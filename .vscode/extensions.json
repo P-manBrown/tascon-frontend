@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "ms-vscode-remote.remote-containers",
+    "dsznajder.es7-react-js-snippets",
+    "PulkitGangwar.nextjs-snippets",
+    "csstools.postcss",
+    "formulahendry.auto-rename-tag"
+  ]
+}

@@ -1,0 +1,17 @@
+services:
+  frontend:
+    build:
+      context: .
+      args:
+        - PROJECT_NAME=${COMPOSE_PROJECT_NAME:?}
+        - USER_NAME=${FRONTEND_USER_NAME:?}
+    volumes:
+      - .:/home/${FRONTEND_USER_NAME:?}/${COMPOSE_PROJECT_NAME:?}
+    environment:
+      - NODE_ENV=${NODE_ENV:-development}
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    ports:
+      - ${FRONTEND_PORT:-3000}:3000
+      - ${FRONTEND_DEBUG_PORT:-9230}:9230
+      - ${STORYBOOK_PORT:-6006}:6006
