@@ -31,7 +31,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/core", "npm:7.21.0"],\
             ["@commitlint/cli", "npm:17.5.1"],\
             ["@commitlint/config-conventional", "npm:17.4.4"],\
-            ["@evilmartians/lefthook", "npm:1.3.0"],\
+            ["@evilmartians/lefthook", "npm:1.3.8"],\
             ["@mdx-js/react", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:1.6.22"],\
             ["@storybook/addon-actions", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:6.5.16"],\
             ["@storybook/addon-docs", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:6.5.16"],\
@@ -4531,10 +4531,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@evilmartians/lefthook", [\
-        ["npm:1.3.0", {\
-          "packageLocation": "./.yarn/unplugged/@evilmartians-lefthook-npm-1.3.0-0f872d240e/node_modules/@evilmartians/lefthook/",\
+        ["npm:1.3.8", {\
+          "packageLocation": "./.yarn/unplugged/@evilmartians-lefthook-npm-1.3.8-1cef5cfafa/node_modules/@evilmartians/lefthook/",\
           "packageDependencies": [\
-            ["@evilmartians/lefthook", "npm:1.3.0"]\
+            ["@evilmartians/lefthook", "npm:1.3.8"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -22020,7 +22020,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/core", "npm:7.21.0"],\
             ["@commitlint/cli", "npm:17.5.1"],\
             ["@commitlint/config-conventional", "npm:17.4.4"],\
-            ["@evilmartians/lefthook", "npm:1.3.0"],\
+            ["@evilmartians/lefthook", "npm:1.3.8"],\
             ["@mdx-js/react", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:1.6.22"],\
             ["@storybook/addon-actions", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:6.5.16"],\
             ["@storybook/addon-docs", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:6.5.16"],\
