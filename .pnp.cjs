@@ -46,7 +46,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/react", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:14.0.0"],\
             ["@types/babel__core", "npm:7.20.0"],\
             ["@types/eslint", "npm:8.21.1"],\
-            ["@types/node", "npm:18.14.1"],\
+            ["@types/node", "npm:18.15.11"],\
             ["@types/prettier", "npm:2.7.2"],\
             ["@types/react", "npm:18.0.28"],\
             ["@types/react-dom", "npm:18.0.11"],\
@@ -9724,6 +9724,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-node-npm-18.14.1-39865d8170-58556bbdb0.zip/node_modules/@types/node/",\
           "packageDependencies": [\
             ["@types/node", "npm:18.14.1"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:18.15.11", {\
+          "packageLocation": "./.yarn/cache/@types-node-npm-18.15.11-fd8ceaaffd-977b4ad047.zip/node_modules/@types/node/",\
+          "packageDependencies": [\
+            ["@types/node", "npm:18.15.11"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -24427,7 +24434,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/react", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:14.0.0"],\
             ["@types/babel__core", "npm:7.20.0"],\
             ["@types/eslint", "npm:8.21.1"],\
-            ["@types/node", "npm:18.14.1"],\
+            ["@types/node", "npm:18.15.11"],\
             ["@types/prettier", "npm:2.7.2"],\
             ["@types/react", "npm:18.0.28"],\
             ["@types/react-dom", "npm:18.0.11"],\
