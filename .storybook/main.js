@@ -9,4 +9,9 @@ module.exports = {
   core: {
     builder: '@storybook/builder-webpack5',
   },
+  // Temporary workaround for
+  // https://github.com/storybookjs/storybook/issues/21642
+  typescript: {
+    reactDocgen: 'react-docgen-typescript-plugin',
+  },
 }

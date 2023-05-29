@@ -11,7 +11,7 @@ updates:
     target-branch: 'develop'
     ignore:
       - dependency-name: 'node'
-        versions: ['~>19.0']
+        versions: ['~>21.0']
   - package-ecosystem: 'npm'
     directory: '/'
     schedule:
@@ -21,3 +21,7 @@ updates:
     commit-message:
       prefix: 'build'
     target-branch: 'develop'
+    ignore:
+      - dependency-name: '@mdx-js/react'
+      - dependency-name: '@storybook/*'
+        versions: ['~7.0']
