@@ -30,7 +30,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@babel/core", "npm:7.22.1"],\
             ["@commitlint/cli", "npm:17.6.3"],\
-            ["@commitlint/config-conventional", "npm:17.6.3"],\
+            ["@commitlint/config-conventional", "npm:17.6.5"],\
             ["@evilmartians/lefthook", "npm:1.4.1"],\
             ["@mdx-js/react", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:1.6.22"],\
             ["@storybook/addon-actions", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:6.5.16"],\
@@ -4531,10 +4531,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@commitlint/config-conventional", [\
-        ["npm:17.6.3", {\
-          "packageLocation": "./.yarn/cache/@commitlint-config-conventional-npm-17.6.3-dc84eb5c43-2dbe26cfaf.zip/node_modules/@commitlint/config-conventional/",\
+        ["npm:17.6.5", {\
+          "packageLocation": "./.yarn/cache/@commitlint-config-conventional-npm-17.6.5-ef8d82de49-f2c637a993.zip/node_modules/@commitlint/config-conventional/",\
           "packageDependencies": [\
-            ["@commitlint/config-conventional", "npm:17.6.3"],\
+            ["@commitlint/config-conventional", "npm:17.6.5"],\
             ["conventional-changelog-conventionalcommits", "npm:5.0.0"]\
           ],\
           "linkType": "HARD"\
@@ -23021,7 +23021,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["tascon-frontend", "workspace:."],\
             ["@babel/core", "npm:7.22.1"],\
             ["@commitlint/cli", "npm:17.6.3"],\
-            ["@commitlint/config-conventional", "npm:17.6.3"],\
+            ["@commitlint/config-conventional", "npm:17.6.5"],\
             ["@evilmartians/lefthook", "npm:1.4.1"],\
             ["@mdx-js/react", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:1.6.22"],\
             ["@storybook/addon-actions", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:6.5.16"],\
