@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['plugin:storybook/recommended', 'next/core-web-vitals', 'prettier'],
+  extends: ['next/core-web-vitals', 'plugin:storybook/recommended', 'prettier'],
   plugins: ['unused-imports'],
   overrides: [
     {
@@ -8,6 +8,9 @@ module.exports = {
       extends: ['plugin:jest/recommended', 'plugin:jest/style'],
     },
   ],
+  settings: {
+    'import/external-module-folders': ['.yarn', 'node_modules'],
+  },
   rules: {
     'import/order': [
       'error',
@@ -16,7 +19,7 @@ module.exports = {
           'builtin',
           'external',
           'internal',
-          ['parent', 'index', 'sibling'],
+          ['parent', 'sibling', 'index'],
           'object',
           'type',
         ],
@@ -27,12 +30,20 @@ module.exports = {
             position: 'before',
           },
         ],
+        pathGroupsExcludedImportTypes: [
+          'builtin',
+          'external',
+          'object',
+          'type',
+        ],
         alphabetize: {
           order: 'asc',
+          caseInsensitive: true,
         },
         'newlines-between': 'never',
       },
     ],
     'unused-imports/no-unused-imports': 'error',
   },
+  root: true,
 }
