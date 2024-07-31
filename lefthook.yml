@@ -14,7 +14,7 @@ pre-commit:
       fail_text: 'Read the report above.'
     markdownlint:
       glob: '*.md'
-      run: yarn markdownlint --fix {staged_files}
+      run: yarn markdownlint-cli2 --fix {staged_files}
       stage_fixed: true
       fail_text: 'Read the report above.'
     check-logger-trace:
