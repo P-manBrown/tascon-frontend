@@ -35,8 +35,6 @@
     "zustand": "^4.3.9"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.5.1",
-    "@commitlint/config-conventional": "^17.6.5",
     "@evilmartians/lefthook": "^1.4.0",
     "autoprefixer": "^10.4.13",
     "eslint": "8.41.0",
