@@ -3,7 +3,7 @@ updates:
   - package-ecosystem: 'docker'
     directory: '/'
     schedule:
-      interval: 'daily'
+      interval: 'monthly'
       time: '03:00'
       timezone: 'Asia/Tokyo'
     reviewers:
@@ -17,7 +17,7 @@ updates:
   - package-ecosystem: 'npm'
     directory: '/'
     schedule:
-      interval: 'daily'
+      interval: 'monthly'
       time: '03:00'
       timezone: 'Asia/Tokyo'
     reviewers:
