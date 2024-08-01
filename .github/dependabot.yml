@@ -25,7 +25,3 @@ updates:
     commit-message:
       prefix: 'build'
     target-branch: 'main'
-    ignore:
-      - dependency-name: '@mdx-js/react'
-      - dependency-name: '@storybook/*'
-        versions: ['~7.0']
