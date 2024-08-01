@@ -2,21 +2,20 @@
   "$schema": "https://unpkg.com/knip@5/schema.json",
   "ignore": [".pnp.*"],
   "ignoreBinaries": [
-    "commitlint",
     "eslint",
     "knip",
-    "markdownlint",
+    "markdownlint-cli2",
     "next",
-    "prettier"
+    "prettier",
+    "pino-pretty"
   ],
   "ignoreDependencies": [
-    "@types/react-dom",
-    "react-dom",
-    "@commitlint/cli",
     "@evilmartians/lefthook",
     "eslint",
-    "markdownlint-cli",
+    "markdownlint-cli2",
     "postcss",
-    "prettier"
+    "prettier",
+    "client-only",
+    "pino-pretty"
   ]
 }
