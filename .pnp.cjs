@@ -37,7 +37,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react-dom", "npm:18.0.11"],\
             ["autoprefixer", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:10.4.14"],\
             ["boring-avatars", "npm:1.10.1"],\
-            ["camelcase-keys", "npm:9.1.2"],\
+            ["camelcase-keys", "npm:9.1.3"],\
             ["eslint", "npm:8.41.0"],\
             ["eslint-config-next", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:13.4.4"],\
             ["eslint-config-prettier", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:8.8.0"],\
@@ -4812,10 +4812,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["camelcase-keys", [\
-        ["npm:9.1.2", {\
-          "packageLocation": "./.yarn/cache/camelcase-keys-npm-9.1.2-d278f6854e-4fb9cf8d9b.zip/node_modules/camelcase-keys/",\
+        ["npm:9.1.3", {\
+          "packageLocation": "./.yarn/cache/camelcase-keys-npm-9.1.3-718ad4b12e-2da83e6b7a.zip/node_modules/camelcase-keys/",\
           "packageDependencies": [\
-            ["camelcase-keys", "npm:9.1.2"],\
+            ["camelcase-keys", "npm:9.1.3"],\
             ["camelcase", "npm:8.0.0"],\
             ["map-obj", "npm:5.0.0"],\
             ["quick-lru", "npm:6.1.2"],\
@@ -11423,7 +11423,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react-dom", "npm:18.0.11"],\
             ["autoprefixer", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:10.4.14"],\
             ["boring-avatars", "npm:1.10.1"],\
-            ["camelcase-keys", "npm:9.1.2"],\
+            ["camelcase-keys", "npm:9.1.3"],\
             ["eslint", "npm:8.41.0"],\
             ["eslint-config-next", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:13.4.4"],\
             ["eslint-config-prettier", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:8.8.0"],\

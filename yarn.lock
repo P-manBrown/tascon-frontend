@@ -3252,15 +3252,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"camelcase-keys@npm:^9.1.2":
-  version: 9.1.2
-  resolution: "camelcase-keys@npm:9.1.2"
+"camelcase-keys@npm:^9.1.3":
+  version: 9.1.3
+  resolution: "camelcase-keys@npm:9.1.3"
   dependencies:
     camelcase: ^8.0.0
     map-obj: 5.0.0
     quick-lru: ^6.1.1
     type-fest: ^4.3.2
-  checksum: 4fb9cf8d9b6fe5dae861dc318c1db9055434cadd3beae20c8f9bb580cb6e693aa7d0b914a6957a0e513ac889380bb0d26c710aafb5391a199425289f280b988e
+  checksum: 2da83e6b7a162e9b7e6d94a5874ed8b580e6f78e50cb2b8137c00f3d5adb42fdae2691bd3587018cabcd489626c52e38ca3a7f6706b28521717b12e149322e64
   languageName: node
   linkType: hard
 
@@ -9019,7 +9019,7 @@ __metadata:
     "@types/react-dom": 18.0.11
     autoprefixer: ^10.4.13
     boring-avatars: ^1.10.1
-    camelcase-keys: ^9.1.2
+    camelcase-keys: ^9.1.3
     eslint: 8.41.0
     eslint-config-next: ^13.4.4
     eslint-config-prettier: ^8.6.0
