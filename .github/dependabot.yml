@@ -3,21 +3,25 @@ updates:
   - package-ecosystem: 'docker'
     directory: '/'
     schedule:
-      interval: 'daily'
+      interval: 'monthly'
       time: '03:00'
       timezone: 'Asia/Tokyo'
+    reviewers:
+      - 'P-manBrown'
     commit-message:
       prefix: 'build'
-    target-branch: 'develop'
+    target-branch: 'main'
     ignore:
       - dependency-name: 'node'
-        versions: ['~>19.0']
+        versions: ['~>23.0']
   - package-ecosystem: 'npm'
     directory: '/'
     schedule:
-      interval: 'daily'
+      interval: 'monthly'
       time: '03:00'
       timezone: 'Asia/Tokyo'
+    reviewers:
+      - 'P-manBrown'
     commit-message:
       prefix: 'build'
-    target-branch: 'develop'
+    target-branch: 'main'
