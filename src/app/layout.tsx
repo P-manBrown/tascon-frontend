@@ -1,12 +1,17 @@
-import { Inter } from 'next/font/google'
+import { Snackbars } from './_components/snackbars'
 import './globals.css'
+import type { Metadata } from 'next'
 
-const inter = Inter({ subsets: ['latin'] })
-
-export const metadata = {
+export const metadata: Metadata = {
   title: {
     default: 'TASCON',
     template: '%s | TASCON',
+  },
+  viewport: {
+    width: 'device-width',
+    viewportFit: 'cover',
+    initialScale: 1,
+    maximumScale: 1,
   },
   description: 'タスク管理とテンプレートの共有',
   manifest: '/manifest.json',
@@ -17,14 +22,18 @@ export const metadata = {
   },
 }
 
-export default function RootLayout({
-  children,
-}: {
+type Props = {
   children: React.ReactNode
-}) {
+}
+
+export default function RootLayout({ children }: Props) {
   return (
     <html lang="ja">
-      <body className={inter.className}>{children}</body>
+      {/* 'lg:overflow-hidden' for the route of the main group only. */}
+      <body className="font-body [&:has(dialog:modal)]:overflow-hidden [&:has(main#main)]:overflow-hidden">
+        {children}
+        <Snackbars />
+      </body>
     </html>
   )
 }

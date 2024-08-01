@@ -17,15 +17,20 @@
       "extensions": [
         "VisualStudioExptTeam.vscodeintellicode",
         "streetsidesoftware.code-spell-checker",
+        "Gruntfuggly.todo-tree",
         "EditorConfig.EditorConfig",
+        "joshbolduc.commitlint",
         "yzhang.markdown-all-in-one",
         "DavidAnson.vscode-markdownlint",
         "bierner.markdown-preview-github-styles",
+        "dotenv.dotenv-vscode",
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
         "Orta.vscode-jest",
         "paulshen.paul-typescript-toolkit",
+        "mxsdev.typescript-explorer",
         "bradlc.vscode-tailwindcss",
+        "hxdyj.bbl-react-outline",
         "arcanis.vscode-zipfs"
       ],
       "settings": {
@@ -37,6 +42,9 @@
         "prettier.prettierPath": ".yarn/sdks/prettier/index.js",
         "typescript.tsdk": ".yarn/sdks/typescript/lib",
         "typescript.enablePromptUseWorkspaceTsdk": true,
+        "todo-tree.general.tags": ["TODO", "TEMP"],
+        "todo-tree.filtering.excludeGlobs": ["**/.next/*/**"],
+        "todo-tree.filtering.includeHiddenFiles": true,
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.formatOnSave": true,
         "editor.codeActionsOnSave": [
@@ -49,14 +57,56 @@
         "files.associations": {
           "*.css": "tailwindcss"
         },
+        "tailwindCSS.classAttributes": ["className", ".*ClassName"],
+        "tailwindCSS.experimental.classRegex": [
+          ["Classes \\=([^;]*)", "['\"`]([^'\"`]*)['\"`]"]
+        ],
         "markdown.extension.toc.levels": "2..6",
         "[markdown]": {
           "editor.defaultFormatter": "yzhang.markdown-all-in-one",
           "editor.formatOnSave": true,
           "editor.codeActionsOnSave": {
-            "source.fixAll.markdownlint": true
+            "source.fixAll.markdownlint": "explicit"
           }
-        }
+        },
+        "commitlint.config.extend.rules": {
+          "type-empty": [2, "never"],
+          "type-case": [2, "always", "lower-case"],
+          "type-enum": [
+            2,
+            "always",
+            [
+              "build",
+              "ci",
+              "docs",
+              "feat",
+              "fix",
+              "perf",
+              "refactor",
+              "revert",
+              "test",
+              "chore"
+            ]
+          ],
+          "subject-empty": [2, "never"],
+          "subject-case": [
+            2,
+            "never",
+            [
+              "upper-case",
+              "camel-case",
+              "kebab-case",
+              "pascal-case",
+              "sentence-case",
+              "snake-case",
+              "start-case"
+            ]
+          ],
+          "subject-full-stop": [2, "never", "."],
+          "body-leading-blank": [2, "always"],
+          "footer-leading-blank": [2, "always"]
+        },
+        "commitlint.preferBundledLibraries": true
       }
     }
   }
