@@ -29,7 +29,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["@evilmartians/lefthook", "npm:1.4.1"],\
-            ["@heroicons/react", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:2.0.18"],\
+            ["@heroicons/react", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:2.1.5"],\
             ["@hookform/resolvers", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:3.1.0"],\
             ["@next/bundle-analyzer", "npm:14.2.1"],\
             ["@types/node", "npm:20.2.5"],\
@@ -2537,17 +2537,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@heroicons/react", [\
-        ["npm:2.0.18", {\
-          "packageLocation": "./.yarn/cache/@heroicons-react-npm-2.0.18-3febb62534-597e866881.zip/node_modules/@heroicons/react/",\
+        ["npm:2.1.5", {\
+          "packageLocation": "./.yarn/cache/@heroicons-react-npm-2.1.5-9eaf1101ac-1c793f9644.zip/node_modules/@heroicons/react/",\
           "packageDependencies": [\
-            ["@heroicons/react", "npm:2.0.18"]\
+            ["@heroicons/react", "npm:2.1.5"]\
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:2.0.18", {\
-          "packageLocation": "./.yarn/__virtual__/@heroicons-react-virtual-df98cc52fb/0/cache/@heroicons-react-npm-2.0.18-3febb62534-597e866881.zip/node_modules/@heroicons/react/",\
+        ["virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:2.1.5", {\
+          "packageLocation": "./.yarn/__virtual__/@heroicons-react-virtual-c5e7cb5975/0/cache/@heroicons-react-npm-2.1.5-9eaf1101ac-1c793f9644.zip/node_modules/@heroicons/react/",\
           "packageDependencies": [\
-            ["@heroicons/react", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:2.0.18"],\
+            ["@heroicons/react", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:2.1.5"],\
             ["@types/react", "npm:18.2.7"],\
             ["react", "npm:18.2.0"]\
           ],\
@@ -11423,7 +11423,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["tascon-frontend", "workspace:."],\
             ["@evilmartians/lefthook", "npm:1.4.1"],\
-            ["@heroicons/react", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:2.0.18"],\
+            ["@heroicons/react", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:2.1.5"],\
             ["@hookform/resolvers", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:3.1.0"],\
             ["@next/bundle-analyzer", "npm:14.2.1"],\
             ["@types/node", "npm:20.2.5"],\

@@ -1468,12 +1468,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@heroicons/react@npm:^2.0.18":
-  version: 2.0.18
-  resolution: "@heroicons/react@npm:2.0.18"
+"@heroicons/react@npm:^2.1.5":
+  version: 2.1.5
+  resolution: "@heroicons/react@npm:2.1.5"
   peerDependencies:
     react: ">= 16"
-  checksum: 597e8668818623d568a302e343ef06b69f62ce297c14b88c2ebbfed0c0f00cd85ec44fae33ec8a249931b4e7dcf145743ae3198095a9f4682108de5155f5f4c3
+  checksum: 1c793f96443580416eccdb60d72c19f640ce068a95f8568bfe8176c6e8ef1318f3d4d4caa8656b571002fe3a7f2d989d6812429fd6bca4bdff641e4b8998c0cd
   languageName: node
   linkType: hard
 
@@ -9020,7 +9020,7 @@ __metadata:
   resolution: "tascon-frontend@workspace:."
   dependencies:
     "@evilmartians/lefthook": ^1.4.0
-    "@heroicons/react": ^2.0.18
+    "@heroicons/react": ^2.1.5
     "@hookform/resolvers": ^3.1.0
     "@next/bundle-analyzer": ^14.2.1
     "@types/node": 20.2.5
