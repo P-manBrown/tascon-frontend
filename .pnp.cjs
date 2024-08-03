@@ -58,7 +58,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-dom", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:18.2.0"],\
             ["react-hook-form", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:7.52.1"],\
             ["server-only", "npm:0.0.1"],\
-            ["snakecase-keys", "npm:6.0.0"],\
+            ["snakecase-keys", "npm:8.0.1"],\
             ["tailwindcss", "npm:3.4.7"],\
             ["typescript", "patch:typescript@npm%3A5.5.4#~builtin<compat/typescript>::version=5.5.4&hash=77c9e2"],\
             ["zod", "npm:3.22.4"],\
@@ -10857,13 +10857,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["snakecase-keys", [\
-        ["npm:6.0.0", {\
-          "packageLocation": "./.yarn/cache/snakecase-keys-npm-6.0.0-05242fc648-4c7521c89d.zip/node_modules/snakecase-keys/",\
+        ["npm:8.0.1", {\
+          "packageLocation": "./.yarn/cache/snakecase-keys-npm-8.0.1-a876c9a7e3-9eefa76140.zip/node_modules/snakecase-keys/",\
           "packageDependencies": [\
-            ["snakecase-keys", "npm:6.0.0"],\
+            ["snakecase-keys", "npm:8.0.1"],\
             ["map-obj", "npm:4.3.0"],\
             ["snake-case", "npm:3.0.4"],\
-            ["type-fest", "npm:3.13.1"]\
+            ["type-fest", "npm:4.23.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -11484,7 +11484,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-dom", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:18.2.0"],\
             ["react-hook-form", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:7.52.1"],\
             ["server-only", "npm:0.0.1"],\
-            ["snakecase-keys", "npm:6.0.0"],\
+            ["snakecase-keys", "npm:8.0.1"],\
             ["tailwindcss", "npm:3.4.7"],\
             ["typescript", "patch:typescript@npm%3A5.5.4#~builtin<compat/typescript>::version=5.5.4&hash=77c9e2"],\
             ["zod", "npm:3.22.4"],\
@@ -11815,10 +11815,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "HARD"\
         }],\
-        ["npm:3.13.1", {\
-          "packageLocation": "./.yarn/cache/type-fest-npm-3.13.1-4bd562882d-c06b0901d5.zip/node_modules/type-fest/",\
+        ["npm:4.23.0", {\
+          "packageLocation": "./.yarn/cache/type-fest-npm-4.23.0-cea2c34bb1-75466563be.zip/node_modules/type-fest/",\
           "packageDependencies": [\
-            ["type-fest", "npm:3.13.1"]\
+            ["type-fest", "npm:4.23.0"]\
           ],\
           "linkType": "HARD"\
         }],\

@@ -8504,14 +8504,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"snakecase-keys@npm:^6.0.0":
-  version: 6.0.0
-  resolution: "snakecase-keys@npm:6.0.0"
+"snakecase-keys@npm:^8.0.1":
+  version: 8.0.1
+  resolution: "snakecase-keys@npm:8.0.1"
   dependencies:
     map-obj: ^4.1.0
     snake-case: ^3.0.4
-    type-fest: ^3.12.0
-  checksum: 4c7521c89d6203621d6e7c83e5bc8fe6a9070d1a415dc38b1d0fbbf6fb012abe9459005fa99e6f53953b81363a392e35d8b249f8298bdb3698eac513bc68cf40
+    type-fest: ^4.15.0
+  checksum: 9eefa761407a8009bb7a1cc75ef1eceef3b07c94868314274b3f3d8ab88abb755ca6c0a10e1a8f387f72954788e40b73d061a673703594c55b15f3222831c9ad
   languageName: node
   linkType: hard
 
@@ -9080,7 +9080,7 @@ __metadata:
     react-dom: ^18.2.0
     react-hook-form: ^7.52.1
     server-only: ^0.0.1
-    snakecase-keys: ^6.0.0
+    snakecase-keys: ^8.0.1
     tailwindcss: ^3.4.7
     typescript: ^5.5.4
     zod: ^3.21.4
@@ -9338,10 +9338,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"type-fest@npm:^3.12.0":
-  version: 3.13.1
-  resolution: "type-fest@npm:3.13.1"
-  checksum: c06b0901d54391dc46de3802375f5579868949d71f93b425ce564e19a428a0d411ae8d8cb0e300d330071d86152c3ea86e744c3f2860a42a79585b6ec2fdae8e
+"type-fest@npm:^4.15.0":
+  version: 4.23.0
+  resolution: "type-fest@npm:4.23.0"
+  checksum: 75466563be2d3d116a0b70ffe76a7f72947e3350ceacbc8509a7d841670dddc2fbb008109f0307888137794cf25681fd50f65bf8873bcdc17bc7ac8912c70114
   languageName: node
   linkType: hard
 
