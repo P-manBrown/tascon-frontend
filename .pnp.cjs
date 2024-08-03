@@ -36,7 +36,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", "npm:18.2.7"],\
             ["@types/react-dom", "npm:18.0.11"],\
             ["autoprefixer", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:10.4.20"],\
-            ["boring-avatars", "npm:1.10.1"],\
+            ["boring-avatars", "npm:1.10.2"],\
             ["camelcase-keys", "npm:9.1.3"],\
             ["eslint", "npm:8.41.0"],\
             ["eslint-config-next", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:14.2.5"],\
@@ -4782,10 +4782,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["boring-avatars", [\
-        ["npm:1.10.1", {\
-          "packageLocation": "./.yarn/cache/boring-avatars-npm-1.10.1-dae9250517-2f4109d8c0.zip/node_modules/boring-avatars/",\
+        ["npm:1.10.2", {\
+          "packageLocation": "./.yarn/cache/boring-avatars-npm-1.10.2-5feb6f0e74-887ac33237.zip/node_modules/boring-avatars/",\
           "packageDependencies": [\
-            ["boring-avatars", "npm:1.10.1"]\
+            ["boring-avatars", "npm:1.10.2"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -11973,7 +11973,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", "npm:18.2.7"],\
             ["@types/react-dom", "npm:18.0.11"],\
             ["autoprefixer", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:10.4.20"],\
-            ["boring-avatars", "npm:1.10.1"],\
+            ["boring-avatars", "npm:1.10.2"],\
             ["camelcase-keys", "npm:9.1.3"],\
             ["eslint", "npm:8.41.0"],\
             ["eslint-config-next", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:14.2.5"],\
