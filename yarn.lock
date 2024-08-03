@@ -1451,12 +1451,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@evilmartians/lefthook@npm:^1.4.0":
-  version: 1.4.1
-  resolution: "@evilmartians/lefthook@npm:1.4.1"
+"@evilmartians/lefthook@npm:^1.7.11":
+  version: 1.7.11
+  resolution: "@evilmartians/lefthook@npm:1.7.11"
   bin:
     lefthook: bin/index.js
-  checksum: 603423145623f5526572b4f414489f11ed65dc806c57c3d5c2a7de5435ba4dd7849daffc0e5843ace270e49188a0ff34aa00c4439ee8c2a7a3252906289a543f
+  checksum: aedc85150bcdddf9b1a8cefe7883794e95b9441854393aeaba662c1cb396ca79ba5995fd225921565a0b7068a7b5ff13909e3f509d9ab317d19095909f6cd1ad
   conditions: (os=darwin | os=linux | os=win32) & (cpu=x64 | cpu=arm64 | cpu=ia32)
   languageName: node
   linkType: hard
@@ -9023,7 +9023,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "tascon-frontend@workspace:."
   dependencies:
-    "@evilmartians/lefthook": ^1.4.0
+    "@evilmartians/lefthook": ^1.7.11
     "@heroicons/react": ^2.1.5
     "@hookform/resolvers": ^3.1.0
     "@next/bundle-analyzer": ^14.2.1

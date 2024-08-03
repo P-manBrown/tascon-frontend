@@ -28,7 +28,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
-            ["@evilmartians/lefthook", "npm:1.4.1"],\
+            ["@evilmartians/lefthook", "npm:1.7.11"],\
             ["@heroicons/react", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:2.1.5"],\
             ["@hookform/resolvers", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:3.1.0"],\
             ["@next/bundle-analyzer", "npm:14.2.1"],\
@@ -2519,10 +2519,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@evilmartians/lefthook", [\
-        ["npm:1.4.1", {\
-          "packageLocation": "./.yarn/unplugged/@evilmartians-lefthook-npm-1.4.1-b73f6d0cbc/node_modules/@evilmartians/lefthook/",\
+        ["npm:1.7.11", {\
+          "packageLocation": "./.yarn/unplugged/@evilmartians-lefthook-npm-1.7.11-6cf81f8748/node_modules/@evilmartians/lefthook/",\
           "packageDependencies": [\
-            ["@evilmartians/lefthook", "npm:1.4.1"]\
+            ["@evilmartians/lefthook", "npm:1.7.11"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -11430,7 +11430,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["tascon-frontend", "workspace:."],\
-            ["@evilmartians/lefthook", "npm:1.4.1"],\
+            ["@evilmartians/lefthook", "npm:1.7.11"],\
             ["@heroicons/react", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:2.1.5"],\
             ["@hookform/resolvers", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:3.1.0"],\
             ["@next/bundle-analyzer", "npm:14.2.1"],\
