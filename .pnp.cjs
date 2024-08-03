@@ -32,7 +32,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@heroicons/react", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:2.1.5"],\
             ["@hookform/resolvers", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:3.9.0"],\
             ["@next/bundle-analyzer", "npm:14.2.1"],\
-            ["@types/node", "npm:20.2.5"],\
+            ["@types/node", "npm:22.1.0"],\
             ["@types/react", "npm:18.2.7"],\
             ["@types/react-dom", "npm:18.0.11"],\
             ["autoprefixer", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:10.4.20"],\
@@ -3487,6 +3487,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-node-npm-20.2.5-0014d2d9ce-38ce7c7e9d.zip/node_modules/@types/node/",\
           "packageDependencies": [\
             ["@types/node", "npm:20.2.5"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:22.1.0", {\
+          "packageLocation": "./.yarn/cache/@types-node-npm-22.1.0-3ca0e36ca8-3544c35da0.zip/node_modules/@types/node/",\
+          "packageDependencies": [\
+            ["@types/node", "npm:22.1.0"],\
+            ["undici-types", "npm:6.13.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -8576,7 +8584,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@pnpm/logger", "npm:5.0.0"],\
             ["@pnpm/workspace.pkgs-graph", "virtual:81a94da0377aa2e700b4fdb382da531627807502692e3bf00c5ab67b44a2844717abc4358399fac74b5d682a5805a9fe529b7a374aa3f32bf8cfafe1a2ef472b#npm:2.0.15"],\
             ["@snyk/github-codeowners", "npm:1.1.0"],\
-            ["@types/node", "npm:20.2.5"],\
+            ["@types/node", "npm:22.1.0"],\
             ["@types/picomatch", "npm:2.3.3"],\
             ["@types/typescript", null],\
             ["easy-table", "npm:1.2.0"],\
@@ -11961,7 +11969,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@heroicons/react", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:2.1.5"],\
             ["@hookform/resolvers", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:3.9.0"],\
             ["@next/bundle-analyzer", "npm:14.2.1"],\
-            ["@types/node", "npm:20.2.5"],\
+            ["@types/node", "npm:22.1.0"],\
             ["@types/react", "npm:18.2.7"],\
             ["@types/react-dom", "npm:18.0.11"],\
             ["autoprefixer", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:10.4.20"],\
@@ -12447,6 +12455,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["has-bigints", "npm:1.0.2"],\
             ["has-symbols", "npm:1.0.3"],\
             ["which-boxed-primitive", "npm:1.0.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["undici-types", [\
+        ["npm:6.13.0", {\
+          "packageLocation": "./.yarn/cache/undici-types-npm-6.13.0-3ce6ceead9-9d0ef6bf58.zip/node_modules/undici-types/",\
+          "packageDependencies": [\
+            ["undici-types", "npm:6.13.0"]\
           ],\
           "linkType": "HARD"\
         }]\
