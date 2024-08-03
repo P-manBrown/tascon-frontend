@@ -49,7 +49,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["markdownlint-cli2", "npm:0.13.0"],\
             ["next", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:14.2.5"],\
             ["next-pwa", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:5.6.0"],\
-            ["pino", "npm:8.19.0"],\
+            ["pino", "npm:9.3.2"],\
             ["pino-pretty", "npm:11.2.2"],\
             ["postcss", "npm:8.4.40"],\
             ["prettier", "npm:3.3.3"],\
@@ -10092,21 +10092,21 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["pino", [\
-        ["npm:8.19.0", {\
-          "packageLocation": "./.yarn/cache/pino-npm-8.19.0-bca0e8bbff-4db9e4b74d.zip/node_modules/pino/",\
+        ["npm:9.3.2", {\
+          "packageLocation": "./.yarn/cache/pino-npm-9.3.2-8da5956b19-81608b8b39.zip/node_modules/pino/",\
           "packageDependencies": [\
-            ["pino", "npm:8.19.0"],\
+            ["pino", "npm:9.3.2"],\
             ["atomic-sleep", "npm:1.0.0"],\
             ["fast-redact", "npm:3.4.0"],\
             ["on-exit-leak-free", "npm:2.1.2"],\
-            ["pino-abstract-transport", "npm:1.1.0"],\
-            ["pino-std-serializers", "npm:6.2.2"],\
-            ["process-warning", "npm:3.0.0"],\
+            ["pino-abstract-transport", "npm:1.2.0"],\
+            ["pino-std-serializers", "npm:7.0.0"],\
+            ["process-warning", "npm:4.0.0"],\
             ["quick-format-unescaped", "npm:4.0.4"],\
             ["real-require", "npm:0.2.0"],\
             ["safe-stable-stringify", "npm:2.4.3"],\
-            ["sonic-boom", "npm:3.8.0"],\
-            ["thread-stream", "npm:2.4.1"]\
+            ["sonic-boom", "npm:4.0.1"],\
+            ["thread-stream", "npm:3.1.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -10116,6 +10116,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/pino-abstract-transport-npm-1.1.0-178ca571bf-cc84caabee.zip/node_modules/pino-abstract-transport/",\
           "packageDependencies": [\
             ["pino-abstract-transport", "npm:1.1.0"],\
+            ["readable-stream", "npm:4.5.2"],\
+            ["split2", "npm:4.2.0"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:1.2.0", {\
+          "packageLocation": "./.yarn/cache/pino-abstract-transport-npm-1.2.0-8567d0d819-3336c51fb9.zip/node_modules/pino-abstract-transport/",\
+          "packageDependencies": [\
+            ["pino-abstract-transport", "npm:1.2.0"],\
             ["readable-stream", "npm:4.5.2"],\
             ["split2", "npm:4.2.0"]\
           ],\
@@ -10146,10 +10155,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["pino-std-serializers", [\
-        ["npm:6.2.2", {\
-          "packageLocation": "./.yarn/cache/pino-std-serializers-npm-6.2.2-0e907a1130-aeb0662edc.zip/node_modules/pino-std-serializers/",\
+        ["npm:7.0.0", {\
+          "packageLocation": "./.yarn/cache/pino-std-serializers-npm-7.0.0-94d470ae0c-08cd1d7b7a.zip/node_modules/pino-std-serializers/",\
           "packageDependencies": [\
-            ["pino-std-serializers", "npm:6.2.2"]\
+            ["pino-std-serializers", "npm:7.0.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -10467,10 +10476,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["process-warning", [\
-        ["npm:3.0.0", {\
-          "packageLocation": "./.yarn/cache/process-warning-npm-3.0.0-e1380c08e2-1fc2eb4524.zip/node_modules/process-warning/",\
+        ["npm:4.0.0", {\
+          "packageLocation": "./.yarn/cache/process-warning-npm-4.0.0-d61ed74d22-39d5cee536.zip/node_modules/process-warning/",\
           "packageDependencies": [\
-            ["process-warning", "npm:3.0.0"]\
+            ["process-warning", "npm:4.0.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -11365,14 +11374,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["sonic-boom", [\
-        ["npm:3.8.0", {\
-          "packageLocation": "./.yarn/cache/sonic-boom-npm-3.8.0-df4849cf66-c21ece61a0.zip/node_modules/sonic-boom/",\
-          "packageDependencies": [\
-            ["sonic-boom", "npm:3.8.0"],\
-            ["atomic-sleep", "npm:1.0.0"]\
-          ],\
-          "linkType": "HARD"\
-        }],\
         ["npm:4.0.1", {\
           "packageLocation": "./.yarn/cache/sonic-boom-npm-4.0.1-75945120ed-451b0f09bc.zip/node_modules/sonic-boom/",\
           "packageDependencies": [\
@@ -12005,7 +12006,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["markdownlint-cli2", "npm:0.13.0"],\
             ["next", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:14.2.5"],\
             ["next-pwa", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:5.6.0"],\
-            ["pino", "npm:8.19.0"],\
+            ["pino", "npm:9.3.2"],\
             ["pino-pretty", "npm:11.2.2"],\
             ["postcss", "npm:8.4.40"],\
             ["prettier", "npm:3.3.3"],\
@@ -12127,10 +12128,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["thread-stream", [\
-        ["npm:2.4.1", {\
-          "packageLocation": "./.yarn/cache/thread-stream-npm-2.4.1-3f89bca0b7-8b28e11eab.zip/node_modules/thread-stream/",\
+        ["npm:3.1.0", {\
+          "packageLocation": "./.yarn/cache/thread-stream-npm-3.1.0-ac5663dfb7-3c5b494ce7.zip/node_modules/thread-stream/",\
           "packageDependencies": [\
-            ["thread-stream", "npm:2.4.1"],\
+            ["thread-stream", "npm:3.1.0"],\
             ["real-require", "npm:0.2.0"]\
           ],\
           "linkType": "HARD"\
