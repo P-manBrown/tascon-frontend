@@ -2196,10 +2196,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:20.2.5":
+"@types/node@npm:*":
   version: 20.2.5
   resolution: "@types/node@npm:20.2.5"
   checksum: 38ce7c7e9d76880dc632f71d71e0d5914fcda9d5e9a7095d6c339abda55ca4affb0f2a882aeb29398f8e09d2c5151f0b6586c81c8ccdfe529c34b1ea3337425e
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:22.1.0":
+  version: 22.1.0
+  resolution: "@types/node@npm:22.1.0"
+  dependencies:
+    undici-types: ~6.13.0
+  checksum: 3544c35da06009790a2e07742a7dfa0ac0f0d64ec47d9e6d3edf0ff6dcfc1a7cc2efdc5e524e80f8ed80aa37154513b2c1c724f95146ff89fc5aefb8e33575f2
   languageName: node
   linkType: hard
 
@@ -9554,7 +9563,7 @@ __metadata:
     "@heroicons/react": ^2.1.5
     "@hookform/resolvers": ^3.9.0
     "@next/bundle-analyzer": ^14.2.1
-    "@types/node": 20.2.5
+    "@types/node": 22.1.0
     "@types/react": 18.2.7
     "@types/react-dom": 18.0.11
     autoprefixer: ^10.4.20
@@ -9974,6 +9983,13 @@ __metadata:
     has-symbols: ^1.0.3
     which-boxed-primitive: ^1.0.2
   checksum: b7a1cf5862b5e4b5deb091672ffa579aa274f648410009c81cca63fed3b62b610c4f3b773f912ce545bb4e31edc3138975b5bc777fc6e4817dca51affb6380e9
+  languageName: node
+  linkType: hard
+
+"undici-types@npm:~6.13.0":
+  version: 6.13.0
+  resolution: "undici-types@npm:6.13.0"
+  checksum: 9d0ef6bf58994bebbea6a4ab75f381c69a89a7ed151bfbae0d4ef95450d56502c9eccb323abf17b7d099c1d9c1cbae62e909e4dfeb8d204612d2f1fdada24707
   languageName: node
   linkType: hard
 
