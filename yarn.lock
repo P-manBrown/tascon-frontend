@@ -4519,10 +4519,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-copy@npm:^3.0.0":
-  version: 3.0.1
-  resolution: "fast-copy@npm:3.0.1"
-  checksum: 5496b5cf47df29eea479deef03b6b7188626a2cbc356b3015649062846729de6f1a9f555f937e772da8feae0a1231fab13096ed32424b2d61e4d065abc9969fe
+"fast-copy@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "fast-copy@npm:3.0.2"
+  checksum: 47f584bcede08ab3198559d3e0e093a547d567715b86be2198da6e3366c3c73eed550d97b86f9fb90dae179982b89c15d68187def960f522cdce14bacdfc6184
   languageName: node
   linkType: hard
 
@@ -7442,13 +7442,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pino-pretty@npm:^10.3.1":
-  version: 10.3.1
-  resolution: "pino-pretty@npm:10.3.1"
+"pino-pretty@npm:^11.2.2":
+  version: 11.2.2
+  resolution: "pino-pretty@npm:11.2.2"
   dependencies:
     colorette: ^2.0.7
     dateformat: ^4.6.3
-    fast-copy: ^3.0.0
+    fast-copy: ^3.0.2
     fast-safe-stringify: ^2.1.1
     help-me: ^5.0.0
     joycon: ^3.1.1
@@ -7458,11 +7458,11 @@ __metadata:
     pump: ^3.0.0
     readable-stream: ^4.0.0
     secure-json-parse: ^2.4.0
-    sonic-boom: ^3.0.0
+    sonic-boom: ^4.0.1
     strip-json-comments: ^3.1.1
   bin:
     pino-pretty: bin.js
-  checksum: 51e2d670745a396ddfd12da9f7ea5c2e4dc93a84589ffb29f64f4118d4b83ab636ee21f4aee7a47adb04664d5d921fb33e039e0ea961bb1c1cffefa28444563c
+  checksum: 813b9583e398ccad2756bd77816394467891e07446f73cfbe0f4e5100f149a1b8d7e248dc19ccf27ff940601abfeb79fb66b96f6dec81b681bcefb051dc2939c
   languageName: node
   linkType: hard
 
@@ -8511,12 +8511,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sonic-boom@npm:^3.0.0, sonic-boom@npm:^3.7.0":
+"sonic-boom@npm:^3.7.0":
   version: 3.8.0
   resolution: "sonic-boom@npm:3.8.0"
   dependencies:
     atomic-sleep: ^1.0.0
   checksum: c21ece61a0cabb78db96547aecb4e9086eba2db2d53030221ed07215bfda2d25bb02906366ea2584cbe73d236dd7dd109122d3d7287914b76a9630e0a36ad819
+  languageName: node
+  linkType: hard
+
+"sonic-boom@npm:^4.0.1":
+  version: 4.0.1
+  resolution: "sonic-boom@npm:4.0.1"
+  dependencies:
+    atomic-sleep: ^1.0.0
+  checksum: 451b0f09bc0a0abfa6bfed0e2d7d36a6fa245be8a444a7ef1e3c8abb006e9994cb7530b1da39c8aee9033598d1ce187e244a6194c92a81790a2e2633c60cd63d
   languageName: node
   linkType: hard
 
@@ -9032,7 +9041,7 @@ __metadata:
     next: 13.4.12
     next-pwa: ^5.6.0
     pino: ^8.19.0
-    pino-pretty: ^10.3.1
+    pino-pretty: ^11.2.2
     postcss: ^8.4.21
     prettier: 2.8.8
     prettier-plugin-tailwindcss: ^0.2.7

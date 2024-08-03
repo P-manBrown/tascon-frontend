@@ -50,7 +50,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["next", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:13.4.12"],\
             ["next-pwa", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:5.6.0"],\
             ["pino", "npm:8.19.0"],\
-            ["pino-pretty", "npm:10.3.1"],\
+            ["pino-pretty", "npm:11.2.2"],\
             ["postcss", "npm:8.4.24"],\
             ["prettier", "npm:2.8.8"],\
             ["prettier-plugin-tailwindcss", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:0.2.8"],\
@@ -6405,10 +6405,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["fast-copy", [\
-        ["npm:3.0.1", {\
-          "packageLocation": "./.yarn/cache/fast-copy-npm-3.0.1-b6d4f87c79-5496b5cf47.zip/node_modules/fast-copy/",\
+        ["npm:3.0.2", {\
+          "packageLocation": "./.yarn/cache/fast-copy-npm-3.0.2-d747bd131f-47f584bced.zip/node_modules/fast-copy/",\
           "packageDependencies": [\
-            ["fast-copy", "npm:3.0.1"]\
+            ["fast-copy", "npm:3.0.2"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -9665,13 +9665,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["pino-pretty", [\
-        ["npm:10.3.1", {\
-          "packageLocation": "./.yarn/cache/pino-pretty-npm-10.3.1-cc187e81d4-51e2d67074.zip/node_modules/pino-pretty/",\
+        ["npm:11.2.2", {\
+          "packageLocation": "./.yarn/cache/pino-pretty-npm-11.2.2-32484c2dea-813b9583e3.zip/node_modules/pino-pretty/",\
           "packageDependencies": [\
-            ["pino-pretty", "npm:10.3.1"],\
+            ["pino-pretty", "npm:11.2.2"],\
             ["colorette", "npm:2.0.20"],\
             ["dateformat", "npm:4.6.3"],\
-            ["fast-copy", "npm:3.0.1"],\
+            ["fast-copy", "npm:3.0.2"],\
             ["fast-safe-stringify", "npm:2.1.1"],\
             ["help-me", "npm:5.0.0"],\
             ["joycon", "npm:3.1.1"],\
@@ -9681,7 +9681,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["pump", "npm:3.0.0"],\
             ["readable-stream", "npm:4.5.2"],\
             ["secure-json-parse", "npm:2.7.0"],\
-            ["sonic-boom", "npm:3.8.0"],\
+            ["sonic-boom", "npm:4.0.1"],\
             ["strip-json-comments", "npm:3.1.1"]\
           ],\
           "linkType": "HARD"\
@@ -10873,6 +10873,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["atomic-sleep", "npm:1.0.0"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:4.0.1", {\
+          "packageLocation": "./.yarn/cache/sonic-boom-npm-4.0.1-75945120ed-451b0f09bc.zip/node_modules/sonic-boom/",\
+          "packageDependencies": [\
+            ["sonic-boom", "npm:4.0.1"],\
+            ["atomic-sleep", "npm:1.0.0"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["source-list-map", [\
@@ -11436,7 +11444,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["next", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:13.4.12"],\
             ["next-pwa", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:5.6.0"],\
             ["pino", "npm:8.19.0"],\
-            ["pino-pretty", "npm:10.3.1"],\
+            ["pino-pretty", "npm:11.2.2"],\
             ["postcss", "npm:8.4.24"],\
             ["prettier", "npm:2.8.8"],\
             ["prettier-plugin-tailwindcss", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:0.2.8"],\
