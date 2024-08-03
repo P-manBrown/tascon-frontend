@@ -31,7 +31,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@evilmartians/lefthook", "npm:1.7.11"],\
             ["@heroicons/react", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:2.1.5"],\
             ["@hookform/resolvers", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:3.9.0"],\
-            ["@next/bundle-analyzer", "npm:14.2.1"],\
+            ["@next/bundle-analyzer", "npm:14.2.5"],\
             ["@types/node", "npm:22.1.0"],\
             ["@types/react", "npm:18.2.7"],\
             ["@types/react-dom", "npm:18.0.11"],\
@@ -2728,10 +2728,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@next/bundle-analyzer", [\
-        ["npm:14.2.1", {\
-          "packageLocation": "./.yarn/cache/@next-bundle-analyzer-npm-14.2.1-a4cb953552-d4d712694c.zip/node_modules/@next/bundle-analyzer/",\
+        ["npm:14.2.5", {\
+          "packageLocation": "./.yarn/cache/@next-bundle-analyzer-npm-14.2.5-93f73f25bf-3721b494bb.zip/node_modules/@next/bundle-analyzer/",\
           "packageDependencies": [\
-            ["@next/bundle-analyzer", "npm:14.2.1"],\
+            ["@next/bundle-analyzer", "npm:14.2.5"],\
             ["webpack-bundle-analyzer", "npm:4.10.1"]\
           ],\
           "linkType": "HARD"\
@@ -11988,7 +11988,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@evilmartians/lefthook", "npm:1.7.11"],\
             ["@heroicons/react", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:2.1.5"],\
             ["@hookform/resolvers", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:3.9.0"],\
-            ["@next/bundle-analyzer", "npm:14.2.1"],\
+            ["@next/bundle-analyzer", "npm:14.2.5"],\
             ["@types/node", "npm:22.1.0"],\
             ["@types/react", "npm:18.2.7"],\
             ["@types/react-dom", "npm:18.0.11"],\

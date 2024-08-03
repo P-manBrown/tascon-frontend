@@ -1610,12 +1610,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/bundle-analyzer@npm:^14.2.1":
-  version: 14.2.1
-  resolution: "@next/bundle-analyzer@npm:14.2.1"
+"@next/bundle-analyzer@npm:^14.2.5":
+  version: 14.2.5
+  resolution: "@next/bundle-analyzer@npm:14.2.5"
   dependencies:
     webpack-bundle-analyzer: 4.10.1
-  checksum: d4d712694c257a03757c4b98b4166d84cbecfe52626e52cc34e488f8666e72bdf1361959b260a158ca5e8de2788938798d9e219440f54a52cfc8397fecb1459a
+  checksum: 3721b494bb5d517e88d585f5b47b8cc4835d51e1c3f8784c17ac2cbe620e2e05b3efcb00e8082dad5315285eda6c4cef5b6c2f72219324b5d038e449ed4c52a6
   languageName: node
   linkType: hard
 
@@ -9586,7 +9586,7 @@ __metadata:
     "@evilmartians/lefthook": ^1.7.11
     "@heroicons/react": ^2.1.5
     "@hookform/resolvers": ^3.9.0
-    "@next/bundle-analyzer": ^14.2.1
+    "@next/bundle-analyzer": ^14.2.5
     "@types/node": 22.1.0
     "@types/react": 18.2.7
     "@types/react-dom": 18.0.11
