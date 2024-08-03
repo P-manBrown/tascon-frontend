@@ -35,7 +35,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:20.2.5"],\
             ["@types/react", "npm:18.2.7"],\
             ["@types/react-dom", "npm:18.0.11"],\
-            ["autoprefixer", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:10.4.14"],\
+            ["autoprefixer", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:10.4.20"],\
             ["boring-avatars", "npm:1.10.1"],\
             ["camelcase-keys", "npm:9.1.3"],\
             ["eslint", "npm:8.41.0"],\
@@ -4373,23 +4373,23 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["autoprefixer", [\
-        ["npm:10.4.14", {\
-          "packageLocation": "./.yarn/cache/autoprefixer-npm-10.4.14-1e0b8c34fb-e9f18e664a.zip/node_modules/autoprefixer/",\
+        ["npm:10.4.20", {\
+          "packageLocation": "./.yarn/cache/autoprefixer-npm-10.4.20-dd5fd05d27-187cec2ec3.zip/node_modules/autoprefixer/",\
           "packageDependencies": [\
-            ["autoprefixer", "npm:10.4.14"]\
+            ["autoprefixer", "npm:10.4.20"]\
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:10.4.14", {\
-          "packageLocation": "./.yarn/__virtual__/autoprefixer-virtual-449dad67cf/0/cache/autoprefixer-npm-10.4.14-1e0b8c34fb-e9f18e664a.zip/node_modules/autoprefixer/",\
+        ["virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:10.4.20", {\
+          "packageLocation": "./.yarn/__virtual__/autoprefixer-virtual-5bb6a19073/0/cache/autoprefixer-npm-10.4.20-dd5fd05d27-187cec2ec3.zip/node_modules/autoprefixer/",\
           "packageDependencies": [\
-            ["autoprefixer", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:10.4.14"],\
+            ["autoprefixer", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:10.4.20"],\
             ["@types/postcss", null],\
-            ["browserslist", "npm:4.21.6"],\
-            ["caniuse-lite", "npm:1.0.30001489"],\
-            ["fraction.js", "npm:4.2.0"],\
+            ["browserslist", "npm:4.23.3"],\
+            ["caniuse-lite", "npm:1.0.30001646"],\
+            ["fraction.js", "npm:4.3.7"],\
             ["normalize-range", "npm:0.1.2"],\
-            ["picocolors", "npm:1.0.0"],\
+            ["picocolors", "npm:1.0.1"],\
             ["postcss", "npm:8.4.24"],\
             ["postcss-value-parser", "npm:4.2.0"]\
           ],\
@@ -4652,17 +4652,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["browserslist", [\
-        ["npm:4.21.6", {\
-          "packageLocation": "./.yarn/cache/browserslist-npm-4.21.6-caaaf19b9e-d9bfff6e5a.zip/node_modules/browserslist/",\
-          "packageDependencies": [\
-            ["browserslist", "npm:4.21.6"],\
-            ["caniuse-lite", "npm:1.0.30001489"],\
-            ["electron-to-chromium", "npm:1.4.411"],\
-            ["node-releases", "npm:2.0.12"],\
-            ["update-browserslist-db", "virtual:caaaf19b9e866ab6ccdf82b25b6099cd113eeb3a4514abbcc43102cdd73fb8e340dd7409c74831276eff69444a84ee9093f8c1c611e00a2607cce5386b8f4ff7#npm:1.0.11"]\
-          ],\
-          "linkType": "HARD"\
-        }],\
         ["npm:4.23.0", {\
           "packageLocation": "./.yarn/cache/browserslist-npm-4.23.0-8126a959d4-436f49e796.zip/node_modules/browserslist/",\
           "packageDependencies": [\
@@ -4671,6 +4660,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["electron-to-chromium", "npm:1.4.690"],\
             ["node-releases", "npm:2.0.14"],\
             ["update-browserslist-db", "virtual:8126a959d46e6def6d7f2497c47970a23a94adac85f5be1df9be290c674503b9bcbe0dc057e2741ee222cc2a8a3b9f584b20c3a9eb5ce085704d99fc5d94514c#npm:1.0.13"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:4.23.3", {\
+          "packageLocation": "./.yarn/cache/browserslist-npm-4.23.3-4e727c7b5b-7906064f99.zip/node_modules/browserslist/",\
+          "packageDependencies": [\
+            ["browserslist", "npm:4.23.3"],\
+            ["caniuse-lite", "npm:1.0.30001646"],\
+            ["electron-to-chromium", "npm:1.5.4"],\
+            ["node-releases", "npm:2.0.18"],\
+            ["update-browserslist-db", "virtual:4e727c7b5b033f8d5ac7299f9860cb61f5802656f7b4fea2accd32d68dc1a767387a6d23f0724065d3c65e61cb31b9eec2438ae937ce36e7602b4586ede55af6#npm:1.1.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -4825,13 +4825,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["caniuse-lite", [\
-        ["npm:1.0.30001489", {\
-          "packageLocation": "./.yarn/cache/caniuse-lite-npm-1.0.30001489-94fce279d5-94585a351f.zip/node_modules/caniuse-lite/",\
-          "packageDependencies": [\
-            ["caniuse-lite", "npm:1.0.30001489"]\
-          ],\
-          "linkType": "HARD"\
-        }],\
         ["npm:1.0.30001593", {\
           "packageLocation": "./.yarn/cache/caniuse-lite-npm-1.0.30001593-bb646b1090-3e2b190755.zip/node_modules/caniuse-lite/",\
           "packageDependencies": [\
@@ -4843,6 +4836,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/caniuse-lite-npm-1.0.30001620-389289b1a8-1831e519c2.zip/node_modules/caniuse-lite/",\
           "packageDependencies": [\
             ["caniuse-lite", "npm:1.0.30001620"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:1.0.30001646", {\
+          "packageLocation": "./.yarn/cache/caniuse-lite-npm-1.0.30001646-2501598beb-53d45b990d.zip/node_modules/caniuse-lite/",\
+          "packageDependencies": [\
+            ["caniuse-lite", "npm:1.0.30001646"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -5473,17 +5473,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["electron-to-chromium", [\
-        ["npm:1.4.411", {\
-          "packageLocation": "./.yarn/cache/electron-to-chromium-npm-1.4.411-10c822c952-f71613a0d0.zip/node_modules/electron-to-chromium/",\
-          "packageDependencies": [\
-            ["electron-to-chromium", "npm:1.4.411"]\
-          ],\
-          "linkType": "HARD"\
-        }],\
         ["npm:1.4.690", {\
           "packageLocation": "./.yarn/cache/electron-to-chromium-npm-1.4.690-0d92de6f50-c3fd731041.zip/node_modules/electron-to-chromium/",\
           "packageDependencies": [\
             ["electron-to-chromium", "npm:1.4.690"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:1.5.4", {\
+          "packageLocation": "./.yarn/cache/electron-to-chromium-npm-1.5.4-58d50ae1f7-352f13c043.zip/node_modules/electron-to-chromium/",\
+          "packageDependencies": [\
+            ["electron-to-chromium", "npm:1.5.4"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -5786,6 +5786,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/escalade-npm-3.1.1-e02da076aa-a3e2a99f07.zip/node_modules/escalade/",\
           "packageDependencies": [\
             ["escalade", "npm:3.1.1"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:3.1.2", {\
+          "packageLocation": "./.yarn/cache/escalade-npm-3.1.2-5826d31cf8-1ec0977aa2.zip/node_modules/escalade/",\
+          "packageDependencies": [\
+            ["escalade", "npm:3.1.2"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -6646,10 +6653,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["fraction.js", [\
-        ["npm:4.2.0", {\
-          "packageLocation": "./.yarn/cache/fraction.js-npm-4.2.0-28efe4afc7-8c76a6e21d.zip/node_modules/fraction.js/",\
+        ["npm:4.3.7", {\
+          "packageLocation": "./.yarn/cache/fraction.js-npm-4.3.7-c2c7e95a8e-e1553ae3f0.zip/node_modules/fraction.js/",\
           "packageDependencies": [\
-            ["fraction.js", "npm:4.2.0"]\
+            ["fraction.js", "npm:4.3.7"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -9011,17 +9018,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["node-releases", [\
-        ["npm:2.0.12", {\
-          "packageLocation": "./.yarn/cache/node-releases-npm-2.0.12-888ed1398a-b8c56db82c.zip/node_modules/node-releases/",\
-          "packageDependencies": [\
-            ["node-releases", "npm:2.0.12"]\
-          ],\
-          "linkType": "HARD"\
-        }],\
         ["npm:2.0.14", {\
           "packageLocation": "./.yarn/cache/node-releases-npm-2.0.14-d39047cad8-59443a2f77.zip/node_modules/node-releases/",\
           "packageDependencies": [\
             ["node-releases", "npm:2.0.14"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:2.0.18", {\
+          "packageLocation": "./.yarn/cache/node-releases-npm-2.0.18-51abc46668-ef55a3d853.zip/node_modules/node-releases/",\
+          "packageDependencies": [\
+            ["node-releases", "npm:2.0.18"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -9578,6 +9585,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/picocolors-npm-1.0.0-d81e0b1927-a2e8092dd8.zip/node_modules/picocolors/",\
           "packageDependencies": [\
             ["picocolors", "npm:1.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:1.0.1", {\
+          "packageLocation": "./.yarn/cache/picocolors-npm-1.0.1-39442f3da8-fa68166d1f.zip/node_modules/picocolors/",\
+          "packageDependencies": [\
+            ["picocolors", "npm:1.0.1"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -11429,7 +11443,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:20.2.5"],\
             ["@types/react", "npm:18.2.7"],\
             ["@types/react-dom", "npm:18.0.11"],\
-            ["autoprefixer", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:10.4.14"],\
+            ["autoprefixer", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:10.4.20"],\
             ["boring-avatars", "npm:1.10.1"],\
             ["camelcase-keys", "npm:9.1.3"],\
             ["eslint", "npm:8.41.0"],\
@@ -12010,13 +12024,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["update-browserslist-db", [\
-        ["npm:1.0.11", {\
-          "packageLocation": "./.yarn/cache/update-browserslist-db-npm-1.0.11-2c8e64258f-b98327518f.zip/node_modules/update-browserslist-db/",\
-          "packageDependencies": [\
-            ["update-browserslist-db", "npm:1.0.11"]\
-          ],\
-          "linkType": "SOFT"\
-        }],\
         ["npm:1.0.13", {\
           "packageLocation": "./.yarn/cache/update-browserslist-db-npm-1.0.13-ea7b8ee24d-1e47d80182.zip/node_modules/update-browserslist-db/",\
           "packageDependencies": [\
@@ -12024,14 +12031,21 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:8126a959d46e6def6d7f2497c47970a23a94adac85f5be1df9be290c674503b9bcbe0dc057e2741ee222cc2a8a3b9f584b20c3a9eb5ce085704d99fc5d94514c#npm:1.0.13", {\
-          "packageLocation": "./.yarn/__virtual__/update-browserslist-db-virtual-c44986bb1a/0/cache/update-browserslist-db-npm-1.0.13-ea7b8ee24d-1e47d80182.zip/node_modules/update-browserslist-db/",\
+        ["npm:1.1.0", {\
+          "packageLocation": "./.yarn/cache/update-browserslist-db-npm-1.1.0-3d2cb7d955-7b74694d96.zip/node_modules/update-browserslist-db/",\
           "packageDependencies": [\
-            ["update-browserslist-db", "virtual:8126a959d46e6def6d7f2497c47970a23a94adac85f5be1df9be290c674503b9bcbe0dc057e2741ee222cc2a8a3b9f584b20c3a9eb5ce085704d99fc5d94514c#npm:1.0.13"],\
+            ["update-browserslist-db", "npm:1.1.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:4e727c7b5b033f8d5ac7299f9860cb61f5802656f7b4fea2accd32d68dc1a767387a6d23f0724065d3c65e61cb31b9eec2438ae937ce36e7602b4586ede55af6#npm:1.1.0", {\
+          "packageLocation": "./.yarn/__virtual__/update-browserslist-db-virtual-e5d722ea57/0/cache/update-browserslist-db-npm-1.1.0-3d2cb7d955-7b74694d96.zip/node_modules/update-browserslist-db/",\
+          "packageDependencies": [\
+            ["update-browserslist-db", "virtual:4e727c7b5b033f8d5ac7299f9860cb61f5802656f7b4fea2accd32d68dc1a767387a6d23f0724065d3c65e61cb31b9eec2438ae937ce36e7602b4586ede55af6#npm:1.1.0"],\
             ["@types/browserslist", null],\
-            ["browserslist", "npm:4.23.0"],\
-            ["escalade", "npm:3.1.1"],\
-            ["picocolors", "npm:1.0.0"]\
+            ["browserslist", "npm:4.23.3"],\
+            ["escalade", "npm:3.1.2"],\
+            ["picocolors", "npm:1.0.1"]\
           ],\
           "packagePeers": [\
             "@types/browserslist",\
@@ -12039,12 +12053,12 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "HARD"\
         }],\
-        ["virtual:caaaf19b9e866ab6ccdf82b25b6099cd113eeb3a4514abbcc43102cdd73fb8e340dd7409c74831276eff69444a84ee9093f8c1c611e00a2607cce5386b8f4ff7#npm:1.0.11", {\
-          "packageLocation": "./.yarn/__virtual__/update-browserslist-db-virtual-ee19308e1c/0/cache/update-browserslist-db-npm-1.0.11-2c8e64258f-b98327518f.zip/node_modules/update-browserslist-db/",\
+        ["virtual:8126a959d46e6def6d7f2497c47970a23a94adac85f5be1df9be290c674503b9bcbe0dc057e2741ee222cc2a8a3b9f584b20c3a9eb5ce085704d99fc5d94514c#npm:1.0.13", {\
+          "packageLocation": "./.yarn/__virtual__/update-browserslist-db-virtual-c44986bb1a/0/cache/update-browserslist-db-npm-1.0.13-ea7b8ee24d-1e47d80182.zip/node_modules/update-browserslist-db/",\
           "packageDependencies": [\
-            ["update-browserslist-db", "virtual:caaaf19b9e866ab6ccdf82b25b6099cd113eeb3a4514abbcc43102cdd73fb8e340dd7409c74831276eff69444a84ee9093f8c1c611e00a2607cce5386b8f4ff7#npm:1.0.11"],\
+            ["update-browserslist-db", "virtual:8126a959d46e6def6d7f2497c47970a23a94adac85f5be1df9be290c674503b9bcbe0dc057e2741ee222cc2a8a3b9f584b20c3a9eb5ce085704d99fc5d94514c#npm:1.0.13"],\
             ["@types/browserslist", null],\
-            ["browserslist", "npm:4.21.6"],\
+            ["browserslist", "npm:4.23.0"],\
             ["escalade", "npm:3.1.1"],\
             ["picocolors", "npm:1.0.0"]\
           ],\
