@@ -30,7 +30,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@evilmartians/lefthook", "npm:1.7.11"],\
             ["@heroicons/react", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:2.1.5"],\
-            ["@hookform/resolvers", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:3.1.0"],\
+            ["@hookform/resolvers", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:3.9.0"],\
             ["@next/bundle-analyzer", "npm:14.2.1"],\
             ["@types/node", "npm:20.2.5"],\
             ["@types/react", "npm:18.2.7"],\
@@ -2559,17 +2559,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@hookform/resolvers", [\
-        ["npm:3.1.0", {\
-          "packageLocation": "./.yarn/cache/@hookform-resolvers-npm-3.1.0-8f7cf259db-8f6690e514.zip/node_modules/@hookform/resolvers/",\
+        ["npm:3.9.0", {\
+          "packageLocation": "./.yarn/cache/@hookform-resolvers-npm-3.9.0-6238a72f77-64a1e77ea2.zip/node_modules/@hookform/resolvers/",\
           "packageDependencies": [\
-            ["@hookform/resolvers", "npm:3.1.0"]\
+            ["@hookform/resolvers", "npm:3.9.0"]\
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:3.1.0", {\
-          "packageLocation": "./.yarn/__virtual__/@hookform-resolvers-virtual-55c4be8b57/0/cache/@hookform-resolvers-npm-3.1.0-8f7cf259db-8f6690e514.zip/node_modules/@hookform/resolvers/",\
+        ["virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:3.9.0", {\
+          "packageLocation": "./.yarn/__virtual__/@hookform-resolvers-virtual-da582f8179/0/cache/@hookform-resolvers-npm-3.9.0-6238a72f77-64a1e77ea2.zip/node_modules/@hookform/resolvers/",\
           "packageDependencies": [\
-            ["@hookform/resolvers", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:3.1.0"],\
+            ["@hookform/resolvers", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:3.9.0"],\
             ["@types/react-hook-form", null],\
             ["react-hook-form", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:7.52.1"]\
           ],\
@@ -11456,7 +11456,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["tascon-frontend", "workspace:."],\
             ["@evilmartians/lefthook", "npm:1.7.11"],\
             ["@heroicons/react", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:2.1.5"],\
-            ["@hookform/resolvers", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:3.1.0"],\
+            ["@hookform/resolvers", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:3.9.0"],\
             ["@next/bundle-analyzer", "npm:14.2.1"],\
             ["@types/node", "npm:20.2.5"],\
             ["@types/react", "npm:18.2.7"],\
