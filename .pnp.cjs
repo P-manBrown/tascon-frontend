@@ -44,7 +44,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-jest", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:27.2.1"],\
             ["eslint-plugin-storybook", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:0.6.12"],\
             ["eslint-plugin-unused-imports", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:2.0.0"],\
-            ["is-network-error", "npm:1.0.1"],\
+            ["is-network-error", "npm:1.1.0"],\
             ["knip", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:5.0.3"],\
             ["markdownlint-cli2", "npm:0.13.0"],\
             ["next", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:13.4.12"],\
@@ -7655,10 +7655,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["is-network-error", [\
-        ["npm:1.0.1", {\
-          "packageLocation": "./.yarn/cache/is-network-error-npm-1.0.1-e7ca0446b3-165d61500c.zip/node_modules/is-network-error/",\
+        ["npm:1.1.0", {\
+          "packageLocation": "./.yarn/cache/is-network-error-npm-1.1.0-31c8d0998d-b2fe6aac07.zip/node_modules/is-network-error/",\
           "packageDependencies": [\
-            ["is-network-error", "npm:1.0.1"]\
+            ["is-network-error", "npm:1.1.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -11452,7 +11452,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-jest", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:27.2.1"],\
             ["eslint-plugin-storybook", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:0.6.12"],\
             ["eslint-plugin-unused-imports", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:2.0.0"],\
-            ["is-network-error", "npm:1.0.1"],\
+            ["is-network-error", "npm:1.1.0"],\
             ["knip", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:5.0.3"],\
             ["markdownlint-cli2", "npm:0.13.0"],\
             ["next", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:13.4.12"],\
