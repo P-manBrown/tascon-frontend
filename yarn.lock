@@ -5651,10 +5651,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-network-error@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "is-network-error@npm:1.0.1"
-  checksum: 165d61500c4186c62db5a3a693d6bfa14ca40fe9b471ef4cd4f27b20ef6760880faf5386dc01ca9867531631782941fedaa94521d09959edf71f046e393c7b91
+"is-network-error@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "is-network-error@npm:1.1.0"
+  checksum: b2fe6aac07f814a9de275efd05934c832c129e7ba292d27614e9e8eec9e043b7a0bbeaeca5d0916b0f462edbec2aa2eaee974ee0a12ac095040e9515c222c251
   languageName: node
   linkType: hard
 
@@ -9049,7 +9049,7 @@ __metadata:
     eslint-plugin-jest: ^27.2.1
     eslint-plugin-storybook: ^0.6.11
     eslint-plugin-unused-imports: ^2.0.0
-    is-network-error: ^1.0.1
+    is-network-error: ^1.1.0
     knip: ^5.0.3
     markdownlint-cli2: ^0.13.0
     next: 13.4.12
