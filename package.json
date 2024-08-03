@@ -30,7 +30,7 @@
     "react-hook-form": "^7.52.1",
     "server-only": "^0.0.1",
     "snakecase-keys": "^6.0.0",
-    "typescript": "^5.0.4",
+    "typescript": "^5.5.4",
     "zod": "^3.21.4",
     "zustand": "^4.5.4"
   },
