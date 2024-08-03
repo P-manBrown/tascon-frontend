@@ -52,7 +52,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["pino", "npm:8.19.0"],\
             ["pino-pretty", "npm:11.2.2"],\
             ["postcss", "npm:8.4.24"],\
-            ["prettier", "npm:2.8.8"],\
+            ["prettier", "npm:3.3.3"],\
             ["prettier-plugin-tailwindcss", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:0.2.8"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:18.2.0"],\
@@ -9875,10 +9875,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["prettier", [\
-        ["npm:2.8.8", {\
-          "packageLocation": "./.yarn/cache/prettier-npm-2.8.8-430828a36c-b49e409431.zip/node_modules/prettier/",\
+        ["npm:3.3.3", {\
+          "packageLocation": "./.yarn/unplugged/prettier-npm-3.3.3-e811f023f3/node_modules/prettier/",\
           "packageDependencies": [\
-            ["prettier", "npm:2.8.8"]\
+            ["prettier", "npm:3.3.3"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -9915,7 +9915,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/shopify__prettier-plugin-liquid", null],\
             ["@types/shufo__prettier-plugin-blade", null],\
             ["@types/trivago__prettier-plugin-sort-imports", null],\
-            ["prettier", "npm:2.8.8"],\
+            ["prettier", "npm:3.3.3"],\
             ["prettier-plugin-astro", null],\
             ["prettier-plugin-css-order", null],\
             ["prettier-plugin-import-sort", null],\
@@ -11446,7 +11446,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["pino", "npm:8.19.0"],\
             ["pino-pretty", "npm:11.2.2"],\
             ["postcss", "npm:8.4.24"],\
-            ["prettier", "npm:2.8.8"],\
+            ["prettier", "npm:3.3.3"],\
             ["prettier-plugin-tailwindcss", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:0.2.8"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:712ddedb7826b0bc439379e55887833ad6e36bc23b62b0c5037e172da6585cad9fc5669277a9973a9a2caacdf8c383c3639827ef862386a6992eb4347b1be7d0#npm:18.2.0"],\
