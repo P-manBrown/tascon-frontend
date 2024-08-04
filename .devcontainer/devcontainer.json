@@ -26,7 +26,6 @@
         "dotenv.dotenv-vscode",
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
-        "Orta.vscode-jest",
         "paulshen.paul-typescript-toolkit",
         "mxsdev.typescript-explorer",
         "bradlc.vscode-tailwindcss",
