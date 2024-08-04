@@ -1,13 +1,6 @@
 module.exports = {
   extends: ['next/core-web-vitals', 'plugin:storybook/recommended', 'prettier'],
   plugins: ['unused-imports'],
-  overrides: [
-    {
-      files: ['test/**'],
-      plugins: ['jest'],
-      extends: ['plugin:jest/recommended', 'plugin:jest/style'],
-    },
-  ],
   settings: {
     'import/external-module-folders': ['.yarn', 'node_modules'],
   },

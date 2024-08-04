@@ -40,7 +40,6 @@
     "eslint": "8.41.0",
     "eslint-config-next": "^14.2.5",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-jest": "^28.6.0",
     "eslint-plugin-storybook": "^0.8.0",
     "eslint-plugin-unused-imports": "^2.0.0",
     "knip": "^5.27.0",
