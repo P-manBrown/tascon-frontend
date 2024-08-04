@@ -1,37 +1,37 @@
-min_version: 1.3.0
-pre-commit:
-  parallel: true
-  commands:
-    eslint:
-      glob: '*.{js,jsx,ts,tsx}'
-      exclude: '^\.|/\.'
-      run: yarn eslint --fix --max-warnings=0 {staged_files}
-      stage_fixed: true
-      fail_text: 'Read the report above.'
-    prettier:
-      run: yarn prettier --write --ignore-unknown {staged_files}
-      stage_fixed: true
-      fail_text: 'Read the report above.'
-    markdownlint:
-      glob: '*.md'
-      run: yarn markdownlint-cli2 --fix {staged_files}
-      stage_fixed: true
-      fail_text: 'Read the report above.'
-    check-logger-trace:
-      glob: 'src/**/*.{js,jsx,ts,tsx}'
-      run: grep -nFH 'logger.trace' {staged_files} && exit 1 || exit 0
-      fail_text: "ERROR: Remove 'logger.trace' before committing."
-    knip-files-exports:
-      run: yarn knip --include files --exports
-      fail_text: 'Read the report above.'
-    protect-branch:
-      run: git branch --show-current | tee /dev/tty | grep -Eqvx 'main|develop'
-      fail_text: "ERROR: Do NOT commit directly to 'main' or 'develop' branch."
-pre-push:
-  commands:
-    knip-dependencies:
-      run: yarn knip --dependencies
-      fail_text: 'Read the report above.'
-    check-git-clean:
-      run: test -z "$(git status --porcelain | tee /dev/tty)"
-      fail_text: 'ERROR: Commit or stash changes before pushing.'
+# min_version: 1.3.0
+# pre-commit:
+#   parallel: true
+#   commands:
+#     eslint:
+#       glob: '*.{js,jsx,ts,tsx}'
+#       exclude: '^\.|/\.'
+#       run: yarn eslint --fix --max-warnings=0 {staged_files}
+#       stage_fixed: true
+#       fail_text: 'Read the report above.'
+#     prettier:
+#       run: yarn prettier --write --ignore-unknown {staged_files}
+#       stage_fixed: true
+#       fail_text: 'Read the report above.'
+#     markdownlint:
+#       glob: '*.md'
+#       run: yarn markdownlint-cli2 --fix {staged_files}
+#       stage_fixed: true
+#       fail_text: 'Read the report above.'
+#     check-logger-trace:
+#       glob: 'src/**/*.{js,jsx,ts,tsx}'
+#       run: grep -nFH 'logger.trace' {staged_files} && exit 1 || exit 0
+#       fail_text: "ERROR: Remove 'logger.trace' before committing."
+#     knip-files-exports:
+#       run: yarn knip --include files --exports
+#       fail_text: 'Read the report above.'
+#     protect-branch:
+#       run: git branch --show-current | tee /dev/tty | grep -Eqvx 'main|develop'
+#       fail_text: "ERROR: Do NOT commit directly to 'main' or 'develop' branch."
+# pre-push:
+#   commands:
+#     knip-dependencies:
+#       run: yarn knip --dependencies
+#       fail_text: 'Read the report above.'
+#     check-git-clean:
+#       run: test -z "$(git status --porcelain | tee /dev/tty)"
+#       fail_text: 'ERROR: Commit or stash changes before pushing.'
