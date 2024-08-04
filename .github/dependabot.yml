@@ -13,7 +13,7 @@ updates:
     target-branch: 'main'
     ignore:
       - dependency-name: 'node'
-        versions: ['~>23.0']
+        versions: ['>=21.0']
   - package-ecosystem: 'npm'
     directory: '/'
     schedule:
