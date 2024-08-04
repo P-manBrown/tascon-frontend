@@ -27,7 +27,7 @@
     "pino": "^9.3.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-hook-form": "^7.52.1",
+    "react-hook-form": "^7.52.2",
     "server-only": "^0.0.1",
     "snakecase-keys": "^8.0.1",
     "typescript": "^5.5.4",
