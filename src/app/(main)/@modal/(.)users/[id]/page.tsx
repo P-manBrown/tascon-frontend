@@ -10,8 +10,5 @@ type Props = {
 }
 
 export default function User({ params: { id } }: Props) {
-  return (
-    // @ts-expect-error
-    <UserPage id={id} />
-  )
+  return <UserPage id={id} />
 }

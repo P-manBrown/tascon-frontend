@@ -38,7 +38,6 @@ export function useLoginForm({ csrfToken }: UseLoginFormParams) {
         reset()
         const fromUrl = searchParams.get('from_url')
         let targetUrl = `${origin}/tasks`
-        // @ts-expect-error
         if (fromUrl && URL.canParse(fromUrl)) {
           const fromOrigin = new URL(fromUrl).origin
           if (fromOrigin === origin) {
@@ -48,7 +47,7 @@ export function useLoginForm({ csrfToken }: UseLoginFormParams) {
         location.assign(targetUrl)
       }
     },
-    [openErrorSnackbar, reset, searchParams, csrfToken]
+    [openErrorSnackbar, reset, searchParams, csrfToken],
   )
 
   return {

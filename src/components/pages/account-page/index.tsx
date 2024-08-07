@@ -26,7 +26,6 @@ export function AccountPage() {
   return (
     <div className="flex flex-col gap-y-10">
       <Suspense fallback={<LoadingCurrentUserInfo />}>
-        {/* @ts-expect-error */}
         <CurrentUserInfo />
       </Suspense>
       <HorizontalRule />

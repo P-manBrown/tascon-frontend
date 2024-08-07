@@ -54,7 +54,6 @@ export function Snackbar({
           ? 'animate-slide-in-top md:animate-slide-in-bottom'
           : 'animate-slide-out-top md:animate-slide-out-bottom'
       }`}
-      // @ts-expect-error
       popover="manual"
       onAnimationEnd={handleAnimationEnd}
     >
