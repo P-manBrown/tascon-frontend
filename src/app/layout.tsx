@@ -1,25 +1,26 @@
 import { Snackbars } from './_components/snackbars'
 import './globals.css'
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 
 export const metadata: Metadata = {
   title: {
     default: 'TASCON',
     template: '%s | TASCON',
   },
-  viewport: {
-    width: 'device-width',
-    viewportFit: 'cover',
-    initialScale: 1,
-    maximumScale: 1,
-  },
   description: 'タスク管理とテンプレートの共有',
   manifest: '/manifest.json',
-  themeColor: '#F5F7FC',
   icons: {
     icon: '/icons/icon-192x192.png',
     apple: '/icons/apple-touch-icon.png',
   },
+}
+
+export const viewport: Viewport = {
+  themeColor: '#F5F7FC',
+  width: 'device-width',
+  viewportFit: 'cover',
+  initialScale: 1,
+  maximumScale: 1,
 }
 
 type Props = {

@@ -23,12 +23,11 @@ export function useSnackbar({ id, isOpen, actionButton }: Params) {
         }
       }
     },
-    [closeSnackbar, id]
+    [closeSnackbar, id],
   )
 
   const handleAnimationEnd = useCallback(() => {
     if (!isOpen) {
-      // @ts-expect-error
       ref.current?.hidePopover()
       cleanupSnackbar(id)
     }
@@ -42,7 +41,6 @@ export function useSnackbar({ id, isOpen, actionButton }: Params) {
 
   useEffect(() => {
     if (isOpen) {
-      // @ts-expect-error
       ref.current?.showPopover()
 
       const timer = setTimeout(() => {

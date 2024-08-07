@@ -10,7 +10,6 @@ type Props = {
 export default function User({ params: { id } }: Props) {
   return (
     <Suspense fallback={<LoadingUserPage />}>
-      {/* @ts-expect-error */}
       <UserPage id={id} />
     </Suspense>
   )

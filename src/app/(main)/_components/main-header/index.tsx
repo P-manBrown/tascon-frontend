@@ -26,7 +26,6 @@ export function MainHeader() {
             <NavLinks className="space-x-3.5 max-md:hidden" />
           </div>
           <Suspense fallback={<LoadingAccountAvatarLink />}>
-            {/* @ts-expect-error */}
             <CurrentUserAvatarLink />
           </Suspense>
         </div>

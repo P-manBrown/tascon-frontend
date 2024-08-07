@@ -16,7 +16,6 @@ export default function ChangePassword() {
       <AuthHeading className="mb-8">パスワード変更</AuthHeading>
       <div className="mx-2">
         <Suspense fallback={<LoadingCurrentUserChangePasswordForm />}>
-          {/* @ts-expect-error */}
           <CurrentUserChangePasswordForm />
         </Suspense>
       </div>
