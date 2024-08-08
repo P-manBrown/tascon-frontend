@@ -1,21 +1,5 @@
 {
   "$schema": "https://unpkg.com/knip@5/schema.json",
   "ignore": [".pnp.*"],
-  "ignoreBinaries": [
-    "eslint",
-    "knip",
-    "markdownlint-cli2",
-    "next",
-    "prettier",
-    "pino-pretty"
-  ],
-  "ignoreDependencies": [
-    "@evilmartians/lefthook",
-    "eslint",
-    "markdownlint-cli2",
-    "postcss",
-    "prettier",
-    "client-only",
-    "pino-pretty"
-  ]
+  "ignoreDependencies": ["@evilmartians/lefthook", "client-only"]
 }
