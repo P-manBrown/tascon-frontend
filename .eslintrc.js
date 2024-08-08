@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['next/core-web-vitals', 'plugin:storybook/recommended', 'prettier'],
+  extends: ['next/core-web-vitals', 'prettier'],
   plugins: ['unused-imports'],
   settings: {
     'import/external-module-folders': ['.yarn', 'node_modules'],
