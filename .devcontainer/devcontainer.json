@@ -25,6 +25,7 @@
         "bierner.markdown-preview-github-styles",
         "dotenv.dotenv-vscode",
         "dbaeumer.vscode-eslint",
+        "yusukehirao.vscode-markuplint",
         "esbenp.prettier-vscode",
         "paulshen.paul-typescript-toolkit",
         "mxsdev.typescript-explorer",
