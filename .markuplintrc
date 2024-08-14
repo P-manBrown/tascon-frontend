@@ -14,6 +14,12 @@
       "rules": {
         "no-hard-code-id": false
       }
+    },
+    {
+      "selector": "Modal > div[onMouseDownCapture][onBlurCapture][onClickCapture]",
+      "rules": {
+        "invalid-attr": false
+      }
     }
   ]
 }
