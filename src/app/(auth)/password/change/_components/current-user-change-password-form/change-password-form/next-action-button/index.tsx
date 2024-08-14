@@ -28,16 +28,11 @@ export function NextActionButton() {
   }, [from, cleanupQueryParams])
 
   return from === 'account' ? (
-    <Button
-      type="button"
-      className="btn-success"
-      autoFocus={true}
-      onClick={handleClick}
-    >
+    <Button type="button" className="btn-success" onClick={handleClick}>
       このページを閉じる
     </Button>
   ) : (
-    <Link href="/tasks" className="btn btn-success" autoFocus={true}>
+    <Link href="/tasks" className="btn btn-success">
       タスク一覧へ
     </Link>
   )

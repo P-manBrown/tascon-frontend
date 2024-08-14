@@ -42,7 +42,6 @@ export function SignUpSuccessMessage({ email, csrfToken }: Props) {
         <Button
           type="button"
           className="btn-primary"
-          autoFocus={true}
           status={isSending ? 'pending' : 'idle'}
           onClick={handleClick}
         >
