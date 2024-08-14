@@ -8,6 +8,11 @@ pre-commit:
       run: yarn eslint --fix --max-warnings=0 {staged_files}
       stage_fixed: true
       fail_text: 'Read the report above.'
+    markuplint:
+      glob: 'src/**/*.{jsx,tsx}'
+      run: yarn markuplint --fix {staged_files}
+      stage_fixed: true
+      fail_text: 'Read the report above.'
     prettier:
       run: yarn prettier --write --ignore-unknown {staged_files}
       stage_fixed: true
