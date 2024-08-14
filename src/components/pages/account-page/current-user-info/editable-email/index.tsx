@@ -136,7 +136,6 @@ export function EditableEmail({
               ref={editorRef}
               type="email"
               defaultValue={emailValue}
-              autoFocus={true}
               register={registerReturn}
               errors={fieldError}
               readOnly={isSubmitting}

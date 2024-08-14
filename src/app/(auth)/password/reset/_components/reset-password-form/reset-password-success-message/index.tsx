@@ -50,7 +50,6 @@ export function ResetPasswordSuccessMessage({
         <Button
           type="button"
           className="btn-primary"
-          autoFocus={true}
           status={isSending ? 'pending' : 'idle'}
           onClick={handleClick}
         >
