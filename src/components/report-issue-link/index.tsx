@@ -11,7 +11,7 @@ export function ReportIssueLink({ className = '', info }: Props) {
 
   return (
     <a
-      href={`https://github.com/P-manBrown/tascon-backend/issues/new${params}`}
+      href={`https://github.com/P-manBrown/tascon-frontend/issues/new${params}`}
       target="_blank"
       rel="noreferrer"
       className={`link inline-flex items-center ${className}`}
