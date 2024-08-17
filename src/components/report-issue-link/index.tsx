@@ -6,12 +6,17 @@ type Props = {
 }
 
 export function ReportIssueLink({ className = '', info }: Props) {
-  const body = `※ 以下の値は編集しないでください。\n${info}`
-  const params = info ? `?${new URLSearchParams({ body }).toString()}` : ''
+  const params = new URLSearchParams({
+    title: `[Bug]: タイトル(${info})`,
+    assignee: 'P-manBrown',
+    template: 'bug.yml',
+  }).toString()
+  const issueUrl = 'https://github.com/P-manBrown/tascon-frontend/issues/new'
+  const href = `${issueUrl}${info ? `?${params}` : ''}`
 
   return (
     <a
-      href={`https://github.com/P-manBrown/tascon-backend/issues/new${params}`}
+      href={href}
       target="_blank"
       rel="noreferrer"
       className={`link inline-flex items-center ${className}`}
