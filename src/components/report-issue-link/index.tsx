@@ -24,7 +24,7 @@ export function ReportIssueLink({ className = '', info }: Props) {
     >
       問題を報告
       <span className="ml-0.5">
-        <ArrowTopRightOnSquareIcon className="h-4 w-4" />
+        <ArrowTopRightOnSquareIcon className="size-4" />
       </span>
     </a>
   )

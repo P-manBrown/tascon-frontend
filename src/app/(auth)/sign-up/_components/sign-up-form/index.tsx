@@ -67,7 +67,7 @@ export function SignUpForm({ csrfToken }: Props) {
           aria-label={isVisible ? 'パスワードを隠す' : 'パスワードを表示する'}
           onClick={toggleVisible}
         >
-          <VisibilityToggleIcon isVisible={isVisible} className="h-5 w-5" />
+          <VisibilityToggleIcon isVisible={isVisible} className="size-5" />
         </IconButton>
       ),
     },
@@ -116,7 +116,7 @@ export function SignUpForm({ csrfToken }: Props) {
                 aria-label="モーダルを閉じる"
                 onClick={closeModal}
               >
-                <XMarkIcon className="h-6 w-6" />
+                <XMarkIcon className="size-6" />
               </IconButton>
             }
           >

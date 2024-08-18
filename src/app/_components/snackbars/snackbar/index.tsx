@@ -16,8 +16,8 @@ type Props = {
 }
 
 const iconBaseClasses =
-  'inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-md'
-const iconClasses = 'h-6 w-6'
+  'inline-flex size-8 flex-shrink-0 items-center justify-center rounded-md'
+const iconClasses = 'size-6'
 
 export function Snackbar({
   id,
@@ -69,7 +69,7 @@ export function Snackbar({
             onClick={() => closeSnackbar(id)}
             className="hover:bg-white/20"
           >
-            <XMarkIcon className="h-5 w-5 fill-white" />
+            <XMarkIcon className="size-5 fill-white" />
           </IconButton>
         )}
       </div>

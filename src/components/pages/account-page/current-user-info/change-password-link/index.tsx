@@ -16,7 +16,7 @@ export function ChangePasswordLink() {
     >
       パスワード変更
       <span className="ml-2">
-        <ArrowTopRightOnSquareIcon className="h-5 w-5 stroke-current" />
+        <ArrowTopRightOnSquareIcon className="size-5 stroke-current" />
       </span>
     </Link>
   )

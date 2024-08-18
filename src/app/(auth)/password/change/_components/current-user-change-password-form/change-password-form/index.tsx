@@ -61,7 +61,7 @@ export function ChangePasswordForm({
     resolver: zodResolver(
       allowPasswordChange
         ? changePasswordSchema.omit({ currentPassword: true })
-        : changePasswordSchema
+        : changePasswordSchema,
     ),
   })
 
@@ -75,7 +75,7 @@ export function ChangePasswordForm({
           type: result.status.toString(),
           message: result.message,
         },
-        { shouldFocus: true }
+        { shouldFocus: true },
       )
     } else {
       openErrorSnackbar(result)
@@ -140,7 +140,7 @@ export function ChangePasswordForm({
                 aria-label="モーダルを閉じる"
                 onClick={closeModal}
               >
-                <XMarkIcon className="h-6 w-6" />
+                <XMarkIcon className="size-6" />
               </IconButton>
             }
           >

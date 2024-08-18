@@ -27,7 +27,7 @@ export function NewPasswordInput(props: Props) {
             aria-label={isVisible ? 'パスワードを隠す' : 'パスワードを表示する'}
             onClick={toggleVisible}
           >
-            <VisibilityToggleIcon isVisible={isVisible} className="h-5 w-5" />
+            <VisibilityToggleIcon isVisible={isVisible} className="size-5" />
           </IconButton>
         }
         {...props}

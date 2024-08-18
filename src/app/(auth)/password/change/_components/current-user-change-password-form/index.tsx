@@ -61,7 +61,7 @@ export async function CurrentUserChangePasswordForm() {
 export function LoadingCurrentUserChangePasswordForm() {
   return (
     <div className="flex h-52 items-center justify-center">
-      <Spinner className="h-10 w-10 border-4 border-gray-500" />
+      <Spinner className="size-10 border-4 border-gray-500" />
     </div>
   )
 }
