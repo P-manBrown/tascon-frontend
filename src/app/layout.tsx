@@ -31,7 +31,7 @@ export default function RootLayout({ children }: Props) {
   return (
     <html lang="ja">
       {/* 'lg:overflow-hidden' for the route of the main group only. */}
-      <body className="font-body [&:has(dialog:modal)]:overflow-hidden [&:has(main#main)]:overflow-hidden">
+      <body className="font-body has-[dialog:modal]:overflow-hidden has-[main#main]:overflow-hidden">
         {children}
         <Snackbars />
       </body>
