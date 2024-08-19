@@ -10,6 +10,9 @@ const withPWA = require('next-pwa')({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    serverComponentsExternalPackages: ['pino'],
+  },
   reactStrictMode: true,
   images: {
     formats: ['image/avif', 'image/webp'],

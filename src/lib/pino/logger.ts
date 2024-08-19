@@ -1,9 +1,10 @@
 import pino from 'pino'
 import { sendLogWithRetries } from './send-log-with-retries.api'
 
+const isProduction = process.env.NODE_ENV === 'production'
+
 export const logger = pino({
   name: 'tascon-frontend',
-  level: process.env.NODE_ENV === 'production' ? 'info' : 'trace',
   timestamp: pino.stdTimeFunctions.isoTime,
   serializers: {
     err: (err: Error | Record<'err', unknown>) => {
@@ -27,4 +28,17 @@ export const logger = pino({
       },
     },
   },
+  ...(isProduction
+    ? {
+        level: 'info',
+      }
+    : {
+        level: 'trace',
+        transport: {
+          target: 'pino-pretty',
+          options: {
+            colorize: true,
+          },
+        },
+      }),
 })
