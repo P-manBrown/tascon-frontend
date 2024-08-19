@@ -5,6 +5,7 @@
     "@evilmartians/lefthook",
     "client-only",
     "@markuplint/jsx-parser",
-    "@markuplint/react-spec"
+    "@markuplint/react-spec",
+    "pino-pretty"
   ]
 }
