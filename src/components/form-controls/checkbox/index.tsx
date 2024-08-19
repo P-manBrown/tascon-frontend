@@ -17,7 +17,7 @@ export function Checkbox({
 }: Props) {
   return (
     <label
-      className="block w-fit cursor-pointer focus-visible:outline-offset-4 [&:has(input:disabled)]:cursor-wait"
+      className="block w-fit cursor-pointer focus-visible:outline-offset-4 has-[input:disabled]:cursor-wait"
       onClick={onClick}
       onKeyDown={onKeyDown}
       tabIndex={0}

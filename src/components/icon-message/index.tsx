@@ -10,7 +10,7 @@ type Props = {
   children: React.ReactNode
 }
 
-const iconClasses = 'mx-auto -mt-3 mb-3 h-24 w-24 stroke-1'
+const iconClasses = 'mx-auto -mt-3 mb-3 size-24 stroke-1'
 
 export function IconMessage({ title, severity, children }: Props) {
   const getIcon = () => {

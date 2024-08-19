@@ -75,12 +75,12 @@ export function CollapsibleSection({
         <span className="flex select-none justify-center gap-1 group-hover:stroke-black">
           {isCollapsed ? (
             <>
-              <ChevronDownIcon className="h-4 w-4 self-center" />
+              <ChevronDownIcon className="size-4 self-center" />
               全て表示
             </>
           ) : (
             <>
-              <ChevronUpIcon className="h-4 w-4 self-center" />
+              <ChevronUpIcon className="size-4 self-center" />
               詳細を非表示
             </>
           )}

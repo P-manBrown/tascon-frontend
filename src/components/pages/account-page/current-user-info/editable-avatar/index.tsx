@@ -66,7 +66,7 @@ export function EditableAvatar({
             status={isDeletingAvatar ? 'pending' : 'idle'}
             onClick={handleXMarkClick}
           >
-            <XCircleIcon className="h-6 w-6 fill-black stroke-white" />
+            <XCircleIcon className="size-6 fill-black stroke-white" />
           </IconButton>
         )}
       </div>

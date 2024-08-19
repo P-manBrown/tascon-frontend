@@ -7,7 +7,7 @@ type Props = {
 
 export default function MainLayout({ children, modal }: Props) {
   return (
-    <div className="flex max-h-[100dvh] flex-col">
+    <div className="flex max-h-dvh flex-col">
       <MainHeader />
       {/* 'id' controls 'overflow-hidden' style on the body element. */}
       <main id="main" className="flex-grow overflow-scroll px-safe">

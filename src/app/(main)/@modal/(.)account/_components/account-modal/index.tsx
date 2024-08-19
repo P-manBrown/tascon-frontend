@@ -103,7 +103,7 @@ export function AccountModal({ children }: Props) {
               aria-label="モーダルを閉じる"
               onClick={closeModal}
             >
-              <XMarkIcon className="h-6 w-6" />
+              <XMarkIcon className="size-6" />
             </IconButton>
           }
         >
