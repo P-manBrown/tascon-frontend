@@ -1813,12 +1813,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/bundle-analyzer@npm:^14.2.6":
-  version: 14.2.6
-  resolution: "@next/bundle-analyzer@npm:14.2.6"
+"@next/bundle-analyzer@npm:^14.2.7":
+  version: 14.2.7
+  resolution: "@next/bundle-analyzer@npm:14.2.7"
   dependencies:
     webpack-bundle-analyzer: "npm:4.10.1"
-  checksum: 10/69556d36655355d3ff46cb2133b4d3e61c30f3c61399a60d750303687a249d3560b54741b6820b899369c5789c9489f6eec49fb28c330a64c27707c5c09df3e3
+  checksum: 10/21e134683546e579f3eb333ac3dbff637d58b7afd8e668257275ef1d38447cfffd6be4386838ced8ca60202c7bb9e34213081b05053214ec7f9a3ee5cb36efbf
   languageName: node
   linkType: hard
 
@@ -6602,9 +6602,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"knip@npm:^5.27.2":
-  version: 5.27.2
-  resolution: "knip@npm:5.27.2"
+"knip@npm:^5.27.4":
+  version: 5.27.4
+  resolution: "knip@npm:5.27.4"
   dependencies:
     "@nodelib/fs.walk": "npm:1.2.8"
     "@snyk/github-codeowners": "npm:1.1.0"
@@ -6628,7 +6628,7 @@ __metadata:
   bin:
     knip: bin/knip.js
     knip-bun: bin/knip-bun.js
-  checksum: 10/65023f970b400e66b6d5edb7262409647399cd0f6706c54dd70f923b44776b954d3c639495a5bd6e2d82ab8c6b700fced8c0d350b34683417417394c5c8815a1
+  checksum: 10/48daf6f44e6aefe4c7f9d0f611e202fcb78aa1ead48cfdebbb17bbebcd2b9db0a7bdb9024a6ee10dbe5bc521f9066ec76f2afb4fba9a7dc646a1fd62332bfb63
   languageName: node
   linkType: hard
 
@@ -9570,7 +9570,7 @@ __metadata:
     "@hookform/resolvers": "npm:^3.9.0"
     "@markuplint/jsx-parser": "npm:^4.7.5"
     "@markuplint/react-spec": "npm:^4.5.5"
-    "@next/bundle-analyzer": "npm:^14.2.6"
+    "@next/bundle-analyzer": "npm:^14.2.7"
     "@types/node": "npm:22.2.0"
     "@types/react": "npm:18.3.4"
     "@types/react-dom": "npm:18.3.0"
@@ -9582,7 +9582,7 @@ __metadata:
     eslint-config-prettier: "npm:^9.1.0"
     eslint-plugin-unused-imports: "npm:^2.0.0"
     is-network-error: "npm:^1.1.0"
-    knip: "npm:^5.27.2"
+    knip: "npm:^5.27.4"
     markdownlint-cli2: "npm:^0.13.0"
     markuplint: "npm:^4.9.2"
     next: "npm:14.2.7"
