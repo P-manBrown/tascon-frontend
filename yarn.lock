@@ -3183,10 +3183,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"boring-avatars@npm:^1.11.0":
-  version: 1.11.0
-  resolution: "boring-avatars@npm:1.11.0"
-  checksum: 10/30497e39cc8965b403645cfb79fbf1e76202791a74912c319aa4ff1794dc3408db17c4c4b6edd1bac66aeb1983a22f930c9bfb08515155903964707027e2a97a
+"boring-avatars@npm:^1.11.1":
+  version: 1.11.1
+  resolution: "boring-avatars@npm:1.11.1"
+  checksum: 10/61da09bb94430e488f920de83fda97dbbed47d49c5de08e7e5ceefeeeba222099d6b41e3186d5f8b4ba35801058ba234e977521a2da838afd2fe5aa1f7777fd3
   languageName: node
   linkType: hard
 
@@ -9677,7 +9677,7 @@ __metadata:
     "@types/react": "npm:18.3.5"
     "@types/react-dom": "npm:18.3.0"
     autoprefixer: "npm:^10.4.20"
-    boring-avatars: "npm:^1.11.0"
+    boring-avatars: "npm:^1.11.1"
     camelcase-keys: "npm:^9.1.3"
     eslint: "npm:8.57.0"
     eslint-config-next: "npm:^14.2.11"
