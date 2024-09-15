@@ -40,7 +40,7 @@
     "@markuplint/react-spec": "^4.5.5",
     "autoprefixer": "^10.4.20",
     "eslint": "8.57.0",
-    "eslint-config-next": "^14.2.10",
+    "eslint-config-next": "^14.2.11",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-unused-imports": "^2.0.0",
     "knip": "^5.30.1",
