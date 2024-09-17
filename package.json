@@ -15,7 +15,7 @@
   "dependencies": {
     "@heroicons/react": "^2.1.5",
     "@hookform/resolvers": "^3.9.0",
-    "@next/bundle-analyzer": "^14.2.10",
+    "@next/bundle-analyzer": "^14.2.11",
     "@types/node": "22.5.4",
     "@types/react": "18.3.5",
     "@types/react-dom": "18.3.0",
