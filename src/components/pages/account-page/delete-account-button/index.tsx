@@ -35,6 +35,7 @@ export function DeleteAccountButton({ currentUserId, csrfToken }: Props) {
     setIsDeletingAccount(true)
     const result = await deleteAccount(csrfToken)
     if (result instanceof Error) {
+      // @ts-expect-error
       openErrorSnackbar(result)
     } else {
       cleanupLocalStorage(currentUserId)

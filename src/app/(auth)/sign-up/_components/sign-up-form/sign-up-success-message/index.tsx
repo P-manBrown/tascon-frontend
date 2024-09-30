@@ -20,6 +20,7 @@ export function SignUpSuccessMessage({ email, csrfToken }: Props) {
     setIsSending(true)
     const result = await resendConfirmationEmail({ csrfToken, email })
     if (result instanceof Error) {
+      // @ts-expect-error
       openErrorSnackbar(result)
     } else {
       openSnackbar({

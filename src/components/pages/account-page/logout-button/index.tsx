@@ -20,6 +20,7 @@ export function LogoutButton({ csrfToken }: Props) {
     setIsLoggingOut(true)
     const result = await logout(csrfToken)
     if (result instanceof Error) {
+      // @ts-expect-error
       openErrorSnackbar(result)
     } else {
       router.refresh()

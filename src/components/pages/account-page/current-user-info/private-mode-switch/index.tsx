@@ -45,6 +45,7 @@ export function PrivateModeSwitch({
     if (err.status === 404) {
       router.replace(redirectLoginPath)
     } else {
+      // @ts-expect-error
       openErrorSnackbar(err)
     }
   }
@@ -59,6 +60,7 @@ export function PrivateModeSwitch({
       if (result instanceof HttpError) {
         handleHttpError(result)
       } else {
+        // @ts-expect-error
         openErrorSnackbar(result)
       }
     } else {

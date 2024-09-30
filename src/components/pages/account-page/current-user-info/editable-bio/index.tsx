@@ -92,9 +92,11 @@ export function EditableBio({
           message: err.message,
         })
       } else {
+        // @ts-expect-error
         openErrorSnackbar(err)
       }
     } else {
+      // @ts-expect-error
       openErrorSnackbar(err)
     }
   }
@@ -105,6 +107,7 @@ export function EditableBio({
       if (result instanceof HttpError) {
         handleHttpError(result)
       } else {
+        // @ts-expect-error
         openErrorSnackbar(result)
       }
     } else {
