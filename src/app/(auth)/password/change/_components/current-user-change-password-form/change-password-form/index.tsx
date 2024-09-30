@@ -78,6 +78,7 @@ export function ChangePasswordForm({
         { shouldFocus: true },
       )
     } else {
+      // @ts-expect-error
       openErrorSnackbar(result)
     }
   }
@@ -88,6 +89,7 @@ export function ChangePasswordForm({
       if (result instanceof HttpError) {
         handleHttpError(result)
       } else {
+        // @ts-expect-error
         openErrorSnackbar(result)
       }
     } else {

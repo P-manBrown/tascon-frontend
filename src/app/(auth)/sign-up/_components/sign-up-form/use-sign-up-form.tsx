@@ -4,8 +4,9 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
 import { useModal } from '@/components/modal/use-modal'
 import { signUpSchema } from '@/schemas/request/auth'
-import { HttpError } from '@/utils/error/custom/http-error'
 import { signUp } from './sign-up.api'
+import type { ErrorObject } from '@/types/error'
+import type { HttpError } from '@/utils/error/custom/http-error'
 import type { z } from 'zod'
 
 type SignUpFormValues = z.infer<typeof signUpSchema>
@@ -38,28 +39,28 @@ export function useSignUpForm({ csrfToken }: Params) {
   })
 
   const handleHttpError = useCallback(
-    (err: HttpError) => {
+    (err: ErrorObject<HttpError>) => {
       if (err.message.startsWith('メールアドレス')) {
         setError(
           'email',
           {
-            type: err.status.toString(),
+            type: err.statusCode.toString(),
             message: err.message,
           },
-          { shouldFocus: true }
+          { shouldFocus: true },
         )
       } else {
         openErrorSnackbar(err)
       }
     },
-    [setError, openErrorSnackbar]
+    [setError, openErrorSnackbar],
   )
 
   const onSubmit: SubmitHandler<SignUpFormValues> = useCallback(
     async (data) => {
       const result = await signUp({ csrfToken, ...data })
-      if (result instanceof Error) {
-        if (result instanceof HttpError) {
+      if (result.status === 'error') {
+        if (result.name === 'HttpError') {
           handleHttpError(result)
         }
       } else {
@@ -68,7 +69,7 @@ export function useSignUpForm({ csrfToken }: Params) {
         openModal()
       }
     },
-    [csrfToken, handleHttpError, reset, openModal]
+    [csrfToken, reset, openModal, handleHttpError],
   )
 
   return {

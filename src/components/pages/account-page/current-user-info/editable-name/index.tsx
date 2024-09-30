@@ -42,7 +42,7 @@ export function EditableName({
   const editorRef = useRef<HTMLInputElement>(null)
   const [nameValue, setNameValue] = useState(initialName)
   const updateCurrentUserAvatar = useCurrentUserAvatarStore(
-    (state) => state.updateCurrentUserAvatar
+    (state) => state.updateCurrentUserAvatar,
   )
   const {
     updateField,
@@ -77,9 +77,11 @@ export function EditableName({
           message: err.message,
         })
       } else {
+        // @ts-expect-error
         openErrorSnackbar(err)
       }
     } else {
+      // @ts-expect-error
       openErrorSnackbar(err)
     }
   }
@@ -93,6 +95,7 @@ export function EditableName({
       if (result instanceof HttpError) {
         handleHttpError(result)
       } else {
+        // @ts-expect-error
         openErrorSnackbar(result)
       }
     } else {

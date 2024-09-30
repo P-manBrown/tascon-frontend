@@ -46,9 +46,11 @@ export function useEditableAvatar({ initialAvatarUrl, csrfToken }: Params) {
           message: err.message,
         })
       } else {
+        // @ts-expect-error
         openErrorSnackbar(err)
       }
     } else {
+      // @ts-expect-error
       openErrorSnackbar(err)
     }
   }
@@ -63,6 +65,7 @@ export function useEditableAvatar({ initialAvatarUrl, csrfToken }: Params) {
         if (result instanceof HttpError) {
           handleChangeHttpError(result)
         } else {
+          // @ts-expect-error
           openErrorSnackbar(result)
         }
       } else {
@@ -76,6 +79,7 @@ export function useEditableAvatar({ initialAvatarUrl, csrfToken }: Params) {
     if (err.status === 404) {
       router.replace(redirectLoginPath)
     } else {
+      // @ts-expect-error
       openErrorSnackbar(err)
     }
   }
@@ -91,6 +95,7 @@ export function useEditableAvatar({ initialAvatarUrl, csrfToken }: Params) {
       if (result instanceof HttpError) {
         handleDeleteHttpError(result)
       } else {
+        // @ts-expect-error
         openErrorSnackbar(result)
       }
     } else {

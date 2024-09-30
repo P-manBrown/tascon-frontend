@@ -51,13 +51,14 @@ export function useResetPasswordForm({
             type: err.status.toString(),
             message: err.message,
           },
-          { shouldFocus: true }
+          { shouldFocus: true },
         )
       } else {
+        // @ts-expect-error
         openErrorSnackbar(err)
       }
     },
-    [openErrorSnackbar, setError]
+    [openErrorSnackbar, setError],
   )
 
   const onSubmit: SubmitHandler<ResetPasswordFormValues> = useCallback(
@@ -67,6 +68,7 @@ export function useResetPasswordForm({
         if (result instanceof HttpError) {
           handleHttpError(result)
         } else {
+          // @ts-expect-error
           openErrorSnackbar(result)
         }
       } else {
@@ -78,7 +80,7 @@ export function useResetPasswordForm({
         openModal()
       }
     },
-    [handleHttpError, openErrorSnackbar, openModal, reset, csrfToken]
+    [handleHttpError, openErrorSnackbar, openModal, reset, csrfToken],
   )
 
   return {

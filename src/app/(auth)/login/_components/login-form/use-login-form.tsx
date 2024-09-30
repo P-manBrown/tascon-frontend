@@ -33,6 +33,7 @@ export function useLoginForm({ csrfToken }: UseLoginFormParams) {
     async (data) => {
       const result = await login({ csrfToken, ...data })
       if (result instanceof Error) {
+        // @ts-expect-error
         openErrorSnackbar(result)
       } else {
         reset()

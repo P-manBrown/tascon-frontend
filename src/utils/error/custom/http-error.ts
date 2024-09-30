@@ -5,13 +5,16 @@ type Params = {
 }
 
 export class HttpError extends Error {
+  name: 'HttpError'
   requestId: string
-  status: number
+  statusCode: number
+  status: number // TODO: Remove this property in the future
 
   constructor({ requestId, res, message }: Params) {
     super(message ?? 'リクエストの処理中にエラーが発生しました。')
     this.name = 'HttpError'
     this.requestId = requestId
-    this.status = res.status
+    this.statusCode = res.status
+    this.status = res.status // TODO: Remove this property in the future
   }
 }
