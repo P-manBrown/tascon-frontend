@@ -1,7 +1,11 @@
+'use server'
+
 import camelcaseKeys from 'camelcase-keys'
+import { cookies } from 'next/headers'
 import { z } from 'zod'
 import { authSchema } from '@/schemas/response/auth'
 import { fetchData } from '@/utils/api/fetch-data'
+import { createErrorObject } from '@/utils/error/create-error-object'
 import { getRequestId } from '@/utils/request-id/get-request-id'
 import { validateData } from '@/utils/validation/validate-data'
 
@@ -25,16 +29,18 @@ export async function signUp({ csrfToken, ...bodyData }: Params) {
       headers: {
         'Content-Type': 'application/json',
         'X-CSRF-Token': csrfToken,
+        Cookie: cookies().toString(),
       },
       body: JSON.stringify({
         ...bodyData,
         confirm_success_url: `${process.env.NEXT_PUBLIC_FRONTEND_ORIGIN}/login`,
       }),
-      credentials: 'include',
-    }
+    },
   )
+
   if (fetchDataResult instanceof Error) {
-    return fetchDataResult
+    const fetchErrorObject = createErrorObject(fetchDataResult)
+    return fetchErrorObject
   }
 
   const { headers, data } = fetchDataResult
@@ -42,7 +48,8 @@ export async function signUp({ csrfToken, ...bodyData }: Params) {
 
   const validateDataResult = validateData({ requestId, dataSchema, data })
   if (validateDataResult instanceof Error) {
-    return validateDataResult
+    const validationErrorObject = createErrorObject(validateDataResult)
+    return validationErrorObject
   }
 
   const camelcaseData = camelcaseKeys(validateDataResult, { deep: true })

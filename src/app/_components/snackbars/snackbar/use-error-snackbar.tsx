@@ -1,26 +1,19 @@
 import { useCallback } from 'react'
 import { useSnackbarsStore } from '@/app/_components/snackbars/use-snackbars-store'
 import { ReportIssueLink } from '@/components/report-issue-link'
-import { ContentTypeError } from '@/utils/error/custom/content-type-error'
-import { HttpError } from '@/utils/error/custom/http-error'
-import { NetworkError } from '@/utils/error/custom/network-error'
-import { UnexpectedError } from '@/utils/error/custom/unexpected-error'
-import { ValidationError } from '@/utils/error/custom/validation-error'
+import type { ErrorObject, Errors } from '@/types/error'
 
-type Errors =
-  | ContentTypeError
-  | HttpError
-  | NetworkError
-  | UnexpectedError
-  | ValidationError
+const criticalErrorNames = [
+  'ContentTypeError',
+  'ValidationError',
+  'UnexpectedError',
+]
 
-const criticalErrors = [ContentTypeError, ValidationError, UnexpectedError]
-
-function isFatalError(err: Errors) {
-  const isCriticalError = criticalErrors.some(
-    (criticalError) => err instanceof criticalError
+function isFatalError(err: ErrorObject<Errors>) {
+  const isCriticalError = criticalErrorNames.some(
+    (criticalErrorName) => err.name === criticalErrorName,
   )
-  const isServerError = err instanceof HttpError && err.status >= 500
+  const isServerError = err.name === 'HttpError' && err.statusCode >= 500
 
   return isCriticalError || isServerError
 }
@@ -29,7 +22,7 @@ export function useErrorSnackbar() {
   const openSnackbar = useSnackbarsStore((state) => state.openSnackbar)
 
   const openErrorSnackbar = useCallback(
-    (err: Errors) => {
+    (err: ErrorObject<Errors>) => {
       openSnackbar({
         severity: 'error',
         message: isFatalError(err)
@@ -40,7 +33,7 @@ export function useErrorSnackbar() {
         ) : undefined,
       })
     },
-    [openSnackbar]
+    [openSnackbar],
   )
 
   return { openErrorSnackbar }

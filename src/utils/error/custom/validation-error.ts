@@ -5,6 +5,7 @@ type Params = {
 }
 
 export class ValidationError extends Error {
+  name: 'ValidationError'
   requestId: string
 
   constructor({ cause, requestId, message }: Params) {

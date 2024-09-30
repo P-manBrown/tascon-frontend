@@ -5,6 +5,7 @@ type Params = {
 }
 
 export class NetworkError extends TypeError {
+  name: 'NetworkError'
   requestId: string
 
   constructor({ requestId, cause, message }: Params) {

@@ -5,6 +5,7 @@ type Params = {
 }
 
 export class UnexpectedError extends Error {
+  name: 'UnexpectedError'
   requestId: string
 
   constructor({ requestId, cause, message }: Params) {
