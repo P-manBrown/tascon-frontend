@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
 import { useModal } from '@/components/modal/use-modal'
 import { resetPasswordSchema } from '@/schemas/request/auth'
+import { ErrorObject } from '@/types/error'
 import { HttpError } from '@/utils/error/custom/http-error'
 import { resetPassword } from './reset-password.api'
 import type { SubmitHandler } from 'react-hook-form'
@@ -43,7 +44,7 @@ export function useResetPasswordForm({
   })
 
   const handleHttpError = useCallback(
-    (err: HttpError) => {
+    (err: ErrorObject<HttpError>) => {
       if (err.message.startsWith('メールアドレス')) {
         setError(
           'email',
@@ -54,7 +55,6 @@ export function useResetPasswordForm({
           { shouldFocus: true },
         )
       } else {
-        // @ts-expect-error
         openErrorSnackbar(err)
       }
     },
@@ -64,11 +64,10 @@ export function useResetPasswordForm({
   const onSubmit: SubmitHandler<ResetPasswordFormValues> = useCallback(
     async (data) => {
       const result = await resetPassword({ csrfToken, ...data })
-      if (result instanceof Error) {
-        if (result instanceof HttpError) {
+      if (result.status === 'error') {
+        if (result.name === 'HttpError') {
           handleHttpError(result)
         } else {
-          // @ts-expect-error
           openErrorSnackbar(result)
         }
       } else {
