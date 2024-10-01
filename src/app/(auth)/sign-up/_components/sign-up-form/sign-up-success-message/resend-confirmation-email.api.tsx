@@ -18,6 +18,8 @@ const dataSchema = z.object({
   message: z.string(),
 })
 
+type Data = z.infer<typeof dataSchema>
+
 export async function resendConfirmationEmail({
   csrfToken,
   ...bodyData
@@ -38,7 +40,7 @@ export async function resendConfirmationEmail({
     },
   )
 
-  let resultObject: ResultObject<z.infer<typeof dataSchema>>
+  let resultObject: ResultObject<Data>
 
   if (fetchDataResult instanceof Error) {
     resultObject = createErrorObject(fetchDataResult)
