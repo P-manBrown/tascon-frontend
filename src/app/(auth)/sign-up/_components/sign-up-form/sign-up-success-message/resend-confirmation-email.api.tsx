@@ -1,5 +1,10 @@
+'use server'
+
+import { cookies } from 'next/headers'
 import { z } from 'zod'
+import { ResultObject } from '@/types/api'
 import { fetchData } from '@/utils/api/fetch-data'
+import { createErrorObject } from '@/utils/error/create-error-object'
 import { getRequestId } from '@/utils/request-id/get-request-id'
 import { validateData } from '@/utils/validation/validate-data'
 
@@ -24,25 +29,33 @@ export async function resendConfirmationEmail({
       headers: {
         'Content-Type': 'application/json',
         'X-CSRF-Token': csrfToken,
+        Cookie: cookies().toString(),
       },
       body: JSON.stringify({
         ...bodyData,
         redirect_url: `${process.env.NEXT_PUBLIC_FRONTEND_ORIGIN}/login`,
       }),
-      credentials: 'include',
-    }
+    },
   )
+
+  let resultObject: ResultObject<z.infer<typeof dataSchema>>
+
   if (fetchDataResult instanceof Error) {
-    return fetchDataResult
+    resultObject = createErrorObject(fetchDataResult)
+  } else {
+    const { headers, data } = fetchDataResult
+    const requestId = getRequestId(headers)
+    const validateDataResult = validateData({ requestId, dataSchema, data })
+
+    if (validateDataResult instanceof Error) {
+      resultObject = createErrorObject(validateDataResult)
+    } else {
+      resultObject = {
+        status: 'success',
+        ...validateDataResult,
+      }
+    }
   }
 
-  const { headers, data } = fetchDataResult
-  const requestId = getRequestId(headers)
-
-  const validateDataResult = validateData({ requestId, dataSchema, data })
-  if (validateDataResult instanceof Error) {
-    return validateDataResult
-  }
-
-  return validateDataResult
+  return resultObject
 }
