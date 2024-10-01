@@ -1,9 +1,9 @@
 import { useState } from 'react'
+import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
 import { useSnackbarsStore } from '@/app/_components/snackbars/use-snackbars-store'
 import { Button } from '@/components/buttons/button'
 import { HorizontalRule } from '@/components/horizontal-rule'
 import { IconMessage } from '@/components/icon-message'
-import { HttpError } from '@/utils/error/custom/http-error'
 import { resetPassword } from '../reset-password.api'
 
 type Props = {
@@ -18,17 +18,13 @@ export function ResetPasswordSuccessMessage({
   csrfToken,
 }: Props) {
   const [isSending, setIsSending] = useState(false)
+  const { openErrorSnackbar } = useErrorSnackbar()
   const openSnackbar = useSnackbarsStore((state) => state.openSnackbar)
   const handleClick = async () => {
     setIsSending(true)
     const result = await resetPassword({ csrfToken, email })
-    if (result instanceof Error) {
-      if (result instanceof HttpError) {
-        openSnackbar({
-          severity: 'error',
-          message: `${result.message}`,
-        })
-      }
+    if (result.status === 'error') {
+      openErrorSnackbar(result)
     } else {
       openSnackbar({
         severity: 'success',
