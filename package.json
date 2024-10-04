@@ -47,7 +47,7 @@
     "eslint-plugin-unused-imports": "^4.1.4",
     "knip": "^5.30.5",
     "markdownlint-cli2": "^0.14.0",
-    "markuplint": "^4.9.3",
+    "markuplint": "^4.9.4",
     "pino-pretty": "^11.2.2",
     "postcss": "^8.4.47",
     "prettier": "3.3.3",
