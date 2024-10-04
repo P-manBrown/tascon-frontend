@@ -2343,6 +2343,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/set-cookie-parser@npm:^2":
+  version: 2.4.10
+  resolution: "@types/set-cookie-parser@npm:2.4.10"
+  dependencies:
+    "@types/node": "npm:*"
+  checksum: 10/105cc90c7d7deeb344858f720b58bd137356586545ac00d1a448e050bfcc0f385553ff26bc9c674bd8c2e953a458149eadb1945ee3d1eee81e6c0656236ebc0a
+  languageName: node
+  linkType: hard
+
 "@types/trusted-types@npm:^2.0.2":
   version: 2.0.7
   resolution: "@types/trusted-types@npm:2.0.7"
@@ -9037,6 +9046,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"set-cookie-parser@npm:^2.7.0":
+  version: 2.7.0
+  resolution: "set-cookie-parser@npm:2.7.0"
+  checksum: 10/5c0a197c022d614b3168efbb27a1e81c6eb97a07f1502780648be7483a6bada38c4e516f3d168769e7e3e819d431efdf7b659dcb450196bb7e2594e6a11a2dd7
+  languageName: node
+  linkType: hard
+
 "set-function-length@npm:^1.2.1":
   version: 1.2.1
   resolution: "set-function-length@npm:1.2.1"
@@ -9731,6 +9747,7 @@ __metadata:
     "@types/node": "npm:22.5.4"
     "@types/react": "npm:18.3.10"
     "@types/react-dom": "npm:18.3.0"
+    "@types/set-cookie-parser": "npm:^2"
     autoprefixer: "npm:^10.4.20"
     boring-avatars: "npm:^1.11.2"
     camelcase-keys: "npm:^9.1.3"
@@ -9753,6 +9770,7 @@ __metadata:
     react-dom: "npm:^18.3.1"
     react-hook-form: "npm:^7.53.0"
     server-only: "npm:^0.0.1"
+    set-cookie-parser: "npm:^2.7.0"
     snakecase-keys: "npm:^8.0.1"
     tailwindcss: "npm:^3.4.13"
     typescript: "npm:<5.5.0"
