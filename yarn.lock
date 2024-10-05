@@ -6471,12 +6471,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jiti@npm:^1.21.0, jiti@npm:^1.21.6":
+"jiti@npm:^1.21.0":
   version: 1.21.6
   resolution: "jiti@npm:1.21.6"
   bin:
     jiti: bin/jiti.js
   checksum: 10/289b124cea411c130a14ffe88e3d38376ab44b6695616dfa0a1f32176a8f20ec90cdd6d2b9d81450fc6467cfa4d865f04f49b98452bff0f812bc400fd0ae78d6
+  languageName: node
+  linkType: hard
+
+"jiti@npm:^2.1.0":
+  version: 2.1.2
+  resolution: "jiti@npm:2.1.2"
+  bin:
+    jiti: lib/jiti-cli.mjs
+  checksum: 10/a9d9098721e97caed56d0d4ea18bdec69fe141d67ce37a6c5937aaf06aab020a134a140fe4fafc1ba7b2c7641457d451142353c00ee3f6337ffa73fcc75cd185
   languageName: node
   linkType: hard
 
@@ -6648,16 +6657,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"knip@npm:^5.30.5":
-  version: 5.30.5
-  resolution: "knip@npm:5.30.5"
+"knip@npm:^5.31.0":
+  version: 5.31.0
+  resolution: "knip@npm:5.31.0"
   dependencies:
     "@nodelib/fs.walk": "npm:1.2.8"
     "@snyk/github-codeowners": "npm:1.1.0"
     easy-table: "npm:1.2.0"
     enhanced-resolve: "npm:^5.17.1"
     fast-glob: "npm:^3.3.2"
-    jiti: "npm:^1.21.6"
+    jiti: "npm:^2.1.0"
     js-yaml: "npm:^4.1.0"
     minimist: "npm:^1.2.8"
     picocolors: "npm:^1.0.0"
@@ -6674,7 +6683,7 @@ __metadata:
   bin:
     knip: bin/knip.js
     knip-bun: bin/knip-bun.js
-  checksum: 10/0cf47fee73ae57a41014a78cb6768228746b8b8fcfd908262caae2c857f5b04c86b6ae2184f5534345fcad5931d8f6a8ecd274a80b1103ab1115ae91785d574a
+  checksum: 10/cb8073cc94d8d325e035debe5bb697e24032af56c1c2d67c78dc73d8c15c92af51a93c290891aa510e20f0cf0897716f4895c942a06d7f04ded4db6f1711a5a5
   languageName: node
   linkType: hard
 
@@ -9656,7 +9665,7 @@ __metadata:
     eslint-config-prettier: "npm:^9.1.0"
     eslint-plugin-unused-imports: "npm:^4.1.4"
     is-network-error: "npm:^1.1.0"
-    knip: "npm:^5.30.5"
+    knip: "npm:^5.31.0"
     markdownlint-cli2: "npm:^0.14.0"
     markuplint: "npm:^4.9.4"
     next: "npm:14.2.13"
