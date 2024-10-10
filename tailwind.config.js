@@ -170,7 +170,7 @@ module.exports = {
           '@apply btn-ghost inline-flex items-center justify-center rounded-sm p-1 disabled:cursor-wait disabled:bg-transparent disabled:duration-0':
             {},
         },
-        '.btn-avatar': {
+        '.clickable-avatar': {
           '@apply duration-200 hover:brightness-75 rounded-full': {},
         },
       })
