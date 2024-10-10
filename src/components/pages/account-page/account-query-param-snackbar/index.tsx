@@ -24,7 +24,7 @@ export function AccountQueryParamSnackbar() {
           message: 'メールアドレスの認証に失敗しました。再度お試しください。',
         })
       }
-      cleanupQueryParams(['account_confirmation_success', 'ts'])
+      cleanupQueryParams(['account_confirmation_success'])
     }
   }, [accountConfSuccess, openSnackbar, cleanupQueryParams, searchParams])
 

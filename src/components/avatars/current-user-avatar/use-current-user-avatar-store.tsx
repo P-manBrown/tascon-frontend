@@ -1,9 +1,9 @@
+import Avatar from 'boring-avatars'
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
-import type { CurrentUserAvatar } from '.'
 
 type CurrentUserAvatarProps = Pick<
-  React.ComponentProps<typeof CurrentUserAvatar>,
+  React.ComponentProps<typeof Avatar>,
   'avatarUrl' | 'name'
 >
 
@@ -14,7 +14,7 @@ type UpdateCurrentUserAvatarParams = Pick<CurrentUserAvatarProps, 'name'> & {
 type CurrentUserAvatarState = {
   currentUserAvatar: CurrentUserAvatarProps
   updateCurrentUserAvatar: (
-    currentUserAvatar: UpdateCurrentUserAvatarParams
+    currentUserAvatar: UpdateCurrentUserAvatarParams,
   ) => void
 }
 
@@ -28,5 +28,5 @@ export const useCurrentUserAvatarStore = create<CurrentUserAvatarState>()(
       set((state) => ({
         currentUserAvatar: { ...state.currentUserAvatar, ...currentUserAvatar },
       })),
-  }))
+  })),
 )

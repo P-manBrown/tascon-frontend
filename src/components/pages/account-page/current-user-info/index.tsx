@@ -1,4 +1,5 @@
 import { redirect } from 'next/navigation'
+import { Suspense } from 'react'
 import { LoadingAvatar } from '@/components/avatars/avatar'
 import { DetailItemHeading } from '@/components/headings/detail-item-heading'
 import { DetailItemContentLayout } from '@/components/layouts/detail-item-content-layout'
@@ -11,15 +12,13 @@ import { getCsrfToken } from '@/utils/cookie/get-csrf-token'
 import { HttpError } from '@/utils/error/custom/http-error'
 import { generateRedirectLoginPath } from '@/utils/login-path/generate-redirect-login-path.server'
 import { ChangePasswordLink } from './change-password-link'
-import { EditableAvatar } from './editable-avatar'
+import { EditableAvatar, LoadingEditableAvatar } from './editable-avatar'
 import { EditableBio } from './editable-bio'
 import { EditableEmail } from './editable-email'
 import { EditableName } from './editable-name'
 import { PrivateModeSwitch } from './private-mode-switch'
 import { LoadingToggleSwitch } from './private-mode-switch/toggle-switch'
 
-const avatarLayoutClasses = 'flex justify-center'
-const avatarSize = 128
 const bioHeight = 160
 const descriptionLayoutClasses = 'ml-3 align-middle'
 
@@ -52,13 +51,10 @@ export async function CurrentUserInfo() {
 
   return (
     <>
-      <div className={avatarLayoutClasses}>
-        <EditableAvatar
-          initialAvatarUrl={currentUser.avatarUrl}
-          name={currentUser.name}
-          size={avatarSize}
-          csrfToken={csrfToken}
-        />
+      <div className="flex justify-center">
+        <Suspense fallback={<LoadingEditableAvatar />}>
+          <EditableAvatar csrfToken={csrfToken} />
+        </Suspense>
       </div>
       <EditableName
         currentUserId={currentUserId}
@@ -105,8 +101,8 @@ export async function CurrentUserInfo() {
 export function LoadingCurrentUserInfo() {
   return (
     <>
-      <div className={avatarLayoutClasses}>
-        <LoadingAvatar size={avatarSize} />
+      <div className="flex justify-center">
+        <LoadingAvatar size={128} />
       </div>
       <div>
         <DetailItemHeadingLayout>

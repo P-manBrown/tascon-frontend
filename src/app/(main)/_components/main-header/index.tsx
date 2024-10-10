@@ -2,10 +2,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import smallLogo from '/public/logos/logo-small.png'
 import { Suspense } from 'react'
-import {
-  CurrentUserAvatarLink,
-  LoadingAccountAvatarLink,
-} from './account-avatar-link'
+import { AccountLink } from './account-avatar-link/account-link'
+import { HeaderAvatar, LoadingHeaderAvatar } from './header-avatar'
 import { NavLinks } from './nav-links'
 
 export function MainHeader() {
@@ -25,9 +23,11 @@ export function MainHeader() {
             </Link>
             <NavLinks className="space-x-3.5 max-md:hidden" />
           </div>
-          <Suspense fallback={<LoadingAccountAvatarLink />}>
-            <CurrentUserAvatarLink />
-          </Suspense>
+          <AccountLink>
+            <Suspense fallback={<LoadingHeaderAvatar />}>
+              <HeaderAvatar />
+            </Suspense>
+          </AccountLink>
         </div>
         <NavLinks className="justify-between overflow-scroll whitespace-nowrap py-1 text-sm hidden-scrollbar md:hidden" />
       </nav>

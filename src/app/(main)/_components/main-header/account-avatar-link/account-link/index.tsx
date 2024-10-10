@@ -1,41 +1,27 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
-import { CurrentUserAvatar } from '@/components/avatars/current-user-avatar'
+import { useSelectedLayoutSegment } from 'next/navigation'
 
-type Props = Pick<
-  React.ComponentProps<typeof CurrentUserAvatar>,
-  'size' | 'name' | 'avatarUrl'
->
+type Props = {
+  children: React.ReactElement
+}
 
-export function AccountLink(props: Props) {
-  const pathname = usePathname()
-  const [ts, setTs] = useState('')
-  const [isActive, setIsActive] = useState(pathname === '/account')
-
-  useEffect(() => {
-    if (pathname === '/account') {
-      setIsActive(true)
-    } else {
-      setIsActive(false)
-    }
-    setTs(Date.now().toString())
-  }, [pathname])
+export function AccountLink({ children }: Props) {
+  const segment = useSelectedLayoutSegment()
+  const isActive = `/${segment}` === '/account'
 
   return (
-    // TEMP: https://github.com/vercel/next.js/issues/54173
     <Link
-      href={{ pathname: '/account', query: { ts } }}
-      className={`btn-avatar ${
+      href="/account"
+      className={`clickable-avatar ${
         isActive ? 'pointer-events-none ring ring-gray-500' : ''
       }`}
       aria-label="アカウント"
       prefetch={!isActive}
       tabIndex={isActive ? -1 : undefined}
     >
-      <CurrentUserAvatar priority={true} {...props} />
+      {children}
     </Link>
   )
 }
