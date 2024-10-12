@@ -15,7 +15,7 @@ import { ChangePasswordLink } from './change-password-link'
 import { EditableAvatar, LoadingEditableAvatar } from './editable-avatar'
 import { EditableBio } from './editable-bio'
 import { EditableEmail } from './editable-email'
-import { EditableName } from './editable-name'
+import { EditableName } from './editable-name/name-editor'
 import { PrivateModeSwitch } from './private-mode-switch'
 import { LoadingToggleSwitch } from './private-mode-switch/toggle-switch'
 
