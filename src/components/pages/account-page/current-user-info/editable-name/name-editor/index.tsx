@@ -1,16 +1,14 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
-import { useCurrentUserAvatarStore } from '@/components/avatars/current-user-avatar/use-current-user-avatar-store'
 import { EditableText } from '@/components/editable-text'
 import { useEditableText } from '@/components/editable-text/use-editable-text'
 import { TextField } from '@/components/form-controls/text-field'
-import { DetailItemContentLayout } from '@/components/layouts/detail-item-content-layout'
 import { DetailItemHeadingLayout } from '@/components/layouts/detail-item-heading-layout'
-import { DetailSingleLineText } from '@/components/texts/detail-single-line-text'
 import { signUpSchema } from '@/schemas/request/auth'
+import { ErrorObject } from '@/types/error'
 import { HttpError } from '@/utils/error/custom/http-error'
 import { useRedirectLoginPath } from '@/utils/login-path/use-redirect-login-path'
 import { changeName } from './change-name.api'
@@ -19,7 +17,7 @@ import type { z } from 'zod'
 const nameSchema = signUpSchema.pick({ name: true })
 
 type ChangeNameFormValue = z.infer<typeof nameSchema>
-type Props = {
+type Props = Pick<React.ComponentProps<typeof EditableText>, 'children'> & {
   currentUserId: string
   initialName: string
   label: React.ReactElement
@@ -28,22 +26,19 @@ type Props = {
   csrfToken: string
 }
 
-export function EditableName({
+export function NameEditor({
   currentUserId,
   initialName,
   label,
   privacyTag,
   unsavedChangeTag,
   csrfToken,
+  children,
 }: Props) {
   const { openErrorSnackbar } = useErrorSnackbar()
   const router = useRouter()
   const redirectLoginPath = useRedirectLoginPath()
   const editorRef = useRef<HTMLInputElement>(null)
-  const [nameValue, setNameValue] = useState(initialName)
-  const updateCurrentUserAvatar = useCurrentUserAvatarStore(
-    (state) => state.updateCurrentUserAvatar,
-  )
   const {
     updateField,
     isSubmitting,
@@ -60,28 +55,26 @@ export function EditableName({
   } = useEditableText<ChangeNameFormValue>({
     editorRef,
     currentUserId,
-    defaultValue: nameValue,
+    defaultValue: initialName,
     schema: nameSchema,
     name: 'name',
     shouldSaveToLocalStorage: true,
   })
 
-  const handleHttpError = (err: HttpError) => {
-    if (err.status === 404) {
+  const handleHttpError = (err: ErrorObject<HttpError>) => {
+    if (err.statusCode === 404) {
       saveFieldValueToLocalStorage()
       router.replace(redirectLoginPath)
-    } else if (err.status === 422) {
+    } else if (err.statusCode === 422) {
       if (err.message.startsWith('ユーザー名')) {
         setFieldError({
-          type: err.status.toString(),
+          type: err.statusCode.toString(),
           message: err.message,
         })
       } else {
-        // @ts-expect-error
         openErrorSnackbar(err)
       }
     } else {
-      // @ts-expect-error
       openErrorSnackbar(err)
     }
   }
@@ -91,17 +84,14 @@ export function EditableName({
       csrfToken,
       ...data,
     })
-    if (result instanceof Error) {
-      if (result instanceof HttpError) {
+    if (result.status === 'error') {
+      if (result.name === 'HttpError') {
         handleHttpError(result)
       } else {
-        // @ts-expect-error
         openErrorSnackbar(result)
       }
     } else {
-      setNameValue(result.data.name)
       updateField(result.data.name)
-      updateCurrentUserAvatar({ name: result.data.name })
       closeEditor()
     }
   }
@@ -118,7 +108,6 @@ export function EditableName({
           <TextField
             ref={editorRef}
             type="text"
-            defaultValue={nameValue}
             readOnly={isSubmitting}
             register={registerReturn}
             errors={fieldError}
@@ -131,9 +120,7 @@ export function EditableName({
         hasLocalStorageValue={hasLocalStorageValue}
         {...rest}
       >
-        <DetailItemContentLayout>
-          <DetailSingleLineText>{nameValue}</DetailSingleLineText>
-        </DetailItemContentLayout>
+        {children}
       </EditableText>
     </div>
   )

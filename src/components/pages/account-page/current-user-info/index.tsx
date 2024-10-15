@@ -15,7 +15,7 @@ import { ChangePasswordLink } from './change-password-link'
 import { EditableAvatar, LoadingEditableAvatar } from './editable-avatar'
 import { EditableBio } from './editable-bio'
 import { EditableEmail } from './editable-email'
-import { EditableName } from './editable-name/name-editor'
+import { EditableName, LoadingEditableName } from './editable-name'
 import { PrivateModeSwitch } from './private-mode-switch'
 import { LoadingToggleSwitch } from './private-mode-switch/toggle-switch'
 
@@ -56,14 +56,9 @@ export async function CurrentUserInfo() {
           <EditableAvatar csrfToken={csrfToken} />
         </Suspense>
       </div>
-      <EditableName
-        currentUserId={currentUserId}
-        initialName={currentUser.name}
-        label={<DetailItemHeading>ユーザー名</DetailItemHeading>}
-        privacyTag={<Tag color="gray">公開</Tag>}
-        unsavedChangeTag={<Tag color="warning">未保存の変更あり</Tag>}
-        csrfToken={csrfToken}
-      />
+      <Suspense fallback={<LoadingEditableName />}>
+        <EditableName csrfToken={csrfToken} />
+      </Suspense>
       <EditableBio
         currentUserId={currentUserId}
         initialBio={currentUser.bio}

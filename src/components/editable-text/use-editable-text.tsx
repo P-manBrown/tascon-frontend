@@ -2,7 +2,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { usePathname } from 'next/navigation'
 import { useState, useCallback, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { generateLocalStorageKey } from '@/utils/local-storage/generate-local-storage-key'
 import { useLocalStorage } from '@/utils/local-storage/use-local-storage'
 import type {
   UseEditableTextParams,
@@ -20,10 +19,8 @@ export function useEditableText<T extends FieldValues>({
   shouldSaveToLocalStorage,
 }: UseEditableTextParams) {
   const pathname = usePathname()
-  const fieldId = `${pathname}_${name}`
-  const localStorageKey = generateLocalStorageKey(currentUserId, fieldId)
+  const localStorageKey = `${currentUserId}_${pathname}_${name}`
   const [isEditorOpen, setIsEditorOpen] = useState(false)
-  const [fieldValue, setFieldValue] = useState(defaultValue)
   const {
     register,
     handleSubmit,
@@ -46,9 +43,7 @@ export function useEditableText<T extends FieldValues>({
     saveToLocalStorage,
     getLocalStorageValue,
     removeLocalStorageValue,
-  } = useLocalStorage()
-  const registerReturn = register(name)
-  const fieldError = errors[name]
+  } = useLocalStorage({ key: localStorageKey })
 
   const openEditor = useCallback(() => {
     setIsEditorOpen(true)
@@ -62,35 +57,33 @@ export function useEditableText<T extends FieldValues>({
     (error: FieldError) => {
       setError(name, error)
     },
-    [setError, name]
+    [setError, name],
   )
 
   const updateField = useCallback(
     (value: string) => {
       resetField(name, { defaultValue: value })
-      setFieldValue(value)
-      removeLocalStorageValue(localStorageKey)
+      removeLocalStorageValue()
     },
-    [resetField, name, removeLocalStorageValue, localStorageKey]
+    [resetField, name, removeLocalStorageValue],
   )
 
   const setFieldValueFromLocalStorage = useCallback(() => {
-    const localStorageValue = getLocalStorageValue(localStorageKey)
+    const localStorageValue = getLocalStorageValue()
     if (localStorageValue !== null) {
       setValue(name, localStorageValue, {
         shouldValidate: true,
         shouldDirty: true,
       })
-      setFieldValue(localStorageValue)
     }
-  }, [name, setValue, setFieldValue, getLocalStorageValue, localStorageKey])
+  }, [name, setValue, getLocalStorageValue])
 
   const saveFieldValueToLocalStorage = useCallback(() => {
     if (isDirty) {
       const fieldValue = getValues(name)
-      saveToLocalStorage(localStorageKey, fieldValue)
+      saveToLocalStorage(fieldValue)
     }
-  }, [getValues, name, saveToLocalStorage, localStorageKey, isDirty])
+  }, [getValues, name, saveToLocalStorage, isDirty])
 
   const handleFormSubmit: FormSubmitHandler<T> = useCallback(
     (onSubmit: SubmitHandler<any>) => async (ev: React.SyntheticEvent) => {
@@ -98,11 +91,11 @@ export function useEditableText<T extends FieldValues>({
       if (isDirty) {
         await handleSubmit(onSubmit)()
       } else {
-        removeLocalStorageValue(localStorageKey)
+        removeLocalStorageValue()
         setIsEditorOpen(false)
       }
     },
-    [isDirty, handleSubmit, removeLocalStorageValue, localStorageKey]
+    [isDirty, handleSubmit, removeLocalStorageValue],
   )
 
   const handleBlur: BlurHandler<T> = useCallback(
@@ -115,20 +108,19 @@ export function useEditableText<T extends FieldValues>({
           if (isDirty) {
             await handleSubmit(onSubmit)()
           } else {
-            removeLocalStorageValue(localStorageKey)
+            removeLocalStorageValue()
             setIsEditorOpen(false)
           }
         }
       },
-    [isDirty, handleSubmit, removeLocalStorageValue, localStorageKey]
+    [isDirty, handleSubmit, removeLocalStorageValue],
   )
 
   const handleCancelClick = useCallback(() => {
     resetField(name)
+    removeLocalStorageValue()
     setIsEditorOpen(false)
-    setFieldValue(defaultValue)
-    removeLocalStorageValue(localStorageKey)
-  }, [resetField, name, defaultValue, removeLocalStorageValue, localStorageKey])
+  }, [resetField, name, removeLocalStorageValue])
 
   useEffect(() => {
     if (isEditorOpen && editorRef.current) {
@@ -155,10 +147,9 @@ export function useEditableText<T extends FieldValues>({
   return {
     isEditorOpen,
     hasLocalStorageValue,
-    fieldValue,
     isSubmitting,
-    registerReturn,
-    fieldError,
+    registerReturn: register(name),
+    fieldError: errors[name],
     closeEditor,
     openEditor,
     setFieldError,

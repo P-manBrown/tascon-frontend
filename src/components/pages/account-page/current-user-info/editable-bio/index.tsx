@@ -53,6 +53,7 @@ export function EditableBio({
   const [bioValue, setBioValue] = useState(initialBio)
   const {
     isEditorOpen,
+    // @ts-expect-error
     fieldValue,
     updateField,
     isSubmitting,

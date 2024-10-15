@@ -11,9 +11,9 @@ export type UseEditableTextParams = {
 }
 
 export type FormSubmitHandler<T extends FieldValues> = (
-  onSubmit: SubmitHandler<T>
+  onSubmit: SubmitHandler<T>,
 ) => (ev: React.SyntheticEvent) => Promise<void>
 
 export type BlurHandler<T extends FieldValues> = (
-  onSubmit: SubmitHandler<T>
+  onSubmit: SubmitHandler<T>,
 ) => (ev: React.FocusEvent<HTMLFormElement>) => Promise<void>
