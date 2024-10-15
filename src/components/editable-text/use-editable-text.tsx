@@ -107,10 +107,8 @@ export function useEditableText<T extends FieldValues>({
           return
         }
 
-        const isTargetInput = ev.target instanceof HTMLInputElement
-        const isTargetTextArea = ev.target instanceof HTMLTextAreaElement
         const isFocusWithin = ev.currentTarget.contains(ev.relatedTarget)
-        if ((isTargetInput || isTargetTextArea) && !isFocusWithin) {
+        if (!isFocusWithin) {
           if (isDirty) {
             await handleSubmit(onSubmit)()
           } else {
