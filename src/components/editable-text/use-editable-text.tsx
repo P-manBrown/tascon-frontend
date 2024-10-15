@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { usePathname } from 'next/navigation'
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { useLocalStorage } from '@/utils/local-storage/use-local-storage'
 import type {
@@ -18,9 +18,10 @@ export function useEditableText<T extends FieldValues>({
   defaultValue,
   shouldSaveToLocalStorage,
 }: UseEditableTextParams) {
+  const [isEditorOpen, setIsEditorOpen] = useState(false)
+  const isPageHidden = useRef(false)
   const pathname = usePathname()
   const localStorageKey = `${currentUserId}_${pathname}_${name}`
-  const [isEditorOpen, setIsEditorOpen] = useState(false)
   const {
     register,
     handleSubmit,
@@ -101,6 +102,11 @@ export function useEditableText<T extends FieldValues>({
   const handleBlur: BlurHandler<T> = useCallback(
     (onSubmit: SubmitHandler<any>) =>
       async (ev: React.FocusEvent<HTMLFormElement>) => {
+        // Prevent form submission when the browser tab is closed
+        if (isPageHidden.current) {
+          return
+        }
+
         const isTargetInput = ev.target instanceof HTMLInputElement
         const isTargetTextArea = ev.target instanceof HTMLTextAreaElement
         const isFocusWithin = ev.currentTarget.contains(ev.relatedTarget)
@@ -122,6 +128,11 @@ export function useEditableText<T extends FieldValues>({
     setIsEditorOpen(false)
   }, [resetField, name, removeLocalStorageValue])
 
+  const handlePageHide = useCallback(() => {
+    isPageHidden.current = true
+    saveFieldValueToLocalStorage()
+  }, [saveFieldValueToLocalStorage])
+
   useEffect(() => {
     if (isEditorOpen && editorRef.current) {
       editorRef.current.focus({ preventScroll: true })
@@ -134,15 +145,15 @@ export function useEditableText<T extends FieldValues>({
 
   useEffect(() => {
     if (shouldSaveToLocalStorage) {
-      window.addEventListener('pagehide', saveFieldValueToLocalStorage)
+      window.addEventListener('pagehide', handlePageHide)
       window.addEventListener('popstate', saveFieldValueToLocalStorage)
 
       return () => {
-        window.removeEventListener('pagehide', saveFieldValueToLocalStorage)
+        window.removeEventListener('pagehide', handlePageHide)
         window.removeEventListener('popstate', saveFieldValueToLocalStorage)
       }
     }
-  }, [saveFieldValueToLocalStorage, shouldSaveToLocalStorage])
+  }, [saveFieldValueToLocalStorage, shouldSaveToLocalStorage, handlePageHide])
 
   return {
     isEditorOpen,
