@@ -32,7 +32,8 @@ export async function EditableBio({ csrfToken }: Props) {
       unsavedChangeTag={<Tag color="warning">未保存の変更あり</Tag>}
       csrfToken={csrfToken}
     >
-      <BioCollapsibleSection height={height}>
+      {/* Pass 'key' so that the bio is re-rendered when it is re-validated */}
+      <BioCollapsibleSection key={bio} height={height}>
         <DetailItemContentLayout>
           {bio === '' ? (
             <p className="text-gray-500">自己紹介を登録してください...</p>
