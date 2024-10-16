@@ -13,13 +13,12 @@ import { HttpError } from '@/utils/error/custom/http-error'
 import { generateRedirectLoginPath } from '@/utils/login-path/generate-redirect-login-path.server'
 import { ChangePasswordLink } from './change-password-link'
 import { EditableAvatar, LoadingEditableAvatar } from './editable-avatar'
-import { EditableBio } from './editable-bio'
+import { EditableBio, LoadingEditableBio } from './editable-bio'
 import { EditableEmail } from './editable-email'
 import { EditableName, LoadingEditableName } from './editable-name'
 import { PrivateModeSwitch } from './private-mode-switch'
 import { LoadingToggleSwitch } from './private-mode-switch/toggle-switch'
 
-const bioHeight = 160
 const descriptionLayoutClasses = 'ml-3 align-middle'
 
 export async function CurrentUserInfo() {
@@ -59,15 +58,10 @@ export async function CurrentUserInfo() {
       <Suspense fallback={<LoadingEditableName />}>
         <EditableName csrfToken={csrfToken} />
       </Suspense>
-      <EditableBio
-        currentUserId={currentUserId}
-        initialBio={currentUser.bio}
-        label={<DetailItemHeading>自己紹介</DetailItemHeading>}
-        privacyTag={<Tag color="gray">公開</Tag>}
-        unsavedChangeTag={<Tag color="warning">未保存の変更あり</Tag>}
-        height={bioHeight}
-        csrfToken={csrfToken}
-      />
+
+      <Suspense fallback={<LoadingEditableBio />}>
+        <EditableBio csrfToken={csrfToken} />
+      </Suspense>
       <EditableEmail
         currentUserId={currentUserId}
         provider={currentUser.provider}
@@ -113,7 +107,7 @@ export function LoadingCurrentUserInfo() {
           <DetailItemHeading>自己紹介</DetailItemHeading>
           <Tag color="gray">公開</Tag>
         </DetailItemHeadingLayout>
-        <div style={{ height: bioHeight }}>
+        <div style={{ height: '160px' }}>
           <DetailItemContentLayout>
             <LoadingDetailMultiLineText lines={6} />
           </DetailItemContentLayout>

@@ -1,163 +1,63 @@
-'use client'
-
-import { useRouter } from 'next/navigation'
-import { useRef, useState } from 'react'
-import { z } from 'zod'
-import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
-import { CollapsibleSection } from '@/components/collapsible-section'
-import { EditableText } from '@/components/editable-text'
-import { useEditableMultiLineText } from '@/components/editable-text/use-editable-multi-line-text'
-import { useEditableText } from '@/components/editable-text/use-editable-text'
-import { TextArea } from '@/components/form-controls/text-area'
+import { DetailItemHeading } from '@/components/headings/detail-item-heading'
 import { DetailItemContentLayout } from '@/components/layouts/detail-item-content-layout'
 import { DetailItemHeadingLayout } from '@/components/layouts/detail-item-heading-layout'
-import { DetailMultiLineText } from '@/components/texts/detail-multi-line-text'
-import { HttpError } from '@/utils/error/custom/http-error'
-import { useRedirectLoginPath } from '@/utils/login-path/use-redirect-login-path'
-import { countCharacters } from '@/utils/string-count/count-characters'
-import { changeBio } from './change-bio.api'
-
-const bioSchema = z.object({
-  bio: z
-    .string()
-    .trim()
-    .refine((value) => countCharacters(value) <= 250, {
-      message: '最大文字数を超えています。',
-    }),
-})
-
-type ChangeBioFormValue = z.infer<typeof bioSchema>
+import { Tag } from '@/components/tag'
+import {
+  DetailMultiLineText,
+  LoadingDetailMultiLineText,
+} from '@/components/texts/detail-multi-line-text'
+import { validateToken } from '@/utils/api/server/validate-token'
+import { BioCollapsibleSection } from './bio-collapsible-section'
+import { BioEditor } from './bio-editor'
 
 type Props = {
-  currentUserId: string
-  initialBio: string
-  label: React.ReactElement
-  privacyTag: React.ReactElement
-  unsavedChangeTag: React.ReactElement
-  height: React.ComponentProps<typeof CollapsibleSection>['height']
   csrfToken: string
 }
 
-export function EditableBio({
-  currentUserId,
-  initialBio,
-  label,
-  privacyTag,
-  unsavedChangeTag,
-  height,
-  csrfToken,
-}: Props) {
-  const router = useRouter()
-  const redirectLoginPath = useRedirectLoginPath()
-  const editorRef = useRef<HTMLTextAreaElement>(null)
-  const [bioValue, setBioValue] = useState(initialBio)
-  const {
-    isEditorOpen,
-    // @ts-expect-error
-    fieldValue,
-    updateField,
-    isSubmitting,
-    hasLocalStorageValue,
-    handleFormSubmit,
-    handleBlur,
-    handleCancelClick,
-    registerReturn,
-    fieldError,
-    setFieldError,
-    closeEditor,
-    saveFieldValueToLocalStorage,
-    ...rest
-  } = useEditableText<ChangeBioFormValue>({
-    editorRef,
-    currentUserId,
-    defaultValue: bioValue,
-    schema: bioSchema,
-    name: 'bio',
-    shouldSaveToLocalStorage: true,
-  })
+const height = 160
 
-  const { shadowRef, wordCount, handleInput } = useEditableMultiLineText({
-    editorRef,
-    isEditorOpen,
-  })
-  const { openErrorSnackbar } = useErrorSnackbar()
-
-  const handleHttpError = (err: HttpError) => {
-    if (err.status === 404) {
-      saveFieldValueToLocalStorage()
-      router.replace(redirectLoginPath)
-    } else if (err.status === 422) {
-      if (err.message.startsWith('自己紹介')) {
-        setFieldError({
-          type: err.status.toString(),
-          message: err.message,
-        })
-      } else {
-        // @ts-expect-error
-        openErrorSnackbar(err)
-      }
-    } else {
-      // @ts-expect-error
-      openErrorSnackbar(err)
-    }
+export async function EditableBio({ csrfToken }: Props) {
+  const validateTokenResult = await validateToken()
+  if (validateTokenResult instanceof Error) {
+    throw validateTokenResult
   }
+  const { id, bio } = validateTokenResult.data
 
-  const onSubmit = async (data: ChangeBioFormValue) => {
-    const result = await changeBio({ csrfToken, ...data })
-    if (result instanceof Error) {
-      if (result instanceof HttpError) {
-        handleHttpError(result)
-      } else {
-        // @ts-expect-error
-        openErrorSnackbar(result)
-      }
-    } else {
-      setBioValue(result.data.bio)
-      updateField(result.data.bio)
-      closeEditor()
-    }
-  }
+  return (
+    <BioEditor
+      currentUserId={id.toString()}
+      initialBio={bio}
+      label={<DetailItemHeading>自己紹介</DetailItemHeading>}
+      privacyTag={<Tag color="gray">公開</Tag>}
+      unsavedChangeTag={<Tag color="warning">未保存の変更あり</Tag>}
+      csrfToken={csrfToken}
+    >
+      {/* Pass 'key' so that the bio is re-rendered when it is re-validated */}
+      <BioCollapsibleSection key={bio} height={height}>
+        <DetailItemContentLayout>
+          {bio === '' ? (
+            <p className="text-gray-500">自己紹介を登録してください...</p>
+          ) : (
+            <DetailMultiLineText>{bio}</DetailMultiLineText>
+          )}
+        </DetailItemContentLayout>
+      </BioCollapsibleSection>
+    </BioEditor>
+  )
+}
 
+export function LoadingEditableBio() {
   return (
     <div>
       <DetailItemHeadingLayout>
-        {label}
-        {privacyTag}
-        {hasLocalStorageValue && unsavedChangeTag}
+        <DetailItemHeading>自己紹介</DetailItemHeading>
+        <Tag color="gray">公開</Tag>
       </DetailItemHeadingLayout>
-      <EditableText
-        editor={
-          <TextArea
-            ref={editorRef}
-            shadowRef={shadowRef}
-            rows={6}
-            defaultValue={fieldValue}
-            readOnly={isSubmitting}
-            wordCount={wordCount}
-            maxCount={250}
-            register={registerReturn}
-            errors={fieldError}
-            onInput={handleInput}
-          />
-        }
-        isEditorOpen={isEditorOpen}
-        isSubmitting={isSubmitting}
-        hasLocalStorageValue={hasLocalStorageValue}
-        onFormSubmit={handleFormSubmit(onSubmit)}
-        onCancelClick={handleCancelClick}
-        onBlur={handleBlur(onSubmit)}
-        {...rest}
-      >
-        <CollapsibleSection height={height} className="z-10">
-          <DetailItemContentLayout>
-            {bioValue === '' ? (
-              <p className="text-gray-500">自己紹介を登録してください...</p>
-            ) : (
-              <DetailMultiLineText>{bioValue}</DetailMultiLineText>
-            )}
-          </DetailItemContentLayout>
-        </CollapsibleSection>
-      </EditableText>
+      <div style={{ height: `${height}px` }}>
+        <DetailItemContentLayout>
+          <LoadingDetailMultiLineText lines={6} />
+        </DetailItemContentLayout>
+      </div>
     </div>
   )
 }
