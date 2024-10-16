@@ -20,7 +20,7 @@ export async function changeBio({ csrfToken, ...bodyData }: Params) {
       },
       body: JSON.stringify(bodyData),
       credentials: 'include',
-    }
+    },
   )
   if (fetchDataResult instanceof Error) {
     return fetchDataResult
