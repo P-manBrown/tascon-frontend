@@ -1,6 +1,12 @@
+'use server'
+
 import camelcaseKeys from 'camelcase-keys'
+import { revalidatePath } from 'next/cache'
+import { cookies } from 'next/headers'
 import { changeUserInfoDataSchema } from '@/schemas/response/change-user-info-success'
+import { ChangeUserInfoData, ResultObject } from '@/types/api'
 import { fetchData } from '@/utils/api/fetch-data'
+import { createErrorObject } from '@/utils/error/create-error-object'
 import { getRequestId } from '@/utils/request-id/get-request-id'
 import { validateData } from '@/utils/validation/validate-data'
 
@@ -17,27 +23,32 @@ export async function changeBio({ csrfToken, ...bodyData }: Params) {
       headers: {
         'Content-Type': 'application/json',
         'X-CSRF-Token': csrfToken,
+        Cookie: cookies().toString(),
       },
       body: JSON.stringify(bodyData),
-      credentials: 'include',
     },
   )
+
+  let resultObject: ResultObject<ChangeUserInfoData>
+
   if (fetchDataResult instanceof Error) {
-    return fetchDataResult
+    resultObject = createErrorObject(fetchDataResult)
+  } else {
+    const { headers, data } = fetchDataResult
+    const requestId = getRequestId(headers)
+    const validateDataResult = validateData({
+      requestId,
+      dataSchema: changeUserInfoDataSchema,
+      data,
+    })
+
+    if (validateDataResult instanceof Error) {
+      resultObject = createErrorObject(validateDataResult)
+    } else {
+      resultObject = camelcaseKeys(validateDataResult, { deep: true })
+      revalidatePath('/account')
+    }
   }
 
-  const { headers, data } = fetchDataResult
-  const requestId = getRequestId(headers)
-
-  const validateDataResult = validateData({
-    requestId,
-    dataSchema: changeUserInfoDataSchema,
-    data,
-  })
-  if (validateDataResult instanceof Error) {
-    return validateDataResult
-  }
-
-  const camelcaseData = camelcaseKeys(validateDataResult, { deep: true })
-  return camelcaseData
+  return resultObject
 }
