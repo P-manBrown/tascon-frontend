@@ -1,16 +1,15 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
 import { useSnackbarsStore } from '@/app/_components/snackbars/use-snackbars-store'
 import { EditableText } from '@/components/editable-text'
 import { useEditableText } from '@/components/editable-text/use-editable-text'
 import { TextField } from '@/components/form-controls/text-field'
-import { DetailItemContentLayout } from '@/components/layouts/detail-item-content-layout'
 import { DetailItemHeadingLayout } from '@/components/layouts/detail-item-heading-layout'
-import { DetailSingleLineText } from '@/components/texts/detail-single-line-text'
 import { signUpSchema } from '@/schemas/request/auth'
+import { ErrorObject } from '@/types/error'
 import { HttpError } from '@/utils/error/custom/http-error'
 import { generateFromUrlParam } from '@/utils/login-path/generate-from-url-param'
 import { useRedirectLoginPath } from '@/utils/login-path/use-redirect-login-path'
@@ -20,38 +19,35 @@ import type { z } from 'zod'
 
 const emailSchema = signUpSchema.pick({ email: true })
 type ChangeEmailFormValue = z.infer<typeof emailSchema>
-type Props = {
+type Props = Pick<React.ComponentProps<typeof EditableText>, 'children'> & {
   currentUserId: string
   provider: string
   initialEmail: string
   label: React.ReactElement
   privacyTag: React.ReactElement
-  unsavedChangeTag: React.ReactElement
   csrfToken: string
 }
 
 const origin = process.env.NEXT_PUBLIC_FRONTEND_ORIGIN
 
-export function EditableEmail({
+export function EmailEditor({
   currentUserId,
   provider,
   initialEmail,
   label,
   privacyTag,
-  unsavedChangeTag,
   csrfToken,
+  children,
 }: Props) {
   const openSnackbar = useSnackbarsStore((state) => state.openSnackbar)
   const { openErrorSnackbar } = useErrorSnackbar()
   const router = useRouter()
   const redirectLoginPath = useRedirectLoginPath()
   const editorRef = useRef<HTMLInputElement>(null)
-  const [emailValue, setEmailValue] = useState(initialEmail)
 
   const {
     updateField,
     isSubmitting,
-    hasLocalStorageValue,
     handleFormSubmit,
     handleCancelClick,
     handleBlur,
@@ -64,28 +60,26 @@ export function EditableEmail({
   } = useEditableText<ChangeEmailFormValue>({
     editorRef,
     currentUserId,
-    defaultValue: emailValue,
+    defaultValue: initialEmail,
     schema: emailSchema,
     name: 'email',
     shouldSaveToLocalStorage: false,
   })
 
-  const handleHttpError = (err: HttpError) => {
-    if (err.status === 404) {
+  const handleHttpError = (err: ErrorObject<HttpError>) => {
+    if (err.statusCode === 404) {
       saveFieldValueToLocalStorage()
       router.replace(redirectLoginPath)
-    } else if (err.status === 422) {
+    } else if (err.statusCode === 422) {
       if (err.message.startsWith('メールアドレス')) {
         setFieldError({
-          type: err.status.toString(),
+          type: err.statusCode.toString(),
           message: err.message,
         })
       } else {
-        // @ts-expect-error
         openErrorSnackbar(err)
       }
     } else {
-      // @ts-expect-error
       openErrorSnackbar(err)
     }
   }
@@ -104,15 +98,13 @@ export function EditableEmail({
       ...data,
       confirmSuccessUrl,
     })
-    if (result instanceof Error) {
-      if (result instanceof HttpError) {
+    if (result.status === 'error') {
+      if (result.name === 'HttpError') {
         handleHttpError(result)
       } else {
-        // @ts-expect-error
         openErrorSnackbar(result)
       }
     } else {
-      setEmailValue(result.data.email)
       updateField(result.data.email)
       closeEditor()
       openSnackbar({
@@ -127,7 +119,6 @@ export function EditableEmail({
       <DetailItemHeadingLayout>
         {label}
         {privacyTag}
-        {hasLocalStorageValue && unsavedChangeTag}
       </DetailItemHeadingLayout>
       <EditableText
         editor={
@@ -138,7 +129,6 @@ export function EditableEmail({
             <TextField
               ref={editorRef}
               type="email"
-              defaultValue={emailValue}
               register={registerReturn}
               errors={fieldError}
               readOnly={isSubmitting}
@@ -149,12 +139,9 @@ export function EditableEmail({
         onCancelClick={handleCancelClick}
         onBlur={handleBlur(onSubmit)}
         isSubmitting={isSubmitting}
-        hasLocalStorageValue={hasLocalStorageValue}
         {...rest}
       >
-        <DetailItemContentLayout>
-          <DetailSingleLineText>{emailValue}</DetailSingleLineText>
-        </DetailItemContentLayout>
+        {children}
       </EditableText>
     </div>
   )

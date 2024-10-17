@@ -14,7 +14,7 @@ import { generateRedirectLoginPath } from '@/utils/login-path/generate-redirect-
 import { ChangePasswordLink } from './change-password-link'
 import { EditableAvatar, LoadingEditableAvatar } from './editable-avatar'
 import { EditableBio, LoadingEditableBio } from './editable-bio'
-import { EditableEmail } from './editable-email/email-editor'
+import { LoadingEditableEmail, EditableEmail } from './editable-email'
 import { EditableName, LoadingEditableName } from './editable-name'
 import { PrivateModeSwitch } from './private-mode-switch'
 import { LoadingToggleSwitch } from './private-mode-switch/toggle-switch'
@@ -40,7 +40,6 @@ export async function CurrentUserInfo() {
     throw validateTokenResult
   }
   const { data: currentUser } = validateTokenResult
-  const currentUserId = currentUser.id.toString()
 
   const getCsrfTokenResult = getCsrfToken()
   if (getCsrfTokenResult instanceof Error) {
@@ -58,19 +57,12 @@ export async function CurrentUserInfo() {
       <Suspense fallback={<LoadingEditableName />}>
         <EditableName csrfToken={csrfToken} />
       </Suspense>
-
       <Suspense fallback={<LoadingEditableBio />}>
         <EditableBio csrfToken={csrfToken} />
       </Suspense>
-      <EditableEmail
-        currentUserId={currentUserId}
-        provider={currentUser.provider}
-        initialEmail={currentUser.email}
-        label={<DetailItemHeading>メールアドレス</DetailItemHeading>}
-        privacyTag={<Tag color="gray">非公開</Tag>}
-        unsavedChangeTag={<Tag color="warning">未保存の変更あり</Tag>}
-        csrfToken={csrfToken}
-      />
+      <Suspense fallback={<LoadingEditableEmail />}>
+        <EditableEmail csrfToken={csrfToken} />
+      </Suspense>
       <PrivateModeSwitch
         initialIsPrivate={currentUser.isPrivate}
         label={<DetailItemHeading>プライベートモード</DetailItemHeading>}
