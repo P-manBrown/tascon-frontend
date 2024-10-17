@@ -16,8 +16,8 @@ import { EditableAvatar, LoadingEditableAvatar } from './editable-avatar'
 import { EditableBio, LoadingEditableBio } from './editable-bio'
 import { LoadingEditableEmail, EditableEmail } from './editable-email'
 import { EditableName, LoadingEditableName } from './editable-name'
-import { PrivateModeSwitch } from './private-mode-switch'
-import { LoadingToggleSwitch } from './private-mode-switch/toggle-switch'
+import { PrivateModeSwitch } from './private-mode-switch/private-mode-checkbox'
+import { LoadingToggleSwitch } from './private-mode-switch/private-mode-checkbox/toggle-switch'
 
 const descriptionLayoutClasses = 'ml-3 align-middle'
 

@@ -21,7 +21,7 @@ export async function changeIsPrivate({ csrfToken, ...bodyData }: Params) {
       },
       body: JSON.stringify(snakecaseKeys(bodyData, { deep: false })),
       credentials: 'include',
-    }
+    },
   )
   if (fetchDataResult instanceof Error) {
     return fetchDataResult
