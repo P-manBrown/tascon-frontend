@@ -22,7 +22,7 @@ export async function changeEmail({ csrfToken, ...bodyData }: Params) {
       },
       body: JSON.stringify(snakecaseKeys(bodyData, { deep: false })),
       credentials: 'include',
-    }
+    },
   )
   if (fetchDataResult instanceof Error) {
     return fetchDataResult

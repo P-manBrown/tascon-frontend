@@ -14,7 +14,7 @@ import { generateRedirectLoginPath } from '@/utils/login-path/generate-redirect-
 import { ChangePasswordLink } from './change-password-link'
 import { EditableAvatar, LoadingEditableAvatar } from './editable-avatar'
 import { EditableBio, LoadingEditableBio } from './editable-bio'
-import { EditableEmail } from './editable-email'
+import { EditableEmail } from './editable-email/email-editor'
 import { EditableName, LoadingEditableName } from './editable-name'
 import { PrivateModeSwitch } from './private-mode-switch'
 import { LoadingToggleSwitch } from './private-mode-switch/toggle-switch'
