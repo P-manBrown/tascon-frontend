@@ -16,10 +16,11 @@ import { EditableAvatar, LoadingEditableAvatar } from './editable-avatar'
 import { EditableBio, LoadingEditableBio } from './editable-bio'
 import { LoadingEditableEmail, EditableEmail } from './editable-email'
 import { EditableName, LoadingEditableName } from './editable-name'
-import { PrivateModeSwitch } from './private-mode-switch'
-import { LoadingToggleSwitch } from './private-mode-switch/toggle-switch'
-
-const descriptionLayoutClasses = 'ml-3 align-middle'
+import {
+  LoadingPrivateModeSwitch,
+  PrivateModeSwitch,
+} from './private-mode-switch'
+import { LoadingToggleSwitch } from './private-mode-switch/private-mode-checkbox/toggle-switch'
 
 export async function CurrentUserInfo() {
   const handleHttpError = (err: HttpError) => {
@@ -63,17 +64,17 @@ export async function CurrentUserInfo() {
       <Suspense fallback={<LoadingEditableEmail />}>
         <EditableEmail csrfToken={csrfToken} />
       </Suspense>
-      <PrivateModeSwitch
-        initialIsPrivate={currentUser.isPrivate}
-        label={<DetailItemHeading>プライベートモード</DetailItemHeading>}
-        privacyTag={<Tag color="gray">非公開</Tag>}
-        description={
-          <span className={descriptionLayoutClasses}>
-            メールアドレスでの検索・登録を拒否する
-          </span>
-        }
-        csrfToken={csrfToken}
-      />
+      <div>
+        <DetailItemHeadingLayout>
+          <DetailItemHeading>プライベートモード</DetailItemHeading>
+          <Tag color="gray">非公開</Tag>
+        </DetailItemHeadingLayout>
+        <DetailItemContentLayout>
+          <Suspense fallback={<LoadingPrivateModeSwitch />}>
+            <PrivateModeSwitch csrfToken={csrfToken} />
+          </Suspense>
+        </DetailItemContentLayout>
+      </div>
       {currentUser.provider === 'email' && <ChangePasswordLink />}
     </>
   )
@@ -121,7 +122,7 @@ export function LoadingCurrentUserInfo() {
         </DetailItemHeadingLayout>
         <DetailItemContentLayout>
           <LoadingToggleSwitch />
-          <span className={descriptionLayoutClasses}>
+          <span className="ml-3 align-middle">
             メールアドレスでの検索・登録を拒否する
           </span>
         </DetailItemContentLayout>
