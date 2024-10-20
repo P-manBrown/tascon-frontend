@@ -1,23 +1,42 @@
-'use client'
-
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
+import { validateToken } from '@/utils/api/server/validate-token'
 
-export function ChangePasswordLink() {
+const layoutClasses = 'h-12 flex items-center'
+
+export async function ChangePasswordLink() {
+  const validateTokenResult = await validateToken()
+  if (validateTokenResult instanceof Error) {
+    throw validateTokenResult
+  }
+  const { provider } = validateTokenResult.data
+
+  const isEmailProvider = provider === 'email'
+
   return (
-    <Link
-      href={{
-        pathname: '/password/change',
-        query: { from: 'account' },
-      }}
-      target="_blank"
-      rel="noreferrer"
-      className="btn btn-success"
-    >
-      パスワード変更
-      <span className="ml-2">
-        <ArrowTopRightOnSquareIcon className="size-5 stroke-current" />
-      </span>
-    </Link>
+    <div className={layoutClasses}>
+      {isEmailProvider ? (
+        <Link
+          href={{
+            pathname: '/password/change',
+            query: { from: 'account' },
+          }}
+          target="_blank"
+          rel="noreferrer"
+          className="btn btn-success"
+        >
+          パスワードを変更
+          <span className="ml-2">
+            <ArrowTopRightOnSquareIcon className="size-5 stroke-current" />
+          </span>
+        </Link>
+      ) : (
+        <p>SNS認証を使用しているため、パスワードの変更はできません。</p>
+      )}
+    </div>
   )
+}
+
+export function LoadingChangePasswordLink() {
+  return <div className={`skeleton ${layoutClasses}`} />
 }
