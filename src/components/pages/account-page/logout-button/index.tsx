@@ -1,6 +1,5 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
 import { useId, useState } from 'react'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
 import { Button } from '@/components/buttons/button'
@@ -13,18 +12,13 @@ type Props = {
 export function LogoutButton({ csrfToken }: Props) {
   const id = useId()
   const [isLoggingOut, setIsLoggingOut] = useState(false)
-  const router = useRouter()
   const { openErrorSnackbar } = useErrorSnackbar()
 
   const handleClick = async () => {
     setIsLoggingOut(true)
     const result = await logout(csrfToken)
-    if (result instanceof Error) {
-      // @ts-expect-error
+    if (result.status === 'error') {
       openErrorSnackbar(result)
-    } else {
-      router.refresh()
-      router.push('/')
     }
     setIsLoggingOut(false)
   }
