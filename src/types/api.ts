@@ -4,9 +4,9 @@ import type { ErrorObject, Errors } from './error'
 import type { CamelCaseKeys } from 'camelcase-keys'
 
 export type ResultObject<T extends Record<string, unknown>> =
-  | ({
-      status: 'success'
-    } & T)
+  | (T extends { status: 'success' } & Record<string, unknown>
+      ? T
+      : { status: 'success' } & T)
   | ErrorObject<Errors>
 
 export type ChangeUserInfoData = CamelCaseKeys<
