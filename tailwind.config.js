@@ -128,8 +128,11 @@ module.exports = {
         '.link': {
           '@apply text-blue-600 hover:underline': {},
         },
+        '.shape-btn': {
+          '@apply h-11 w-full rounded-sm': {},
+        },
         '.btn': {
-          '@apply inline-flex h-11 w-full items-center justify-center whitespace-nowrap rounded-sm text-lg font-semibold':
+          '@apply shape-btn inline-flex items-center justify-center whitespace-nowrap text-lg font-semibold':
             {},
         },
         '.btn-ghost': {

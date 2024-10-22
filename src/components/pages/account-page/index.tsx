@@ -1,11 +1,15 @@
 import { redirect } from 'next/navigation'
+import { Suspense } from 'react'
 import { HorizontalRule } from '@/components/horizontal-rule'
 import { getCsrfToken } from '@/utils/cookie/get-csrf-token'
 import { getCurrentUserId } from '@/utils/cookie/get-current-user-id'
 import { generateRedirectLoginPath } from '@/utils/login-path/generate-redirect-login-path.server'
 import { AccountQueryParamSnackbar } from './account-query-param-snackbar'
 import { CurrentUserInfo } from './current-user-info'
-import { DeleteAccountButton } from './delete-account-button'
+import {
+  DeleteCurrentUserAccountButton,
+  LoadingDeleteCurrentUserAccountButton,
+} from './delete-current-user-account-button'
 import { LogoutButton } from './logout-button'
 
 export function AccountPage() {
@@ -27,10 +31,9 @@ export function AccountPage() {
       <CurrentUserInfo />
       <HorizontalRule />
       <LogoutButton csrfToken={csrfToken} />
-      <DeleteAccountButton
-        currentUserId={currentUserId}
-        csrfToken={csrfToken}
-      />
+      <Suspense fallback={<LoadingDeleteCurrentUserAccountButton />}>
+        <DeleteCurrentUserAccountButton csrfToken={csrfToken} />
+      </Suspense>
       <AccountQueryParamSnackbar />
     </div>
   )
