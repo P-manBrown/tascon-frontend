@@ -34,13 +34,11 @@ export function DeleteAccountButton({ currentUserId, csrfToken }: Props) {
   const handleOkClick = async () => {
     setIsDeletingAccount(true)
     const result = await deleteAccount(csrfToken)
-    if (result instanceof Error) {
-      // @ts-expect-error
+    if (result.status === 'error') {
       openErrorSnackbar(result)
     } else {
       cleanupLocalStorage(currentUserId)
       closeModal()
-      location.replace('https://forms.gle/F9d8j2XnjT2mAfRc9')
     }
     setIsDeletingAccount(false)
   }
