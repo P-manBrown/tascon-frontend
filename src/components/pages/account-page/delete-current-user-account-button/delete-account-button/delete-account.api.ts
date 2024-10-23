@@ -11,17 +11,19 @@ import { getRequestId } from '@/utils/request-id/get-request-id'
 import { validateData } from '@/utils/validation/validate-data'
 
 const dataSchema = z.object({
-  success: z.literal(true),
+  status: z.literal('success'),
+  message: z.string(),
 })
 
 type Data = z.infer<typeof dataSchema>
 
-export async function logout(csrfToken: string) {
+export async function deleteAccount(csrfToken: string) {
   const fetchDataResult = await fetchData(
-    `${process.env.NEXT_PUBLIC_API_ORIGIN}/api/v1/auth/sign_out`,
+    `${process.env.NEXT_PUBLIC_API_ORIGIN}/api/v1/auth`,
     {
       method: 'DELETE',
       headers: {
+        'Content-Type': 'application/json',
         'X-CSRF-Token': csrfToken,
         Cookie: cookies().toString(),
       },
@@ -40,12 +42,9 @@ export async function logout(csrfToken: string) {
     if (validateDataResult instanceof Error) {
       resultObject = createErrorObject(validateDataResult)
     } else {
-      resultObject = {
-        status: 'success',
-        ...validateDataResult,
-      }
+      resultObject = validateDataResult
       proxyServerCookies(headers)
-      redirect('/')
+      redirect('https://forms.gle/F9d8j2XnjT2mAfRc9')
     }
   }
 
