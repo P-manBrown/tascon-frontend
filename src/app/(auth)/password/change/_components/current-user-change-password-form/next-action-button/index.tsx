@@ -1,14 +1,14 @@
+'use client'
+
 import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
-import { useEffect } from 'react'
 import { useSnackbarsStore } from '@/app/_components/snackbars/use-snackbars-store'
 import { Button } from '@/components/buttons/button'
-import { useQueryParams } from '@/utils/query-param/use-query-params'
 
-export function NextActionButton() {
-  const searchParams = useSearchParams()
-  const from = searchParams.get('from')
-  const { cleanupQueryParams } = useQueryParams()
+type Props = {
+  referer: string | null
+}
+
+export function NextActionButton({ referer }: Props) {
   const openSnackbar = useSnackbarsStore((state) => state.openSnackbar)
 
   const handleClick = () => {
@@ -21,13 +21,7 @@ export function NextActionButton() {
     }
   }
 
-  useEffect(() => {
-    if (from) {
-      cleanupQueryParams(['from'])
-    }
-  }, [from, cleanupQueryParams])
-
-  return from === 'account' ? (
+  return referer === `${process.env.NEXT_PUBLIC_FRONTEND_ORIGIN}/account` ? (
     <Button type="button" className="btn-success" onClick={handleClick}>
       このページを閉じる
     </Button>

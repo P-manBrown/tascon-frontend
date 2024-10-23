@@ -1,10 +1,13 @@
+import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
+import { IconMessage } from '@/components/icon-message'
 import { Spinner } from '@/components/spinner'
 import { validateToken } from '@/utils/api/server/validate-token'
 import { getCsrfToken } from '@/utils/cookie/get-csrf-token'
 import { HttpError } from '@/utils/error/custom/http-error'
 import { generateRedirectLoginPath } from '@/utils/login-path/generate-redirect-login-path.server'
 import { ChangePasswordForm } from './change-password-form'
+import { NextActionButton } from './next-action-button'
 
 export async function CurrentUserChangePasswordForm() {
   const handleHttpError = (err: HttpError) => {
@@ -32,6 +35,8 @@ export async function CurrentUserChangePasswordForm() {
   }
   const csrfToken = getCsrfTokenResult
 
+  const referer = headers().get('referer')
+
   return (
     <ChangePasswordForm
       allowPasswordChange={currentUser.allowPasswordChange}
@@ -52,6 +57,12 @@ export async function CurrentUserChangePasswordForm() {
           className="hidden"
           readOnly={true}
         />
+      }
+      successMessage={
+        <IconMessage severity="success" title="パスワード変更完了">
+          <p className="mb-5 text-center">パスワードを変更しました。</p>
+          <NextActionButton referer={referer} />
+        </IconMessage>
       }
       csrfToken={csrfToken}
     />
