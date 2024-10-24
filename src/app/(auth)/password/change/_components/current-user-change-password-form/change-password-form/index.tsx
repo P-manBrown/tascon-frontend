@@ -2,7 +2,6 @@
 
 import { XMarkIcon } from '@heroicons/react/24/solid'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
 import { Button } from '@/components/buttons/button'
@@ -11,9 +10,8 @@ import { ModalContent } from '@/components/contents/modal-content'
 import { Modal } from '@/components/modal'
 import { useModal } from '@/components/modal/use-modal'
 import { changePasswordSchema } from '@/schemas/request/auth'
+import { ErrorObject } from '@/types/error'
 import { HttpError } from '@/utils/error/custom/http-error'
-import { useRedirectLoginPath } from '@/utils/login-path/use-redirect-login-path'
-import { ChangePasswordSuccessMessage } from './change-password-success-message'
 import { changePassword } from './change-password.api'
 import { CurrentPasswordInput } from './current-password-input'
 import { NewPasswordInput } from './new-password-input'
@@ -29,6 +27,7 @@ type Props = {
   allowPasswordChange: boolean
   nameInput: React.ReactElement
   emailInput: React.ReactElement
+  successMessage: React.ReactElement
   csrfToken: string
 }
 
@@ -36,10 +35,9 @@ export function ChangePasswordForm({
   allowPasswordChange,
   nameInput,
   emailInput,
+  successMessage,
   csrfToken,
 }: Props) {
-  const router = useRouter()
-  const redirectLoginPath = useRedirectLoginPath()
   const { openErrorSnackbar } = useErrorSnackbar()
   const {
     shouldMount,
@@ -65,39 +63,32 @@ export function ChangePasswordForm({
     ),
   })
 
-  const handleHttpError = (result: HttpError) => {
-    if (result.status === 401) {
-      router.replace(redirectLoginPath)
-    } else if (result.message.startsWith('現在のパスワード')) {
+  const handleHttpError = (err: ErrorObject<HttpError>) => {
+    if (err.message.startsWith('現在のパスワード')) {
       setError(
         'currentPassword',
         {
-          type: result.status.toString(),
-          message: result.message,
+          type: err.statusCode.toString(),
+          message: err.message,
         },
         { shouldFocus: true },
       )
     } else {
-      // @ts-expect-error
-      openErrorSnackbar(result)
+      openErrorSnackbar(err)
     }
   }
 
   const onSubmit: SubmitHandler<ChangePasswordFormValues> = async (data) => {
     const result = await changePassword({ csrfToken, ...data })
-    if (result instanceof Error) {
-      if (result instanceof HttpError) {
+    if (result.status === 'error') {
+      if (result.name === 'HttpError') {
         handleHttpError(result)
       } else {
-        // @ts-expect-error
         openErrorSnackbar(result)
       }
     } else {
       reset()
       openModal()
-      if (allowPasswordChange) {
-        router.refresh()
-      }
     }
   }
 
@@ -146,7 +137,7 @@ export function ChangePasswordForm({
               </IconButton>
             }
           >
-            <ChangePasswordSuccessMessage />
+            {successMessage}
           </ModalContent>
         </Modal>
       )}

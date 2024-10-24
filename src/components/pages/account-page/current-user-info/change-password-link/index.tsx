@@ -17,12 +17,8 @@ export async function ChangePasswordLink() {
     <div className={layoutClasses}>
       {isEmailProvider ? (
         <Link
-          href={{
-            pathname: '/password/change',
-            query: { from: 'account' },
-          }}
+          href="/password/change"
           target="_blank"
-          rel="noreferrer"
           className="btn btn-success"
         >
           パスワードを変更
