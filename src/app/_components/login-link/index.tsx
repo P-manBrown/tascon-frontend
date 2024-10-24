@@ -3,7 +3,7 @@
 import { ArrowRightEndOnRectangleIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { isValidToken } from './is-valid-token.api'
+import { validateToken } from './validate-token.api'
 
 export function LoginLink() {
   const [isValid, setIsValid] = useState(false)
@@ -11,9 +11,9 @@ export function LoginLink() {
   useEffect(() => {
     let ignore = false
     void (async () => {
-      const isValid = await isValidToken()
-      if (!ignore) {
-        setIsValid(isValid)
+      const result = await validateToken()
+      if (!ignore && result.status === 'success') {
+        setIsValid(true)
       }
     })()
 
