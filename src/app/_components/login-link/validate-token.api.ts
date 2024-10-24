@@ -6,7 +6,7 @@ export async function isValidToken() {
     {
       method: 'GET',
       credentials: 'include',
-    }
+    },
   )
 
   const isValid = !(result instanceof Error)
