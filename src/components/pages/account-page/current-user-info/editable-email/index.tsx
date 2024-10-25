@@ -6,7 +6,7 @@ import {
   DetailSingleLineText,
   LoadingDetailSingleLineText,
 } from '@/components/texts/detail-single-line-text'
-import { validateToken } from '@/utils/api/server/validate-token'
+import { getCurrentUser } from '@/utils/api/server/get-current-user'
 import { EmailEditor } from './email-editor'
 
 type Props = {
@@ -14,23 +14,20 @@ type Props = {
 }
 
 export async function EditableEmail({ csrfToken }: Props) {
-  const validateTokenResult = await validateToken()
-  if (validateTokenResult instanceof Error) {
-    throw validateTokenResult
-  }
-  const { id, provider, email } = validateTokenResult.data
+  const { data: currentUser } = await getCurrentUser()
+  const currentUserId = currentUser.id.toString()
 
   return (
     <EmailEditor
-      currentUserId={id.toString()}
-      provider={provider}
-      initialEmail={email}
+      currentUserId={currentUserId}
+      provider={currentUser.provider}
+      initialEmail={currentUser.email}
       label={<DetailItemHeading>メールアドレス</DetailItemHeading>}
       privacyTag={<Tag color="gray">非公開</Tag>}
       csrfToken={csrfToken}
     >
       <DetailItemContentLayout>
-        <DetailSingleLineText>{email}</DetailSingleLineText>
+        <DetailSingleLineText>{currentUser.email}</DetailSingleLineText>
       </DetailItemContentLayout>
     </EmailEditor>
   )

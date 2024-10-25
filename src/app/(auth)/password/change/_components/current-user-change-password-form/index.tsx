@@ -1,33 +1,13 @@
 import { headers } from 'next/headers'
-import { redirect } from 'next/navigation'
 import { IconMessage } from '@/components/icon-message'
 import { Spinner } from '@/components/spinner'
-import { validateToken } from '@/utils/api/server/validate-token'
+import { getCurrentUser } from '@/utils/api/server/get-current-user'
 import { getCsrfToken } from '@/utils/cookie/get-csrf-token'
-import { HttpError } from '@/utils/error/custom/http-error'
-import { generateRedirectLoginPath } from '@/utils/login-path/generate-redirect-login-path.server'
 import { ChangePasswordForm } from './change-password-form'
 import { NextActionButton } from './next-action-button'
 
 export async function CurrentUserChangePasswordForm() {
-  const handleHttpError = (err: HttpError) => {
-    if (err.status === 401) {
-      const redirectLoginPath = generateRedirectLoginPath()
-      redirect(redirectLoginPath)
-    }
-
-    throw err
-  }
-
-  const validateTokenResult = await validateToken()
-  if (validateTokenResult instanceof Error) {
-    if (validateTokenResult instanceof HttpError) {
-      handleHttpError(validateTokenResult)
-    }
-
-    throw validateTokenResult
-  }
-  const { data: currentUser } = validateTokenResult
+  const { data: currentUser } = await getCurrentUser()
 
   const getCsrfTokenResult = getCsrfToken()
   if (getCsrfTokenResult instanceof Error) {

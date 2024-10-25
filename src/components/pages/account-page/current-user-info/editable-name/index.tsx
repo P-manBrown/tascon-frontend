@@ -6,7 +6,7 @@ import {
   DetailSingleLineText,
   LoadingDetailSingleLineText,
 } from '@/components/texts/detail-single-line-text'
-import { validateToken } from '@/utils/api/server/validate-token'
+import { getCurrentUser } from '@/utils/api/server/get-current-user'
 import { NameEditor } from './name-editor'
 
 type Props = {
@@ -14,23 +14,20 @@ type Props = {
 }
 
 export async function EditableName({ csrfToken }: Props) {
-  const validateTokenResult = await validateToken()
-  if (validateTokenResult instanceof Error) {
-    throw validateTokenResult
-  }
-  const { id, name } = validateTokenResult.data
+  const { data: currentUser } = await getCurrentUser()
+  const currentUserId = currentUser.id.toString()
 
   return (
     <NameEditor
-      currentUserId={id.toString()}
-      initialName={name}
+      currentUserId={currentUserId}
+      initialName={currentUser.name}
       label={<DetailItemHeading>ユーザー名</DetailItemHeading>}
       privacyTag={<Tag color="gray">公開</Tag>}
       unsavedChangeTag={<Tag color="warning">未保存の変更あり</Tag>}
       csrfToken={csrfToken}
     >
       <DetailItemContentLayout>
-        <DetailSingleLineText>{name}</DetailSingleLineText>
+        <DetailSingleLineText>{currentUser.name}</DetailSingleLineText>
       </DetailItemContentLayout>
     </NameEditor>
   )

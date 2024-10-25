@@ -1,17 +1,12 @@
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
-import { validateToken } from '@/utils/api/server/validate-token'
+import { getCurrentUser } from '@/utils/api/server/get-current-user'
 
 const layoutClasses = 'h-12 flex items-center'
 
 export async function ChangePasswordLink() {
-  const validateTokenResult = await validateToken()
-  if (validateTokenResult instanceof Error) {
-    throw validateTokenResult
-  }
-  const { provider } = validateTokenResult.data
-
-  const isEmailProvider = provider === 'email'
+  const { data: currentUser } = await getCurrentUser()
+  const isEmailProvider = currentUser.provider === 'email'
 
   return (
     <div className={layoutClasses}>

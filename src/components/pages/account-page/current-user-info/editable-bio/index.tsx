@@ -6,7 +6,7 @@ import {
   DetailMultiLineText,
   LoadingDetailMultiLineText,
 } from '@/components/texts/detail-multi-line-text'
-import { validateToken } from '@/utils/api/server/validate-token'
+import { getCurrentUser } from '@/utils/api/server/get-current-user'
 import { BioCollapsibleSection } from './bio-collapsible-section'
 import { BioEditor } from './bio-editor'
 
@@ -17,28 +17,25 @@ type Props = {
 const height = 160
 
 export async function EditableBio({ csrfToken }: Props) {
-  const validateTokenResult = await validateToken()
-  if (validateTokenResult instanceof Error) {
-    throw validateTokenResult
-  }
-  const { id, bio } = validateTokenResult.data
+  const { data: currentUser } = await getCurrentUser()
+  const currentUserId = currentUser.id.toString()
 
   return (
     <BioEditor
-      currentUserId={id.toString()}
-      initialBio={bio}
+      currentUserId={currentUserId}
+      initialBio={currentUser.bio}
       label={<DetailItemHeading>自己紹介</DetailItemHeading>}
       privacyTag={<Tag color="gray">公開</Tag>}
       unsavedChangeTag={<Tag color="warning">未保存の変更あり</Tag>}
       csrfToken={csrfToken}
     >
       {/* Pass 'key' so that the bio is re-rendered when it is re-validated */}
-      <BioCollapsibleSection key={bio} height={height}>
+      <BioCollapsibleSection key={currentUser.bio} height={height}>
         <DetailItemContentLayout>
-          {bio === '' ? (
+          {currentUser.bio === '' ? (
             <p className="text-gray-500">自己紹介を登録してください...</p>
           ) : (
-            <DetailMultiLineText>{bio}</DetailMultiLineText>
+            <DetailMultiLineText>{currentUser.bio}</DetailMultiLineText>
           )}
         </DetailItemContentLayout>
       </BioCollapsibleSection>
