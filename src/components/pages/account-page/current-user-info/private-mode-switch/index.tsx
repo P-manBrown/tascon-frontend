@@ -1,4 +1,4 @@
-import { validateToken } from '@/utils/api/server/validate-token'
+import { getCurrentUser } from '@/utils/api/server/get-current-user'
 import { PrivateModeCheckbox } from './private-mode-checkbox'
 import {
   LoadingToggleSwitch,
@@ -12,16 +12,12 @@ type Props = {
 const descriptionLayoutClasses = 'ml-3 align-middle'
 
 export async function PrivateModeSwitch({ csrfToken }: Props) {
-  const validateTokenResult = await validateToken()
-  if (validateTokenResult instanceof Error) {
-    throw validateTokenResult
-  }
-  const { isPrivate } = validateTokenResult.data
+  const { data: currentUser } = await getCurrentUser()
 
   return (
     <PrivateModeCheckbox
-      isPrivate={isPrivate}
-      toggleIcon={<ToggleSwitch isToggleOn={isPrivate} />}
+      isPrivate={currentUser.isPrivate}
+      toggleIcon={<ToggleSwitch isToggleOn={currentUser.isPrivate} />}
       description={
         <span className={descriptionLayoutClasses}>
           メールアドレスでの検索・登録を拒否する

@@ -1,4 +1,4 @@
-import { validateToken } from '@/utils/api/server/validate-token'
+import { getCurrentUser } from '@/utils/api/server/get-current-user'
 import { DeleteAccountButton } from './delete-account-button'
 
 type Props = {
@@ -6,14 +6,11 @@ type Props = {
 }
 
 export async function DeleteCurrentUserAccountButton({ csrfToken }: Props) {
-  const validateTokenResult = await validateToken()
-  if (validateTokenResult instanceof Error) {
-    throw validateTokenResult
-  }
-  const { id } = validateTokenResult.data
+  const { data: currentUser } = await getCurrentUser()
+  const currentUserId = currentUser.id.toString()
 
   return (
-    <DeleteAccountButton currentUserId={id.toString()} csrfToken={csrfToken} />
+    <DeleteAccountButton currentUserId={currentUserId} csrfToken={csrfToken} />
   )
 }
 
