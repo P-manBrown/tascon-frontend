@@ -4,10 +4,12 @@ import camelcaseKeys from 'camelcase-keys'
 import { cookies } from 'next/headers'
 import { z } from 'zod'
 import { authSchema } from '@/schemas/response/auth'
+import { ResultObject } from '@/types/api'
 import { fetchData } from '@/utils/api/fetch-data'
 import { createErrorObject } from '@/utils/error/create-error-object'
 import { getRequestId } from '@/utils/request-id/get-request-id'
 import { validateData } from '@/utils/validation/validate-data'
+import type { CamelCaseKeys } from 'camelcase-keys'
 
 type Params = {
   csrfToken: string
@@ -20,6 +22,8 @@ const dataSchema = z.object({
   status: z.literal('success'),
   data: authSchema.omit({ avatar_url: true }),
 })
+
+type Data = CamelCaseKeys<z.infer<typeof dataSchema>, true>
 
 export async function signUp({ csrfToken, ...bodyData }: Params) {
   const fetchDataResult = await fetchData(
@@ -38,20 +42,21 @@ export async function signUp({ csrfToken, ...bodyData }: Params) {
     },
   )
 
+  let resultObject: ResultObject<Data>
+
   if (fetchDataResult instanceof Error) {
-    const fetchErrorObject = createErrorObject(fetchDataResult)
-    return fetchErrorObject
+    resultObject = createErrorObject(fetchDataResult)
+  } else {
+    const { headers, data } = fetchDataResult
+    const requestId = getRequestId(headers)
+    const validateDataResult = validateData({ requestId, dataSchema, data })
+
+    if (validateDataResult instanceof Error) {
+      resultObject = createErrorObject(validateDataResult)
+    } else {
+      resultObject = camelcaseKeys(validateDataResult, { deep: true })
+    }
   }
 
-  const { headers, data } = fetchDataResult
-  const requestId = getRequestId(headers)
-
-  const validateDataResult = validateData({ requestId, dataSchema, data })
-  if (validateDataResult instanceof Error) {
-    const validationErrorObject = createErrorObject(validateDataResult)
-    return validationErrorObject
-  }
-
-  const camelcaseData = camelcaseKeys(validateDataResult, { deep: true })
-  return camelcaseData
+  return resultObject
 }
