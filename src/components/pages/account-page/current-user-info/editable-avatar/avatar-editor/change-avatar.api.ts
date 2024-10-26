@@ -58,10 +58,9 @@ export async function changeAvatar({ csrfToken, formData }: Params) {
       resultObject = createErrorObject(validateDataResult)
     } else {
       resultObject = camelcaseKeys(validateDataResult, { deep: true })
+      revalidatePath('/account')
     }
   }
-
-  revalidatePath('/account')
 
   return resultObject
 }
