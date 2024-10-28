@@ -1,6 +1,7 @@
 'use client'
 
 import { XMarkIcon } from '@heroicons/react/24/solid'
+import { useRouter } from 'next/navigation'
 import { useId, useState } from 'react'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
 import { Button } from '@/components/buttons/button'
@@ -18,8 +19,9 @@ type Props = {
 }
 
 export function DeleteAccountButton({ currentUserId, csrfToken }: Props) {
-  const [isDeletingAccount, setIsDeletingAccount] = useState(false)
+  const router = useRouter()
   const id = useId()
+  const [isDeletingAccount, setIsDeletingAccount] = useState(false)
   const { openErrorSnackbar } = useErrorSnackbar()
   const {
     shouldMount,
@@ -39,6 +41,9 @@ export function DeleteAccountButton({ currentUserId, csrfToken }: Props) {
     } else {
       cleanupLocalStorage(currentUserId)
       closeModal()
+      window.open('https://forms.gle/F9d8j2XnjT2mAfRc9', '_blank', 'noreferrer')
+      router.push('/')
+      router.refresh()
     }
     setIsDeletingAccount(false)
   }
