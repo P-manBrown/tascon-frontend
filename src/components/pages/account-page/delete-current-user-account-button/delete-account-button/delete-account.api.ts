@@ -1,11 +1,9 @@
 'use server'
 
 import { cookies } from 'next/headers'
-import { redirect } from 'next/navigation'
 import { z } from 'zod'
 import { ResultObject } from '@/types/api'
 import { fetchData } from '@/utils/api/fetch-data'
-import { proxyServerCookies } from '@/utils/cookie/proxy-server-cookies'
 import { createErrorObject } from '@/utils/error/create-error-object'
 import { getRequestId } from '@/utils/request-id/get-request-id'
 import { validateData } from '@/utils/validation/validate-data'
@@ -43,8 +41,6 @@ export async function deleteAccount(csrfToken: string) {
       resultObject = createErrorObject(validateDataResult)
     } else {
       resultObject = validateDataResult
-      proxyServerCookies(headers)
-      redirect('https://forms.gle/F9d8j2XnjT2mAfRc9')
     }
   }
 
