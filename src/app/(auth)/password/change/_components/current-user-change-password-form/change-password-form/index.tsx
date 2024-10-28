@@ -2,6 +2,7 @@
 
 import { XMarkIcon } from '@heroicons/react/24/solid'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
 import { Button } from '@/components/buttons/button'
@@ -12,6 +13,7 @@ import { useModal } from '@/components/modal/use-modal'
 import { changePasswordSchema } from '@/schemas/request/auth'
 import { ErrorObject } from '@/types/error'
 import { HttpError } from '@/utils/error/custom/http-error'
+import { useRedirectLoginPath } from '@/utils/login-path/use-redirect-login-path'
 import { changePassword } from './change-password.api'
 import { CurrentPasswordInput } from './current-password-input'
 import { NewPasswordInput } from './new-password-input'
@@ -38,6 +40,8 @@ export function ChangePasswordForm({
   successMessage,
   csrfToken,
 }: Props) {
+  const router = useRouter()
+  const redirectLoginPath = useRedirectLoginPath()
   const { openErrorSnackbar } = useErrorSnackbar()
   const {
     shouldMount,
@@ -64,7 +68,10 @@ export function ChangePasswordForm({
   })
 
   const handleHttpError = (err: ErrorObject<HttpError>) => {
-    if (err.message.startsWith('現在のパスワード')) {
+    if (err.statusCode === 401) {
+      router.push(redirectLoginPath)
+      router.refresh()
+    } else if (err.message.startsWith('現在のパスワード')) {
       setError(
         'currentPassword',
         {
