@@ -1,7 +1,6 @@
 'use server'
 
 import { cookies } from 'next/headers'
-import { redirect } from 'next/navigation'
 import { z } from 'zod'
 import { ResultObject } from '@/types/api'
 import { fetchData } from '@/utils/api/fetch-data'
@@ -45,7 +44,6 @@ export async function logout(csrfToken: string) {
         ...validateDataResult,
       }
       proxyServerCookies(headers)
-      redirect('/')
     }
   }
 
