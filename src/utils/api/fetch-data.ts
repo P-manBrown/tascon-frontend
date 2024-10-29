@@ -19,7 +19,7 @@ type Options = Omit<RequestInit, 'method'> & {
 
 export async function fetchData(
   url: string,
-  { headers, ...optionRest }: Options
+  { headers, ...optionRest }: Options,
 ) {
   const requestId = crypto.randomUUID()
 
@@ -37,7 +37,7 @@ export async function fetchData(
 
     logger.debug(
       { requestId, method: optionRest.method, url, data },
-      'fetchData response data'
+      'fetchData response data',
     )
 
     if (!res.ok) {
@@ -70,11 +70,11 @@ export async function fetchData(
     }
 
     if (err instanceof HttpError) {
-      if ([401, 404, 422].includes(err.status)) {
+      if ([401, 404, 422].includes(err.statusCode)) {
         logger.warn(err)
-      } else if (400 <= err.status && err.status < 500) {
+      } else if (400 <= err.statusCode && err.statusCode < 500) {
         logger.error(err)
-      } else if (err.status >= 500) {
+      } else if (err.statusCode >= 500) {
         logger.fatal(err)
       }
       return err

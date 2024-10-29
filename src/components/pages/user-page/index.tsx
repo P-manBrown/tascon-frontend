@@ -25,10 +25,10 @@ const avatarSize = 128
 
 export async function UserPage({ id }: Props) {
   const handleHttpError = (err: HttpError) => {
-    if (err.status === 401) {
+    if (err.statusCode === 401) {
       const redirectLoginPath = generateRedirectLoginPath()
       redirect(redirectLoginPath)
-    } else if (err.status === 404) {
+    } else if (err.statusCode === 404) {
       notFound()
     }
 
