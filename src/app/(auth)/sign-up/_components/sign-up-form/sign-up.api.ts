@@ -27,7 +27,7 @@ type Data = CamelCaseKeys<z.infer<typeof dataSchema>, true>
 
 export async function signUp({ csrfToken, ...bodyData }: Params) {
   const fetchDataResult = await fetchData(
-    `${process.env.NEXT_PUBLIC_API_ORIGIN}/api/v1/auth`,
+    `${process.env.API_ORIGIN}/api/v1/auth`,
     {
       method: 'POST',
       headers: {

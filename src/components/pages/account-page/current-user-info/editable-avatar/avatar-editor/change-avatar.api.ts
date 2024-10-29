@@ -33,7 +33,7 @@ export async function changeAvatar({ csrfToken, formData }: Params) {
   }
 
   const fetchDataResult = await fetchData(
-    `${process.env.NEXT_PUBLIC_API_ORIGIN}/api/v1/auth`,
+    `${process.env.API_ORIGIN}/api/v1/auth`,
     {
       method: 'PATCH',
       headers: reqHeaders,
