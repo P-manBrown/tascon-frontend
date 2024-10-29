@@ -17,7 +17,7 @@ type Data = z.infer<typeof dataSchema>
 
 export async function deleteAccount(csrfToken: string) {
   const fetchDataResult = await fetchData(
-    `${process.env.NEXT_PUBLIC_API_ORIGIN}/api/v1/auth`,
+    `${process.env.API_ORIGIN}/api/v1/auth`,
     {
       method: 'DELETE',
       headers: {

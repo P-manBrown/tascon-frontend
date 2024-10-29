@@ -17,7 +17,7 @@ type Data = z.infer<typeof dataSchema>
 
 export async function logout(csrfToken: string) {
   const fetchDataResult = await fetchData(
-    `${process.env.NEXT_PUBLIC_API_ORIGIN}/api/v1/auth/sign_out`,
+    `${process.env.API_ORIGIN}/api/v1/auth/sign_out`,
     {
       method: 'DELETE',
       headers: {
