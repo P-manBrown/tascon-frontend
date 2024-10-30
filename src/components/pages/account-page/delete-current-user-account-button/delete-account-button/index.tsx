@@ -10,6 +10,7 @@ import { ModalContent } from '@/components/contents/modal-content'
 import { IconMessage } from '@/components/icon-message'
 import { Modal } from '@/components/modal'
 import { useModal } from '@/components/modal/use-modal'
+import { useRedirectLoginPath } from '@/utils/login-path/use-redirect-login-path'
 import { cleanupLocalStorage } from './cleanup-local-storage'
 import { deleteAccount } from './delete-account.api'
 
@@ -21,6 +22,7 @@ type Props = {
 export function DeleteAccountButton({ currentUserId, csrfToken }: Props) {
   const router = useRouter()
   const id = useId()
+  const redirectLoginPath = useRedirectLoginPath()
   const [isDeletingAccount, setIsDeletingAccount] = useState(false)
   const { openErrorSnackbar } = useErrorSnackbar()
   const {
@@ -37,7 +39,12 @@ export function DeleteAccountButton({ currentUserId, csrfToken }: Props) {
     setIsDeletingAccount(true)
     const result = await deleteAccount(csrfToken)
     if (result.status === 'error') {
-      openErrorSnackbar(result)
+      if (result.name === 'HttpError' && result.statusCode === 404) {
+        router.push(redirectLoginPath)
+        router.refresh()
+      } else {
+        openErrorSnackbar(result)
+      }
     } else {
       cleanupLocalStorage(currentUserId)
       closeModal()
