@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import { useId, useState } from 'react'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
 import { Button } from '@/components/buttons/button'
+import { useRedirectLoginPath } from '@/utils/login-path/use-redirect-login-path'
 import { logout } from './logout.api'
 
 type Props = {
@@ -13,6 +14,7 @@ type Props = {
 export function LogoutButton({ csrfToken }: Props) {
   const router = useRouter()
   const id = useId()
+  const redirectLoginPath = useRedirectLoginPath()
   const [isLoggingOut, setIsLoggingOut] = useState(false)
   const { openErrorSnackbar } = useErrorSnackbar()
 
@@ -20,6 +22,10 @@ export function LogoutButton({ csrfToken }: Props) {
     setIsLoggingOut(true)
     const result = await logout(csrfToken)
     if (result.status === 'error') {
+      if (result.name === 'HttpError' && result.statusCode === 404) {
+        router.push(redirectLoginPath)
+        router.refresh()
+      }
       openErrorSnackbar(result)
     } else {
       router.push('/')
