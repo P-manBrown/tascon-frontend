@@ -25,8 +25,9 @@ export function LogoutButton({ csrfToken }: Props) {
       if (result.name === 'HttpError' && result.statusCode === 404) {
         router.push(redirectLoginPath)
         router.refresh()
+      } else {
+        openErrorSnackbar(result)
       }
-      openErrorSnackbar(result)
     } else {
       router.push('/')
     }
