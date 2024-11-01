@@ -50,7 +50,6 @@ export function DeleteAccountButton({ currentUserId, csrfToken }: Props) {
       closeModal()
       window.open('https://forms.gle/F9d8j2XnjT2mAfRc9', '_blank', 'noreferrer')
       router.push('/')
-      router.refresh()
     }
     setIsDeletingAccount(false)
   }
