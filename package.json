@@ -29,7 +29,7 @@
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.53.0",
     "server-only": "^0.0.1",
-    "set-cookie-parser": "^2.7.0",
+    "set-cookie-parser": "^2.7.1",
     "snakecase-keys": "^8.0.1",
     "typescript": "<5.5.0",
     "zod": "^3.23.8",
