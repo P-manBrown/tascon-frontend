@@ -36,7 +36,7 @@
     "zustand": "^4.5.5"
   },
   "devDependencies": {
-    "@evilmartians/lefthook": "^1.7.18",
+    "@evilmartians/lefthook": "^1.8.2",
     "@markuplint/jsx-parser": "^4.7.12",
     "@markuplint/react-spec": "^4.5.12",
     "@types/set-cookie-parser": "^2",
