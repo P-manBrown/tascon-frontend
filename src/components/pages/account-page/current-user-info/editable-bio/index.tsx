@@ -10,13 +10,9 @@ import { getCurrentUser } from '@/utils/api/server/get-current-user'
 import { BioCollapsibleSection } from './bio-collapsible-section'
 import { BioEditor } from './bio-editor'
 
-type Props = {
-  csrfToken: string
-}
-
 const height = 160
 
-export async function EditableBio({ csrfToken }: Props) {
+export async function EditableBio() {
   const { data: currentUser } = await getCurrentUser()
   const currentUserId = currentUser.id.toString()
 
@@ -27,7 +23,6 @@ export async function EditableBio({ csrfToken }: Props) {
       label={<DetailItemHeading>自己紹介</DetailItemHeading>}
       privacyTag={<Tag color="gray">公開</Tag>}
       unsavedChangeTag={<Tag color="warning">未保存の変更あり</Tag>}
-      csrfToken={csrfToken}
     >
       {/* Pass 'key' so that the bio is re-rendered when it is re-validated */}
       <BioCollapsibleSection key={currentUser.bio} height={height}>

@@ -6,12 +6,11 @@ import { ValidationErrorMessage } from '@/components/form-controls/validation-er
 import { useAvatarEditor } from './use-avatar-editor'
 
 type Props = {
-  csrfToken: string
   avatarUrl: string | null
   children: React.ReactElement
 }
 
-export function AvatarEditor({ csrfToken, avatarUrl, children }: Props) {
+export function AvatarEditor({ avatarUrl, children }: Props) {
   const {
     handleSubmit,
     onSubmit,
@@ -22,7 +21,7 @@ export function AvatarEditor({ csrfToken, avatarUrl, children }: Props) {
     inputRef,
     isDeletingAvatar,
     registerRest,
-  } = useAvatarEditor({ csrfToken })
+  } = useAvatarEditor()
 
   return (
     <div className="flex w-fit flex-col items-center">

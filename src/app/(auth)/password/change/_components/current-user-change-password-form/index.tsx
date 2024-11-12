@@ -2,18 +2,11 @@ import { headers } from 'next/headers'
 import { IconMessage } from '@/components/icon-message'
 import { Spinner } from '@/components/spinner'
 import { getCurrentUser } from '@/utils/api/server/get-current-user'
-import { getCsrfToken } from '@/utils/cookie/get-csrf-token'
 import { ChangePasswordForm } from './change-password-form'
 import { NextActionButton } from './next-action-button'
 
 export async function CurrentUserChangePasswordForm() {
   const { data: currentUser } = await getCurrentUser()
-
-  const getCsrfTokenResult = getCsrfToken()
-  if (getCsrfTokenResult instanceof Error) {
-    throw getCsrfTokenResult
-  }
-  const csrfToken = getCsrfTokenResult
 
   const referer = headers().get('referer')
 
@@ -44,7 +37,6 @@ export async function CurrentUserChangePasswordForm() {
           <NextActionButton referer={referer} />
         </IconMessage>
       }
-      csrfToken={csrfToken}
     />
   )
 }

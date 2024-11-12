@@ -9,20 +9,15 @@ import { resetPassword } from '../reset-password.api'
 type Props = {
   message: string
   email: string
-  csrfToken: string
 }
 
-export function ResetPasswordSuccessMessage({
-  message,
-  email,
-  csrfToken,
-}: Props) {
+export function ResetPasswordSuccessMessage({ message, email }: Props) {
   const [isSending, setIsSending] = useState(false)
   const { openErrorSnackbar } = useErrorSnackbar()
   const openSnackbar = useSnackbarsStore((state) => state.openSnackbar)
   const handleClick = async () => {
     setIsSending(true)
-    const result = await resetPassword({ csrfToken, email })
+    const result = await resetPassword({ email })
     if (result.status === 'error') {
       openErrorSnackbar(result)
     } else {

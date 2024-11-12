@@ -16,14 +16,13 @@ const dataSchema = z.object({
 
 type Data = z.infer<typeof dataSchema>
 
-export async function deleteAccount(csrfToken: string) {
+export async function deleteAccount() {
   const fetchDataResult = await fetchData(
     `${process.env.API_ORIGIN}/api/v1/auth`,
     {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        'X-CSRF-Token': csrfToken,
         Cookie: cookies().toString(),
       },
     },

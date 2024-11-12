@@ -12,18 +12,16 @@ import { getRequestId } from '@/utils/request-id/get-request-id'
 import { validateData } from '@/utils/validation/validate-data'
 
 type Params = {
-  csrfToken: string
   isPrivate: boolean
 }
 
-export async function changeIsPrivate({ csrfToken, ...bodyData }: Params) {
+export async function changeIsPrivate({ ...bodyData }: Params) {
   const fetchDataResult = await fetchData(
     `${process.env.API_ORIGIN}/api/v1/auth`,
     {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        'X-CSRF-Token': csrfToken,
         Cookie: cookies().toString(),
       },
       body: JSON.stringify(snakecaseKeys(bodyData, { deep: false })),

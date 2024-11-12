@@ -11,22 +11,17 @@ import { validateData } from '@/utils/validation/validate-data'
 import type { ChangeUserInfoData, ResultObject } from '@/types/api'
 
 type Params = {
-  csrfToken: string
   formData: FormData | null
 }
 
-export async function changeAvatar({ csrfToken, formData }: Params) {
+export async function changeAvatar({ formData }: Params) {
   let reqHeaders: Record<string, string> = {
-    'X-CSRF-Token': csrfToken,
     Cookie: cookies().toString(),
   }
   let body: FormData | string
 
   if (formData === null) {
-    reqHeaders = {
-      'Content-Type': 'application/json',
-      ...reqHeaders,
-    }
+    reqHeaders['Content-Type'] = 'application/json'
     body = JSON.stringify({ avatar: null })
   } else {
     body = formData

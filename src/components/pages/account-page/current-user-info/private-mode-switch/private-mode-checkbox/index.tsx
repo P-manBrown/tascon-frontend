@@ -14,14 +14,12 @@ type PrivateModeSwitchProps = Pick<
   'toggleIcon' | 'description'
 > & {
   isPrivate: boolean
-  csrfToken: string
 }
 
 export function PrivateModeCheckbox({
   isPrivate,
   toggleIcon,
   description,
-  csrfToken,
 }: PrivateModeSwitchProps) {
   const { openErrorSnackbar } = useErrorSnackbar()
   const router = useRouter()
@@ -45,10 +43,7 @@ export function PrivateModeCheckbox({
 
   const handleChange = async (ev: React.ChangeEvent<HTMLInputElement>) => {
     setIsChangingIsPrivate(true)
-    const result = await changeIsPrivate({
-      csrfToken,
-      isPrivate: ev.target.checked,
-    })
+    const result = await changeIsPrivate({ isPrivate: ev.target.checked })
     if (result.status === 'error') {
       if (result.name === 'HttpError') {
         handleHttpError(result)

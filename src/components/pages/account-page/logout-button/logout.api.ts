@@ -15,13 +15,12 @@ const dataSchema = z.object({
 
 type Data = z.infer<typeof dataSchema>
 
-export async function logout(csrfToken: string) {
+export async function logout() {
   const fetchDataResult = await fetchData(
     `${process.env.API_ORIGIN}/api/v1/auth/sign_out`,
     {
       method: 'DELETE',
       headers: {
-        'X-CSRF-Token': csrfToken,
         Cookie: cookies().toString(),
       },
     },

@@ -11,11 +11,7 @@ import { Modal } from '@/components/modal'
 import { ResetPasswordSuccessMessage } from './reset-password-success-message'
 import { useResetPasswordForm } from './use-reset-password-form'
 
-type Props = {
-  csrfToken: string
-}
-
-export function ResetPasswordForm({ csrfToken }: Props) {
+export function ResetPasswordForm() {
   const id = useId()
   const {
     shouldMount,
@@ -30,7 +26,7 @@ export function ResetPasswordForm({ csrfToken }: Props) {
     register,
     handleSubmit,
     onSubmit,
-  } = useResetPasswordForm({ csrfToken })
+  } = useResetPasswordForm()
 
   return (
     <>
@@ -80,7 +76,6 @@ export function ResetPasswordForm({ csrfToken }: Props) {
             <ResetPasswordSuccessMessage
               message={resultValues.message}
               email={resultValues.email}
-              csrfToken={csrfToken}
             />
           </ModalContent>
         </Modal>

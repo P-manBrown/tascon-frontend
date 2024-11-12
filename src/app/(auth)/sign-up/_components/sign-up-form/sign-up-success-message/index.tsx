@@ -8,17 +8,16 @@ import { resendConfirmationEmail } from './resend-confirmation-email.api'
 
 type Props = {
   email: string
-  csrfToken: string
 }
 
-export function SignUpSuccessMessage({ email, csrfToken }: Props) {
+export function SignUpSuccessMessage({ email }: Props) {
   const [isSending, setIsSending] = useState(false)
   const openSnackbar = useSnackbarsStore((state) => state.openSnackbar)
   const { openErrorSnackbar } = useErrorSnackbar()
 
   const handleClick = async () => {
     setIsSending(true)
-    const result = await resendConfirmationEmail({ csrfToken, email })
+    const result = await resendConfirmationEmail({ email })
     if (result.status === 'error') {
       openErrorSnackbar(result)
     } else {
