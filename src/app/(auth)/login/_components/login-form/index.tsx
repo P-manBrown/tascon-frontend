@@ -11,14 +11,10 @@ import { useVisibilityToggle } from '@/components/visibility-toggle-icon/use-vis
 import { useLoginForm } from './use-login-form'
 import type { LabeledTextFields } from '@/types/labeled-text-fields'
 
-type Props = {
-  csrfToken: string
-}
-
-export function LoginForm({ csrfToken }: Props) {
+export function LoginForm() {
   const id = useId()
   const { register, handleSubmit, onSubmit, isSubmitting, errors } =
-    useLoginForm({ csrfToken })
+    useLoginForm()
   const { isVisible, toggleVisible } = useVisibilityToggle()
 
   const labeledTextFields: LabeledTextFields = [

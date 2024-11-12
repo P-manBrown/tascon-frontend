@@ -11,13 +11,9 @@ import { changeAvatarSchema } from './change-avatar.schema'
 import type { SubmitHandler } from 'react-hook-form'
 import type { z } from 'zod'
 
-type Params = {
-  csrfToken: string
-}
-
 type ChangeAvatarFormValue = z.infer<typeof changeAvatarSchema>
 
-export function useAvatarEditor({ csrfToken }: Params) {
+export function useAvatarEditor() {
   const inputRef = useRef<HTMLInputElement | null>(null)
   const { openErrorSnackbar } = useErrorSnackbar()
   const router = useRouter()
@@ -57,10 +53,7 @@ export function useAvatarEditor({ csrfToken }: Params) {
       const formData = new FormData()
       formData.append('avatar', data.avatar[0])
 
-      const result = await changeAvatar({
-        csrfToken,
-        formData: formData,
-      })
+      const result = await changeAvatar({ formData: formData })
 
       if (result.status === 'error') {
         if (result.name === 'HttpError') {
@@ -86,10 +79,7 @@ export function useAvatarEditor({ csrfToken }: Params) {
     setIsDeletingAvatar(true)
     reset()
 
-    const result = await changeAvatar({
-      csrfToken,
-      formData: null,
-    })
+    const result = await changeAvatar({ formData: null })
 
     if (result.status === 'error') {
       if (result.name === 'HttpError') {

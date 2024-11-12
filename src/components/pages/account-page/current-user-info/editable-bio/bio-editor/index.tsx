@@ -32,7 +32,6 @@ type Props = Pick<React.ComponentProps<typeof EditableText>, 'children'> & {
   label: React.ReactElement
   privacyTag: React.ReactElement
   unsavedChangeTag: React.ReactElement
-  csrfToken: string
 }
 
 export function BioEditor({
@@ -41,7 +40,6 @@ export function BioEditor({
   label,
   privacyTag,
   unsavedChangeTag,
-  csrfToken,
   children,
 }: Props) {
   const router = useRouter()
@@ -94,7 +92,7 @@ export function BioEditor({
   }
 
   const onSubmit = async (data: ChangeBioFormValue) => {
-    const result = await changeBio({ csrfToken, ...data })
+    const result = await changeBio(data)
     if (result.status === 'error') {
       if (result.name === 'HttpError') {
         handleHttpError(result)

@@ -12,7 +12,6 @@ import { validateData } from '@/utils/validation/validate-data'
 import type { CamelCaseKeys } from 'camelcase-keys'
 
 type Params = {
-  csrfToken: string
   name: string
   email: string
   password: string
@@ -25,14 +24,13 @@ const dataSchema = z.object({
 
 type Data = CamelCaseKeys<z.infer<typeof dataSchema>, true>
 
-export async function signUp({ csrfToken, ...bodyData }: Params) {
+export async function signUp({ ...bodyData }: Params) {
   const fetchDataResult = await fetchData(
     `${process.env.API_ORIGIN}/api/v1/auth`,
     {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'X-CSRF-Token': csrfToken,
         Cookie: cookies().toString(),
       },
       body: JSON.stringify({

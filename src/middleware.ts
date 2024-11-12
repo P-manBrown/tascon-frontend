@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server'
-import { fetchCsrfToken } from './utils/api/middleware/fetch-csrf-token'
 import type { NextRequest } from 'next/server'
 
 export const config = {
@@ -34,42 +33,9 @@ export async function middleware(req: NextRequest) {
   reqHeaders.set('Tascon-Pathname', req.nextUrl.pathname)
   reqHeaders.set('Tascon-Params', req.nextUrl.searchParams.toString())
 
-  if (req.cookies.has('_tascon_session') && req.cookies.has('csrf_token')) {
-    return NextResponse.next({
-      request: {
-        headers: reqHeaders,
-      },
-    })
-  }
-
-  // Set the CSRF token cookie.
-  const result = await fetchCsrfToken()
-  if (result instanceof Error) {
-    // Ensure that error pages are displayed correctly.
-    return NextResponse.next({
-      request: {
-        headers: reqHeaders,
-      },
-    })
-  }
-  const { headers: resHeaders, data } = result
-  const { csrfToken } = data
-  // Add the CSRF token cookie to the request headers.
-  const reqCookies = reqHeaders.get('Cookie') ?? ''
-  reqHeaders.set('Cookie', `csrf_token=${csrfToken}; ${reqCookies}`)
-
-  const res = NextResponse.next({
-    headers: resHeaders,
+  return NextResponse.next({
     request: {
       headers: reqHeaders,
     },
   })
-  // Set the CSRF token cookie in the client.
-  res.cookies.set({
-    name: 'csrf_token',
-    value: csrfToken,
-    httpOnly: true,
-    sameSite: 'lax',
-  })
-  return res
 }

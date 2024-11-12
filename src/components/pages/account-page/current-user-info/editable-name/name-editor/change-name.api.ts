@@ -11,18 +11,16 @@ import { getRequestId } from '@/utils/request-id/get-request-id'
 import { validateData } from '@/utils/validation/validate-data'
 
 type Params = {
-  csrfToken: string
   name: string
 }
 
-export async function changeName({ csrfToken, ...bodyData }: Params) {
+export async function changeName({ ...bodyData }: Params) {
   const fetchDataResult = await fetchData(
     `${process.env.API_ORIGIN}/api/v1/auth`,
     {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        'X-CSRF-Token': csrfToken,
         Cookie: cookies().toString(),
       },
       body: JSON.stringify(bodyData),

@@ -3,7 +3,6 @@ import { DetailItemHeading } from '@/components/headings/detail-item-heading'
 import { DetailItemContentLayout } from '@/components/layouts/detail-item-content-layout'
 import { DetailItemHeadingLayout } from '@/components/layouts/detail-item-heading-layout'
 import { Tag } from '@/components/tag'
-import { getCsrfToken } from '@/utils/cookie/get-csrf-token'
 import {
   ChangePasswordLink,
   LoadingChangePasswordLink,
@@ -18,27 +17,21 @@ import {
 } from './private-mode-switch'
 
 export function CurrentUserInfo() {
-  const getCsrfTokenResult = getCsrfToken()
-  if (getCsrfTokenResult instanceof Error) {
-    throw getCsrfTokenResult
-  }
-  const csrfToken = getCsrfTokenResult
-
   return (
     <>
       <div className="flex justify-center">
         <Suspense fallback={<LoadingEditableAvatar />}>
-          <EditableAvatar csrfToken={csrfToken} />
+          <EditableAvatar />
         </Suspense>
       </div>
       <Suspense fallback={<LoadingEditableName />}>
-        <EditableName csrfToken={csrfToken} />
+        <EditableName />
       </Suspense>
       <Suspense fallback={<LoadingEditableBio />}>
-        <EditableBio csrfToken={csrfToken} />
+        <EditableBio />
       </Suspense>
       <Suspense fallback={<LoadingEditableEmail />}>
-        <EditableEmail csrfToken={csrfToken} />
+        <EditableEmail />
       </Suspense>
       <div>
         <DetailItemHeadingLayout>
@@ -47,7 +40,7 @@ export function CurrentUserInfo() {
         </DetailItemHeadingLayout>
         <DetailItemContentLayout>
           <Suspense fallback={<LoadingPrivateModeSwitch />}>
-            <PrivateModeSwitch csrfToken={csrfToken} />
+            <PrivateModeSwitch />
           </Suspense>
         </DetailItemContentLayout>
       </div>

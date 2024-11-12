@@ -11,11 +11,7 @@ import type { z } from 'zod'
 
 type SignUpFormValues = z.infer<typeof signUpSchema>
 
-type Params = {
-  csrfToken: string
-}
-
-export function useSignUpForm({ csrfToken }: Params) {
+export function useSignUpForm() {
   const [email, setEmail] = useState('')
   const { openErrorSnackbar } = useErrorSnackbar()
   const {
@@ -58,7 +54,7 @@ export function useSignUpForm({ csrfToken }: Params) {
 
   const onSubmit: SubmitHandler<SignUpFormValues> = useCallback(
     async (data) => {
-      const result = await signUp({ csrfToken, ...data })
+      const result = await signUp(data)
       if (result.status === 'error') {
         if (result.name === 'HttpError') {
           handleHttpError(result)
@@ -69,7 +65,7 @@ export function useSignUpForm({ csrfToken }: Params) {
         openModal()
       }
     },
-    [csrfToken, reset, openModal, handleHttpError],
+    [reset, openModal, handleHttpError],
   )
 
   return {

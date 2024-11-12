@@ -14,11 +14,7 @@ import { SignUpSuccessMessage } from './sign-up-success-message'
 import { useSignUpForm } from './use-sign-up-form'
 import type { LabeledTextFields } from '@/types/labeled-text-fields'
 
-type Props = {
-  csrfToken: string
-}
-
-export function SignUpForm({ csrfToken }: Props) {
+export function SignUpForm() {
   const id = useId()
   const { isVisible, toggleVisible } = useVisibilityToggle()
 
@@ -35,7 +31,7 @@ export function SignUpForm({ csrfToken }: Props) {
     onSubmit,
     handleSubmit,
     register,
-  } = useSignUpForm({ csrfToken })
+  } = useSignUpForm()
 
   const labeledTextFields: LabeledTextFields = [
     {
@@ -120,7 +116,7 @@ export function SignUpForm({ csrfToken }: Props) {
               </IconButton>
             }
           >
-            <SignUpSuccessMessage email={email} csrfToken={csrfToken} />
+            <SignUpSuccessMessage email={email} />
           </ModalContent>
         </Modal>
       )}

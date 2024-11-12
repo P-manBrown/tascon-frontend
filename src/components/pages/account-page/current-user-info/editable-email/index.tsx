@@ -9,11 +9,7 @@ import {
 import { getCurrentUser } from '@/utils/api/server/get-current-user'
 import { EmailEditor } from './email-editor'
 
-type Props = {
-  csrfToken: string
-}
-
-export async function EditableEmail({ csrfToken }: Props) {
+export async function EditableEmail() {
   const { data: currentUser } = await getCurrentUser()
   const currentUserId = currentUser.id.toString()
 
@@ -24,7 +20,6 @@ export async function EditableEmail({ csrfToken }: Props) {
       initialEmail={currentUser.email}
       label={<DetailItemHeading>メールアドレス</DetailItemHeading>}
       privacyTag={<Tag color="gray">非公開</Tag>}
-      csrfToken={csrfToken}
     >
       <DetailItemContentLayout>
         <DetailSingleLineText>{currentUser.email}</DetailSingleLineText>

@@ -9,7 +9,6 @@ import { getRequestId } from '@/utils/request-id/get-request-id'
 import { validateData } from '@/utils/validation/validate-data'
 
 type Params = {
-  csrfToken: string
   email: string
 }
 
@@ -21,14 +20,13 @@ const dataSchema = z.object({
 
 type Data = z.infer<typeof dataSchema>
 
-export async function resetPassword({ csrfToken, ...bodyData }: Params) {
+export async function resetPassword({ ...bodyData }: Params) {
   const fetchDataResult = await fetchData(
     `${process.env.API_ORIGIN}/api/v1/auth/password`,
     {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'X-CSRF-Token': csrfToken,
         Cookie: cookies().toString(),
       },
       body: JSON.stringify({
