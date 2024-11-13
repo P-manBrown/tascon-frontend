@@ -1,5 +1,4 @@
 import { headers } from 'next/headers'
-import { getCsrfToken } from '@/utils/cookie/get-csrf-token'
 import { Button } from '../buttons/button'
 
 const socialLoginForms = [
@@ -27,12 +26,6 @@ export function SocialLoginForms() {
     failureRedirectUrl = `${origin}${pathname}?${stringParams}`
   }
 
-  const getCsrfTokenResult = getCsrfToken()
-  if (getCsrfTokenResult instanceof Error) {
-    throw getCsrfTokenResult
-  }
-  const csrfToken = getCsrfTokenResult
-
   return (
     <>
       {socialLoginForms.map((form) => {
@@ -52,7 +45,6 @@ export function SocialLoginForms() {
               name="failure_redirect_url"
               value={failureRedirectUrl}
             />
-            <input type="hidden" name="authenticity_token" value={csrfToken} />
             <Button type="submit" className={`btn-shadow ${form.className}`}>
               {`${form.appName}で${authActionText}`}
             </Button>

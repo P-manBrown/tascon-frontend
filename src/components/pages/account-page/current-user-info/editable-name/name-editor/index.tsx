@@ -23,7 +23,6 @@ type Props = Pick<React.ComponentProps<typeof EditableText>, 'children'> & {
   label: React.ReactElement
   privacyTag: React.ReactElement
   unsavedChangeTag: React.ReactElement
-  csrfToken: string
 }
 
 export function NameEditor({
@@ -32,7 +31,6 @@ export function NameEditor({
   label,
   privacyTag,
   unsavedChangeTag,
-  csrfToken,
   children,
 }: Props) {
   const { openErrorSnackbar } = useErrorSnackbar()
@@ -80,10 +78,7 @@ export function NameEditor({
   }
 
   const onSubmit = async (data: ChangeNameFormValue) => {
-    const result = await changeName({
-      csrfToken,
-      ...data,
-    })
+    const result = await changeName(data)
     if (result.status === 'error') {
       if (result.name === 'HttpError') {
         handleHttpError(result)

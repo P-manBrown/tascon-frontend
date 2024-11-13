@@ -25,7 +25,6 @@ type Props = Pick<React.ComponentProps<typeof EditableText>, 'children'> & {
   initialEmail: string
   label: React.ReactElement
   privacyTag: React.ReactElement
-  csrfToken: string
 }
 
 const origin = process.env.NEXT_PUBLIC_FRONTEND_ORIGIN
@@ -36,7 +35,6 @@ export function EmailEditor({
   initialEmail,
   label,
   privacyTag,
-  csrfToken,
   children,
 }: Props) {
   const openSnackbar = useSnackbarsStore((state) => state.openSnackbar)
@@ -93,11 +91,7 @@ export function EmailEditor({
       confirmSuccessUrl = `${origin}/account`
     }
 
-    const result = await changeEmail({
-      csrfToken,
-      ...data,
-      confirmSuccessUrl,
-    })
+    const result = await changeEmail({ ...data, confirmSuccessUrl })
     if (result.status === 'error') {
       if (result.name === 'HttpError') {
         handleHttpError(result)

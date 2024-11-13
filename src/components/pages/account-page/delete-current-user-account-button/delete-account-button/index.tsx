@@ -16,10 +16,9 @@ import { deleteAccount } from './delete-account.api'
 
 type Props = {
   currentUserId: string
-  csrfToken: string
 }
 
-export function DeleteAccountButton({ currentUserId, csrfToken }: Props) {
+export function DeleteAccountButton({ currentUserId }: Props) {
   const router = useRouter()
   const id = useId()
   const redirectLoginPath = useRedirectLoginPath()
@@ -37,7 +36,7 @@ export function DeleteAccountButton({ currentUserId, csrfToken }: Props) {
 
   const handleOkClick = async () => {
     setIsDeletingAccount(true)
-    const result = await deleteAccount(csrfToken)
+    const result = await deleteAccount()
     if (result.status === 'error') {
       if (result.name === 'HttpError' && result.statusCode === 404) {
         router.push(redirectLoginPath)

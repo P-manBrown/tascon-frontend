@@ -7,11 +7,7 @@ import { Button } from '@/components/buttons/button'
 import { useRedirectLoginPath } from '@/utils/login-path/use-redirect-login-path'
 import { logout } from './logout.api'
 
-type Props = {
-  csrfToken: string
-}
-
-export function LogoutButton({ csrfToken }: Props) {
+export function LogoutButton() {
   const router = useRouter()
   const id = useId()
   const redirectLoginPath = useRedirectLoginPath()
@@ -20,7 +16,7 @@ export function LogoutButton({ csrfToken }: Props) {
 
   const handleClick = async () => {
     setIsLoggingOut(true)
-    const result = await logout(csrfToken)
+    const result = await logout()
     if (result.status === 'error') {
       if (result.name === 'HttpError' && result.statusCode === 404) {
         router.push(redirectLoginPath)

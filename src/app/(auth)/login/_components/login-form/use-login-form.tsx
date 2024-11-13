@@ -10,13 +10,9 @@ import type { z } from 'zod'
 
 type LoginFormValues = z.infer<typeof loginSchema>
 
-type UseLoginFormParams = {
-  csrfToken: string
-}
-
 const origin = process.env.NEXT_PUBLIC_FRONTEND_ORIGIN
 
-export function useLoginForm({ csrfToken }: UseLoginFormParams) {
+export function useLoginForm() {
   const searchParams = useSearchParams()
   const { openErrorSnackbar } = useErrorSnackbar()
   const {
@@ -31,7 +27,7 @@ export function useLoginForm({ csrfToken }: UseLoginFormParams) {
 
   const onSubmit: SubmitHandler<LoginFormValues> = useCallback(
     async (data) => {
-      const result = await login({ csrfToken, ...data })
+      const result = await login(data)
       if (result.status === 'error') {
         openErrorSnackbar(result)
       } else {
@@ -47,7 +43,7 @@ export function useLoginForm({ csrfToken }: UseLoginFormParams) {
         location.assign(targetUrl)
       }
     },
-    [openErrorSnackbar, reset, searchParams, csrfToken],
+    [openErrorSnackbar, reset, searchParams],
   )
 
   return {

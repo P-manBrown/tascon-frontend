@@ -30,7 +30,6 @@ type Props = {
   nameInput: React.ReactElement
   emailInput: React.ReactElement
   successMessage: React.ReactElement
-  csrfToken: string
 }
 
 export function ChangePasswordForm({
@@ -38,7 +37,6 @@ export function ChangePasswordForm({
   nameInput,
   emailInput,
   successMessage,
-  csrfToken,
 }: Props) {
   const router = useRouter()
   const redirectLoginPath = useRedirectLoginPath()
@@ -86,7 +84,7 @@ export function ChangePasswordForm({
   }
 
   const onSubmit: SubmitHandler<ChangePasswordFormValues> = async (data) => {
-    const result = await changePassword({ csrfToken, ...data })
+    const result = await changePassword(data)
     if (result.status === 'error') {
       if (result.name === 'HttpError') {
         handleHttpError(result)

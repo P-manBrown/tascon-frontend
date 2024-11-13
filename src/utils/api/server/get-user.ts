@@ -24,7 +24,7 @@ export const getUser = cache(async (id: string) => {
       headers: {
         Cookie: cookies().toString(),
       },
-    }
+    },
   )
   if (fetchDataResult instanceof Error) {
     return fetchDataResult

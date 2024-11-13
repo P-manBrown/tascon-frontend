@@ -11,13 +11,8 @@ import type { SubmitHandler } from 'react-hook-form'
 import type { z } from 'zod'
 
 type ResetPasswordFormValues = z.infer<typeof resetPasswordSchema>
-type UseResetPasswordFormParams = {
-  csrfToken: string
-}
 
-export function useResetPasswordForm({
-  csrfToken,
-}: UseResetPasswordFormParams) {
+export function useResetPasswordForm() {
   const [resultValues, setResultValues] = useState({
     email: '',
     message: '',
@@ -63,7 +58,7 @@ export function useResetPasswordForm({
 
   const onSubmit: SubmitHandler<ResetPasswordFormValues> = useCallback(
     async (data) => {
-      const result = await resetPassword({ csrfToken, ...data })
+      const result = await resetPassword(data)
       if (result.status === 'error') {
         if (result.name === 'HttpError') {
           handleHttpError(result)
@@ -79,7 +74,7 @@ export function useResetPasswordForm({
         openModal()
       }
     },
-    [handleHttpError, openErrorSnackbar, openModal, reset, csrfToken],
+    [handleHttpError, openErrorSnackbar, openModal, reset],
   )
 
   return {

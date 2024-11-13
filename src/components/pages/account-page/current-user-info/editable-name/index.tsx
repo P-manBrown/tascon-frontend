@@ -9,11 +9,7 @@ import {
 import { getCurrentUser } from '@/utils/api/server/get-current-user'
 import { NameEditor } from './name-editor'
 
-type Props = {
-  csrfToken: string
-}
-
-export async function EditableName({ csrfToken }: Props) {
+export async function EditableName() {
   const { data: currentUser } = await getCurrentUser()
   const currentUserId = currentUser.id.toString()
 
@@ -24,7 +20,6 @@ export async function EditableName({ csrfToken }: Props) {
       label={<DetailItemHeading>ユーザー名</DetailItemHeading>}
       privacyTag={<Tag color="gray">公開</Tag>}
       unsavedChangeTag={<Tag color="warning">未保存の変更あり</Tag>}
-      csrfToken={csrfToken}
     >
       <DetailItemContentLayout>
         <DetailSingleLineText>{currentUser.name}</DetailSingleLineText>

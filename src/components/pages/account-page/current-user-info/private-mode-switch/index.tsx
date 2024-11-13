@@ -5,13 +5,9 @@ import {
   ToggleSwitch,
 } from './private-mode-checkbox/toggle-switch'
 
-type Props = {
-  csrfToken: string
-}
-
 const descriptionLayoutClasses = 'ml-3 align-middle'
 
-export async function PrivateModeSwitch({ csrfToken }: Props) {
+export async function PrivateModeSwitch() {
   const { data: currentUser } = await getCurrentUser()
 
   return (
@@ -23,7 +19,6 @@ export async function PrivateModeSwitch({ csrfToken }: Props) {
           メールアドレスでの検索・登録を拒否する
         </span>
       }
-      csrfToken={csrfToken}
     />
   )
 }
