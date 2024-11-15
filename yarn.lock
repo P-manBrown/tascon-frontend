@@ -6786,9 +6786,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"knip@npm:^5.36.1":
-  version: 5.36.1
-  resolution: "knip@npm:5.36.1"
+"knip@npm:^5.37.0":
+  version: 5.37.0
+  resolution: "knip@npm:5.37.0"
   dependencies:
     "@nodelib/fs.walk": "npm:1.2.8"
     "@snyk/github-codeowners": "npm:1.1.0"
@@ -6812,7 +6812,7 @@ __metadata:
   bin:
     knip: bin/knip.js
     knip-bun: bin/knip-bun.js
-  checksum: 10/fe2bd375a4beae2a77d3da3258c3440ee9d9bfe46e7bd36fec8ab77364b4fd41660056182568b25d7b4bc723aa1cf4b67b9c6cad70466eeb9b8dd29093ea2335
+  checksum: 10/f3b789d22fe9711ee01eb7c87d28836d5d1616a5d050ad0ce8a4366ca50a10cdaf42b72078edaa2f9b80d248468b4f925c9f654174652e4aed6268c9bf68a7bf
   languageName: node
   linkType: hard
 
@@ -7101,36 +7101,36 @@ __metadata:
   languageName: node
   linkType: hard
 
-"markdownlint-cli2@npm:^0.14.0":
-  version: 0.14.0
-  resolution: "markdownlint-cli2@npm:0.14.0"
+"markdownlint-cli2@npm:^0.15.0":
+  version: 0.15.0
+  resolution: "markdownlint-cli2@npm:0.15.0"
   dependencies:
     globby: "npm:14.0.2"
     js-yaml: "npm:4.1.0"
     jsonc-parser: "npm:3.3.1"
-    markdownlint: "npm:0.35.0"
+    markdownlint: "npm:0.36.1"
     markdownlint-cli2-formatter-default: "npm:0.0.5"
     micromatch: "npm:4.0.8"
   bin:
     markdownlint-cli2: markdownlint-cli2.js
-  checksum: 10/6d3c356da54a0d452e50e0299da4ac9d776395b06faae666bbe16af962631bfbf8c977e79210d2a5121b98f4eecb18e01d5efc894b3db3e1e70421fde6c502de
+  checksum: 10/ac47d757921f6fc0c4b3773b67728abd986d59ce2505b2f764501f9bb71ee1d3264713fb8a725bb85dd70a55fad667d9bcb404f2cb8ebf08ca54f71e0a8b9486
   languageName: node
   linkType: hard
 
-"markdownlint-micromark@npm:0.1.10":
-  version: 0.1.10
-  resolution: "markdownlint-micromark@npm:0.1.10"
-  checksum: 10/d4449f1010e40d0619a25d9292a8b8f50ba264d23195798e802b559625e5f3ad0a2e350b15655dba2e23522cea62efd05df260ef6c5bc65a4f2de9b9e2a3d81a
+"markdownlint-micromark@npm:0.1.12":
+  version: 0.1.12
+  resolution: "markdownlint-micromark@npm:0.1.12"
+  checksum: 10/99d753b4dafa3c390b96332d02658112eeb131644ff4ab55a2320557a0d52b038998be5a5b5f9c450fdfc25d7c4701f56b36116f114cec1ff191410a0b0e4997
   languageName: node
   linkType: hard
 
-"markdownlint@npm:0.35.0":
-  version: 0.35.0
-  resolution: "markdownlint@npm:0.35.0"
+"markdownlint@npm:0.36.1":
+  version: 0.36.1
+  resolution: "markdownlint@npm:0.36.1"
   dependencies:
     markdown-it: "npm:14.1.0"
-    markdownlint-micromark: "npm:0.1.10"
-  checksum: 10/5aceb6b0d4eb6147d8c7f3b5a4804a2aa1f73f5fe46058bb58500eee7b5ca4e62bdb510039ff5680d3f0313bdb69e4f3c107af07bb6f741f9ce72d7d6c562df2
+    markdownlint-micromark: "npm:0.1.12"
+  checksum: 10/36606c186293d3879d6890505310d82943de62370047a8bd92800e134c54b51f9c2bba270aacc23df7a844287deefbbc73457aebe2c7a49d58b38f1bf4fe94aa
   languageName: node
   linkType: hard
 
@@ -8556,12 +8556,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-hook-form@npm:^7.53.1":
-  version: 7.53.1
-  resolution: "react-hook-form@npm:7.53.1"
+"react-hook-form@npm:^7.53.2":
+  version: 7.53.2
+  resolution: "react-hook-form@npm:7.53.2"
   peerDependencies:
     react: ^16.8.0 || ^17 || ^18 || ^19
-  checksum: 10/41ac7140add546b90f75b0aef343b67b795d26a60da7bfeac1ded7716ec01234c6050f5c00a4487c28a73c24f9c9347cda741173a8083d7f4b02b588203e7544
+  checksum: 10/172589ac5871bd41717e8c6bc4c825d149db88eb02e356a8fef4115615a56b21bf66ad16954575b1d6302ed265b8780f1975a2730d5aa10a53e412b56d9f72ca
   languageName: node
   linkType: hard
 
@@ -9784,8 +9784,8 @@ __metadata:
     eslint-config-prettier: "npm:^9.1.0"
     eslint-plugin-unused-imports: "npm:^4.1.4"
     is-network-error: "npm:^1.1.0"
-    knip: "npm:^5.36.1"
-    markdownlint-cli2: "npm:^0.14.0"
+    knip: "npm:^5.37.0"
+    markdownlint-cli2: "npm:^0.15.0"
     markuplint: "npm:^4.9.4"
     next: "npm:14.2.15"
     next-pwa: "npm:^5.6.0"
@@ -9796,7 +9796,7 @@ __metadata:
     prettier-plugin-tailwindcss: "npm:^0.6.8"
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
-    react-hook-form: "npm:^7.53.1"
+    react-hook-form: "npm:^7.53.2"
     server-only: "npm:^0.0.1"
     snakecase-keys: "npm:^8.0.1"
     tailwindcss: "npm:^3.4.14"
