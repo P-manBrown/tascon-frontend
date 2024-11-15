@@ -1,12 +1,11 @@
 'use server'
 
 import camelcaseKeys from 'camelcase-keys'
-import { cookies } from 'next/headers'
 import { z } from 'zod'
 import { authSchema } from '@/schemas/response/auth'
 import { ResultObject } from '@/types/api'
 import { fetchData } from '@/utils/api/fetch-data'
-import { proxyServerCookies } from '@/utils/cookie/proxy-server-cookies'
+import { setAuthorization } from '@/utils/cookie/authorization'
 import { createErrorObject } from '@/utils/error/create-error-object'
 import { getRequestId } from '@/utils/request-id/get-request-id'
 import { validateData } from '@/utils/validation/validate-data'
@@ -34,7 +33,6 @@ export async function login({ ...bodyData }: Params) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Cookie: cookies().toString(),
       },
       body: JSON.stringify(bodyData),
     },
@@ -56,7 +54,7 @@ export async function login({ ...bodyData }: Params) {
         status: 'success',
         ...camelcaseKeys(validateDataResult, { deep: true }),
       }
-      proxyServerCookies(headers)
+      setAuthorization(headers)
     }
   }
 

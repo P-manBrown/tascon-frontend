@@ -1,7 +1,6 @@
 'use server'
 
 import camelcaseKeys from 'camelcase-keys'
-import { cookies } from 'next/headers'
 import { z } from 'zod'
 import { authSchema } from '@/schemas/response/auth'
 import { ResultObject } from '@/types/api'
@@ -31,7 +30,6 @@ export async function signUp({ ...bodyData }: Params) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Cookie: cookies().toString(),
       },
       body: JSON.stringify({
         ...bodyData,

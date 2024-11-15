@@ -18,20 +18,20 @@ const origin = process.env.NEXT_PUBLIC_FRONTEND_ORIGIN
 export async function middleware(req: NextRequest) {
   const reqHeaders = new Headers(req.headers)
 
+  // Add the pathname and query parameters to the request headers.
+  reqHeaders.set('Tascon-Pathname', req.nextUrl.pathname)
+  reqHeaders.set('Tascon-Params', req.nextUrl.searchParams.toString())
+
   // Redirect to the login page if the user is not authenticated.
   if (protectedPaths.some((path) => req.nextUrl.pathname.startsWith(path))) {
-    const hasAuthCookie = req.cookies.has('auth_cookie')
-    if (!hasAuthCookie) {
+    const hasAuthorizationCookie = req.cookies.has('authorization')
+    if (!hasAuthorizationCookie) {
       const loginUrl = new URL('/login', req.url)
       const fromUrl = `${origin}${req.nextUrl.pathname}${req.nextUrl.search}`
       loginUrl.searchParams.set('from_url', fromUrl)
       return NextResponse.redirect(loginUrl)
     }
   }
-
-  // Add the pathname and query parameters to the request headers.
-  reqHeaders.set('Tascon-Pathname', req.nextUrl.pathname)
-  reqHeaders.set('Tascon-Params', req.nextUrl.searchParams.toString())
 
   return NextResponse.next({
     request: {

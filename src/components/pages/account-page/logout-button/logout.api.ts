@@ -1,10 +1,12 @@
 'use server'
 
-import { cookies } from 'next/headers'
 import { z } from 'zod'
 import { ResultObject } from '@/types/api'
 import { fetchData } from '@/utils/api/fetch-data'
-import { proxyServerCookies } from '@/utils/cookie/proxy-server-cookies'
+import {
+  deleteAuthorization,
+  getAuthorization,
+} from '@/utils/cookie/authorization'
 import { createErrorObject } from '@/utils/error/create-error-object'
 import { getRequestId } from '@/utils/request-id/get-request-id'
 import { validateData } from '@/utils/validation/validate-data'
@@ -21,7 +23,7 @@ export async function logout() {
     {
       method: 'DELETE',
       headers: {
-        Cookie: cookies().toString(),
+        Authorization: getAuthorization(),
       },
     },
   )
@@ -42,7 +44,7 @@ export async function logout() {
         status: 'success',
         ...validateDataResult,
       }
-      proxyServerCookies(headers)
+      deleteAuthorization()
     }
   }
 

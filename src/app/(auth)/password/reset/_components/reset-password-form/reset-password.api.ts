@@ -1,9 +1,9 @@
 'use server'
 
-import { cookies } from 'next/headers'
 import { z } from 'zod'
 import { ResultObject } from '@/types/api'
 import { fetchData } from '@/utils/api/fetch-data'
+import { getAuthorization } from '@/utils/cookie/authorization'
 import { createErrorObject } from '@/utils/error/create-error-object'
 import { getRequestId } from '@/utils/request-id/get-request-id'
 import { validateData } from '@/utils/validation/validate-data'
@@ -27,7 +27,7 @@ export async function resetPassword({ ...bodyData }: Params) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Cookie: cookies().toString(),
+        Authorization: getAuthorization(),
       },
       body: JSON.stringify({
         ...bodyData,
