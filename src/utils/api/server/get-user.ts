@@ -1,8 +1,8 @@
 import 'server-only'
 import camelcaseKeys from 'camelcase-keys'
-import { cookies } from 'next/headers'
 import { cache } from 'react'
 import { z } from 'zod'
+import { getAuthorization } from '@/utils/cookie/authorization'
 import { getRequestId } from '../../request-id/get-request-id'
 import { validateData } from '../../validation/validate-data'
 import { fetchData } from '../fetch-data'
@@ -22,7 +22,7 @@ export const getUser = cache(async (id: string) => {
     {
       method: 'GET',
       headers: {
-        Cookie: cookies().toString(),
+        Authorization: getAuthorization(),
       },
     },
   )

@@ -1,3 +1,4 @@
+import 'server-only'
 import isNetworkError from 'is-network-error'
 import { z } from 'zod'
 import { logger } from '@/lib/pino/logger'
@@ -26,6 +27,7 @@ export async function fetchData(
   try {
     const res = await fetch(url, {
       headers: {
+        Origin: `${process.env.NEXT_PUBLIC_FRONTEND_ORIGIN}`,
         'X-Request-Id': requestId,
         ...headers,
       },

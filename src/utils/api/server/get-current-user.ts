@@ -1,9 +1,9 @@
 import 'server-only'
 import camelcaseKeys from 'camelcase-keys'
-import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { cache } from 'react'
 import { validateTokenDataSchema } from '@/schemas/response/validate-token-success'
+import { getAuthorization } from '@/utils/cookie/authorization'
 import { HttpError } from '@/utils/error/custom/http-error'
 import { generateRedirectLoginPath } from '@/utils/login-path/generate-redirect-login-path.server'
 import { getRequestId } from '../../request-id/get-request-id'
@@ -16,7 +16,7 @@ export const getCurrentUser = cache(async () => {
     {
       method: 'GET',
       headers: {
-        Cookie: cookies().toString(),
+        Authorization: getAuthorization(),
       },
     },
   )

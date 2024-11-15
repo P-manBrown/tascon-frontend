@@ -1,11 +1,11 @@
 'use server'
 
 import camelcaseKeys, { CamelCaseKeys } from 'camelcase-keys'
-import { cookies } from 'next/headers'
 import { z } from 'zod'
 import { validateTokenDataSchema } from '@/schemas/response/validate-token-success'
 import { ResultObject } from '@/types/api'
 import { fetchData } from '@/utils/api/fetch-data'
+import { getAuthorization } from '@/utils/cookie/authorization'
 import { createErrorObject } from '@/utils/error/create-error-object'
 import { getRequestId } from '@/utils/request-id/get-request-id'
 import { validateData } from '@/utils/validation/validate-data'
@@ -18,7 +18,7 @@ export async function validateToken() {
     {
       method: 'GET',
       headers: {
-        Cookie: cookies().toString(),
+        Authorization: getAuthorization(),
       },
     },
   )

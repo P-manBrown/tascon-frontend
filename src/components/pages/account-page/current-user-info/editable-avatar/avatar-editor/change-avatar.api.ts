@@ -2,9 +2,9 @@
 
 import camelcaseKeys from 'camelcase-keys'
 import { revalidatePath } from 'next/cache'
-import { cookies } from 'next/headers'
 import { changeUserInfoDataSchema } from '@/schemas/response/change-user-info-success'
 import { fetchData } from '@/utils/api/fetch-data'
+import { getAuthorization } from '@/utils/cookie/authorization'
 import { createErrorObject } from '@/utils/error/create-error-object'
 import { getRequestId } from '@/utils/request-id/get-request-id'
 import { validateData } from '@/utils/validation/validate-data'
@@ -16,7 +16,7 @@ type Params = {
 
 export async function changeAvatar({ formData }: Params) {
   let reqHeaders: Record<string, string> = {
-    Cookie: cookies().toString(),
+    Authorization: getAuthorization(),
   }
   let body: FormData | string
 
