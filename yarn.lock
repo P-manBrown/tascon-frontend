@@ -1441,12 +1441,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@heroicons/react@npm:^2.1.5":
-  version: 2.1.5
-  resolution: "@heroicons/react@npm:2.1.5"
+"@heroicons/react@npm:^2.2.0":
+  version: 2.2.0
+  resolution: "@heroicons/react@npm:2.2.0"
   peerDependencies:
-    react: ">= 16"
-  checksum: 10/dd972f06760e2eec36e32db2edd938e7cc4fd012f6b25e0a31adc3c7fd7122517aa8a55f7b262646c6ef988c42b16fc635b252a4b8aa1bcf8597c97567eaa3d4
+    react: ">= 16 || ^19.0.0-rc"
+  checksum: 10/5bf8a3faa16f1566165bfaec2448ce3c2bd3e4f49e446ccf233f6aa63626155585eaf7e89f01fb4e8e92dfca3d7113b8c517c3b3c04036b9243c818595db3908
   languageName: node
   linkType: hard
 
@@ -9800,7 +9800,7 @@ __metadata:
   resolution: "tascon-frontend@workspace:."
   dependencies:
     "@evilmartians/lefthook": "npm:^1.8.2"
-    "@heroicons/react": "npm:^2.1.5"
+    "@heroicons/react": "npm:^2.2.0"
     "@hookform/resolvers": "npm:^3.9.1"
     "@markuplint/jsx-parser": "npm:^4.7.12"
     "@markuplint/react-spec": "npm:^4.5.12"
