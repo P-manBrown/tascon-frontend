@@ -13,7 +13,7 @@
     "format": "prettier --write --ignore-unknown ."
   },
   "dependencies": {
-    "@heroicons/react": "^2.1.5",
+    "@heroicons/react": "^2.2.0",
     "@hookform/resolvers": "^3.9.1",
     "@next/bundle-analyzer": "^14.2.15",
     "@types/node": "22.9.0",
