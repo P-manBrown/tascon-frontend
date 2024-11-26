@@ -7,27 +7,16 @@ import { useQueryParams } from '@/utils/query-param/use-query-params'
 
 export function LoginQueryParamSnackbar() {
   const searchParams = useSearchParams()
-  const error = searchParams.get('err')
   const hasFromUrl = searchParams.has('from_url')
   const isAccountConfirmationSuccessful = searchParams.get(
-    'account_confirmation_success'
+    'account_confirmation_success',
   )
   const openSnackbar = useSnackbarsStore((state) => state.openSnackbar)
   const { cleanupQueryParams } = useQueryParams()
 
   useEffect(() => {
     if (searchParams.toString()) {
-      if (error === 'omniauth_record_invalid') {
-        openSnackbar({
-          severity: 'error',
-          message: '認証できませんでした。別のアカウントでお試しください。',
-        })
-      } else if (error === 'omniauth_failure') {
-        openSnackbar({
-          severity: 'error',
-          message: '認証できませんでした。再度お試しください。',
-        })
-      } else if (isAccountConfirmationSuccessful === 'true') {
+      if (isAccountConfirmationSuccessful === 'true') {
         openSnackbar({
           severity: 'success',
           message: 'メールアドレスを認証しました。ログインしてください。',
@@ -43,12 +32,11 @@ export function LoginQueryParamSnackbar() {
           message: '作業するにはログインしてください。',
         })
       }
-      cleanupQueryParams(['err', 'from_url', 'account_confirmation_success'])
+      cleanupQueryParams(['from_url', 'account_confirmation_success'])
     }
   }, [
     hasFromUrl,
     isAccountConfirmationSuccessful,
-    error,
     openSnackbar,
     searchParams,
     cleanupQueryParams,
