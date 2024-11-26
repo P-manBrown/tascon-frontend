@@ -5,7 +5,7 @@ import { z } from 'zod'
 import { authSchema } from '@/schemas/response/auth'
 import { ResultObject } from '@/types/api'
 import { fetchData } from '@/utils/api/fetch-data'
-import { setAuthorization } from '@/utils/cookie/authorization'
+import { setBearerToken } from '@/utils/cookie/bearer-token'
 import { createErrorObject } from '@/utils/error/create-error-object'
 import { getRequestId } from '@/utils/request-id/get-request-id'
 import { validateData } from '@/utils/validation/validate-data'
@@ -54,7 +54,11 @@ export async function login({ ...bodyData }: Params) {
         status: 'success',
         ...camelcaseKeys(validateDataResult, { deep: true }),
       }
-      setAuthorization(headers)
+      const bearerToken = headers.get('Authorization')
+      const expiry = headers.get('expiry')
+      if (bearerToken !== null && expiry !== null) {
+        setBearerToken({ bearerToken, expiry })
+      }
     }
   }
 

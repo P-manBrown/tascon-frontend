@@ -3,10 +3,7 @@
 import { z } from 'zod'
 import { ResultObject } from '@/types/api'
 import { fetchData } from '@/utils/api/fetch-data'
-import {
-  deleteAuthorization,
-  getAuthorization,
-} from '@/utils/cookie/authorization'
+import { getBearerToken, deleteBearerToken } from '@/utils/cookie/bearer-token'
 import { createErrorObject } from '@/utils/error/create-error-object'
 import { getRequestId } from '@/utils/request-id/get-request-id'
 import { validateData } from '@/utils/validation/validate-data'
@@ -23,7 +20,7 @@ export async function logout() {
     {
       method: 'DELETE',
       headers: {
-        Authorization: getAuthorization(),
+        Authorization: getBearerToken(),
       },
     },
   )
@@ -44,7 +41,7 @@ export async function logout() {
         status: 'success',
         ...validateDataResult,
       }
-      deleteAuthorization()
+      deleteBearerToken()
     }
   }
 

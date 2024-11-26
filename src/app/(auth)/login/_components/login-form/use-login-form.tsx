@@ -4,13 +4,12 @@ import { useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
 import { loginSchema } from '@/schemas/request/auth'
+import { getPostLoginUrl } from '@/utils/url/get-post-login-url'
 import { login } from './login.api'
 import type { SubmitHandler } from 'react-hook-form'
 import type { z } from 'zod'
 
 type LoginFormValues = z.infer<typeof loginSchema>
-
-const origin = process.env.NEXT_PUBLIC_FRONTEND_ORIGIN
 
 export function useLoginForm() {
   const searchParams = useSearchParams()
@@ -33,13 +32,8 @@ export function useLoginForm() {
       } else {
         reset()
         const fromUrl = searchParams.get('from_url')
-        let targetUrl = `${origin}/tasks`
-        if (fromUrl && URL.canParse(fromUrl)) {
-          const fromOrigin = new URL(fromUrl).origin
-          if (fromOrigin === origin) {
-            targetUrl = fromUrl
-          }
-        }
+        let targetUrl = getPostLoginUrl(fromUrl)
+        // Using router.push() causes the page displaying the modal to become Not Found.
         location.assign(targetUrl)
       }
     },

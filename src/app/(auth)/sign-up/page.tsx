@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { Suspense } from 'react'
 import { AuthHeading } from '@/components/headings/auth-heading'
 import { HorizontalRule } from '@/components/horizontal-rule'
 import { SocialLoginForms } from '@/components/social-login-forms'
@@ -17,14 +18,18 @@ export default function SignUp() {
       <SignUpForm />
       <HorizontalRule className="my-6">または</HorizontalRule>
       <div className="space-y-6">
-        <SocialLoginForms />
+        <Suspense>
+          <SocialLoginForms />
+        </Suspense>
       </div>
       <div className="mt-7 text-center">
         <Link href="/login" className="link">
           アカウントをお持ちの場合はログインへ
         </Link>
       </div>
-      <SignUpQueryParamSnackbar />
+      <Suspense>
+        <SignUpQueryParamSnackbar />
+      </Suspense>
     </>
   )
 }

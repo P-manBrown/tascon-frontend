@@ -5,7 +5,7 @@ import snakecaseKeys from 'snakecase-keys'
 import { changeUserInfoDataSchema } from '@/schemas/response/change-user-info-success'
 import { ChangeUserInfoData, ResultObject } from '@/types/api'
 import { fetchData } from '@/utils/api/fetch-data'
-import { getAuthorization } from '@/utils/cookie/authorization'
+import { getBearerToken } from '@/utils/cookie/bearer-token'
 import { createErrorObject } from '@/utils/error/create-error-object'
 import { getRequestId } from '@/utils/request-id/get-request-id'
 import { validateData } from '@/utils/validation/validate-data'
@@ -22,7 +22,7 @@ export async function changeEmail({ ...bodyData }: Params) {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: getAuthorization(),
+        Authorization: getBearerToken(),
       },
       body: JSON.stringify(snakecaseKeys(bodyData, { deep: false })),
     },

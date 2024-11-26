@@ -20,7 +20,9 @@ export default function Login() {
       </Suspense>
       <HorizontalRule className="my-8">または</HorizontalRule>
       <div className="space-y-8">
-        <SocialLoginForms />
+        <Suspense>
+          <SocialLoginForms />
+        </Suspense>
       </div>
       <div className="mt-10 text-center">
         <Link href="/sign-up" className="link">

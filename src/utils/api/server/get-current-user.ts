@@ -3,7 +3,7 @@ import camelcaseKeys from 'camelcase-keys'
 import { redirect } from 'next/navigation'
 import { cache } from 'react'
 import { validateTokenDataSchema } from '@/schemas/response/validate-token-success'
-import { getAuthorization } from '@/utils/cookie/authorization'
+import { getBearerToken } from '@/utils/cookie/bearer-token'
 import { HttpError } from '@/utils/error/custom/http-error'
 import { generateRedirectLoginPath } from '@/utils/login-path/generate-redirect-login-path.server'
 import { getRequestId } from '../../request-id/get-request-id'
@@ -16,7 +16,7 @@ export const getCurrentUser = cache(async () => {
     {
       method: 'GET',
       headers: {
-        Authorization: getAuthorization(),
+        Authorization: getBearerToken(),
       },
     },
   )

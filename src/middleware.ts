@@ -24,8 +24,8 @@ export async function middleware(req: NextRequest) {
 
   // Redirect to the login page if the user is not authenticated.
   if (protectedPaths.some((path) => req.nextUrl.pathname.startsWith(path))) {
-    const hasAuthorizationCookie = req.cookies.has('authorization')
-    if (!hasAuthorizationCookie) {
+    const hasBearerTokenCookie = req.cookies.has('bearerToken')
+    if (!hasBearerTokenCookie) {
       const loginUrl = new URL('/login', req.url)
       const fromUrl = `${origin}${req.nextUrl.pathname}${req.nextUrl.search}`
       loginUrl.searchParams.set('from_url', fromUrl)
