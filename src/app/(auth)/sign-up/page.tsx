@@ -4,7 +4,6 @@ import { AuthHeading } from '@/components/headings/auth-heading'
 import { HorizontalRule } from '@/components/horizontal-rule'
 import { SocialLoginForms } from '@/components/social-login-forms'
 import { SignUpForm } from './_components/sign-up-form'
-import { SignUpQueryParamSnackbar } from './_components/sign-up-query-param-snackbar'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -27,9 +26,6 @@ export default function SignUp() {
           アカウントをお持ちの場合はログインへ
         </Link>
       </div>
-      <Suspense>
-        <SignUpQueryParamSnackbar />
-      </Suspense>
     </>
   )
 }
