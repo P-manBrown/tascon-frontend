@@ -5,14 +5,19 @@ import { getCurrentUser } from '@/utils/api/server/get-current-user'
 import { ChangePasswordForm } from './change-password-form'
 import { NextActionButton } from './next-action-button'
 
-export async function CurrentUserChangePasswordForm() {
-  const { data: currentUser } = await getCurrentUser()
+type Props = {
+  resetPasswordToken: null
+}
 
+export async function CurrentUserChangePasswordForm({
+  resetPasswordToken,
+}: Props) {
+  const { data: currentUser } = await getCurrentUser()
   const referer = headers().get('referer')
 
   return (
     <ChangePasswordForm
-      allowPasswordChange={currentUser.allowPasswordChange}
+      resetPasswordToken={resetPasswordToken}
       nameInput={
         <input
           type="text"
