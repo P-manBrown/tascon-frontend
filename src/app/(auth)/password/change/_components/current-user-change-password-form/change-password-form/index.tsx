@@ -26,14 +26,14 @@ type ChangePasswordFormValues = {
 }
 
 type Props = {
-  allowPasswordChange: boolean
-  nameInput: React.ReactElement
-  emailInput: React.ReactElement
-  successMessage: React.ReactElement
+  resetPasswordToken: string | null
+  nameInput?: JSX.Element
+  emailInput?: JSX.Element
+  successMessage: JSX.Element
 }
 
 export function ChangePasswordForm({
-  allowPasswordChange,
+  resetPasswordToken,
   nameInput,
   emailInput,
   successMessage,
@@ -59,9 +59,9 @@ export function ChangePasswordForm({
   } = useForm<ChangePasswordFormValues>({
     mode: 'onBlur',
     resolver: zodResolver(
-      allowPasswordChange
-        ? changePasswordSchema.omit({ currentPassword: true })
-        : changePasswordSchema,
+      resetPasswordToken === null
+        ? changePasswordSchema
+        : changePasswordSchema.omit({ currentPassword: true }),
     ),
   })
 
@@ -84,7 +84,7 @@ export function ChangePasswordForm({
   }
 
   const onSubmit: SubmitHandler<ChangePasswordFormValues> = async (data) => {
-    const result = await changePassword(data)
+    const result = await changePassword({ resetPasswordToken, ...data })
     if (result.status === 'error') {
       if (result.name === 'HttpError') {
         handleHttpError(result)
@@ -103,7 +103,7 @@ export function ChangePasswordForm({
         <div className="space-y-3">
           {nameInput}
           {emailInput}
-          {!allowPasswordChange && (
+          {resetPasswordToken === null && (
             <CurrentPasswordInput
               readOnly={isSubmitting}
               register={register('currentPassword')}
