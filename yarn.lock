@@ -6668,9 +6668,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"knip@npm:^5.38.4":
-  version: 5.38.4
-  resolution: "knip@npm:5.38.4"
+"knip@npm:^5.39.1":
+  version: 5.39.1
+  resolution: "knip@npm:5.39.1"
   dependencies:
     "@nodelib/fs.walk": "npm:1.2.8"
     "@snyk/github-codeowners": "npm:1.1.0"
@@ -6694,7 +6694,7 @@ __metadata:
   bin:
     knip: bin/knip.js
     knip-bun: bin/knip-bun.js
-  checksum: 10/2f732bf6e2e0612754d6f96a12ab530f51c9e6542c91cb0ef3e08a1756a6f4d58c97ae47ff8849f2e3608a372fd23e58f61e4aa521499d276d6eed28e639217e
+  checksum: 10/43dc480d071297d86ee92213f92b01965a38290191f3378c150958d2da4c04fa49a8471d8a5cc74685daebe06335117d11b5fae625fc443934fc3f2c0b67d35c
   languageName: node
   linkType: hard
 
@@ -9667,7 +9667,7 @@ __metadata:
     eslint-config-prettier: "npm:^9.1.0"
     eslint-plugin-unused-imports: "npm:^4.1.4"
     is-network-error: "npm:^1.1.0"
-    knip: "npm:^5.38.4"
+    knip: "npm:^5.39.1"
     markdownlint-cli2: "npm:^0.15.0"
     markuplint: "npm:^4.11.3"
     next: "npm:14.2.15"
