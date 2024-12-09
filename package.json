@@ -32,7 +32,7 @@
     "snakecase-keys": "^8.0.1",
     "typescript": "<5.5.0",
     "zod": "^3.23.8",
-    "zustand": "^5.0.1"
+    "zustand": "^5.0.2"
   },
   "devDependencies": {
     "@evilmartians/lefthook": "^1.9.0",
