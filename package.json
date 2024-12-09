@@ -35,7 +35,7 @@
     "zustand": "^5.0.1"
   },
   "devDependencies": {
-    "@evilmartians/lefthook": "^1.8.5",
+    "@evilmartians/lefthook": "^1.9.0",
     "@markuplint/jsx-parser": "^4.7.14",
     "@markuplint/react-spec": "^4.5.14",
     "autoprefixer": "^10.4.20",
