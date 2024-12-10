@@ -6997,9 +6997,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"markdownlint-cli2@npm:^0.15.0":
-  version: 0.15.0
-  resolution: "markdownlint-cli2@npm:0.15.0"
+"markdownlint-cli2@npm:^0.16.0":
+  version: 0.16.0
+  resolution: "markdownlint-cli2@npm:0.16.0"
   dependencies:
     globby: "npm:14.0.2"
     js-yaml: "npm:4.1.0"
@@ -7009,7 +7009,7 @@ __metadata:
     micromatch: "npm:4.0.8"
   bin:
     markdownlint-cli2: markdownlint-cli2.js
-  checksum: 10/ac47d757921f6fc0c4b3773b67728abd986d59ce2505b2f764501f9bb71ee1d3264713fb8a725bb85dd70a55fad667d9bcb404f2cb8ebf08ca54f71e0a8b9486
+  checksum: 10/aeec04f3c61f10a0e2d65993ea309d0caf7574969353315e2a17460cf82897757c24674bc05e03908c8f0a8981e7ab0fc92697bb024bb5d43c4dfa079b5aed70
   languageName: node
   linkType: hard
 
@@ -9665,7 +9665,7 @@ __metadata:
     eslint-plugin-unused-imports: "npm:^4.1.4"
     is-network-error: "npm:^1.1.0"
     knip: "npm:^5.39.2"
-    markdownlint-cli2: "npm:^0.15.0"
+    markdownlint-cli2: "npm:^0.16.0"
     markuplint: "npm:^4.11.4"
     next: "npm:14.2.15"
     next-pwa: "npm:^5.6.0"
