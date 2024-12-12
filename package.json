@@ -16,7 +16,7 @@
     "@heroicons/react": "^2.2.0",
     "@hookform/resolvers": "^3.9.1",
     "@next/bundle-analyzer": "^15.0.4",
-    "@types/node": "22.10.1",
+    "@types/node": "22.10.2",
     "@types/react": "18.3.12",
     "@types/react-dom": "19.0.2",
     "boring-avatars": "^1.11.2",
