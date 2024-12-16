@@ -4,9 +4,9 @@ import { DetailItemContentLayout } from '@/components/layouts/detail-item-conten
 import { DetailItemHeadingLayout } from '@/components/layouts/detail-item-heading-layout'
 import { Tag } from '@/components/tag'
 import {
-  ChangePasswordLink,
-  LoadingChangePasswordLink,
-} from './change-password-link'
+  CurrentUserChangePasswordFormShowButton,
+  LoadingCurrentUserChangePasswordFormShowButton,
+} from './current-user-change-password-form-show-button'
 import { EditableAvatar, LoadingEditableAvatar } from './editable-avatar'
 import { EditableBio, LoadingEditableBio } from './editable-bio'
 import { LoadingEditableEmail, EditableEmail } from './editable-email'
@@ -50,8 +50,10 @@ export function CurrentUserInfo() {
           <Tag color="gray">非公開</Tag>
         </DetailItemHeadingLayout>
         <DetailItemContentLayout>
-          <Suspense fallback={<LoadingChangePasswordLink />}>
-            <ChangePasswordLink />
+          <Suspense
+            fallback={<LoadingCurrentUserChangePasswordFormShowButton />}
+          >
+            <CurrentUserChangePasswordFormShowButton />
           </Suspense>
         </DetailItemContentLayout>
       </div>

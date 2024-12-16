@@ -144,7 +144,7 @@ module.exports = {
             {},
         },
         '.btn-disabled': {
-          '@apply cursor-wait bg-gray-400 text-white': {},
+          '@apply cursor-not-allowed bg-gray-400 text-white': {},
         },
         '.btn-primary': {
           '@apply btn-shadow bg-blue-600 text-white disabled:btn-disabled disabled:duration-0':
