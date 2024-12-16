@@ -5,8 +5,8 @@ import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error
 import { useModal } from '@/components/modal/use-modal'
 import { resetPasswordSchema } from '@/schemas/request/auth'
 import { ErrorObject } from '@/types/error'
+import { resetPassword } from '@/utils/api/reset-password'
 import { HttpError } from '@/utils/error/custom/http-error'
-import { resetPassword } from './reset-password.api'
 import type { SubmitHandler } from 'react-hook-form'
 import type { z } from 'zod'
 

@@ -4,7 +4,7 @@ import { useSnackbarsStore } from '@/app/_components/snackbars/use-snackbars-sto
 import { Button } from '@/components/buttons/button'
 import { HorizontalRule } from '@/components/horizontal-rule'
 import { IconMessage } from '@/components/icon-message'
-import { resetPassword } from '../reset-password.api'
+import { resetPassword } from '@/utils/api/reset-password'
 
 type Props = {
   message: string
