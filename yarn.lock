@@ -9967,6 +9967,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "tascon-frontend@workspace:."
   dependencies:
+    "@eslint/eslintrc": "npm:^3.2.0"
     "@evilmartians/lefthook": "npm:^1.9.2"
     "@heroicons/react": "npm:^2.2.0"
     "@hookform/resolvers": "npm:^3.9.1"

@@ -3,9 +3,11 @@
   "ignore": [".pnp.*"],
   "ignoreDependencies": [
     "@evilmartians/lefthook",
-    "client-only",
     "@markuplint/jsx-parser",
     "@markuplint/react-spec",
+    "client-only",
+    "eslint-config-next",
+    "eslint-config-prettier",
     "pino-pretty"
   ]
 }
