@@ -12,7 +12,7 @@ export default function ResetPassword() {
   const cookieStore = cookies()
   const resetPasswordToken = cookieStore.get('resetPasswordToken')?.value
   if (resetPasswordToken === undefined) {
-    redirect('/password/reset?err=token_not_found')
+    redirect('/password/forgot?err=token_not_found')
   }
 
   return (
