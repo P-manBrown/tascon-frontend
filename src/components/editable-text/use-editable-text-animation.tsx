@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 type Params = {
-  containerRef: React.RefObject<HTMLElement>
-  contentRef: React.RefObject<HTMLElement>
+  containerRef: React.RefObject<HTMLElement | null>
+  contentRef: React.RefObject<HTMLElement | null>
   isEditorOpen: boolean
 }
 
@@ -33,7 +33,7 @@ export function useEditableTextAnimation({
       if (containerRef.current) {
         const animation = containerRef.current.animate(
           [{ height: `${fromHeight}px` }, { height: `${toHeight}px` }],
-          { ...animateBaseOptions, delay }
+          { ...animateBaseOptions, delay },
         )
         animation.onfinish = () => {
           if (containerRef.current) {
@@ -47,7 +47,7 @@ export function useEditableTextAnimation({
         return animation
       }
     },
-    [containerRef]
+    [containerRef],
   )
 
   const animateExpansion = useCallback(() => {

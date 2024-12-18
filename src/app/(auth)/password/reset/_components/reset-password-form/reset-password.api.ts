@@ -15,7 +15,6 @@ import type { CamelCaseKeys } from 'camelcase-keys'
 
 type Params = {
   resetPasswordToken: string | null
-  currentPassword?: string
   password: string
 }
 
@@ -27,7 +26,7 @@ const dataSchema = z.object({
 
 type Data = CamelCaseKeys<z.infer<typeof dataSchema>, true>
 
-export async function changePassword({
+export async function resetPassword({
   resetPasswordToken,
   ...bodyData
 }: Params) {
@@ -63,14 +62,12 @@ export async function changePassword({
         status: 'success',
         ...camelcaseKeys(validateDataResult, { deep: true }),
       }
-      if (resetPasswordToken !== null) {
-        const bearerToken = headers.get('Authorization')
-        const expiry = headers.get('expiry')
-        if (bearerToken !== null && expiry !== null) {
-          setBearerToken({ bearerToken, expiry })
-        }
-        cookies().delete('resetPasswordToken')
+      const bearerToken = headers.get('Authorization')
+      const expiry = headers.get('expiry')
+      if (bearerToken !== null && expiry !== null) {
+        setBearerToken({ bearerToken, expiry })
       }
+      cookies().delete('resetPasswordToken')
     }
   }
 

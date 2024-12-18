@@ -66,7 +66,7 @@ export function LoginForm() {
         ))}
       </div>
       <div className="mt-2 flex justify-end">
-        <Link href="/password/reset" className="link">
+        <Link href="/password/forgot" className="link">
           パスワードを忘れた場合はこちら
         </Link>
       </div>

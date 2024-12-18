@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 
-type Params = { targetRef: React.RefObject<HTMLElement> }
+type Params = { targetRef: React.RefObject<HTMLElement | null> }
 
 export function useTextSelection({ targetRef }: Params) {
   const [isTextSelected, setIsTextSelected] = useState(false)

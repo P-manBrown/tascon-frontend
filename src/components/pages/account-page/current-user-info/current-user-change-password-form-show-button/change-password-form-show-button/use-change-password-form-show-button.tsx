@@ -7,7 +7,7 @@ import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error
 import { useSnackbarsStore } from '@/app/_components/snackbars/use-snackbars-store'
 import { changePasswordSchema } from '@/schemas/request/auth'
 import { ErrorObject } from '@/types/error'
-import { resetPassword } from '@/utils/api/reset-password'
+import { requestResetPasswordEmail } from '@/utils/api/request-reset-password-email'
 import { HttpError } from '@/utils/error/custom/http-error'
 import { useRedirectLoginPath } from '@/utils/login-path/use-redirect-login-path'
 import { changePassword } from './change-password.api'
@@ -49,7 +49,7 @@ export function useChangePasswordFormShowButton({ email }: Params) {
 
   const handleResetPasswordButtonClick = useCallback(async () => {
     setIsSending(true)
-    const result = await resetPassword({ email })
+    const result = await requestResetPasswordEmail({ email })
     if (result.status === 'error') {
       openErrorSnackbar(result)
     } else {

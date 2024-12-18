@@ -3,7 +3,7 @@ import { setCursorToEnd } from '../form-controls/text-area/set-cursor-to-end'
 import { useTextArea } from '../form-controls/text-area/use-text-area'
 
 type Params = {
-  editorRef: React.RefObject<HTMLTextAreaElement>
+  editorRef: React.RefObject<HTMLTextAreaElement | null>
   isEditorOpen: boolean
 }
 
@@ -17,7 +17,7 @@ export function useEditableMultiLineText({ editorRef, isEditorOpen }: Params) {
       adjustHeight(ev.currentTarget)
       updateWordCount(ev.currentTarget.value)
     },
-    [adjustHeight, updateWordCount]
+    [adjustHeight, updateWordCount],
   )
 
   useLayoutEffect(() => {

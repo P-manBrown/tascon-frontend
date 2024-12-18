@@ -1,85 +1,92 @@
 'use client'
 
-import { XMarkIcon } from '@heroicons/react/24/solid'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
 import { useId } from 'react'
+import { useForm } from 'react-hook-form'
+import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
 import { Button } from '@/components/buttons/button'
 import { IconButton } from '@/components/buttons/icon-button'
-import { ModalContent } from '@/components/contents/modal-content'
 import { Label } from '@/components/form-controls/label'
 import { TextField } from '@/components/form-controls/text-field'
-import { Modal } from '@/components/modal'
-import { ResetPasswordSuccessMessage } from './reset-password-success-message'
-import { useResetPasswordForm } from './use-reset-password-form'
+import { VisibilityToggleIcon } from '@/components/visibility-toggle-icon'
+import { useVisibilityToggle } from '@/components/visibility-toggle-icon/use-visibility-toggle'
+import { resetPasswordSchema } from '@/schemas/request/auth'
+import { ErrorObject } from '@/types/error'
+import { HttpError } from '@/utils/error/custom/http-error'
+import { resetPassword } from './reset-password.api'
+import type { SubmitHandler } from 'react-hook-form'
+import type { z } from 'zod'
 
-export function ResetPasswordForm() {
+type ResetPasswordFormValues = z.infer<typeof resetPasswordSchema>
+
+type Props = {
+  resetPasswordToken: string
+}
+
+export function ResetPasswordForm({ resetPasswordToken }: Props) {
   const id = useId()
+  const { isVisible, toggleVisible } = useVisibilityToggle()
+  const router = useRouter()
+  const { openErrorSnackbar } = useErrorSnackbar()
   const {
-    shouldMount,
-    isOpen,
-    closeModal,
-    unmountModal,
-    handleAnimationEnd,
-    handleCancel,
-    resultValues,
-    isSubmitting,
-    errors,
     register,
     handleSubmit,
-    onSubmit,
-  } = useResetPasswordForm()
+    reset,
+    formState: { isSubmitting, errors },
+  } = useForm<ResetPasswordFormValues>({
+    mode: 'onBlur',
+    resolver: zodResolver(resetPasswordSchema),
+  })
+
+  const handleHttpError = (err: ErrorObject<HttpError>) => {
+    if (err.statusCode === 401) {
+      router.push('/password/forgot?err=invalid_token')
+    } else {
+      openErrorSnackbar(err)
+    }
+  }
+
+  const onSubmit: SubmitHandler<ResetPasswordFormValues> = async (data) => {
+    const result = await resetPassword({ resetPasswordToken, ...data })
+    if (result.status === 'error') {
+      if (result.name === 'HttpError') {
+        handleHttpError(result)
+      } else {
+        openErrorSnackbar(result)
+      }
+    } else {
+      reset()
+      router.push('/tasks')
+    }
+  }
 
   return (
-    <>
-      <div>
-        <p className="mb-4">
-          登録済みメールアドレスを入力してください。
-          <br />
-          パスワード再設定用のメールを送信します。
-        </p>
-        <form noValidate={true} onSubmit={handleSubmit(onSubmit)}>
-          <Label htmlFor={`${id}-email`}>メールアドレス</Label>
-          <TextField
-            id={`${id}-email`}
-            type="email"
-            autoComplete="email"
-            readOnly={isSubmitting}
-            register={register('email')}
-            errors={errors.email}
-          />
-          <Button
-            type="submit"
-            className="btn-primary my-7"
-            status={isSubmitting ? 'pending' : 'idle'}
+    <form noValidate={true} onSubmit={handleSubmit(onSubmit)}>
+      <Label htmlFor={`${id}-password`}>新しいパスワード</Label>
+      <TextField
+        id={`${id}-password`}
+        type={isVisible ? 'text' : 'password'}
+        autoComplete="new-password"
+        register={register('password')}
+        errors={errors.password}
+        suffixIcon={
+          <IconButton
+            type="button"
+            aria-label={isVisible ? 'パスワードを隠す' : 'パスワードを表示する'}
+            onClick={toggleVisible}
           >
-            パスワード再設定用メール送信
-          </Button>
-        </form>
-      </div>
-      {shouldMount && (
-        <Modal
-          isOpen={isOpen}
-          onCancel={handleCancel}
-          onAnimationEnd={handleAnimationEnd}
-          onClose={unmountModal}
-        >
-          <ModalContent
-            upperLeftIcon={
-              <IconButton
-                type="button"
-                aria-label="モーダルを閉じる"
-                onClick={closeModal}
-              >
-                <XMarkIcon className="size-6" />
-              </IconButton>
-            }
-          >
-            <ResetPasswordSuccessMessage
-              message={resultValues.message}
-              email={resultValues.email}
-            />
-          </ModalContent>
-        </Modal>
-      )}
-    </>
+            <VisibilityToggleIcon isVisible={isVisible} className="size-5" />
+          </IconButton>
+        }
+      />
+      <Button
+        type="submit"
+        className="btn-primary mt-9"
+        status={isSubmitting ? 'pending' : 'idle'}
+      >
+        パスワード再設定
+      </Button>
+    </form>
   )
 }

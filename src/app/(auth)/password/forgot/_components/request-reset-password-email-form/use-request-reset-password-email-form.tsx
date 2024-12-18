@@ -3,16 +3,16 @@ import { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
 import { useModal } from '@/components/modal/use-modal'
-import { resetPasswordSchema } from '@/schemas/request/auth'
+import { requestResetPasswordEmailSchema } from '@/schemas/request/auth'
 import { ErrorObject } from '@/types/error'
-import { resetPassword } from '@/utils/api/reset-password'
+import { requestResetPasswordEmail } from '@/utils/api/request-reset-password-email'
 import { HttpError } from '@/utils/error/custom/http-error'
 import type { SubmitHandler } from 'react-hook-form'
 import type { z } from 'zod'
 
-type ResetPasswordFormValues = z.infer<typeof resetPasswordSchema>
+type ResetPasswordFormValues = z.infer<typeof requestResetPasswordEmailSchema>
 
-export function useResetPasswordForm() {
+export function useRequestResetPasswordEmailForm() {
   const [resultValues, setResultValues] = useState({
     email: '',
     message: '',
@@ -35,7 +35,7 @@ export function useResetPasswordForm() {
     formState: { isSubmitting, errors },
   } = useForm<ResetPasswordFormValues>({
     mode: 'onBlur',
-    resolver: zodResolver(resetPasswordSchema),
+    resolver: zodResolver(requestResetPasswordEmailSchema),
   })
 
   const handleHttpError = useCallback(
@@ -58,7 +58,7 @@ export function useResetPasswordForm() {
 
   const onSubmit: SubmitHandler<ResetPasswordFormValues> = useCallback(
     async (data) => {
-      const result = await resetPassword(data)
+      const result = await requestResetPasswordEmail(data)
       if (result.status === 'error') {
         if (result.name === 'HttpError') {
           handleHttpError(result)

@@ -4,20 +4,23 @@ import { useSnackbarsStore } from '@/app/_components/snackbars/use-snackbars-sto
 import { Button } from '@/components/buttons/button'
 import { HorizontalRule } from '@/components/horizontal-rule'
 import { IconMessage } from '@/components/icon-message'
-import { resetPassword } from '@/utils/api/reset-password'
+import { requestResetPasswordEmail } from '@/utils/api/request-reset-password-email'
 
 type Props = {
   message: string
   email: string
 }
 
-export function ResetPasswordSuccessMessage({ message, email }: Props) {
+export function RequestResetPasswordEmailSuccessMessage({
+  message,
+  email,
+}: Props) {
   const [isSending, setIsSending] = useState(false)
   const { openErrorSnackbar } = useErrorSnackbar()
   const openSnackbar = useSnackbarsStore((state) => state.openSnackbar)
   const handleClick = async () => {
     setIsSending(true)
-    const result = await resetPassword({ email })
+    const result = await requestResetPasswordEmail({ email })
     if (result.status === 'error') {
       openErrorSnackbar(result)
     } else {
