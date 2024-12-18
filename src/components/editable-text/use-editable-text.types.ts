@@ -2,7 +2,7 @@ import type { FieldValues, SubmitHandler } from 'react-hook-form'
 import type { ZodSchema } from 'zod'
 
 export type UseEditableTextParams = {
-  editorRef: React.RefObject<HTMLInputElement | HTMLTextAreaElement>
+  editorRef: React.RefObject<HTMLInputElement | HTMLTextAreaElement | null>
   currentUserId: string
   name: string
   schema: ZodSchema

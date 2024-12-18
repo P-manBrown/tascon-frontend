@@ -10,13 +10,13 @@ type Props = Omit<
   maxCount?: number
   register: UseFormRegisterReturn
   errors: FieldError | undefined
-  shadowRef?: React.RefObject<HTMLTextAreaElement>
+  shadowRef?: React.RefObject<HTMLTextAreaElement | null>
 }
 
 export const TextArea = forwardRef<HTMLTextAreaElement, Props>(
   function TextArea(
     { rows, cols, wordCount, maxCount, register, errors, shadowRef, ...rest },
-    ref
+    ref,
   ) {
     const { ref: registerRef, ...registerRest } = register
     const textAreaClasses = `text-box overflow-hidden py-2.5 ${
@@ -68,5 +68,5 @@ export const TextArea = forwardRef<HTMLTextAreaElement, Props>(
         </div>
       </div>
     )
-  }
+  },
 )
