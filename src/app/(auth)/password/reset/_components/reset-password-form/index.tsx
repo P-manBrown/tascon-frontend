@@ -12,6 +12,8 @@ import { TextField } from '@/components/form-controls/text-field'
 import { VisibilityToggleIcon } from '@/components/visibility-toggle-icon'
 import { useVisibilityToggle } from '@/components/visibility-toggle-icon/use-visibility-toggle'
 import { resetPasswordSchema } from '@/schemas/request/auth'
+import { ErrorObject } from '@/types/error'
+import { HttpError } from '@/utils/error/custom/http-error'
 import { resetPassword } from './reset-password.api'
 import type { SubmitHandler } from 'react-hook-form'
 import type { z } from 'zod'
@@ -37,10 +39,22 @@ export function ResetPasswordForm({ resetPasswordToken }: Props) {
     resolver: zodResolver(resetPasswordSchema),
   })
 
+  const handleHttpError = (err: ErrorObject<HttpError>) => {
+    if (err.statusCode === 401) {
+      router.push('/password/forgot?err=invalid_token')
+    } else {
+      openErrorSnackbar(err)
+    }
+  }
+
   const onSubmit: SubmitHandler<ResetPasswordFormValues> = async (data) => {
     const result = await resetPassword({ resetPasswordToken, ...data })
     if (result.status === 'error') {
-      openErrorSnackbar(result)
+      if (result.name === 'HttpError') {
+        handleHttpError(result)
+      } else {
+        openErrorSnackbar(result)
+      }
     } else {
       reset()
       router.push('/tasks')

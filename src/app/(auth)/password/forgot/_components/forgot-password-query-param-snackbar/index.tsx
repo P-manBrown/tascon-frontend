@@ -19,6 +19,12 @@ export function ForgotPasswordQueryParamSnackbar({ searchParams }: Props) {
           severity: 'error',
           message: 'パスワード再設定用メールからお手続きください。',
         })
+      } else if (searchParams.err === 'invalid_token') {
+        openSnackbar({
+          severity: 'error',
+          message:
+            '新規パスワードの設定に失敗しました。最初からやり直してください。',
+        })
       }
       cleanupQueryParams(['err'])
     }
