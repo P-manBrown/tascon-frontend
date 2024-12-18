@@ -8,7 +8,7 @@ type Props = {
   searchParams: { [key: string]: string | string[] | undefined }
 }
 
-export function ResetPasswordQueryParamSnackbar({ searchParams }: Props) {
+export function ForgotPasswordQueryParamSnackbar({ searchParams }: Props) {
   const openSnackbar = useSnackbarsStore((state) => state.openSnackbar)
   const { cleanupQueryParams } = useQueryParams()
 

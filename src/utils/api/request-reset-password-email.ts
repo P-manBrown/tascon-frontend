@@ -20,7 +20,7 @@ const dataSchema = z.object({
 
 type Data = z.infer<typeof dataSchema>
 
-export async function resetPassword({ ...bodyData }: Params) {
+export async function requestResetPasswordEmail({ ...bodyData }: Params) {
   const fetchDataResult = await fetchData(
     `${process.env.API_ORIGIN}/api/v1/auth/password`,
     {

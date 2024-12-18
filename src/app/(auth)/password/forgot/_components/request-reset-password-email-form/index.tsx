@@ -8,10 +8,10 @@ import { ModalContent } from '@/components/contents/modal-content'
 import { Label } from '@/components/form-controls/label'
 import { TextField } from '@/components/form-controls/text-field'
 import { Modal } from '@/components/modal'
-import { ResetPasswordSuccessMessage } from './reset-password-success-message'
-import { useResetPasswordForm } from './use-reset-password-form'
+import { RequestResetPasswordEmailSuccessMessage } from './request-reset-password-email-success-message'
+import { useRequestResetPasswordEmailForm } from './use-request-reset-password-email-form'
 
-export function ResetPasswordForm() {
+export function RequestResetPasswordEmailForm() {
   const id = useId()
   const {
     shouldMount,
@@ -26,7 +26,7 @@ export function ResetPasswordForm() {
     register,
     handleSubmit,
     onSubmit,
-  } = useResetPasswordForm()
+  } = useRequestResetPasswordEmailForm()
 
   return (
     <>
@@ -73,7 +73,7 @@ export function ResetPasswordForm() {
               </IconButton>
             }
           >
-            <ResetPasswordSuccessMessage
+            <RequestResetPasswordEmailSuccessMessage
               message={resultValues.message}
               email={resultValues.email}
             />
