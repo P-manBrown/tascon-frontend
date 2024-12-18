@@ -1,13 +1,18 @@
 import Link from 'next/link'
 import { AuthHeading } from '@/components/headings/auth-heading'
 import { ResetPasswordForm } from './_components/reset-password-form'
+import { ResetPasswordQueryParamSnackbar } from './_components/reset-password-query-param-snackbar'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'パスワードリセット',
 }
 
-export default function ResetPassword() {
+type Props = {
+  searchParams: { [key: string]: string | string[] | undefined }
+}
+
+export default function ResetPassword({ searchParams }: Props) {
   return (
     <>
       <AuthHeading className="mb-8">パスワードリセット</AuthHeading>
@@ -17,6 +22,7 @@ export default function ResetPassword() {
           ログイン画面へ
         </Link>
       </div>
+      <ResetPasswordQueryParamSnackbar searchParams={searchParams} />
     </>
   )
 }

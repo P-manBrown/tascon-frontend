@@ -31,7 +31,11 @@ export const signUpSchema = z.object({
 
 export const loginSchema = signUpSchema.pick({ email: true, password: true })
 
-export const resetPasswordSchema = signUpSchema.pick({ email: true })
+export const requestResetPasswordEmailSchema = signUpSchema.pick({
+  email: true,
+})
+
+export const resetPasswordSchema = signUpSchema.pick({ password: true })
 
 export const changePasswordSchema = signUpSchema
   .pick({ password: true })

@@ -63,14 +63,12 @@ export async function changePassword({
         status: 'success',
         ...camelcaseKeys(validateDataResult, { deep: true }),
       }
-      if (resetPasswordToken !== null) {
-        const bearerToken = headers.get('Authorization')
-        const expiry = headers.get('expiry')
-        if (bearerToken !== null && expiry !== null) {
-          setBearerToken({ bearerToken, expiry })
-        }
-        cookies().delete('resetPasswordToken')
+      const bearerToken = headers.get('Authorization')
+      const expiry = headers.get('expiry')
+      if (bearerToken !== null && expiry !== null) {
+        setBearerToken({ bearerToken, expiry })
       }
+      cookies().delete('resetPasswordToken')
     }
   }
 
