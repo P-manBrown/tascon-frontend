@@ -5,13 +5,7 @@ export const config = {
   matcher: ['/((?!icons|logos|_next/static|favicon.ico|manifest.json).*)'],
 }
 
-const protectedPaths = [
-  '/password/change',
-  '/tasks',
-  '/templates',
-  '/users',
-  '/account',
-]
+const protectedPaths = ['/tasks', '/templates', '/users', '/account']
 
 const origin = process.env.NEXT_PUBLIC_FRONTEND_ORIGIN
 
@@ -34,7 +28,7 @@ export async function middleware(req: NextRequest) {
     }
   }
 
-  if (nextUrl.pathname === '/password/change') {
+  if (nextUrl.pathname === '/password/reset') {
     const resetPasswordToken = nextUrl.searchParams.get('reset_password_token')
     if (resetPasswordToken !== null) {
       nextUrl.searchParams.delete('reset_password_token')
