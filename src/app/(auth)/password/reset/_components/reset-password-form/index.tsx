@@ -12,7 +12,7 @@ import { TextField } from '@/components/form-controls/text-field'
 import { VisibilityToggleIcon } from '@/components/visibility-toggle-icon'
 import { useVisibilityToggle } from '@/components/visibility-toggle-icon/use-visibility-toggle'
 import { resetPasswordSchema } from '@/schemas/request/auth'
-import { changePassword } from './change-password.api'
+import { resetPassword } from './reset-password.api'
 import type { SubmitHandler } from 'react-hook-form'
 import type { z } from 'zod'
 
@@ -22,7 +22,7 @@ type Props = {
   resetPasswordToken: string
 }
 
-export function ChangePasswordForm({ resetPasswordToken }: Props) {
+export function ResetPasswordForm({ resetPasswordToken }: Props) {
   const id = useId()
   const { isVisible, toggleVisible } = useVisibilityToggle()
   const router = useRouter()
@@ -38,7 +38,7 @@ export function ChangePasswordForm({ resetPasswordToken }: Props) {
   })
 
   const onSubmit: SubmitHandler<ResetPasswordFormValues> = async (data) => {
-    const result = await changePassword({ resetPasswordToken, ...data })
+    const result = await resetPassword({ resetPasswordToken, ...data })
     if (result.status === 'error') {
       openErrorSnackbar(result)
     } else {

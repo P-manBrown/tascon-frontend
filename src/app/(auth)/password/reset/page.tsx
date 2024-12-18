@@ -1,14 +1,14 @@
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { AuthHeading } from '@/components/headings/auth-heading'
-import { ChangePasswordForm } from './_components/change-password-form'
+import { ResetPasswordForm } from './_components/reset-password-form'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'パスワード変更',
+  title: '新規パスワード設定',
 }
 
-export default function ChangePassword() {
+export default function ResetPassword() {
   const cookieStore = cookies()
   const resetPasswordToken = cookieStore.get('resetPasswordToken')?.value
   if (resetPasswordToken === undefined) {
@@ -17,9 +17,9 @@ export default function ChangePassword() {
 
   return (
     <>
-      <AuthHeading className="mb-8">パスワード変更</AuthHeading>
+      <AuthHeading className="mb-8">新規パスワード設定</AuthHeading>
       <div className="mx-2">
-        <ChangePasswordForm resetPasswordToken={resetPasswordToken} />
+        <ResetPasswordForm resetPasswordToken={resetPasswordToken} />
       </div>
     </>
   )

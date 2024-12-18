@@ -10,7 +10,7 @@ export default function Error({ error, reset }: ErrorProps) {
   return (
     <IconMessage severity="error" title="Error">
       <ErrorContent
-        message="パスワード変更画面の表示中に問題が発生しました。"
+        message="新規パスワード設定画面の表示中に問題が発生しました。"
         resetButton={
           <Button type="button" className="btn-success" onClick={reset}>
             再読み込み

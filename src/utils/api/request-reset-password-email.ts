@@ -31,7 +31,7 @@ export async function requestResetPasswordEmail({ ...bodyData }: Params) {
       },
       body: JSON.stringify({
         ...bodyData,
-        redirect_url: `${process.env.NEXT_PUBLIC_FRONTEND_ORIGIN}/password/change`,
+        redirect_url: `${process.env.NEXT_PUBLIC_FRONTEND_ORIGIN}/password/reset`,
       }),
     },
   )
