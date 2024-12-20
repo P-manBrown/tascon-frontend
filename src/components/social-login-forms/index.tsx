@@ -1,5 +1,6 @@
 'use client'
 
+import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/solid'
 import { useSocialLoginForms } from './use-social-login-forms'
 import { Button } from '../buttons/button'
 
@@ -38,6 +39,9 @@ export function SocialLoginForms({ fromUrl }: Props) {
             onClick={handleClick}
           >
             {`${form.appName}で${authActionText}`}
+            <span className="ml-2">
+              <ArrowTopRightOnSquareIcon className="size-5 stroke-current" />
+            </span>
           </Button>
         </form>
       ))}
