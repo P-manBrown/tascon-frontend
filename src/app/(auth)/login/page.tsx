@@ -3,10 +3,9 @@ import { Suspense } from 'react'
 import { AuthHeading } from '@/components/headings/auth-heading'
 import { HorizontalRule } from '@/components/horizontal-rule'
 import { SocialLoginForms } from '@/components/social-login-forms'
-import { getFromUrl } from '@/utils/url/get-from-url'
 import { LoginForm } from './_components/login-form'
 import { LoginQueryParamSnackbar } from './_components/login-query-param-snackbar'
-import type { SearchParams } from '@/types/page'
+import type { PageSearchParams } from '@/types/page'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -14,11 +13,14 @@ export const metadata: Metadata = {
 }
 
 type Props = {
-  searchParams: SearchParams
+  searchParams: PageSearchParams
 }
 
 export default function Login({ searchParams }: Props) {
-  const fromUrl = getFromUrl(searchParams)
+  let fromUrl = searchParams.from_url
+  if (typeof fromUrl !== 'string') {
+    fromUrl = undefined
+  }
 
   return (
     <>
