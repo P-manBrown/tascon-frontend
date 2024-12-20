@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { Suspense } from 'react'
 import { AuthHeading } from '@/components/headings/auth-heading'
 import { HorizontalRule } from '@/components/horizontal-rule'
 import { SocialLoginForms } from '@/components/social-login-forms'
@@ -17,9 +16,7 @@ export default function SignUp() {
       <SignUpForm />
       <HorizontalRule className="my-6">または</HorizontalRule>
       <div className="space-y-6">
-        <Suspense>
-          <SocialLoginForms />
-        </Suspense>
+        <SocialLoginForms />
       </div>
       <div className="mt-7 text-center">
         <Link href="/login" className="link">
