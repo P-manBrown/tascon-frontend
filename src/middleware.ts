@@ -38,6 +38,7 @@ export async function middleware(req: NextRequest) {
         value: resetPasswordToken,
         httpOnly: true,
         sameSite: 'lax',
+        path: '/password/reset',
       })
       return res
     }
