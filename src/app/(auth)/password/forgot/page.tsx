@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { AuthHeading } from '@/components/headings/auth-heading'
 import { ForgotPasswordQueryParamSnackbar } from './_components/forgot-password-query-param-snackbar'
 import { RequestResetPasswordEmailForm } from './_components/request-reset-password-email-form'
+import type { SearchParams } from '@/types/page'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
 }
 
 type Props = {
-  searchParams: { [key: string]: string | string[] | undefined }
+  searchParams: SearchParams
 }
 
 export default function ForgotPassword({ searchParams }: Props) {

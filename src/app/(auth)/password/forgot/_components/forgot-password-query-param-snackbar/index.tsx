@@ -3,9 +3,10 @@
 import { useEffect } from 'react'
 import { useSnackbarsStore } from '@/app/_components/snackbars/use-snackbars-store'
 import { useQueryParams } from '@/utils/query-param/use-query-params'
+import type { SearchParams } from '@/types/page'
 
 type Props = {
-  searchParams: { [key: string]: string | string[] | undefined }
+  searchParams: SearchParams
 }
 
 export function ForgotPasswordQueryParamSnackbar({ searchParams }: Props) {
