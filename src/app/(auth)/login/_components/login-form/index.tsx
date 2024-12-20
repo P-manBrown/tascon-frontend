@@ -11,10 +11,13 @@ import { useVisibilityToggle } from '@/components/visibility-toggle-icon/use-vis
 import { useLoginForm } from './use-login-form'
 import type { LabeledTextFields } from '@/types/labeled-text-fields'
 
-export function LoginForm() {
+type Props = {
+  fromUrl: string | undefined
+}
+export function LoginForm({ fromUrl }: Props) {
   const id = useId()
   const { register, handleSubmit, onSubmit, isSubmitting, errors } =
-    useLoginForm()
+    useLoginForm({ fromUrl })
   const { isVisible, toggleVisible } = useVisibilityToggle()
 
   const labeledTextFields: LabeledTextFields = [
