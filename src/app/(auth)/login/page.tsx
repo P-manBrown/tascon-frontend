@@ -25,9 +25,7 @@ export default function Login({ searchParams }: Props) {
   return (
     <>
       <AuthHeading className="mb-7">ログイン</AuthHeading>
-      <Suspense>
-        <LoginForm />
-      </Suspense>
+      <LoginForm fromUrl={fromUrl} />
       <HorizontalRule className="my-8">または</HorizontalRule>
       <div className="space-y-8">
         <SocialLoginForms fromUrl={fromUrl} />
