@@ -1,7 +1,6 @@
 'use server'
 
 import camelcaseKeys from 'camelcase-keys'
-import { cookies } from 'next/headers'
 import snakecaseKeys from 'snakecase-keys'
 import { z } from 'zod'
 import { authSchema } from '@/schemas/response/auth'
@@ -58,7 +57,6 @@ export async function changePassword(bodyData: Params) {
         status: 'success',
         ...camelcaseKeys(validateDataResult, { deep: true }),
       }
-      cookies().delete('resetPasswordToken')
     }
   }
 
