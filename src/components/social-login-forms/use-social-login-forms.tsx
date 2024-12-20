@@ -1,7 +1,7 @@
 'use client'
 
 import camelcaseKeys from 'camelcase-keys'
-import { usePathname, useSearchParams } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { z } from 'zod'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
@@ -13,6 +13,10 @@ import { getPostLoginUrl } from '@/utils/url/get-post-login-url'
 import { validateData } from '@/utils/validation/validate-data'
 import { storeCredentials } from './store-credentials.action'
 import type { CamelCaseKeys } from 'camelcase-keys'
+
+type Params = {
+  fromUrl: string | undefined
+}
 
 const messageSchema = z.object({
   request_id: z.string(),
@@ -44,10 +48,9 @@ type HandleAuthFailureParams = {
 
 const windowName = 'socialLoginWindow'
 
-export const useSocialLoginForms = () => {
+export const useSocialLoginForms = ({ fromUrl }: Params) => {
   const pathname = usePathname()
   const authActionText = pathname === '/sign-up' ? '新規登録' : 'ログイン'
-  const searchParams = useSearchParams()
   const openSnackbar = useSnackbarsStore((state) => state.openSnackbar)
   const { openErrorSnackbar } = useErrorSnackbar()
   const [activeProvider, setActiveProvider] = useState('')
@@ -116,7 +119,6 @@ export const useSocialLoginForms = () => {
       if (result.status === 'error') {
         openErrorSnackbar(result)
       } else {
-        const fromUrl = searchParams.get('from_url')
         const targetUrl = getPostLoginUrl(fromUrl)
         // Using router.push() causes the page displaying the modal to become Not Found.
         location.assign(targetUrl)
@@ -124,7 +126,7 @@ export const useSocialLoginForms = () => {
 
       setActiveProvider('')
     },
-    [openErrorSnackbar, searchParams],
+    [openErrorSnackbar, fromUrl],
   )
 
   const handleMessage = useCallback(

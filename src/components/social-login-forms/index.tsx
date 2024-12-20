@@ -13,9 +13,13 @@ const socialLoginForms = [
 ]
 const apiBaseUrl = `${process.env.NEXT_PUBLIC_API_ORIGIN}/api/v1/auth`
 
-export function SocialLoginForms() {
+type Props = {
+  fromUrl: string | undefined
+}
+
+export function SocialLoginForms({ fromUrl }: Props) {
   const { activeProvider, authActionText, handleClick, windowName } =
-    useSocialLoginForms()
+    useSocialLoginForms({ fromUrl })
 
   return (
     <>
