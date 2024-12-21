@@ -3,6 +3,7 @@
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/solid'
 import { useSocialLoginForms } from './use-social-login-forms'
 import { Button } from '../buttons/button'
+import { SearchParamsLoader } from '../search-params-loader'
 
 const socialLoginForms = [
   {
@@ -14,13 +15,14 @@ const socialLoginForms = [
 ]
 const apiBaseUrl = `${process.env.NEXT_PUBLIC_API_ORIGIN}/api/v1/auth`
 
-type Props = {
-  fromUrl?: string
-}
-
-export function SocialLoginForms({ fromUrl }: Props) {
-  const { activeProvider, authActionText, handleClick, windowName } =
-    useSocialLoginForms({ fromUrl })
+export function SocialLoginForms() {
+  const {
+    searchParamsRef,
+    activeProvider,
+    authActionText,
+    handleClick,
+    windowName,
+  } = useSocialLoginForms()
 
   return (
     <>
@@ -45,6 +47,7 @@ export function SocialLoginForms({ fromUrl }: Props) {
           </Button>
         </form>
       ))}
+      <SearchParamsLoader searchParamsRef={searchParamsRef} />
     </>
   )
 }

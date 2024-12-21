@@ -1,7 +1,7 @@
 'use client'
 
 import camelcaseKeys from 'camelcase-keys'
-import { usePathname } from 'next/navigation'
+import { ReadonlyURLSearchParams, usePathname } from 'next/navigation'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { z } from 'zod'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
@@ -13,10 +13,6 @@ import { getPostLoginUrl } from '@/utils/url/get-post-login-url'
 import { validateData } from '@/utils/validation/validate-data'
 import { storeCredentials } from './store-credentials.action'
 import type { CamelCaseKeys } from 'camelcase-keys'
-
-type Params = {
-  fromUrl: string | undefined
-}
 
 const messageSchema = z.object({
   request_id: z.string(),
@@ -48,11 +44,12 @@ type HandleAuthFailureParams = {
 
 const windowName = 'socialLoginWindow'
 
-export const useSocialLoginForms = ({ fromUrl }: Params) => {
+export const useSocialLoginForms = () => {
   const pathname = usePathname()
   const authActionText = pathname === '/sign-up' ? '新規登録' : 'ログイン'
   const openSnackbar = useSnackbarsStore((state) => state.openSnackbar)
   const { openErrorSnackbar } = useErrorSnackbar()
+  const searchParamsRef = useRef<ReadonlyURLSearchParams>(null)
   const [activeProvider, setActiveProvider] = useState('')
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
 
@@ -119,6 +116,7 @@ export const useSocialLoginForms = ({ fromUrl }: Params) => {
       if (result.status === 'error') {
         openErrorSnackbar(result)
       } else {
+        const fromUrl = searchParamsRef.current?.get('from_url')
         const targetUrl = getPostLoginUrl(fromUrl)
         // Using router.push() causes the page displaying the modal to become Not Found.
         location.assign(targetUrl)
@@ -126,7 +124,7 @@ export const useSocialLoginForms = ({ fromUrl }: Params) => {
 
       setActiveProvider('')
     },
-    [openErrorSnackbar, fromUrl],
+    [openErrorSnackbar],
   )
 
   const handleMessage = useCallback(
@@ -202,6 +200,7 @@ export const useSocialLoginForms = ({ fromUrl }: Params) => {
   }, [])
 
   return {
+    searchParamsRef,
     activeProvider,
     authActionText,
     handleClick,
