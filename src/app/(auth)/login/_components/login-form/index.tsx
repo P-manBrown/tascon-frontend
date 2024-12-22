@@ -11,6 +11,7 @@ import { VisibilityToggleIcon } from '@/components/visibility-toggle-icon'
 import { useVisibilityToggle } from '@/components/visibility-toggle-icon/use-visibility-toggle'
 import { useLoginForm } from './use-login-form'
 import type { LabeledTextFields } from '@/types/labeled-text-fields'
+import type { ReadonlyURLSearchParams } from 'next/navigation'
 
 export function LoginForm() {
   const id = useId()
@@ -52,6 +53,10 @@ export function LoginForm() {
     },
   ]
 
+  const handleParamsReceived = (searchParams: ReadonlyURLSearchParams) => {
+    searchParamsRef.current = searchParams
+  }
+
   return (
     <>
       <form noValidate={true} onSubmit={handleSubmit(onSubmit)}>
@@ -86,7 +91,7 @@ export function LoginForm() {
           ログイン
         </Button>
       </form>
-      <SearchParamsLoader searchParamsRef={searchParamsRef} />
+      <SearchParamsLoader onParamsReceived={handleParamsReceived} />
     </>
   )
 }

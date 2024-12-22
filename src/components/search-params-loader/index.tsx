@@ -5,7 +5,7 @@ import { Suspense, useEffect } from 'react'
 import type { ReadonlyURLSearchParams } from 'next/navigation'
 
 type Props = {
-  searchParamsRef: React.RefObject<ReadonlyURLSearchParams | null>
+  onParamsReceived: (searchParams: ReadonlyURLSearchParams) => void
 }
 
 export function SearchParamsLoader(props: Props) {
@@ -16,12 +16,12 @@ export function SearchParamsLoader(props: Props) {
   )
 }
 
-function SearchParamsLoaderInner({ searchParamsRef }: Props) {
+function SearchParamsLoaderInner({ onParamsReceived }: Props) {
   const searchParams = useSearchParams()
 
   useEffect(() => {
-    searchParamsRef.current = searchParams
-  }, [searchParams, searchParamsRef])
+    onParamsReceived(searchParams)
+  }, [onParamsReceived, searchParams])
 
   return null
 }
