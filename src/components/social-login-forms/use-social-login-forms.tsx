@@ -1,7 +1,7 @@
 'use client'
 
 import camelcaseKeys from 'camelcase-keys'
-import { ReadonlyURLSearchParams, usePathname } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { z } from 'zod'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
@@ -49,9 +49,9 @@ export const useSocialLoginForms = () => {
   const authActionText = pathname === '/sign-up' ? '新規登録' : 'ログイン'
   const openSnackbar = useSnackbarsStore((state) => state.openSnackbar)
   const { openErrorSnackbar } = useErrorSnackbar()
-  const searchParamsRef = useRef<ReadonlyURLSearchParams>(null)
   const [activeProvider, setActiveProvider] = useState('')
-  const intervalRef = useRef<NodeJS.Timeout | null>(null)
+  const interval = useRef<NodeJS.Timeout | null>(null)
+  const fromUrl = useRef<string | null>(null)
 
   const validateMessage = useCallback(
     (ev: MessageEvent<unknown>) => {
@@ -116,8 +116,7 @@ export const useSocialLoginForms = () => {
       if (result.status === 'error') {
         openErrorSnackbar(result)
       } else {
-        const fromUrl = searchParamsRef.current?.get('from_url')
-        const targetUrl = getPostLoginUrl(fromUrl)
+        const targetUrl = getPostLoginUrl(fromUrl.current)
         // Using router.push() causes the page displaying the modal to become Not Found.
         location.assign(targetUrl)
       }
@@ -168,15 +167,15 @@ export const useSocialLoginForms = () => {
     ev.currentTarget.form?.requestSubmit()
     if (socialLoginWindow !== null) {
       socialLoginWindow.opener = null
-      intervalRef.current = setInterval(() => {
+      interval.current = setInterval(() => {
         socialLoginWindow?.postMessage(
           'requestCredentials',
           `${process.env.NEXT_PUBLIC_API_ORIGIN}`,
         )
         if (socialLoginWindow?.closed) {
-          if (intervalRef.current !== null) {
-            clearInterval(intervalRef.current)
-            intervalRef.current = null
+          if (interval.current !== null) {
+            clearInterval(interval.current)
+            interval.current = null
           }
         }
       }, 1000)
@@ -192,15 +191,15 @@ export const useSocialLoginForms = () => {
 
   useEffect(() => {
     return () => {
-      if (intervalRef.current !== null) {
-        clearInterval(intervalRef.current)
-        intervalRef.current = null
+      if (interval.current !== null) {
+        clearInterval(interval.current)
+        interval.current = null
       }
     }
   }, [])
 
   return {
-    searchParamsRef,
+    fromUrl,
     activeProvider,
     authActionText,
     handleClick,

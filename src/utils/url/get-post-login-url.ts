@@ -1,6 +1,6 @@
 const origin = process.env.NEXT_PUBLIC_FRONTEND_ORIGIN
 
-export function getPostLoginUrl(fromUrl: string | null | undefined) {
+export function getPostLoginUrl(fromUrl: string | null) {
   let targetUrl = `${origin}/tasks`
 
   if (fromUrl && URL.canParse(fromUrl)) {

@@ -17,16 +17,11 @@ const socialLoginForms = [
 const apiBaseUrl = `${process.env.NEXT_PUBLIC_API_ORIGIN}/api/v1/auth`
 
 export function SocialLoginForms() {
-  const {
-    searchParamsRef,
-    activeProvider,
-    authActionText,
-    handleClick,
-    windowName,
-  } = useSocialLoginForms()
+  const { fromUrl, activeProvider, authActionText, handleClick, windowName } =
+    useSocialLoginForms()
 
   const handleParamsReceived = (searchParams: ReadonlyURLSearchParams) => {
-    searchParamsRef.current = searchParams
+    fromUrl.current = searchParams.get('from_url')
   }
 
   return (

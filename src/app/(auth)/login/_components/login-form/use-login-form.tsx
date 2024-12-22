@@ -5,14 +5,13 @@ import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error
 import { loginSchema } from '@/schemas/request/auth'
 import { getPostLoginUrl } from '@/utils/url/get-post-login-url'
 import { login } from './login.api'
-import type { ReadonlyURLSearchParams } from 'next/navigation'
 import type { SubmitHandler } from 'react-hook-form'
 import type { z } from 'zod'
 
 type LoginFormValues = z.infer<typeof loginSchema>
 
 export function useLoginForm() {
-  const searchParamsRef = useRef<ReadonlyURLSearchParams>(null)
+  const fromUrl = useRef<string>(null)
   const { openErrorSnackbar } = useErrorSnackbar()
   const {
     register,
@@ -31,8 +30,7 @@ export function useLoginForm() {
         openErrorSnackbar(result)
       } else {
         reset()
-        const fromUrl = searchParamsRef.current?.get('from_url')
-        const targetUrl = getPostLoginUrl(fromUrl)
+        const targetUrl = getPostLoginUrl(fromUrl.current)
         // Using router.push() causes the page displaying the modal to become Not Found.
         location.assign(targetUrl)
       }
@@ -41,7 +39,7 @@ export function useLoginForm() {
   )
 
   return {
-    searchParamsRef,
+    fromUrl,
     register,
     handleSubmit,
     onSubmit,

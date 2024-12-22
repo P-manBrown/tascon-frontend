@@ -15,14 +15,8 @@ import type { ReadonlyURLSearchParams } from 'next/navigation'
 
 export function LoginForm() {
   const id = useId()
-  const {
-    searchParamsRef,
-    register,
-    handleSubmit,
-    onSubmit,
-    isSubmitting,
-    errors,
-  } = useLoginForm()
+  const { fromUrl, register, handleSubmit, onSubmit, isSubmitting, errors } =
+    useLoginForm()
   const { isVisible, toggleVisible } = useVisibilityToggle()
 
   const labeledTextFields: LabeledTextFields = [
@@ -54,7 +48,7 @@ export function LoginForm() {
   ]
 
   const handleParamsReceived = (searchParams: ReadonlyURLSearchParams) => {
-    searchParamsRef.current = searchParams
+    fromUrl.current = searchParams.get('from_url')
   }
 
   return (
