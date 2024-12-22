@@ -1,26 +1,24 @@
 'use client'
 
+import { useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 import { useSnackbarsStore } from '@/app/_components/snackbars/use-snackbars-store'
 import { useQueryParams } from '@/utils/query-param/use-query-params'
-import type { PageSearchParams } from '@/types/page'
 
-type Props = {
-  searchParams: PageSearchParams
-}
-
-export function ForgotPasswordQueryParamSnackbar({ searchParams }: Props) {
+export function ForgotPasswordQueryParamSnackbar() {
+  const searchParams = useSearchParams()
+  const error = searchParams.get('err')
   const openSnackbar = useSnackbarsStore((state) => state.openSnackbar)
   const { cleanupQueryParams } = useQueryParams()
 
   useEffect(() => {
-    if (searchParams !== undefined) {
-      if (searchParams.err === 'token_not_found') {
+    if (error !== null) {
+      if (error === 'token_not_found') {
         openSnackbar({
           severity: 'error',
           message: 'パスワード再設定用メールからお手続きください。',
         })
-      } else if (searchParams.err === 'invalid_token') {
+      } else if (error === 'invalid_token') {
         openSnackbar({
           severity: 'error',
           message:
@@ -29,7 +27,7 @@ export function ForgotPasswordQueryParamSnackbar({ searchParams }: Props) {
       }
       cleanupQueryParams(['err'])
     }
-  }, [openSnackbar, cleanupQueryParams, searchParams])
+  }, [searchParams, error, openSnackbar, cleanupQueryParams])
 
   return null
 }

@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useCallback } from 'react'
+import { useCallback, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
 import { loginSchema } from '@/schemas/request/auth'
@@ -8,13 +8,10 @@ import { login } from './login.api'
 import type { SubmitHandler } from 'react-hook-form'
 import type { z } from 'zod'
 
-type Params = {
-  fromUrl: string | undefined
-}
-
 type LoginFormValues = z.infer<typeof loginSchema>
 
-export function useLoginForm({ fromUrl }: Params) {
+export function useLoginForm() {
+  const fromUrl = useRef<string>(null)
   const { openErrorSnackbar } = useErrorSnackbar()
   const {
     register,
@@ -33,15 +30,16 @@ export function useLoginForm({ fromUrl }: Params) {
         openErrorSnackbar(result)
       } else {
         reset()
-        const targetUrl = getPostLoginUrl(fromUrl)
+        const targetUrl = getPostLoginUrl(fromUrl.current)
         // Using router.push() causes the page displaying the modal to become Not Found.
         location.assign(targetUrl)
       }
     },
-    [openErrorSnackbar, reset, fromUrl],
+    [openErrorSnackbar, reset],
   )
 
   return {
+    fromUrl,
     register,
     handleSubmit,
     onSubmit,

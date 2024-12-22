@@ -3,6 +3,8 @@
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/solid'
 import { useSocialLoginForms } from './use-social-login-forms'
 import { Button } from '../buttons/button'
+import { SearchParamsLoader } from '../search-params-loader'
+import type { ReadonlyURLSearchParams } from 'next/navigation'
 
 const socialLoginForms = [
   {
@@ -14,13 +16,13 @@ const socialLoginForms = [
 ]
 const apiBaseUrl = `${process.env.NEXT_PUBLIC_API_ORIGIN}/api/v1/auth`
 
-type Props = {
-  fromUrl?: string
-}
+export function SocialLoginForms() {
+  const { fromUrl, activeProvider, authActionText, handleClick, windowName } =
+    useSocialLoginForms()
 
-export function SocialLoginForms({ fromUrl }: Props) {
-  const { activeProvider, authActionText, handleClick, windowName } =
-    useSocialLoginForms({ fromUrl })
+  const handleParamsReceived = (searchParams: ReadonlyURLSearchParams) => {
+    fromUrl.current = searchParams.get('from_url')
+  }
 
   return (
     <>
@@ -45,6 +47,7 @@ export function SocialLoginForms({ fromUrl }: Props) {
           </Button>
         </form>
       ))}
+      <SearchParamsLoader onParamsReceived={handleParamsReceived} />
     </>
   )
 }

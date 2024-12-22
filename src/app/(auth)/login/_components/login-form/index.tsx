@@ -6,18 +6,17 @@ import { Button } from '@/components/buttons/button'
 import { IconButton } from '@/components/buttons/icon-button'
 import { Label } from '@/components/form-controls/label'
 import { TextField } from '@/components/form-controls/text-field'
+import { SearchParamsLoader } from '@/components/search-params-loader'
 import { VisibilityToggleIcon } from '@/components/visibility-toggle-icon'
 import { useVisibilityToggle } from '@/components/visibility-toggle-icon/use-visibility-toggle'
 import { useLoginForm } from './use-login-form'
 import type { LabeledTextFields } from '@/types/labeled-text-fields'
+import type { ReadonlyURLSearchParams } from 'next/navigation'
 
-type Props = {
-  fromUrl: string | undefined
-}
-export function LoginForm({ fromUrl }: Props) {
+export function LoginForm() {
   const id = useId()
-  const { register, handleSubmit, onSubmit, isSubmitting, errors } =
-    useLoginForm({ fromUrl })
+  const { fromUrl, register, handleSubmit, onSubmit, isSubmitting, errors } =
+    useLoginForm()
   const { isVisible, toggleVisible } = useVisibilityToggle()
 
   const labeledTextFields: LabeledTextFields = [
@@ -48,38 +47,45 @@ export function LoginForm({ fromUrl }: Props) {
     },
   ]
 
+  const handleParamsReceived = (searchParams: ReadonlyURLSearchParams) => {
+    fromUrl.current = searchParams.get('from_url')
+  }
+
   return (
-    <form noValidate={true} onSubmit={handleSubmit(onSubmit)}>
-      <div className="space-y-4">
-        {labeledTextFields.map((labeledTextField) => (
-          <div key={labeledTextField.id}>
-            <Label htmlFor={labeledTextField.id}>
-              {labeledTextField.label}
-            </Label>
-            <TextField
-              id={labeledTextField.id}
-              type={labeledTextField.type}
-              autoComplete={labeledTextField.autoComplete}
-              readOnly={isSubmitting}
-              register={labeledTextField.register}
-              errors={labeledTextField.errors}
-              suffixIcon={labeledTextField.suffixIcon}
-            />
-          </div>
-        ))}
-      </div>
-      <div className="mt-2 flex justify-end">
-        <Link href="/password/forgot" className="link">
-          パスワードを忘れた場合はこちら
-        </Link>
-      </div>
-      <Button
-        type="submit"
-        className="btn-primary mt-8"
-        status={isSubmitting ? 'pending' : 'idle'}
-      >
-        ログイン
-      </Button>
-    </form>
+    <>
+      <form noValidate={true} onSubmit={handleSubmit(onSubmit)}>
+        <div className="space-y-4">
+          {labeledTextFields.map((labeledTextField) => (
+            <div key={labeledTextField.id}>
+              <Label htmlFor={labeledTextField.id}>
+                {labeledTextField.label}
+              </Label>
+              <TextField
+                id={labeledTextField.id}
+                type={labeledTextField.type}
+                autoComplete={labeledTextField.autoComplete}
+                readOnly={isSubmitting}
+                register={labeledTextField.register}
+                errors={labeledTextField.errors}
+                suffixIcon={labeledTextField.suffixIcon}
+              />
+            </div>
+          ))}
+        </div>
+        <div className="mt-2 flex justify-end">
+          <Link href="/password/forgot" className="link">
+            パスワードを忘れた場合はこちら
+          </Link>
+        </div>
+        <Button
+          type="submit"
+          className="btn-primary mt-8"
+          status={isSubmitting ? 'pending' : 'idle'}
+        >
+          ログイン
+        </Button>
+      </form>
+      <SearchParamsLoader onParamsReceived={handleParamsReceived} />
+    </>
   )
 }
