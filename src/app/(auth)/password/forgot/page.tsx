@@ -1,19 +1,15 @@
 import Link from 'next/link'
+import { Suspense } from 'react'
 import { AuthHeading } from '@/components/headings/auth-heading'
 import { ForgotPasswordQueryParamSnackbar } from './_components/forgot-password-query-param-snackbar'
 import { RequestResetPasswordEmailForm } from './_components/request-reset-password-email-form'
-import type { PageSearchParams } from '@/types/page'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'パスワードリセット',
 }
 
-type Props = {
-  searchParams: PageSearchParams
-}
-
-export default function ForgotPassword({ searchParams }: Props) {
+export default function ForgotPassword() {
   return (
     <>
       <AuthHeading className="mb-8">パスワードリセット</AuthHeading>
@@ -23,7 +19,9 @@ export default function ForgotPassword({ searchParams }: Props) {
           ログイン画面へ
         </Link>
       </div>
-      <ForgotPasswordQueryParamSnackbar searchParams={searchParams} />
+      <Suspense>
+        <ForgotPasswordQueryParamSnackbar />
+      </Suspense>
     </>
   )
 }
