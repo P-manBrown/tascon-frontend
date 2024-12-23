@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
-    "@evilmartians/lefthook": "^1.9.2",
+    "@evilmartians/lefthook": "^1.10.0",
     "@markuplint/jsx-parser": "^4.7.14",
     "@markuplint/react-spec": "^4.5.14",
     "autoprefixer": "^10.4.20",
