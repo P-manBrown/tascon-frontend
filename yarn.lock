@@ -1869,12 +1869,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/bundle-analyzer@npm:^15.1.0":
-  version: 15.1.0
-  resolution: "@next/bundle-analyzer@npm:15.1.0"
+"@next/bundle-analyzer@npm:^15.1.2":
+  version: 15.1.2
+  resolution: "@next/bundle-analyzer@npm:15.1.2"
   dependencies:
     webpack-bundle-analyzer: "npm:4.10.1"
-  checksum: 10/b14be248d94d0eb515fa4b1f548695a74fe576744c61eae48c7c2c897bd204c2f241693412547b25705c87ef45e8338c3209b1fb17fbfc47724e1ac65a1ba098
+  checksum: 10/2c1da422a5a6f81f15b16f1edd0f2207cd9834607634de79e980c2385129c709aae7511ede81e7096fd92c2bfb4a9351ccaa70b311b598204b43e5373610c99d
   languageName: node
   linkType: hard
 
@@ -9973,7 +9973,7 @@ __metadata:
     "@hookform/resolvers": "npm:^3.9.1"
     "@markuplint/jsx-parser": "npm:^4.7.14"
     "@markuplint/react-spec": "npm:^4.5.14"
-    "@next/bundle-analyzer": "npm:^15.1.0"
+    "@next/bundle-analyzer": "npm:^15.1.2"
     "@types/node": "npm:22.10.2"
     "@types/react": "npm:19.0.1"
     "@types/react-dom": "npm:19.0.2"
