@@ -7,7 +7,7 @@ import { useQueryParams } from '@/utils/query-param/use-query-params'
 
 export function LoginQueryParamSnackbar() {
   const searchParams = useSearchParams()
-  const hasFromUrl = searchParams.has('from_url')
+  const error = searchParams.get('err')
   const isAccountConfirmationSuccessful = searchParams.get(
     'account_confirmation_success',
   )
@@ -26,16 +26,16 @@ export function LoginQueryParamSnackbar() {
           severity: 'error',
           message: 'メールアドレスの認証に失敗しました。再度お試しください。',
         })
-      } else if (hasFromUrl) {
+      } else if (error === 'unauthorized') {
         openSnackbar({
           severity: 'error',
           message: '作業するにはログインしてください。',
         })
       }
-      cleanupQueryParams(['account_confirmation_success'])
+      cleanupQueryParams(['err', 'account_confirmation_success'])
     }
   }, [
-    hasFromUrl,
+    error,
     isAccountConfirmationSuccessful,
     openSnackbar,
     searchParams,
