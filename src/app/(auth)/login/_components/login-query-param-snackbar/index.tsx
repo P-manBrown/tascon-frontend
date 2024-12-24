@@ -32,7 +32,7 @@ export function LoginQueryParamSnackbar() {
           message: '作業するにはログインしてください。',
         })
       }
-      cleanupQueryParams(['from_url', 'account_confirmation_success'])
+      cleanupQueryParams(['account_confirmation_success'])
     }
   }, [
     hasFromUrl,
