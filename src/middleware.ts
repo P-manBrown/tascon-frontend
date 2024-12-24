@@ -24,6 +24,7 @@ export async function middleware(req: NextRequest) {
       const loginUrl = new URL('/login', req.url)
       const fromUrl = `${origin}${nextUrl.pathname}${nextUrl.search}`
       loginUrl.searchParams.set('from_url', fromUrl)
+      loginUrl.searchParams.set('err', 'unauthorized')
       return NextResponse.redirect(loginUrl)
     }
   }
