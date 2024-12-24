@@ -20,13 +20,9 @@ export function useQueryParams() {
         newUrl = pathname
       }
 
-      history.replaceState(
-        { ...history.state, as: newUrl, url: newUrl },
-        '',
-        newUrl
-      )
+      history.replaceState(null, '', newUrl)
     },
-    [pathname, searchParams]
+    [pathname, searchParams],
   )
 
   return { cleanupQueryParams }
