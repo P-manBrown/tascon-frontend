@@ -9,7 +9,7 @@ export function ForgotPasswordQueryParamSnackbar() {
   const searchParams = useSearchParams()
   const error = searchParams.get('err')
   const openSnackbar = useSnackbarsStore((state) => state.openSnackbar)
-  const { cleanupQueryParams } = useQueryParams()
+  const { cleanupQueryParams } = useQueryParams({ searchParams })
 
   useEffect(() => {
     if (error !== null) {

@@ -9,7 +9,7 @@ export function AccountQueryParamSnackbar() {
   const searchParams = useSearchParams()
   const accountConfSuccess = searchParams.get('account_confirmation_success')
   const openSnackbar = useSnackbarsStore((state) => state.openSnackbar)
-  const { cleanupQueryParams } = useQueryParams()
+  const { cleanupQueryParams } = useQueryParams({ searchParams })
 
   useEffect(() => {
     if (searchParams.toString()) {
