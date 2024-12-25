@@ -17,9 +17,7 @@ export function AccountPage() {
       <Suspense fallback={<LoadingDeleteCurrentUserAccountButton />}>
         <DeleteCurrentUserAccountButton />
       </Suspense>
-      <Suspense>
-        <AccountQueryParamSnackbar />
-      </Suspense>
+      <AccountQueryParamSnackbar />
     </div>
   )
 }
