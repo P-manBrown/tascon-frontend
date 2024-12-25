@@ -1,7 +1,7 @@
 'use client'
 
 import { XMarkIcon } from '@heroicons/react/24/solid'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useId, useState } from 'react'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
 import { Button } from '@/components/buttons/button'
@@ -21,7 +21,8 @@ type Props = {
 export function DeleteAccountButton({ currentUserId }: Props) {
   const router = useRouter()
   const id = useId()
-  const redirectLoginPath = useRedirectLoginPath()
+  const searchParams = useSearchParams()
+  const redirectLoginPath = useRedirectLoginPath({ searchParams })
   const [isDeletingAccount, setIsDeletingAccount] = useState(false)
   const { openErrorSnackbar } = useErrorSnackbar()
   const {

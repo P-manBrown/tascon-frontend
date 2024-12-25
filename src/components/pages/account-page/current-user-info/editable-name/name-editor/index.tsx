@@ -1,6 +1,6 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useRef } from 'react'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
 import { EditableText } from '@/components/editable-text'
@@ -35,7 +35,8 @@ export function NameEditor({
 }: Props) {
   const { openErrorSnackbar } = useErrorSnackbar()
   const router = useRouter()
-  const redirectLoginPath = useRedirectLoginPath()
+  const searchParams = useSearchParams()
+  const redirectLoginPath = useRedirectLoginPath({ searchParams })
   const editorRef = useRef<HTMLInputElement>(null)
   const {
     updateField,

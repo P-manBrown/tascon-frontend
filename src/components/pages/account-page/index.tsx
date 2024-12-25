@@ -13,9 +13,7 @@ export function AccountPage() {
     <div className="flex flex-col gap-y-10">
       <CurrentUserInfo />
       <HorizontalRule />
-      <Suspense>
-        <LogoutButton />
-      </Suspense>
+      <LogoutButton />
       <Suspense fallback={<LoadingDeleteCurrentUserAccountButton />}>
         <DeleteCurrentUserAccountButton />
       </Suspense>
