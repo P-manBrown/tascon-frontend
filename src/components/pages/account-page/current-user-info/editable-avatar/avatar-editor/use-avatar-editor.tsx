@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useState, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
@@ -17,7 +17,8 @@ export function useAvatarEditor() {
   const inputRef = useRef<HTMLInputElement | null>(null)
   const { openErrorSnackbar } = useErrorSnackbar()
   const router = useRouter()
-  const redirectLoginPath = useRedirectLoginPath()
+  const searchParams = useSearchParams()
+  const redirectLoginPath = useRedirectLoginPath({ searchParams })
   const [isDeletingAvatar, setIsDeletingAvatar] = useState(false)
   const {
     register,

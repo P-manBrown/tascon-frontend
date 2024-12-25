@@ -1,6 +1,6 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useRef } from 'react'
 import { z } from 'zod'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
@@ -43,7 +43,8 @@ export function BioEditor({
   children,
 }: Props) {
   const router = useRouter()
-  const redirectLoginPath = useRedirectLoginPath()
+  const searchParams = useSearchParams()
+  const redirectLoginPath = useRedirectLoginPath({ searchParams })
   const editorRef = useRef<HTMLTextAreaElement>(null)
   const {
     isEditorOpen,

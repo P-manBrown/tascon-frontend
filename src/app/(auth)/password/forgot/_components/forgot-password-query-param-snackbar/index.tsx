@@ -1,18 +1,20 @@
 'use client'
 
-import { useSearchParams } from 'next/navigation'
-import { useEffect } from 'react'
+import { ReadonlyURLSearchParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import { useSnackbarsStore } from '@/app/_components/snackbars/use-snackbars-store'
+import { SearchParamsLoader } from '@/components/search-params-loader'
 import { useQueryParams } from '@/utils/query-param/use-query-params'
 
 export function ForgotPasswordQueryParamSnackbar() {
-  const searchParams = useSearchParams()
-  const error = searchParams.get('err')
+  const [searchParams, setSearchParams] =
+    useState<ReadonlyURLSearchParams | null>(null)
+  const error = searchParams?.get('err')
   const openSnackbar = useSnackbarsStore((state) => state.openSnackbar)
-  const { cleanupQueryParams } = useQueryParams()
+  const { cleanupQueryParams } = useQueryParams({ searchParams })
 
   useEffect(() => {
-    if (error !== null) {
+    if (searchParams !== null && error !== null) {
       if (error === 'token_not_found') {
         openSnackbar({
           severity: 'error',
@@ -29,5 +31,5 @@ export function ForgotPasswordQueryParamSnackbar() {
     }
   }, [searchParams, error, openSnackbar, cleanupQueryParams])
 
-  return null
+  return <SearchParamsLoader onParamsReceived={setSearchParams} />
 }

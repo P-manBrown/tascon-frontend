@@ -1,6 +1,6 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import React, { useRef } from 'react'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
 import { useSnackbarsStore } from '@/app/_components/snackbars/use-snackbars-store'
@@ -40,7 +40,8 @@ export function EmailEditor({
   const openSnackbar = useSnackbarsStore((state) => state.openSnackbar)
   const { openErrorSnackbar } = useErrorSnackbar()
   const router = useRouter()
-  const redirectLoginPath = useRedirectLoginPath()
+  const searchParams = useSearchParams()
+  const redirectLoginPath = useRedirectLoginPath({ searchParams })
   const editorRef = useRef<HTMLInputElement>(null)
 
   const {

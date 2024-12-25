@@ -1,18 +1,20 @@
 'use client'
 
-import { useSearchParams } from 'next/navigation'
-import { useEffect } from 'react'
+import { ReadonlyURLSearchParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import { useSnackbarsStore } from '@/app/_components/snackbars/use-snackbars-store'
+import { SearchParamsLoader } from '@/components/search-params-loader'
 import { useQueryParams } from '@/utils/query-param/use-query-params'
 
 export function AccountQueryParamSnackbar() {
-  const searchParams = useSearchParams()
-  const accountConfSuccess = searchParams.get('account_confirmation_success')
+  const [searchParams, setSearchParams] =
+    useState<ReadonlyURLSearchParams | null>(null)
+  const accountConfSuccess = searchParams?.get('account_confirmation_success')
   const openSnackbar = useSnackbarsStore((state) => state.openSnackbar)
-  const { cleanupQueryParams } = useQueryParams()
+  const { cleanupQueryParams } = useQueryParams({ searchParams })
 
   useEffect(() => {
-    if (searchParams.toString()) {
+    if (searchParams?.toString()) {
       if (accountConfSuccess === 'true') {
         openSnackbar({
           severity: 'success',
@@ -28,5 +30,5 @@ export function AccountQueryParamSnackbar() {
     }
   }, [accountConfSuccess, openSnackbar, cleanupQueryParams, searchParams])
 
-  return null
+  return <SearchParamsLoader onParamsReceived={setSearchParams} />
 }

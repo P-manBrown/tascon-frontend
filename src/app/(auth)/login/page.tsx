@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { Suspense } from 'react'
 import { AuthHeading } from '@/components/headings/auth-heading'
 import { HorizontalRule } from '@/components/horizontal-rule'
 import { SocialLoginForms } from '@/components/social-login-forms'
@@ -25,9 +24,7 @@ export default function Login() {
           アカウントを新規作成
         </Link>
       </div>
-      <Suspense>
-        <LoginQueryParamSnackbar />
-      </Suspense>
+      <LoginQueryParamSnackbar />
     </>
   )
 }

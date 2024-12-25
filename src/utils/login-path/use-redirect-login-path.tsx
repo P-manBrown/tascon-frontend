@@ -1,11 +1,12 @@
-import { useSearchParams, usePathname } from 'next/navigation'
+import { usePathname, ReadonlyURLSearchParams } from 'next/navigation'
 import { generateFromUrlParam } from './generate-from-url-param'
 
-export function useRedirectLoginPath() {
-  const searchParams = useSearchParams()
-
+type Params = {
+  searchParams: ReadonlyURLSearchParams | null
+}
+export function useRedirectLoginPath({ searchParams }: Params) {
   const pathname = usePathname()
-  const params = searchParams.toString()
+  const params = searchParams?.toString() ?? null
 
   const fromUrl = generateFromUrlParam(pathname, params)
   return `/login?${fromUrl}&err='unauthorized'`

@@ -1,13 +1,16 @@
-import { usePathname, useSearchParams } from 'next/navigation'
+import { ReadonlyURLSearchParams, usePathname } from 'next/navigation'
 import { useCallback } from 'react'
 
-export function useQueryParams() {
+type Params = {
+  searchParams: ReadonlyURLSearchParams | null
+}
+
+export function useQueryParams({ searchParams }: Params) {
   const pathname = usePathname()
-  const searchParams = useSearchParams()
 
   const cleanupQueryParams = useCallback(
     (keys: string[]) => {
-      const params = new URLSearchParams(searchParams.toString())
+      const params = new URLSearchParams(searchParams?.toString())
       keys.forEach((key) => {
         params.delete(key)
       })

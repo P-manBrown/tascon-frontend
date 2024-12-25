@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useRef, useState, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -19,12 +19,13 @@ type Params = {
 }
 
 export function useChangePasswordFormShowButton({ email }: Params) {
+  const searchParams = useSearchParams()
   const contentRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const [isShown, setIsShown] = useState(false)
   const [isSending, setIsSending] = useState(false)
   const router = useRouter()
-  const redirectLoginPath = useRedirectLoginPath()
+  const redirectLoginPath = useRedirectLoginPath({ searchParams })
   const openSnackbar = useSnackbarsStore((store) => store.openSnackbar)
   const { openErrorSnackbar } = useErrorSnackbar()
 

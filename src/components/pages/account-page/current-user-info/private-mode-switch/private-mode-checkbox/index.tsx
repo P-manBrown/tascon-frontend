@@ -1,6 +1,6 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
 import { Checkbox } from '@/components/form-controls/checkbox'
@@ -23,7 +23,8 @@ export function PrivateModeCheckbox({
 }: PrivateModeSwitchProps) {
   const { openErrorSnackbar } = useErrorSnackbar()
   const router = useRouter()
-  const redirectLoginPath = useRedirectLoginPath()
+  const searchParams = useSearchParams()
+  const redirectLoginPath = useRedirectLoginPath({ searchParams })
   const [isChangingIsPrivate, setIsChangingIsPrivate] = useState(false)
 
   const handleKeyDown = (ev: React.KeyboardEvent<HTMLLabelElement>) => {
