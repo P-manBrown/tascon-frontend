@@ -7,5 +7,5 @@ export function generateRedirectLoginPath() {
   const params = headers().get('Tascon-Params') ?? ''
 
   const fromUrl = generateFromUrlParam(pathname, params)
-  return `/login?${fromUrl}?err='unauthorized'`
+  return `/login?${fromUrl}&err=unauthorized`
 }
