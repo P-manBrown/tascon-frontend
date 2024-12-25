@@ -9,5 +9,5 @@ export function useRedirectLoginPath({ searchParams }: Params) {
   const params = searchParams?.toString() ?? null
 
   const fromUrl = generateFromUrlParam(pathname, params)
-  return `/login?${fromUrl}&err='unauthorized'`
+  return `/login?${fromUrl}&err=unauthorized`
 }
