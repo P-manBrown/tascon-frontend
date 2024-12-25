@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { Suspense } from 'react'
 import { AuthHeading } from '@/components/headings/auth-heading'
 import { ForgotPasswordQueryParamSnackbar } from './_components/forgot-password-query-param-snackbar'
 import { RequestResetPasswordEmailForm } from './_components/request-reset-password-email-form'
@@ -19,9 +18,7 @@ export default function ForgotPassword() {
           ログイン画面へ
         </Link>
       </div>
-      <Suspense>
-        <ForgotPasswordQueryParamSnackbar />
-      </Suspense>
+      <ForgotPasswordQueryParamSnackbar />
     </>
   )
 }
