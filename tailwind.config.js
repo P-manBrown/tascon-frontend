@@ -159,7 +159,7 @@ module.exports = {
             {},
         },
         '.btn-outline-disabled': {
-          '@apply cursor-wait border-2 border-gray-400 text-gray-400': {},
+          '@apply cursor-not-allowed border-2 border-gray-400 text-gray-400': {},
         },
         '.btn-outline-danger': {
           '@apply btn-shadow border-2 border-red-600 bg-white text-red-600 disabled:btn-outline-disabled disabled:duration-0':
