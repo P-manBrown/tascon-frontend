@@ -20,11 +20,7 @@ import type { z } from 'zod'
 
 type ResetPasswordFormValues = z.infer<typeof resetPasswordSchema>
 
-type Props = {
-  resetPasswordToken: string
-}
-
-export function ResetPasswordForm({ resetPasswordToken }: Props) {
+export function ResetPasswordForm() {
   const id = useId()
   const { isVisible, toggleVisible } = useVisibilityToggle()
   const router = useRouter()
@@ -48,7 +44,7 @@ export function ResetPasswordForm({ resetPasswordToken }: Props) {
   }
 
   const onSubmit: SubmitHandler<ResetPasswordFormValues> = async (data) => {
-    const result = await resetPassword({ resetPasswordToken, ...data })
+    const result = await resetPassword(data)
     if (result.status === 'error') {
       if (result.name === 'HttpError') {
         handleHttpError(result)

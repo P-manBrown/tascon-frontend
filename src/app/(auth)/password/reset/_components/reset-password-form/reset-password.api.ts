@@ -14,7 +14,6 @@ import { validateData } from '@/utils/validation/validate-data'
 import type { CamelCaseKeys } from 'camelcase-keys'
 
 type Params = {
-  resetPasswordToken: string | null
   password: string
 }
 
@@ -26,10 +25,7 @@ const dataSchema = z.object({
 
 type Data = CamelCaseKeys<z.infer<typeof dataSchema>, true>
 
-export async function resetPassword({
-  resetPasswordToken,
-  ...bodyData
-}: Params) {
+export async function resetPassword(bodyData: Params) {
   const fetchDataResult = await fetchData(
     `${process.env.API_ORIGIN}/api/v1/auth/password`,
     {
@@ -41,7 +37,7 @@ export async function resetPassword({
       body: JSON.stringify({
         ...snakecaseKeys(bodyData, { deep: false }),
         password_confirmation: bodyData.password,
-        reset_password_token: resetPasswordToken,
+        reset_password_token: cookies().get('resetPasswordToken')?.value,
       }),
     },
   )
