@@ -43,6 +43,13 @@ export async function middleware(req: NextRequest) {
       })
       return res
     }
+
+    const hasResetPasswordTokenCookie = req.cookies.has('resetPasswordToken')
+    if (!hasResetPasswordTokenCookie) {
+      const forgotUrl = new URL('/password/forgot', req.url)
+      forgotUrl.searchParams.set('err', 'token_not_found')
+      return NextResponse.redirect(forgotUrl)
+    }
   }
 
   // Add the pathname and query parameters to the request headers.
