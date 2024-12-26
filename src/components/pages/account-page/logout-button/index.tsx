@@ -1,7 +1,7 @@
 'use client'
 
 import { ReadonlyURLSearchParams, useRouter } from 'next/navigation'
-import { useId, useRef, useState } from 'react'
+import { useId, useState } from 'react'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
 import { Button } from '@/components/buttons/button'
 import { SearchParamsLoader } from '@/components/search-params-loader'
@@ -9,11 +9,10 @@ import { useRedirectLoginPath } from '@/utils/login-path/use-redirect-login-path
 import { logout } from './logout.api'
 
 export function LogoutButton() {
-  const searchParams = useRef<ReadonlyURLSearchParams>(null)
+  const [searchParams, setSearchParams] =
+    useState<ReadonlyURLSearchParams | null>(null)
   const [isLoggingOut, setIsLoggingOut] = useState(false)
-  const redirectLoginPath = useRedirectLoginPath({
-    searchParams: searchParams.current,
-  })
+  const redirectLoginPath = useRedirectLoginPath({ searchParams })
   const id = useId()
   const router = useRouter()
   const { openErrorSnackbar } = useErrorSnackbar()
@@ -34,10 +33,6 @@ export function LogoutButton() {
     setIsLoggingOut(false)
   }
 
-  const handleParamsReceived = (params: ReadonlyURLSearchParams) => {
-    searchParams.current = params
-  }
-
   return (
     // 'id' is used to manage popstate events in AccountModal.
     <>
@@ -50,7 +45,7 @@ export function LogoutButton() {
       >
         ログアウト
       </Button>
-      <SearchParamsLoader onParamsReceived={handleParamsReceived} />
+      <SearchParamsLoader onParamsReceived={setSearchParams} />
     </>
   )
 }
