@@ -90,7 +90,7 @@ export function EditableText({
       ) : (
         <div
           ref={contentRef}
-          className={`relative h-fit has-[>button:hover]:select-none ${
+          className={`relative h-fit has-[>button:last-of-type:hover]:select-none ${
             isDraggingInside ? 'hover:cursor-text' : 'hover:cursor-default'
           }`}
           onMouseEnter={handleMouseEnter}
