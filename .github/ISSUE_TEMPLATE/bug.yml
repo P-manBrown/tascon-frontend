@@ -1,6 +1,6 @@
 name: バグ報告
 description: バグ報告用のテンプレート
-title: '[Bug]: '
+title: '[BUG]: '
 labels: ['bug']
 assignees:
   - P-manBrown
@@ -45,7 +45,7 @@ body:
       description: バグが発生した環境について記述してください。
       placeholder: |
         - OS: [e.g. iOS(v17.6.1)]
-        - Browser: [e.g. chrome(v127.0.6533.101), safari(v17.6)]
+        - ブラウザ: [e.g. chrome(v127.0.6533.101), safari(v17.6)]
     validations:
       required: true
   - type: textarea
