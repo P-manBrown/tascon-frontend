@@ -1,5 +1,6 @@
 import DefaultAvatar from 'boring-avatars'
 import Image from 'next/image'
+import { getImagePlaceholderUrl } from '@/utils/image-placeholder/get-image-placeholder-url'
 
 type Props = {
   size: number
@@ -28,6 +29,7 @@ export function Avatar({ size, name, avatarUrl, priority = false }: Props) {
       width={size}
       className={`aspect-square bg-white object-cover ${shapeClasses}`}
       priority={priority}
+      placeholder={getImagePlaceholderUrl(size, size)}
     />
   )
 }
