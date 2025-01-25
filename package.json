@@ -41,7 +41,7 @@
     "@markuplint/react-spec": "^4.5.14",
     "autoprefixer": "^10.4.20",
     "eslint": "9.18.0",
-    "eslint-config-next": "^15.1.4",
+    "eslint-config-next": "^15.1.6",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-unused-imports": "^4.1.4",
     "knip": "^5.43.3",
