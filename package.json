@@ -38,7 +38,7 @@
     "@eslint/eslintrc": "^3.2.0",
     "@evilmartians/lefthook": "^1.10.8",
     "@markuplint/jsx-parser": "^4.7.14",
-    "@markuplint/react-spec": "^4.5.14",
+    "@markuplint/react-spec": "^4.5.15",
     "autoprefixer": "^10.4.20",
     "eslint": "9.19.0",
     "eslint-config-next": "^15.1.6",
