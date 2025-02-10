@@ -8,6 +8,7 @@
     "client-only",
     "eslint-config-next",
     "eslint-config-prettier",
-    "pino-pretty"
+    "pino-pretty",
+    "postcss"
   ]
 }
