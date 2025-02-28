@@ -37,7 +37,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.0",
     "@evilmartians/lefthook": "^1.10.8",
-    "@markuplint/jsx-parser": "^4.7.16",
+    "@markuplint/jsx-parser": "^4.7.17",
     "@markuplint/react-spec": "^4.5.16",
     "@tailwindcss/postcss": "^4.0.9",
     "eslint": "9.21.0",
