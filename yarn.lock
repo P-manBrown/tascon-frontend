@@ -1851,12 +1851,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@markuplint/react-spec@npm:^4.5.17":
-  version: 4.5.17
-  resolution: "@markuplint/react-spec@npm:4.5.17"
+"@markuplint/react-spec@npm:^4.5.18":
+  version: 4.5.18
+  resolution: "@markuplint/react-spec@npm:4.5.18"
   dependencies:
-    "@markuplint/ml-spec": "npm:4.9.4"
-  checksum: 10/9a8ee2329f684da82c1f1c4c5130b21bb4c3dfff35dda261b5bf400646d6a83b11780a8d7bad4566908b756359b97d61e61f630199c50a59aa9a1ee139b8f44e
+    "@markuplint/ml-spec": "npm:4.9.5"
+  checksum: 10/952f21790aa09b2c8747ba047eb26f6423febee134dff7f87677e6bc8370d36d0e7c94dce7e9fa0dda37344cd14b088a2b80d4e4edea7be6cc5499113aa64970
   languageName: node
   linkType: hard
 
@@ -10381,7 +10381,7 @@ __metadata:
     "@heroicons/react": "npm:^2.2.0"
     "@hookform/resolvers": "npm:^4.1.3"
     "@markuplint/jsx-parser": "npm:^4.7.17"
-    "@markuplint/react-spec": "npm:^4.5.17"
+    "@markuplint/react-spec": "npm:^4.5.18"
     "@next/bundle-analyzer": "npm:^15.2.1"
     "@tailwindcss/postcss": "npm:^4.0.12"
     "@types/node": "npm:22.13.10"
