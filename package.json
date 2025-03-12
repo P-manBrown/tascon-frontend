@@ -39,7 +39,7 @@
     "@evilmartians/lefthook": "^1.10.8",
     "@markuplint/jsx-parser": "^4.7.17",
     "@markuplint/react-spec": "^4.5.18",
-    "@tailwindcss/postcss": "^4.0.12",
+    "@tailwindcss/postcss": "^4.0.13",
     "eslint": "9.22.0",
     "eslint-config-next": "^15.2.2",
     "eslint-config-prettier": "^10.1.1",
