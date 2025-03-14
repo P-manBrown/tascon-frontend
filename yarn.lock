@@ -10283,10 +10283,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwindcss@npm:4.0.13, tailwindcss@npm:^4.0.13":
+"tailwindcss@npm:4.0.13":
   version: 4.0.13
   resolution: "tailwindcss@npm:4.0.13"
   checksum: 10/665a832da5619669cfc8bf85140ec8257b091c598a088d1c0a896a410e26d9342b3bb3756973173854f957a1753367061d4198f99a4ee3f6029217187ddea425
+  languageName: node
+  linkType: hard
+
+"tailwindcss@npm:^4.0.14":
+  version: 4.0.14
+  resolution: "tailwindcss@npm:4.0.14"
+  checksum: 10/8d6e039b99b22d4dd97d8713d7ad6ff0e7762ece2a8e99eeb3b4e52ea8273fbded363a4b63c2e668a7f08f95fa87371aa29fd710b1a1d840d5fbb846ba87445a
   languageName: node
   linkType: hard
 
@@ -10348,7 +10355,7 @@ __metadata:
     react-hook-form: "npm:^7.54.2"
     server-only: "npm:^0.0.1"
     snakecase-keys: "npm:^8.0.1"
-    tailwindcss: "npm:^4.0.13"
+    tailwindcss: "npm:^4.0.14"
     typescript: "npm:<5.6.0"
     zod: "npm:^3.24.2"
     zustand: "npm:^5.0.3"
