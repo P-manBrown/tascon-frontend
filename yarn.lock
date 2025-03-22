@@ -1461,6 +1461,7 @@ __metadata:
   languageName: node
   linkType: hard
 
+
 "@eslint/js@npm:9.23.0":
   version: 9.23.0
   resolution: "@eslint/js@npm:9.23.0"
@@ -10332,7 +10333,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "tascon-frontend@workspace:."
   dependencies:
-    "@eslint/eslintrc": "npm:^3.3.0"
+    "@eslint/eslintrc": "npm:^3.3.1"
     "@evilmartians/lefthook": "npm:^1.10.8"
     "@heroicons/react": "npm:^2.2.0"
     "@hookform/resolvers": "npm:^4.1.3"
