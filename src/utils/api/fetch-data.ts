@@ -7,12 +7,7 @@ import { ContentTypeError } from '../error/custom/content-type-error'
 import { HttpError } from '../error/custom/http-error'
 import { NetworkError } from '../error/custom/network-error'
 import { UnexpectedError } from '../error/custom/unexpected-error'
-import { isValidValue } from '../type-guard/is-valid-data'
 import { validateContentType } from '../validation/validate-content-type'
-
-const errorMessageSchema = z.object({
-  errors: z.array(z.string()),
-})
 
 type Options = Omit<RequestInit, 'method'> & {
   method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
@@ -43,15 +38,7 @@ export async function fetchData(
     )
 
     if (!res.ok) {
-      let errorMessage
-      if (isValidValue(errorMessageSchema, data)) {
-        errorMessage = data.errors[0]
-      }
-      throw new HttpError({
-        requestId,
-        res,
-        message: errorMessage,
-      })
+      throw new HttpError({ requestId, res, details: data })
     }
 
     return { headers: res.headers, data }
