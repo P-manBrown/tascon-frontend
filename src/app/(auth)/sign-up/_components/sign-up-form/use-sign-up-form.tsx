@@ -1,15 +1,22 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useCallback, useState } from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
 import { useModal } from '@/components/modal/use-modal'
 import { signUpSchema } from '@/schemas/request/auth'
+import { createFormErrorsSchema } from '@/utils/form/create-form-errors-schema'
+import { useHandleFormErrors } from '@/utils/form/use-handle-form-error'
+import { isValidValue } from '@/utils/type-guard/is-valid-data'
 import { signUp } from './sign-up.api'
 import type { ErrorObject } from '@/types/error'
 import type { HttpError } from '@/utils/error/custom/http-error'
-import type { z } from 'zod'
+import type { SubmitHandler } from 'react-hook-form'
 
 type SignUpFormValues = z.infer<typeof signUpSchema>
+const formErrorsSchema = createFormErrorsSchema(
+  z.enum(['email', 'password', 'name']),
+)
 
 export function useSignUpForm() {
   const [email, setEmail] = useState('')
@@ -33,23 +40,18 @@ export function useSignUpForm() {
     mode: 'onBlur',
     resolver: zodResolver(signUpSchema),
   })
+  const { handleFormErrors } = useHandleFormErrors(setError)
 
   const handleHttpError = useCallback(
     (err: ErrorObject<HttpError>) => {
-      if (err.message.startsWith('メールアドレス')) {
-        setError(
-          'email',
-          {
-            type: err.statusCode.toString(),
-            message: err.message,
-          },
-          { shouldFocus: true },
-        )
+      const { details } = err
+      if (isValidValue(formErrorsSchema, details)) {
+        handleFormErrors(details)
       } else {
         openErrorSnackbar(err)
       }
     },
-    [setError, openErrorSnackbar],
+    [handleFormErrors, openErrorSnackbar],
   )
 
   const onSubmit: SubmitHandler<SignUpFormValues> = useCallback(
@@ -61,7 +63,7 @@ export function useSignUpForm() {
         }
       } else {
         reset()
-        setEmail(result.data.email)
+        setEmail(result.account.email)
         openModal()
       }
     },

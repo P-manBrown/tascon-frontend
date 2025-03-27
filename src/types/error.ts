@@ -21,5 +21,5 @@ export type ErrorBaseObject = Pick<Errors, 'message' | 'requestId'> & {
 }
 
 export type ErrorObject<T extends Errors> = T extends HttpError
-  ? Pick<T, 'name' | 'statusCode'> & ErrorBaseObject
+  ? Pick<T, 'name' | 'statusCode' | 'details'> & ErrorBaseObject
   : Pick<T, 'name'> & ErrorBaseObject

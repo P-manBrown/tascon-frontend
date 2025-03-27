@@ -2,7 +2,7 @@
 
 import camelcaseKeys from 'camelcase-keys'
 import { z } from 'zod'
-import { authSchema } from '@/schemas/response/auth'
+import { accountSchema } from '@/schemas/response/account'
 import { ResultObject } from '@/types/api'
 import { fetchData } from '@/utils/api/fetch-data'
 import { createErrorObject } from '@/utils/error/create-error-object'
@@ -16,14 +16,9 @@ type Params = {
   password: string
 }
 
-const dataSchema = z.object({
-  status: z.literal('success'),
-  data: authSchema.omit({ avatar_url: true }),
-})
+type Data = CamelCaseKeys<z.infer<typeof accountSchema>, true>
 
-type Data = CamelCaseKeys<z.infer<typeof dataSchema>, true>
-
-export async function signUp({ ...bodyData }: Params) {
+export async function signUp(bodyData: Params) {
   const fetchDataResult = await fetchData(
     `${process.env.API_ORIGIN}/api/v1/auth`,
     {
@@ -45,12 +40,17 @@ export async function signUp({ ...bodyData }: Params) {
   } else {
     const { headers, data } = fetchDataResult
     const requestId = getRequestId(headers)
-    const validateDataResult = validateData({ requestId, dataSchema, data })
+    const validateDataResult = validateData({
+      requestId,
+      dataSchema: accountSchema,
+      data,
+    })
 
     if (validateDataResult instanceof Error) {
       resultObject = createErrorObject(validateDataResult)
     } else {
-      resultObject = camelcaseKeys(validateDataResult, { deep: true })
+      const { account } = camelcaseKeys(validateDataResult, { deep: true })
+      resultObject = { status: 'success', account }
     }
   }
 

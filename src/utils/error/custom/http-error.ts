@@ -1,18 +1,20 @@
 type Params = {
   requestId: string
   res: Response
-  message?: string
+  details: unknown
 }
 
 export class HttpError extends Error {
   name: 'HttpError'
-  requestId: string
-  statusCode: number
+  requestId: Params['requestId']
+  statusCode: Params['res']['status']
+  details: Params['details']
 
-  constructor({ requestId, res, message }: Params) {
-    super(message ?? 'リクエストの処理中にエラーが発生しました。')
+  constructor({ requestId, res, details }: Params) {
+    super('リクエストの処理中にエラーが発生しました。')
     this.name = 'HttpError'
     this.requestId = requestId
     this.statusCode = res.status
+    this.details = details
   }
 }
