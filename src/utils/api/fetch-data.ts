@@ -38,7 +38,7 @@ export async function fetchData(
     )
 
     if (!res.ok) {
-      throw new HttpError({ requestId, res, details: data })
+      throw new HttpError({ requestId, res, data })
     }
 
     return { headers: res.headers, data }

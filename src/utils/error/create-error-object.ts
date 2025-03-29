@@ -15,7 +15,7 @@ export function createErrorObject(err: Errors) {
       ...errorBaseObject,
       name: err.name,
       statusCode: err.statusCode,
-      details: err.details,
+      data: err.data,
     }
   } else {
     errorObject = {

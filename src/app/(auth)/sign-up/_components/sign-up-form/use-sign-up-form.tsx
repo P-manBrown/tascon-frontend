@@ -44,9 +44,9 @@ export function useSignUpForm() {
 
   const handleHttpError = useCallback(
     (err: ErrorObject<HttpError>) => {
-      const { details } = err
-      if (isValidValue(formErrorsSchema, details)) {
-        handleFormErrors(details)
+      const { data } = err
+      if (isValidValue(formErrorsSchema, data)) {
+        handleFormErrors(data)
       } else {
         openErrorSnackbar(err)
       }
