@@ -4306,16 +4306,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"enhanced-resolve@npm:^5.18.0":
-  version: 5.18.0
-  resolution: "enhanced-resolve@npm:5.18.0"
-  dependencies:
-    graceful-fs: "npm:^4.2.4"
-    tapable: "npm:^2.2.0"
-  checksum: 10/e88463ef97b68d40d0da0cd0c572e23f43dba0be622d6d44eae5cafed05f0c5dac43e463a83a86c4f70186d029357f82b56d9e1e47e8fc91dce3d6602f8bd6ce
-  languageName: node
-  linkType: hard
-
 "enhanced-resolve@npm:^5.18.1":
   version: 5.18.1
   resolution: "enhanced-resolve@npm:5.18.1"
@@ -7045,14 +7035,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"knip@npm:^5.46.3":
-  version: 5.46.3
-  resolution: "knip@npm:5.46.3"
+"knip@npm:^5.46.4":
+  version: 5.46.4
+  resolution: "knip@npm:5.46.4"
   dependencies:
     "@nodelib/fs.walk": "npm:3.0.1"
     "@snyk/github-codeowners": "npm:1.1.0"
     easy-table: "npm:1.2.0"
-    enhanced-resolve: "npm:^5.18.0"
+    enhanced-resolve: "npm:^5.18.1"
     fast-glob: "npm:^3.3.3"
     jiti: "npm:^2.4.2"
     js-yaml: "npm:^4.1.0"
@@ -7071,7 +7061,7 @@ __metadata:
   bin:
     knip: bin/knip.js
     knip-bun: bin/knip-bun.js
-  checksum: 10/4260da18a6cfc8bca9a620eb41bad3013fdd75c59ee71bd02a464c00bd6f297bdf41a653ac76e61ab0ea9300ee19742172883fdb02dc72bedb8407a6d46e9653
+  checksum: 10/298664a44f26b85ca0da720c1206c93f41bd812e24ebfde4949a7e143b988b1e9078cf40dbd4207d60a969641303bbf0611bea679ffe08904340b46c0ad36f3a
   languageName: node
   linkType: hard
 
@@ -10333,7 +10323,7 @@ __metadata:
     eslint-config-prettier: "npm:^10.1.1"
     eslint-plugin-unused-imports: "npm:^4.1.4"
     is-network-error: "npm:^1.1.0"
-    knip: "npm:^5.46.3"
+    knip: "npm:^5.46.4"
     markdownlint-cli2: "npm:^0.17.2"
     markuplint: "npm:^4.11.8"
     next: "npm:14.2.15"
