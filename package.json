@@ -40,7 +40,7 @@
     "@markuplint/jsx-parser": "^4.7.18",
     "@markuplint/react-spec": "^4.5.18",
     "@tailwindcss/postcss": "^4.1.2",
-    "eslint": "9.23.0",
+    "eslint": "9.24.0",
     "eslint-config-next": "^15.2.4",
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-unused-imports": "^4.1.4",
