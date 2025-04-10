@@ -22,15 +22,25 @@ export function useErrorSnackbar() {
   const openSnackbar = useSnackbarsStore((state) => state.openSnackbar)
 
   const openErrorSnackbar = useCallback(
-    (err: ErrorObject<Errors>) => {
+    (err: ErrorObject<Errors>, message?: string) => {
+      let snackbarContent: Omit<Parameters<typeof openSnackbar>[0], 'severity'>
+      if (isFatalError(err)) {
+        snackbarContent = {
+          message:
+            message ?? '予期せぬエラーが発生しました。問題を報告してください。',
+          actionButton: (
+            <ReportIssueLink info={`Request ID: ${err.requestId}`} />
+          ),
+        }
+      } else {
+        snackbarContent = {
+          message: message ?? err.message,
+        }
+      }
+
       openSnackbar({
+        ...snackbarContent,
         severity: 'error',
-        message: isFatalError(err)
-          ? '予期せぬエラーが発生しました。問題を報告してください。'
-          : err.message,
-        actionButton: isFatalError(err) ? (
-          <ReportIssueLink info={`Request ID: ${err.requestId}`} />
-        ) : undefined,
       })
     },
     [openSnackbar],
