@@ -1,8 +1,7 @@
 'use server'
 
 import camelcaseKeys from 'camelcase-keys'
-import { z } from 'zod'
-import { authSchema } from '@/schemas/response/auth'
+import { accountSchema } from '@/schemas/response/account'
 import { ResultObject } from '@/types/api'
 import { fetchData } from '@/utils/api/fetch-data'
 import { setBearerToken } from '@/utils/cookie/bearer-token'
@@ -10,23 +9,16 @@ import { createErrorObject } from '@/utils/error/create-error-object'
 import { getRequestId } from '@/utils/request-id/get-request-id'
 import { validateData } from '@/utils/validation/validate-data'
 import type { CamelCaseKeys } from 'camelcase-keys'
+import type { z } from 'zod'
 
 type Params = {
   email: string
   password: string
 }
 
-const dataSchema = z.object({
-  data: authSchema.omit({
-    avatar_url: true,
-    created_at: true,
-    updated_at: true,
-  }),
-})
+type Data = CamelCaseKeys<z.infer<typeof accountSchema>, true>
 
-type Data = CamelCaseKeys<z.infer<typeof dataSchema>, true>
-
-export async function login({ ...bodyData }: Params) {
+export async function login(bodyData: Params) {
   const fetchDataResult = await fetchData(
     `${process.env.API_ORIGIN}/api/v1/auth/sign_in`,
     {
@@ -45,7 +37,11 @@ export async function login({ ...bodyData }: Params) {
   } else {
     const { headers, data } = fetchDataResult
     const requestId = getRequestId(headers)
-    const validateDataResult = validateData({ requestId, dataSchema, data })
+    const validateDataResult = validateData({
+      requestId,
+      dataSchema: accountSchema,
+      data,
+    })
 
     if (validateDataResult instanceof Error) {
       resultObject = createErrorObject(validateDataResult)
