@@ -6,7 +6,7 @@ import { ValidationErrorMessage } from '@/components/form-controls/validation-er
 import { useAvatarEditor } from './use-avatar-editor'
 
 type Props = {
-  avatarUrl: string | null
+  avatarUrl?: string
   children: React.ReactElement
 }
 
@@ -41,7 +41,7 @@ export function AvatarEditor({ avatarUrl, children }: Props) {
         {avatarUrl && !isSubmitting && (
           <IconButton
             type="button"
-            className={`absolute right-0.5 top-0.5 z-10 duration-[1ms] hover:visible peer-hover:visible [@media(hover:hover)]:focus-visible:visible [@media(hover:hover)]:peer-focus-visible:visible ${
+            className={`absolute top-0.5 right-0.5 z-10 duration-[1ms] peer-hover:visible hover:visible [@media(hover:hover)]:peer-focus-visible:visible [@media(hover:hover)]:focus-visible:visible ${
               isDeletingAvatar ? '' : '[@media(hover:hover)]:invisible'
             }`}
             aria-label="アバター削除"
