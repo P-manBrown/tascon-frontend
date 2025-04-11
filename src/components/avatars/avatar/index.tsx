@@ -5,7 +5,7 @@ import { getImagePlaceholderUrl } from '@/utils/image-placeholder/get-image-plac
 type Props = {
   size: number
   name: string
-  avatarUrl: string | null
+  avatarUrl?: string
   priority?: boolean
 }
 
