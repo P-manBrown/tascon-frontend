@@ -5,7 +5,7 @@ import { SignUpLink } from '../sign-up-link'
 
 export function HomeHeader() {
   return (
-    <header className="border-b bg-theme px-safe">
+    <header className="bg-theme px-safe border-b border-b-gray-200">
       <nav className="flex h-14 items-center px-4 py-2">
         <Image
           src={logo}
