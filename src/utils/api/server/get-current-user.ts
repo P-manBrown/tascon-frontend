@@ -2,7 +2,7 @@ import 'server-only'
 import camelcaseKeys from 'camelcase-keys'
 import { redirect } from 'next/navigation'
 import { cache } from 'react'
-import { validateTokenDataSchema } from '@/schemas/response/validate-token-success'
+import { accountSchema } from '@/schemas/response/account'
 import { getBearerToken } from '@/utils/cookie/bearer-token'
 import { HttpError } from '@/utils/error/custom/http-error'
 import { generateRedirectLoginPath } from '@/utils/login-path/generate-redirect-login-path.server'
@@ -37,7 +37,7 @@ export const getCurrentUser = cache(async () => {
 
   const validateDataResult = validateData({
     requestId,
-    dataSchema: validateTokenDataSchema,
+    dataSchema: accountSchema,
     data,
   })
 
