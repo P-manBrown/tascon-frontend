@@ -5,7 +5,7 @@ import { getCurrentUser } from '@/utils/api/server/get-current-user'
 const size = 32
 
 export async function HeaderAvatar() {
-  const { data: currentUser } = await getCurrentUser()
+  const { account: currentUser } = await getCurrentUser()
 
   return (
     <Avatar
