@@ -10,7 +10,7 @@ import { getCurrentUser } from '@/utils/api/server/get-current-user'
 import { EmailEditor } from './email-editor'
 
 export async function EditableEmail() {
-  const { data: currentUser } = await getCurrentUser()
+  const { account: currentUser } = await getCurrentUser()
   const currentUserId = currentUser.id.toString()
 
   return (

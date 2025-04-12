@@ -2,7 +2,7 @@ import { getCurrentUser } from '@/utils/api/server/get-current-user'
 import { ChangePasswordFormShowButton } from './change-password-form-show-button'
 
 export async function CurrentUserChangePasswordFormShowButton() {
-  const { data: currentUser } = await getCurrentUser()
+  const { account: currentUser } = await getCurrentUser()
 
   return (
     <ChangePasswordFormShowButton

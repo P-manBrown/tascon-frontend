@@ -28,7 +28,7 @@ type ChangeBioFormValue = z.infer<typeof bioSchema>
 
 type Props = Pick<React.ComponentProps<typeof EditableText>, 'children'> & {
   currentUserId: string
-  initialBio: string
+  initialBio: string | undefined
   label: React.ReactElement
   privacyTag: React.ReactElement
   unsavedChangeTag: React.ReactElement
@@ -36,7 +36,7 @@ type Props = Pick<React.ComponentProps<typeof EditableText>, 'children'> & {
 
 export function BioEditor({
   currentUserId,
-  initialBio,
+  initialBio = '',
   label,
   privacyTag,
   unsavedChangeTag,

@@ -5,7 +5,7 @@ import { AvatarEditor } from './avatar-editor'
 const size = 128
 
 export async function EditableAvatar() {
-  const { data: currentUser } = await getCurrentUser()
+  const { account: currentUser } = await getCurrentUser()
 
   return (
     <AvatarEditor avatarUrl={currentUser.avatarUrl}>
