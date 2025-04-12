@@ -1,7 +1,7 @@
-import { z } from 'zod'
-import { changeUserInfoDataSchema } from '@/schemas/response/change-user-info-success'
 import type { ErrorObject, Errors } from './error'
+import type { accountSchema } from '@/schemas/response/account'
 import type { CamelCaseKeys } from 'camelcase-keys'
+import type { z } from 'zod'
 
 export type ResultObject<T extends Record<string, unknown>> =
   | (T extends { status: 'success' } & Record<string, unknown>
@@ -10,6 +10,6 @@ export type ResultObject<T extends Record<string, unknown>> =
   | ErrorObject<Errors>
 
 export type ChangeUserInfoData = CamelCaseKeys<
-  z.infer<typeof changeUserInfoDataSchema>,
+  z.infer<typeof accountSchema>,
   true
 >
