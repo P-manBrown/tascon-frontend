@@ -87,7 +87,7 @@ export function NameEditor({
         openErrorSnackbar(result)
       }
     } else {
-      updateField(result.data.name)
+      updateField(result.account.name)
       closeEditor()
     }
   }
