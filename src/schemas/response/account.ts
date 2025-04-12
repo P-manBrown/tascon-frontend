@@ -8,5 +8,6 @@ export const accountSchema = z.object({
     is_private: z.boolean(),
     bio: z.string().optional(),
     avatar_url: z.string().optional(),
+    provider: z.string(),
   }),
 })
