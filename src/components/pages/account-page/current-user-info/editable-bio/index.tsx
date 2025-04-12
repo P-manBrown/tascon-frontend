@@ -27,7 +27,7 @@ export async function EditableBio() {
       {/* Pass 'key' so that the bio is re-rendered when it is re-validated */}
       <BioCollapsibleSection key={currentUser.bio} height={height}>
         <DetailItemContentLayout>
-          {currentUser.bio === undefined ? (
+          {currentUser.bio === '' || currentUser.bio === undefined ? (
             <p className="text-gray-500">自己紹介を登録してください...</p>
           ) : (
             <DetailMultiLineText>{currentUser.bio}</DetailMultiLineText>
