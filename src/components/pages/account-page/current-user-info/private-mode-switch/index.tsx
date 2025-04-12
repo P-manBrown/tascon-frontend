@@ -8,7 +8,7 @@ import {
 const descriptionLayoutClasses = 'ml-3 align-middle'
 
 export async function PrivateModeSwitch() {
-  const { data: currentUser } = await getCurrentUser()
+  const { account: currentUser } = await getCurrentUser()
 
   return (
     <PrivateModeCheckbox
