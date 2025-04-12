@@ -101,7 +101,7 @@ export function BioEditor({
         openErrorSnackbar(result)
       }
     } else {
-      updateField(result.data.bio)
+      updateField(result.account.bio ?? '')
       closeEditor()
     }
   }
