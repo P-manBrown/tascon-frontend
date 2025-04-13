@@ -3,7 +3,7 @@
 import camelcaseKeys from 'camelcase-keys'
 import { revalidatePath } from 'next/cache'
 import snakecaseKeys from 'snakecase-keys'
-import { changeUserInfoDataSchema } from '@/schemas/response/change-user-info-success'
+import { accountSchema } from '@/schemas/response/account'
 import { ChangeUserInfoData, ResultObject } from '@/types/api'
 import { fetchData } from '@/utils/api/fetch-data'
 import { getBearerToken } from '@/utils/cookie/bearer-token'
@@ -37,14 +37,18 @@ export async function changeIsPrivate({ ...bodyData }: Params) {
     const requestId = getRequestId(headers)
     const validateDataResult = validateData({
       requestId,
-      dataSchema: changeUserInfoDataSchema,
+      dataSchema: accountSchema,
       data,
     })
 
     if (validateDataResult instanceof Error) {
       resultObject = createErrorObject(validateDataResult)
     } else {
-      resultObject = camelcaseKeys(validateDataResult, { deep: true })
+      resultObject = {
+        status: 'success',
+        ...camelcaseKeys(validateDataResult, { deep: true }),
+      }
+
       revalidatePath('/account')
     }
   }
