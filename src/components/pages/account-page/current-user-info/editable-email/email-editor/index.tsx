@@ -100,7 +100,7 @@ export function EmailEditor({
         openErrorSnackbar(result)
       }
     } else {
-      updateField(result.data.email)
+      updateField(result.account.email)
       closeEditor()
       openSnackbar({
         severity: 'success',
