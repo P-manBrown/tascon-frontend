@@ -29,8 +29,14 @@ export async function fetchData(
       ...optionRest,
     })
 
-    validateContentType(requestId, res.headers)
-    const data: unknown = await res.json()
+    let data: unknown
+
+    if (res.status === 204) {
+      data = null
+    } else {
+      validateContentType(requestId, res.headers)
+      data = await res.json()
+    }
 
     logger.debug(
       { requestId, method: optionRest.method, url, data },
