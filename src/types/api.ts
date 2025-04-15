@@ -3,10 +3,12 @@ import type { accountSchema } from '@/schemas/response/account'
 import type { CamelCaseKeys } from 'camelcase-keys'
 import type { z } from 'zod'
 
-export type ResultObject<T extends Record<string, unknown>> =
-  | (T extends { status: 'success' } & Record<string, unknown>
-      ? T
-      : { status: 'success' } & T)
+export type ResultObject<T extends Record<string, unknown> | null> =
+  | (T extends null
+      ? { status: 'success' }
+      : T extends { status: 'success' } & Record<string, unknown>
+        ? T
+        : { status: 'success' } & T)
   | ErrorObject<Errors>
 
 export type ChangeUserInfoData = CamelCaseKeys<
