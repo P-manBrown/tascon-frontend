@@ -14,7 +14,7 @@ export function HomeHeader() {
           alt="TASCON"
           priority={true}
         />
-        <div className="flex flex-grow justify-end space-x-4">
+        <div className="flex flex-grow justify-end gap-x-4">
           <LoginLink />
           <SignUpLink className="h-8 w-52 max-lg:hidden" />
         </div>

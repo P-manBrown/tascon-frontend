@@ -30,8 +30,11 @@ export function LoginLink() {
       >
         ログイン
       </Link>
-      <Link href={isValid ? '/tasks' : '/login'} className="btn-icon lg:hidden">
-        <ArrowRightEndOnRectangleIcon className="h-8 w-8" />
+      <Link
+        href={isValid ? '/tasks' : '/login'}
+        className="btn-icon align-middle lg:hidden"
+      >
+        <ArrowRightEndOnRectangleIcon className="size-8" />
       </Link>
     </div>
   )
