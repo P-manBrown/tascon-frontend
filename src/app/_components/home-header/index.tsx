@@ -5,7 +5,7 @@ import { SignUpLink } from '../sign-up-link'
 
 export function HomeHeader() {
   return (
-    <header className="border-b bg-theme px-safe">
+    <header className="bg-theme px-safe border-b border-b-gray-200">
       <nav className="flex h-14 items-center px-4 py-2">
         <Image
           src={logo}
@@ -14,7 +14,7 @@ export function HomeHeader() {
           alt="TASCON"
           priority={true}
         />
-        <div className="flex flex-grow justify-end space-x-4">
+        <div className="flex flex-grow justify-end gap-x-4">
           <LoginLink />
           <SignUpLink className="h-8 w-52 max-lg:hidden" />
         </div>
