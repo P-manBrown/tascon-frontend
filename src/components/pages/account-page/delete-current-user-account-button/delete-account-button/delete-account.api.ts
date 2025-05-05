@@ -8,10 +8,7 @@ import { createErrorObject } from '@/utils/error/create-error-object'
 import { getRequestId } from '@/utils/request-id/get-request-id'
 import { validateData } from '@/utils/validation/validate-data'
 
-const dataSchema = z.object({
-  status: z.literal('success'),
-  message: z.string(),
-})
+const dataSchema = z.null()
 
 type Data = z.infer<typeof dataSchema>
 
@@ -39,7 +36,7 @@ export async function deleteAccount() {
     if (validateDataResult instanceof Error) {
       resultObject = createErrorObject(validateDataResult)
     } else {
-      resultObject = validateDataResult
+      resultObject = { status: 'success' }
       deleteBearerToken()
     }
   }
