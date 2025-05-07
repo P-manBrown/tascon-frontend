@@ -2,16 +2,21 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useState, useRef } from 'react'
 import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
 import { ErrorObject } from '@/types/error'
 import { HttpError } from '@/utils/error/custom/http-error'
+import { createFormErrorsSchema } from '@/utils/form/create-form-errors-schema'
+import { useHandleFormErrors } from '@/utils/form/use-handle-form-error'
 import { useRedirectLoginPath } from '@/utils/login-path/use-redirect-login-path'
+import { isValidValue } from '@/utils/type-guard/is-valid-data'
 import { changeAvatar } from './change-avatar.api'
 import { changeAvatarSchema } from './change-avatar.schema'
 import type { SubmitHandler } from 'react-hook-form'
-import type { z } from 'zod'
 
 type ChangeAvatarFormValue = z.infer<typeof changeAvatarSchema>
+
+const formErrorsSchema = createFormErrorsSchema(z.enum(['avatar']))
 
 export function useAvatarEditor() {
   const inputRef = useRef<HTMLInputElement | null>(null)
@@ -31,19 +36,14 @@ export function useAvatarEditor() {
     resolver: zodResolver(changeAvatarSchema),
   })
   const { ref, ...registerRest } = register('avatar')
+  const { handleFormErrors } = useHandleFormErrors(setError)
 
   const handleChangeHttpError = (err: ErrorObject<HttpError>) => {
-    if (err.statusCode === 404) {
+    const { statusCode, data } = err
+    if (statusCode === 404) {
       router.replace(redirectLoginPath)
-    } else if (err.statusCode === 422) {
-      if (err.message.startsWith('アバター')) {
-        setError('avatar', {
-          type: err.status.toString(),
-          message: err.message,
-        })
-      } else {
-        openErrorSnackbar(err)
-      }
+    } else if (isValidValue(formErrorsSchema, data)) {
+      handleFormErrors(data)
     } else {
       openErrorSnackbar(err)
     }
