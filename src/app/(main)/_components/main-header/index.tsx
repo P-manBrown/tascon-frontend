@@ -8,7 +8,7 @@ import { NavLinks } from './nav-links'
 
 export function MainHeader() {
   return (
-    <header className="border-b bg-theme px-safe">
+    <header className="bg-theme px-safe border-b border-b-gray-200">
       <nav className="px-2">
         <div className="flex justify-between py-1">
           <div className="flex flex-row">
@@ -29,7 +29,7 @@ export function MainHeader() {
             </Suspense>
           </AccountLink>
         </div>
-        <NavLinks className="justify-between overflow-scroll whitespace-nowrap py-1 text-sm hidden-scrollbar md:hidden" />
+        <NavLinks className="hidden-scrollbar justify-between overflow-scroll py-1 text-sm whitespace-nowrap md:hidden" />
       </nav>
     </header>
   )
