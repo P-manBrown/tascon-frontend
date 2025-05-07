@@ -15,7 +15,7 @@ export function AccountLink({ children }: Props) {
     <Link
       href="/account"
       className={`clickable-avatar ${
-        isActive ? 'pointer-events-none ring ring-gray-500' : ''
+        isActive ? 'pointer-events-none ring-3 ring-gray-500' : ''
       }`}
       aria-label="アカウント"
       prefetch={!isActive}
