@@ -12,7 +12,7 @@ const colorClasses = {
 export function Tag({ className = '', color, children }: Props) {
   return (
     <span
-      className={`rounded-sm border px-2 py-0.5 text-xs ${colorClasses[color]} ${className}`}
+      className={`rounded-sm border border-gray-200 px-2 py-0.5 text-xs ${colorClasses[color]} ${className}`}
     >
       {children}
     </span>

@@ -118,7 +118,9 @@ module.exports = {
           '@apply mb-1 text-sm font-bold': {},
         },
         '.text-box': {
-          '@apply block min-h-[2.75rem] w-full rounded-none border border-gray-300 px-2.5 focus:border-blue-600 focus:outline-none':
+          // TEMP: Add 'bg-white' to avoid the background becoming transparent.
+          //   See https://github.com/tailwindlabs/tailwindcss/issues/17646
+          '@apply block min-h-[2.75rem] w-full rounded-none border border-gray-300 px-2.5 focus:border-blue-600 focus:outline-none bg-white':
             {},
         },
         '.text-box-error': {
@@ -159,7 +161,8 @@ module.exports = {
             {},
         },
         '.btn-outline-disabled': {
-          '@apply cursor-not-allowed border-2 border-gray-400 text-gray-400': {},
+          '@apply cursor-not-allowed border-2 border-gray-400 text-gray-400':
+            {},
         },
         '.btn-outline-danger': {
           '@apply btn-shadow border-2 border-red-600 bg-white text-red-600 disabled:btn-outline-disabled disabled:duration-0':
