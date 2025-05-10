@@ -1936,12 +1936,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/bundle-analyzer@npm:^15.3.1":
-  version: 15.3.1
-  resolution: "@next/bundle-analyzer@npm:15.3.1"
+"@next/bundle-analyzer@npm:^15.3.2":
+  version: 15.3.2
+  resolution: "@next/bundle-analyzer@npm:15.3.2"
   dependencies:
     webpack-bundle-analyzer: "npm:4.10.1"
-  checksum: 10/a771a501302ba21d1d53d0e5dcb45865aa57a5439e453f309fa074d7621dc7b882c77ea9d06a33452f3758cf2c27f1433538bc57256085d69c7ba5b699a51fe4
+  checksum: 10/67796684f1cf727e72768cdc1c112269b7b89f916c85fe8f6c9585caaa91a24b4a2a71b68247afa259b24838ef0fb539d2522c7d49e52afeadcecd1f184fa430
   languageName: node
   linkType: hard
 
@@ -10547,7 +10547,7 @@ __metadata:
     "@hookform/resolvers": "npm:^5.0.1"
     "@markuplint/jsx-parser": "npm:^4.7.19"
     "@markuplint/react-spec": "npm:^4.5.19"
-    "@next/bundle-analyzer": "npm:^15.3.1"
+    "@next/bundle-analyzer": "npm:^15.3.2"
     "@tailwindcss/postcss": "npm:^4.1.5"
     "@types/node": "npm:22.15.3"
     "@types/react": "npm:19.1.2"
