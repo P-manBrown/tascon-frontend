@@ -47,7 +47,6 @@ export function NameEditor({
     handleBlur,
     registerReturn,
     fieldError,
-    setFieldError,
     closeEditor,
     saveFieldValueToLocalStorage,
     ...rest
@@ -64,15 +63,6 @@ export function NameEditor({
     if (err.statusCode === 404) {
       saveFieldValueToLocalStorage()
       router.replace(redirectLoginPath)
-    } else if (err.statusCode === 422) {
-      if (err.message.startsWith('ユーザー名')) {
-        setFieldError({
-          type: err.statusCode.toString(),
-          message: err.message,
-        })
-      } else {
-        openErrorSnackbar(err)
-      }
     } else {
       openErrorSnackbar(err)
     }
