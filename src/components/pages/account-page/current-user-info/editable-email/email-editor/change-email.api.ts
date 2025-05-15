@@ -15,7 +15,7 @@ type Params = {
   confirmSuccessUrl: string
 }
 
-export async function changeEmail({ ...bodyData }: Params) {
+export async function changeEmail(bodyData: Params) {
   const fetchDataResult = await fetchData(
     `${process.env.API_ORIGIN}/api/v1/auth`,
     {

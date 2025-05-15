@@ -2,13 +2,14 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { usePathname } from 'next/navigation'
 import { useState, useCallback, useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
+import { useHandleFormErrors } from '@/utils/form/use-handle-form-error'
 import { useLocalStorage } from '@/utils/local-storage/use-local-storage'
 import type {
   UseEditableTextParams,
   FormSubmitHandler,
   BlurHandler,
 } from './use-editable-text.types'
-import type { FieldError, FieldValues, SubmitHandler } from 'react-hook-form'
+import type { FieldValues, SubmitHandler } from 'react-hook-form'
 
 export function useEditableText<T extends FieldValues>({
   editorRef,
@@ -39,6 +40,7 @@ export function useEditableText<T extends FieldValues>({
       [name]: defaultValue,
     },
   })
+  const { handleFormErrors } = useHandleFormErrors(setError)
   const {
     hasLocalStorageValue,
     saveToLocalStorage,
@@ -53,13 +55,6 @@ export function useEditableText<T extends FieldValues>({
   const closeEditor = useCallback(() => {
     setIsEditorOpen(false)
   }, [])
-
-  const setFieldError = useCallback(
-    (error: FieldError) => {
-      setError(name, error)
-    },
-    [setError, name],
-  )
 
   const updateField = useCallback(
     (value: string) => {
@@ -161,7 +156,7 @@ export function useEditableText<T extends FieldValues>({
     fieldError: errors[name],
     closeEditor,
     openEditor,
-    setFieldError,
+    handleFormErrors,
     updateField,
     handleFormSubmit,
     handleBlur,

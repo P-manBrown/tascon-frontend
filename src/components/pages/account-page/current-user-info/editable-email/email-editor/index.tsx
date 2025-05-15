@@ -2,6 +2,7 @@
 
 import { useRouter, useSearchParams } from 'next/navigation'
 import React, { useRef } from 'react'
+import { z } from 'zod'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
 import { useSnackbarsStore } from '@/app/_components/snackbars/use-snackbars-store'
 import { EditableText } from '@/components/editable-text'
@@ -11,11 +12,12 @@ import { DetailItemHeadingLayout } from '@/components/layouts/detail-item-headin
 import { signUpSchema } from '@/schemas/request/auth'
 import { ErrorObject } from '@/types/error'
 import { HttpError } from '@/utils/error/custom/http-error'
+import { createFormErrorsSchema } from '@/utils/form/create-form-errors-schema'
 import { generateFromUrlParam } from '@/utils/login-path/generate-from-url-param'
 import { useRedirectLoginPath } from '@/utils/login-path/use-redirect-login-path'
+import { isValidValue } from '@/utils/type-guard/is-valid-data'
 import { changeEmail } from './change-email.api'
 import type { SubmitHandler } from 'react-hook-form'
-import type { z } from 'zod'
 
 const emailSchema = signUpSchema.pick({ email: true })
 type ChangeEmailFormValue = z.infer<typeof emailSchema>
@@ -28,6 +30,8 @@ type Props = Pick<React.ComponentProps<typeof EditableText>, 'children'> & {
 }
 
 const origin = process.env.NEXT_PUBLIC_FRONTEND_ORIGIN
+
+const formErrorsSchema = createFormErrorsSchema(z.enum(['email']))
 
 export function EmailEditor({
   currentUserId,
@@ -52,7 +56,7 @@ export function EmailEditor({
     handleBlur,
     registerReturn,
     fieldError,
-    setFieldError,
+    handleFormErrors,
     closeEditor,
     saveFieldValueToLocalStorage,
     ...rest
@@ -66,18 +70,12 @@ export function EmailEditor({
   })
 
   const handleHttpError = (err: ErrorObject<HttpError>) => {
-    if (err.statusCode === 404) {
+    const { statusCode, data } = err
+    if (statusCode === 404) {
       saveFieldValueToLocalStorage()
       router.replace(redirectLoginPath)
-    } else if (err.statusCode === 422) {
-      if (err.message.startsWith('メールアドレス')) {
-        setFieldError({
-          type: err.statusCode.toString(),
-          message: err.message,
-        })
-      } else {
-        openErrorSnackbar(err)
-      }
+    } else if (isValidValue(formErrorsSchema, data)) {
+      handleFormErrors({ ...data, shouldFocus: false })
     } else {
       openErrorSnackbar(err)
     }
