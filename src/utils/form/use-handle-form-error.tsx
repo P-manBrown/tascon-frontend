@@ -7,19 +7,16 @@ type FormErrors<T extends FieldValues = FieldValues> = {
     type: string
     full_message: string
   }>
+  shouldFocus?: boolean
 }
 
 export function useHandleFormErrors<T extends FieldValues = FieldValues>(
   setError: UseFormSetError<T>,
 ) {
   const handleFormErrors = useCallback(
-    ({ errors }: FormErrors<T>) => {
+    ({ errors, shouldFocus = true }: FormErrors<T>) => {
       errors.forEach(({ attribute, type, full_message }) => {
-        setError(
-          attribute,
-          { type, message: full_message },
-          { shouldFocus: true },
-        )
+        setError(attribute, { type, message: full_message }, { shouldFocus })
       })
     },
     [setError],
