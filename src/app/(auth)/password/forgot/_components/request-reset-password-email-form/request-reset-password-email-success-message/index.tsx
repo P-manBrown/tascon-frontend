@@ -7,14 +7,10 @@ import { IconMessage } from '@/components/icon-message'
 import { requestResetPasswordEmail } from '@/utils/api/request-reset-password-email'
 
 type Props = {
-  message: string
   email: string
 }
 
-export function RequestResetPasswordEmailSuccessMessage({
-  message,
-  email,
-}: Props) {
+export function RequestResetPasswordEmailSuccessMessage({ email }: Props) {
   const [isSending, setIsSending] = useState(false)
   const { openErrorSnackbar } = useErrorSnackbar()
   const openSnackbar = useSnackbarsStore((state) => state.openSnackbar)
@@ -35,7 +31,7 @@ export function RequestResetPasswordEmailSuccessMessage({
   return (
     <IconMessage severity="success" title="再設定用メール送信完了">
       <p className="break-words">
-        {message}
+        {`'${email}' にパスワードリセットの案内を送信しました。`}
         <br />
         内容を確認してパスワードを再設定してください。
       </p>

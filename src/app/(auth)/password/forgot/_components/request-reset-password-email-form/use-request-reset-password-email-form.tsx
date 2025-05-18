@@ -13,10 +13,7 @@ import type { z } from 'zod'
 type ResetPasswordFormValues = z.infer<typeof requestResetPasswordEmailSchema>
 
 export function useRequestResetPasswordEmailForm() {
-  const [resultValues, setResultValues] = useState({
-    email: '',
-    message: '',
-  })
+  const [email, setEmail] = useState('')
   const { openErrorSnackbar } = useErrorSnackbar()
   const {
     shouldMount,
@@ -67,10 +64,7 @@ export function useRequestResetPasswordEmailForm() {
         }
       } else {
         reset()
-        setResultValues({
-          email: result.email,
-          message: result.message,
-        })
+        setEmail(data.email)
         openModal()
       }
     },
@@ -85,7 +79,7 @@ export function useRequestResetPasswordEmailForm() {
     unmountModal,
     handleAnimationEnd,
     handleCancel,
-    resultValues,
+    email,
     isSubmitting,
     errors,
     register,

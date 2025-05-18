@@ -20,7 +20,7 @@ export function RequestResetPasswordEmailForm() {
     unmountModal,
     handleAnimationEnd,
     handleCancel,
-    resultValues,
+    email,
     isSubmitting,
     errors,
     register,
@@ -73,10 +73,7 @@ export function RequestResetPasswordEmailForm() {
               </IconButton>
             }
           >
-            <RequestResetPasswordEmailSuccessMessage
-              message={resultValues.message}
-              email={resultValues.email}
-            />
+            <RequestResetPasswordEmailSuccessMessage email={email} />
           </ModalContent>
         </Modal>
       )}
