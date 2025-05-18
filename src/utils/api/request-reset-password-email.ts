@@ -12,15 +12,11 @@ type Params = {
   email: string
 }
 
-const dataSchema = z.object({
-  success: z.literal(true),
-  email: z.string(),
-  message: z.string(),
-})
+const dataSchema = z.null()
 
 type Data = z.infer<typeof dataSchema>
 
-export async function requestResetPasswordEmail({ ...bodyData }: Params) {
+export async function requestResetPasswordEmail(bodyData: Params) {
   const fetchDataResult = await fetchData(
     `${process.env.API_ORIGIN}/api/v1/auth/password`,
     {
@@ -48,10 +44,7 @@ export async function requestResetPasswordEmail({ ...bodyData }: Params) {
     if (validateDataResult instanceof Error) {
       resultObject = createErrorObject(validateDataResult)
     } else {
-      resultObject = {
-        status: 'success',
-        ...validateDataResult,
-      }
+      resultObject = { status: 'success' }
     }
   }
 
