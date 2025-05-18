@@ -56,7 +56,6 @@ export function BioEditor({
     handleCancelClick,
     registerReturn,
     fieldError,
-    setFieldError,
     closeEditor,
     saveFieldValueToLocalStorage,
     ...rest
@@ -78,15 +77,6 @@ export function BioEditor({
     if (err.statusCode === 404) {
       saveFieldValueToLocalStorage()
       router.replace(redirectLoginPath)
-    } else if (err.statusCode === 422) {
-      if (err.message.startsWith('自己紹介')) {
-        setFieldError({
-          type: err.statusCode.toString(),
-          message: err.message,
-        })
-      } else {
-        openErrorSnackbar(err)
-      }
     } else {
       openErrorSnackbar(err)
     }
