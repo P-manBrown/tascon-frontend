@@ -109,7 +109,12 @@ module.exports = {
     },
   },
   plugins: [
-    plugin(function ({ addComponents, addUtilities }) {
+    plugin(function ({ addBase, addComponents, addUtilities }) {
+      addBase({
+        'button:not(:disabled), [role="button"]:not(:disabled)': {
+          cursor: 'pointer',
+        },
+      })
       addComponents({
         '.skeleton': {
           '@apply animate-pulse bg-gray-300': {},
