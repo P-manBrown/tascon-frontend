@@ -2,7 +2,7 @@
 
 import camelcaseKeys, { CamelCaseKeys } from 'camelcase-keys'
 import { z } from 'zod'
-import { validateTokenDataSchema } from '@/schemas/response/validate-token-success'
+import { accountSchema } from '@/schemas/response/account'
 import { ResultObject } from '@/types/api'
 import { fetchData } from '@/utils/api/fetch-data'
 import { getBearerToken } from '@/utils/cookie/bearer-token'
@@ -10,7 +10,7 @@ import { createErrorObject } from '@/utils/error/create-error-object'
 import { getRequestId } from '@/utils/request-id/get-request-id'
 import { validateData } from '@/utils/validation/validate-data'
 
-type Data = CamelCaseKeys<z.infer<typeof validateTokenDataSchema>, true>
+type Data = CamelCaseKeys<z.infer<typeof accountSchema>, true>
 
 export async function validateToken() {
   const fetchDataResult = await fetchData(
@@ -32,7 +32,7 @@ export async function validateToken() {
     const requestId = getRequestId(headers)
     const validateDataResult = validateData({
       requestId,
-      dataSchema: validateTokenDataSchema,
+      dataSchema: accountSchema,
       data,
     })
 
