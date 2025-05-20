@@ -2621,12 +2621,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:22.15.18":
-  version: 22.15.18
-  resolution: "@types/node@npm:22.15.18"
+"@types/node@npm:22.15.20":
+  version: 22.15.20
+  resolution: "@types/node@npm:22.15.20"
   dependencies:
     undici-types: "npm:~6.21.0"
-  checksum: 10/89c8c638beade806753b6fb2f25ed45b0e06f9f7375422137da5752be5c29fa9c75932b942fd55ae7de2b4288e8496912af3e029df45cc93735ac5eb49ece01e
+  checksum: 10/75f4c0787b643db602c260e1e0d73c75fbb59337d384decec0d64e0e8e4398bc325a6507ccf16c7751cbb8a70ac605cbf850153149b0823a41f8a1c34b072991
   languageName: node
   linkType: hard
 
@@ -10797,7 +10797,7 @@ __metadata:
     "@markuplint/react-spec": "npm:^4.5.19"
     "@next/bundle-analyzer": "npm:^15.3.2"
     "@tailwindcss/postcss": "npm:^4.1.7"
-    "@types/node": "npm:22.15.18"
+    "@types/node": "npm:22.15.20"
     "@types/react": "npm:19.1.4"
     "@types/react-dom": "npm:19.1.5"
     boring-avatars: "npm:^1.11.2"
