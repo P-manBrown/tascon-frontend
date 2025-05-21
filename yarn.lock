@@ -10824,7 +10824,7 @@ __metadata:
     snakecase-keys: "npm:^8.0.1"
     tailwindcss: "npm:^4.1.7"
     typescript: "npm:<5.9.0"
-    zod: "npm:^3.24.4"
+    zod: "npm:^3.25.17"
     zustand: "npm:^5.0.4"
   languageName: unknown
   linkType: soft
@@ -11907,10 +11907,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod@npm:^3.24.4":
-  version: 3.24.4
-  resolution: "zod@npm:3.24.4"
-  checksum: 10/3d545792fa54bb27ee5dbc34a5709e81f603185fcc94c8204b5d95c20dc4c81d870ff9c51f3884a30ef05cdc601449f4c4df254ac4783f0827b1faed7c1cdb48
+"zod@npm:^3.25.17":
+  version: 3.25.17
+  resolution: "zod@npm:3.25.17"
+  checksum: 10/132a61be241c9c09b90ed85ec3cbe2a8c9146b96048ca2c3e62f53fcec4fc06c0047f00ef49521cd63bf133a6a6ed54ff733e68d3b4dc375fc1e34d9ad182a16
   languageName: node
   linkType: hard
 
