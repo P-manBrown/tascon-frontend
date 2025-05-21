@@ -4,7 +4,7 @@ import camelcaseKeys from 'camelcase-keys'
 import { cookies } from 'next/headers'
 import snakecaseKeys from 'snakecase-keys'
 import { z } from 'zod'
-import { authSchema } from '@/schemas/response/auth'
+import { accountSchema } from '@/schemas/response/account'
 import { ResultObject } from '@/types/api'
 import { fetchData } from '@/utils/api/fetch-data'
 import { getBearerToken, setBearerToken } from '@/utils/cookie/bearer-token'
@@ -17,13 +17,7 @@ type Params = {
   password: string
 }
 
-const dataSchema = z.object({
-  success: z.literal(true),
-  data: authSchema.omit({ avatar_url: true }),
-  message: z.string(),
-})
-
-type Data = CamelCaseKeys<z.infer<typeof dataSchema>, true>
+type Data = CamelCaseKeys<z.infer<typeof accountSchema>, true>
 
 export async function resetPassword(bodyData: Params) {
   const fetchDataResult = await fetchData(
@@ -50,7 +44,11 @@ export async function resetPassword(bodyData: Params) {
     const { headers, data } = fetchDataResult
     const requestId = getRequestId(headers)
 
-    const validateDataResult = validateData({ requestId, dataSchema, data })
+    const validateDataResult = validateData({
+      requestId,
+      dataSchema: accountSchema,
+      data,
+    })
     if (validateDataResult instanceof Error) {
       resultObject = createErrorObject(validateDataResult)
     } else {
