@@ -19,7 +19,7 @@ export async function deleteAccount() {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: getBearerToken(),
+        Authorization: await getBearerToken(),
       },
     },
   )

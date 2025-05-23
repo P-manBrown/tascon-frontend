@@ -18,7 +18,7 @@ export async function logout() {
     {
       method: 'DELETE',
       headers: {
-        Authorization: getBearerToken(),
+        Authorization: await getBearerToken(),
       },
     },
   )

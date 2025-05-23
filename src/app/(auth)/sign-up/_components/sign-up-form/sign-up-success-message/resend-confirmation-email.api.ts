@@ -23,7 +23,7 @@ export async function resendConfirmationEmail(bodyData: Params) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: getBearerToken(),
+        Authorization: await getBearerToken(),
       },
       body: JSON.stringify({
         ...bodyData,

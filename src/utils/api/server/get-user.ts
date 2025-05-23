@@ -22,7 +22,7 @@ export const getUser = cache(async (id: string) => {
     {
       method: 'GET',
       headers: {
-        Authorization: getBearerToken(),
+        Authorization: await getBearerToken(),
       },
     },
   )
