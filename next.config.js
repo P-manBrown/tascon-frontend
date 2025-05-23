@@ -12,6 +12,9 @@ const withPWA = require('next-pwa')({
 const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: ['pino'],
+    serverActions: {
+      bodySizeLimit: '3mb',
+    },
   },
   reactStrictMode: true,
   images: {
