@@ -11,12 +11,12 @@ const withPWA = require('next-pwa')({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    serverComponentsExternalPackages: ['pino'],
     serverActions: {
       bodySizeLimit: '3mb',
     },
   },
   reactStrictMode: true,
+  serverExternalPackages: ['pino'],
   images: {
     formats: ['image/avif', 'image/webp'],
     minimumCacheTTL: 60 * 60 * 24 * 365,
