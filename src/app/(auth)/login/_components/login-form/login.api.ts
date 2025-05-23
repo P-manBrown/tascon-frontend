@@ -53,7 +53,7 @@ export async function login(bodyData: Params) {
       const bearerToken = headers.get('Authorization')
       const expiry = headers.get('expiry')
       if (bearerToken !== null && expiry !== null) {
-        setBearerToken({ bearerToken, expiry })
+        await setBearerToken({ bearerToken, expiry })
       }
     }
   }
