@@ -18,7 +18,7 @@ export async function validateToken() {
     {
       method: 'GET',
       headers: {
-        Authorization: getBearerToken(),
+        Authorization: await getBearerToken(),
       },
     },
   )

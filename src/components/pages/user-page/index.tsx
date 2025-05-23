@@ -24,9 +24,9 @@ const avatarLayoutClasses = 'flex justify-center'
 const avatarSize = 128
 
 export async function UserPage({ id }: Props) {
-  const handleHttpError = (err: HttpError) => {
+  const handleHttpError = async (err: HttpError) => {
     if (err.statusCode === 401) {
-      const redirectLoginPath = generateRedirectLoginPath()
+      const redirectLoginPath = await generateRedirectLoginPath()
       redirect(redirectLoginPath)
     } else if (err.statusCode === 404) {
       notFound()

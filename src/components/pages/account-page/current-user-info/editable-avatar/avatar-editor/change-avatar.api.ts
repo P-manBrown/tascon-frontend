@@ -16,7 +16,7 @@ type Params = {
 
 export async function changeAvatar({ formData }: Params) {
   let reqHeaders: Record<string, string> = {
-    Authorization: getBearerToken(),
+    Authorization: await getBearerToken(),
   }
   let body: FormData | string
 

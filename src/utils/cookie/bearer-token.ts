@@ -8,22 +8,30 @@ type SetBearerTokenParams = {
   expiry: string | number
 }
 
-export function setBearerToken({ bearerToken, expiry }: SetBearerTokenParams) {
+export async function setBearerToken({
+  bearerToken,
+  expiry,
+}: SetBearerTokenParams) {
+  const cookieStore = await cookies()
+
   const expiryDate = new Date(Number(expiry) * 1000)
-  cookies().set(COOKIE_NAME, bearerToken, {
+
+  cookieStore.set(COOKIE_NAME, bearerToken, {
     httpOnly: true,
     sameSite: 'lax',
     expires: expiryDate,
   })
 }
 
-export function getBearerToken() {
-  const cookieStore = cookies()
+export async function getBearerToken() {
+  const cookieStore = await cookies()
   const bearerToken = cookieStore.get(COOKIE_NAME)?.value ?? ''
 
   return bearerToken
 }
 
-export function deleteBearerToken() {
-  cookies().delete(COOKIE_NAME)
+export async function deleteBearerToken() {
+  const cookieStore = await cookies()
+
+  cookieStore.delete(COOKIE_NAME)
 }

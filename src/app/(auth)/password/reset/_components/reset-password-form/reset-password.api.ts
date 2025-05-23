@@ -20,18 +20,20 @@ type Params = {
 type Data = CamelCaseKeys<z.infer<typeof accountSchema>, true>
 
 export async function resetPassword(bodyData: Params) {
+  const cookieStore = await cookies()
+
   const fetchDataResult = await fetchData(
     `${process.env.API_ORIGIN}/api/v1/auth/password`,
     {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: getBearerToken(),
+        Authorization: await getBearerToken(),
       },
       body: JSON.stringify({
         ...snakecaseKeys(bodyData, { deep: false }),
         password_confirmation: bodyData.password,
-        reset_password_token: cookies().get('resetPasswordToken')?.value,
+        reset_password_token: cookieStore.get('resetPasswordToken')?.value,
       }),
     },
   )
@@ -61,7 +63,7 @@ export async function resetPassword(bodyData: Params) {
       if (bearerToken !== null && expiry !== null) {
         setBearerToken({ bearerToken, expiry })
       }
-      cookies().delete('resetPasswordToken')
+      cookieStore.delete('resetPasswordToken')
     }
   }
 

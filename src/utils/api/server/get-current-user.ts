@@ -16,7 +16,7 @@ export const getCurrentUser = cache(async () => {
     {
       method: 'GET',
       headers: {
-        Authorization: getBearerToken(),
+        Authorization: await getBearerToken(),
       },
     },
   )
@@ -25,7 +25,7 @@ export const getCurrentUser = cache(async () => {
     const isHttpError = fetchDataResult instanceof HttpError
     const isUnauthorized = isHttpError && fetchDataResult.statusCode === 401
     if (isUnauthorized) {
-      const redirectLoginPath = generateRedirectLoginPath()
+      const redirectLoginPath = await generateRedirectLoginPath()
       redirect(redirectLoginPath)
     }
 
