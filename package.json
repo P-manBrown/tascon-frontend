@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "debug": "NODE_OPTIONS='--inspect=0.0.0.0 -r ./.pnp.cjs' next dev",
     "build": "ANALYZE=true next build",
     "start": "next start",
