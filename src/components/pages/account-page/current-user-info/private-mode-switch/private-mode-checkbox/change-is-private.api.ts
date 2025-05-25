@@ -22,7 +22,7 @@ export async function changeIsPrivate({ ...bodyData }: Params) {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: getBearerToken(),
+        Authorization: await getBearerToken(),
       },
       body: JSON.stringify(snakecaseKeys(bodyData, { deep: false })),
     },

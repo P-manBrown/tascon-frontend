@@ -1,16 +1,22 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
 import { useModal } from '@/components/modal/use-modal'
 import { requestResetPasswordEmailSchema } from '@/schemas/request/auth'
 import { ErrorObject } from '@/types/error'
 import { requestResetPasswordEmail } from '@/utils/api/request-reset-password-email'
 import { HttpError } from '@/utils/error/custom/http-error'
+import { isValidValue } from '@/utils/type-guard/is-valid-data'
 import type { SubmitHandler } from 'react-hook-form'
-import type { z } from 'zod'
 
 type ResetPasswordFormValues = z.infer<typeof requestResetPasswordEmailSchema>
+
+const snackbarErrorsSchema = z.object({
+  success: z.literal(false),
+  errors: z.array(z.string()),
+})
 
 export function useRequestResetPasswordEmailForm() {
   const [email, setEmail] = useState('')
@@ -28,7 +34,6 @@ export function useRequestResetPasswordEmailForm() {
     register,
     handleSubmit,
     reset,
-    setError,
     formState: { isSubmitting, errors },
   } = useForm<ResetPasswordFormValues>({
     mode: 'onBlur',
@@ -37,20 +42,13 @@ export function useRequestResetPasswordEmailForm() {
 
   const handleHttpError = useCallback(
     (err: ErrorObject<HttpError>) => {
-      if (err.message.startsWith('メールアドレス')) {
-        setError(
-          'email',
-          {
-            type: err.status.toString(),
-            message: err.message,
-          },
-          { shouldFocus: true },
-        )
+      if (isValidValue(snackbarErrorsSchema, err.data)) {
+        openErrorSnackbar(err, err.data.errors[0])
       } else {
         openErrorSnackbar(err)
       }
     },
-    [openErrorSnackbar, setError],
+    [openErrorSnackbar],
   )
 
   const onSubmit: SubmitHandler<ResetPasswordFormValues> = useCallback(

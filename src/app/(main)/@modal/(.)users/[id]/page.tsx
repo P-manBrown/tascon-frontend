@@ -4,11 +4,12 @@ import { UserPage } from '@/components/pages/user-page'
 // TEMP: https://github.com/vercel/next.js/issues/59316
 
 type Props = {
-  params: {
-    id: string
-  }
+  params: Promise<{ id: string }>
 }
 
-export default function User({ params: { id } }: Props) {
+export default async function User(props: Props) {
+  const params = await props.params
+  const { id } = params
+
   return <UserPage id={id} />
 }

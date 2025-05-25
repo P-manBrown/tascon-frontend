@@ -18,7 +18,7 @@ export function IconButton({
       {...rest}
     >
       {status === 'pending' ? (
-        <Spinner className="h-5 border-[3.5px] border-gray-400" />
+        <Spinner className="size-5 text-gray-400" />
       ) : (
         children
       )}

@@ -4,7 +4,7 @@ import camelcaseKeys from 'camelcase-keys'
 import { cookies } from 'next/headers'
 import snakecaseKeys from 'snakecase-keys'
 import { z } from 'zod'
-import { authSchema } from '@/schemas/response/auth'
+import { accountSchema } from '@/schemas/response/account'
 import { ResultObject } from '@/types/api'
 import { fetchData } from '@/utils/api/fetch-data'
 import { getBearerToken, setBearerToken } from '@/utils/cookie/bearer-token'
@@ -17,27 +17,23 @@ type Params = {
   password: string
 }
 
-const dataSchema = z.object({
-  success: z.literal(true),
-  data: authSchema.omit({ avatar_url: true }),
-  message: z.string(),
-})
-
-type Data = CamelCaseKeys<z.infer<typeof dataSchema>, true>
+type Data = CamelCaseKeys<z.infer<typeof accountSchema>, true>
 
 export async function resetPassword(bodyData: Params) {
+  const cookieStore = await cookies()
+
   const fetchDataResult = await fetchData(
     `${process.env.API_ORIGIN}/api/v1/auth/password`,
     {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: getBearerToken(),
+        Authorization: await getBearerToken(),
       },
       body: JSON.stringify({
         ...snakecaseKeys(bodyData, { deep: false }),
         password_confirmation: bodyData.password,
-        reset_password_token: cookies().get('resetPasswordToken')?.value,
+        reset_password_token: cookieStore.get('resetPasswordToken')?.value,
       }),
     },
   )
@@ -50,7 +46,11 @@ export async function resetPassword(bodyData: Params) {
     const { headers, data } = fetchDataResult
     const requestId = getRequestId(headers)
 
-    const validateDataResult = validateData({ requestId, dataSchema, data })
+    const validateDataResult = validateData({
+      requestId,
+      dataSchema: accountSchema,
+      data,
+    })
     if (validateDataResult instanceof Error) {
       resultObject = createErrorObject(validateDataResult)
     } else {
@@ -63,7 +63,7 @@ export async function resetPassword(bodyData: Params) {
       if (bearerToken !== null && expiry !== null) {
         setBearerToken({ bearerToken, expiry })
       }
-      cookies().delete('resetPasswordToken')
+      cookieStore.delete('resetPasswordToken')
     }
   }
 

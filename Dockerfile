@@ -1,4 +1,4 @@
-FROM node:22.15.1
+FROM node:22.16.0
 
 ARG PROJECT_NAME
 ARG USER_NAME
@@ -13,4 +13,4 @@ WORKDIR /home/${USER_NAME}/${PROJECT_NAME}
 
 EXPOSE 3000
 
-CMD ["bash", "-c", "node -r ./.pnp.cjs $(yarn bin next) dev"]
+CMD ["bash", "-c", "node -r ./.pnp.cjs $(yarn bin next) dev --turbopack"]
