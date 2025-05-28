@@ -42,12 +42,12 @@ export async function changePassword(bodyData: Params) {
   } else {
     const { headers, data } = fetchDataResult
     const requestId = getRequestId(headers)
-
     const validateDataResult = validateData({
       requestId,
       dataSchema: accountSchema,
       data,
     })
+
     if (validateDataResult instanceof Error) {
       resultObject = createErrorObject(validateDataResult)
     } else {

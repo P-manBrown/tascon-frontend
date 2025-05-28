@@ -1,7 +1,10 @@
 import { z } from 'zod'
 
 export function createFormErrorsSchema<
-  T extends z.ZodLiteral<string> | z.ZodEnum<[string, ...string[]]>,
+  T extends
+    | z.ZodLiteral<string>
+    | z.ZodEnum<[string, ...string[]]>
+    | z.ZodEffects<z.ZodLiteral<string> | z.ZodEnum<[string, ...string[]]>>,
 >(attributeSchema: T) {
   return z.object({
     errors: z.array(
