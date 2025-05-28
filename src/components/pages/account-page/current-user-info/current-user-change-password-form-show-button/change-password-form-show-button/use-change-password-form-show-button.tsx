@@ -9,6 +9,8 @@ import { changePasswordSchema } from '@/schemas/request/auth'
 import { ErrorObject } from '@/types/error'
 import { requestResetPasswordEmail } from '@/utils/api/request-reset-password-email'
 import { HttpError } from '@/utils/error/custom/http-error'
+import { createFormErrorsSchema } from '@/utils/form/create-form-errors-schema'
+import { useHandleFormErrors } from '@/utils/form/use-handle-form-error'
 import { useRedirectLoginPath } from '@/utils/login-path/use-redirect-login-path'
 import { changePassword } from './change-password.api'
 
@@ -17,6 +19,16 @@ type ChangePasswordFormValues = z.infer<typeof changePasswordSchema>
 type Params = {
   email: string
 }
+
+const formErrorsSchema = createFormErrorsSchema(
+  z.enum(['password', 'current_password']).transform((value) => {
+    if (value === 'current_password') {
+      return 'currentPassword'
+    } else {
+      return value
+    }
+  }),
+)
 
 export function useChangePasswordFormShowButton({ email }: Params) {
   const searchParams = useSearchParams()
@@ -39,6 +51,8 @@ export function useChangePasswordFormShowButton({ email }: Params) {
     mode: 'onBlur',
     resolver: zodResolver(changePasswordSchema),
   })
+
+  const { handleFormErrors } = useHandleFormErrors(setError)
 
   const showForm = useCallback(() => {
     setIsShown(true)
@@ -64,23 +78,22 @@ export function useChangePasswordFormShowButton({ email }: Params) {
 
   const handleHttpError = useCallback(
     (err: ErrorObject<HttpError>) => {
-      if (err.statusCode === 401) {
+      const { statusCode, data } = err
+      if (statusCode === 401) {
         router.push(redirectLoginPath)
         router.refresh()
-      } else if (err.message.startsWith('現在のパスワード')) {
-        setError(
-          'currentPassword',
-          {
-            type: err.statusCode.toString(),
-            message: err.message,
-          },
-          { shouldFocus: true },
-        )
+      } else if (statusCode === 422) {
+        const parseResult = formErrorsSchema.safeParse(data)
+        if (parseResult.success) {
+          handleFormErrors(parseResult.data)
+        } else {
+          openErrorSnackbar(err)
+        }
       } else {
         openErrorSnackbar(err)
       }
     },
-    [router, redirectLoginPath, setError, openErrorSnackbar],
+    [router, redirectLoginPath, handleFormErrors, openErrorSnackbar],
   )
 
   const onSubmit = useCallback(
