@@ -70,7 +70,7 @@ export function useChangePasswordFormShowButton({ email }: Params) {
     } else {
       openSnackbar({
         severity: 'success',
-        message: result.message,
+        message: `'${email}' にパスワードリセットの案内を送信しました。`,
       })
     }
     setIsSending(false)
