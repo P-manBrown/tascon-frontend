@@ -15,7 +15,7 @@ import { HttpError } from '@/utils/error/custom/http-error'
 import { createFormErrorsSchema } from '@/utils/form/create-form-errors-schema'
 import { generateFromUrlParam } from '@/utils/login-path/generate-from-url-param'
 import { useRedirectLoginPath } from '@/utils/login-path/use-redirect-login-path'
-import { isValidValue } from '@/utils/type-guard/is-valid-data'
+import { isValidValue } from '@/utils/type-guard/is-valid-value'
 import { changeEmail } from './change-email.api'
 import type { SubmitHandler } from 'react-hook-form'
 

@@ -6,7 +6,7 @@ import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error
 import { loginSchema } from '@/schemas/request/auth'
 import { ErrorObject } from '@/types/error'
 import { HttpError } from '@/utils/error/custom/http-error'
-import { isValidValue } from '@/utils/type-guard/is-valid-data'
+import { isValidValue } from '@/utils/type-guard/is-valid-value'
 import { getPostLoginUrl } from '@/utils/url/get-post-login-url'
 import { login } from './login.api'
 import type { SubmitHandler } from 'react-hook-form'

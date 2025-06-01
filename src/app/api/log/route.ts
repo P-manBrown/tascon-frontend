@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { logger } from '@/lib/pino/logger'
 import { getRequestId } from '@/utils/request-id/get-request-id'
-import { isValidValue } from '@/utils/type-guard/is-valid-data'
+import { isValidValue } from '@/utils/type-guard/is-valid-value'
 import { validateValue } from '@/utils/type-guard/validate-value'
 import { validateContentType } from '@/utils/validation/validate-content-type'
 import { errorMessageSchema } from './_schemas/error-message'
