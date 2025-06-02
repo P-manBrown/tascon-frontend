@@ -16,7 +16,7 @@ export function AvatarEditor({ avatarUrl, children }: Props) {
     onSubmit,
     handleXMarkClick,
     ref,
-    isSubmitting,
+    isPending,
     errors,
     inputRef,
     isDeletingAvatar,
@@ -29,16 +29,16 @@ export function AvatarEditor({ avatarUrl, children }: Props) {
         <button
           type="button"
           className={`peer clickable-avatar disabled:cursor-wait disabled:hover:brightness-100 ${
-            isSubmitting ? 'disabled:animate-pulse' : ''
+            isPending ? 'disabled:animate-pulse' : ''
           }`}
-          disabled={isSubmitting || isDeletingAvatar}
+          disabled={isPending || isDeletingAvatar}
           tabIndex={0}
           aria-label="アバター変更"
           onClick={() => inputRef.current?.click()}
         >
           {children}
         </button>
-        {avatarUrl && !isSubmitting && (
+        {avatarUrl && !isPending && (
           <IconButton
             type="button"
             className={`absolute top-0.5 right-0.5 z-10 duration-[1ms] peer-hover:visible hover:visible [@media(hover:hover)]:peer-focus-visible:visible [@media(hover:hover)]:focus-visible:visible ${
