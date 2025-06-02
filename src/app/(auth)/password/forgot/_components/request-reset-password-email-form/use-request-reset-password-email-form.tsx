@@ -8,7 +8,7 @@ import { requestResetPasswordEmailSchema } from '@/schemas/request/auth'
 import { ErrorObject } from '@/types/error'
 import { requestResetPasswordEmail } from '@/utils/api/request-reset-password-email'
 import { HttpError } from '@/utils/error/custom/http-error'
-import { isValidValue } from '@/utils/type-guard/is-valid-data'
+import { isValidValue } from '@/utils/type-guard/is-valid-value'
 import type { SubmitHandler } from 'react-hook-form'
 
 type ResetPasswordFormValues = z.infer<typeof requestResetPasswordEmailSchema>
