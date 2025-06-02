@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useRef } from 'react'
+import { useRef, useTransition } from 'react'
 import { z } from 'zod'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
 import { EditableText } from '@/components/editable-text'
@@ -42,6 +42,7 @@ export function BioEditor({
   unsavedChangeTag,
   children,
 }: Props) {
+  const [isPending, startTransition] = useTransition()
   const router = useRouter()
   const searchParams = useSearchParams()
   const redirectLoginPath = useRedirectLoginPath({ searchParams })
@@ -49,16 +50,14 @@ export function BioEditor({
   const {
     isEditorOpen,
     updateField,
-    isSubmitting,
     hasLocalStorageValue,
     handleFormSubmit,
     handleBlur,
     handleCancelClick,
     registerReturn,
     fieldError,
-    closeEditor,
     saveFieldValueToLocalStorage,
-    ...rest
+    openEditor,
   } = useEditableText<ChangeBioFormValue>({
     editorRef,
     currentUserId,
@@ -83,17 +82,18 @@ export function BioEditor({
   }
 
   const onSubmit = async (data: ChangeBioFormValue) => {
-    const result = await changeBio(data)
-    if (result.status === 'error') {
-      if (result.name === 'HttpError') {
-        handleHttpError(result)
+    startTransition(async () => {
+      const result = await changeBio(data)
+      if (result.status === 'error') {
+        if (result.name === 'HttpError') {
+          handleHttpError(result)
+        } else {
+          openErrorSnackbar(result)
+        }
       } else {
-        openErrorSnackbar(result)
+        updateField(result.account.bio ?? '')
       }
-    } else {
-      updateField(result.account.bio ?? '')
-      closeEditor()
-    }
+    })
   }
 
   return (
@@ -109,7 +109,7 @@ export function BioEditor({
             ref={editorRef}
             shadowRef={shadowRef}
             rows={6}
-            readOnly={isSubmitting}
+            readOnly={isPending}
             wordCount={wordCount}
             maxCount={250}
             register={registerReturn}
@@ -117,13 +117,13 @@ export function BioEditor({
             onInput={handleInput}
           />
         }
-        isEditorOpen={isEditorOpen}
-        isSubmitting={isSubmitting}
+        isEditorOpen={isEditorOpen || isPending}
+        isSubmitting={isPending}
         hasLocalStorageValue={hasLocalStorageValue}
         onFormSubmit={handleFormSubmit(onSubmit)}
         onCancelClick={handleCancelClick}
         onBlur={handleBlur(onSubmit)}
-        {...rest}
+        openEditor={openEditor}
       >
         {children}
       </EditableText>
