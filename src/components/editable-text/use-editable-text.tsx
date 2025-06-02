@@ -30,7 +30,7 @@ export function useEditableText<T extends FieldValues>({
     getValues,
     setValue,
     setError,
-    formState: { isDirty, isSubmitting, errors },
+    formState: { isDirty, isValid, isSubmitting, errors },
   } = useForm({
     mode: 'onChange',
     shouldFocusError: false,
@@ -88,10 +88,12 @@ export function useEditableText<T extends FieldValues>({
         await handleSubmit(onSubmit)()
       } else {
         removeLocalStorageValue()
+      }
+      if (isValid) {
         setIsEditorOpen(false)
       }
     },
-    [isDirty, handleSubmit, removeLocalStorageValue],
+    [isDirty, handleSubmit, removeLocalStorageValue, isValid],
   )
 
   const handleBlur: BlurHandler<T> = useCallback(
@@ -108,11 +110,13 @@ export function useEditableText<T extends FieldValues>({
             await handleSubmit(onSubmit)()
           } else {
             removeLocalStorageValue()
+          }
+          if (isValid) {
             setIsEditorOpen(false)
           }
         }
       },
-    [isDirty, handleSubmit, removeLocalStorageValue],
+    [isDirty, handleSubmit, removeLocalStorageValue, isValid],
   )
 
   const handleCancelClick = useCallback(() => {

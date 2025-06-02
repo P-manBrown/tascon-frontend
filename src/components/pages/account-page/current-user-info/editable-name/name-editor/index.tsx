@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useRef } from 'react'
+import { useRef, useTransition } from 'react'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
 import { EditableText } from '@/components/editable-text'
 import { useEditableText } from '@/components/editable-text/use-editable-text'
@@ -33,6 +33,7 @@ export function NameEditor({
   unsavedChangeTag,
   children,
 }: Props) {
+  const [isPending, startTransition] = useTransition()
   const { openErrorSnackbar } = useErrorSnackbar()
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -40,16 +41,15 @@ export function NameEditor({
   const editorRef = useRef<HTMLInputElement>(null)
   const {
     updateField,
-    isSubmitting,
+    isEditorOpen,
     hasLocalStorageValue,
     handleFormSubmit,
     handleCancelClick,
     handleBlur,
     registerReturn,
     fieldError,
-    closeEditor,
     saveFieldValueToLocalStorage,
-    ...rest
+    openEditor,
   } = useEditableText<ChangeNameFormValue>({
     editorRef,
     currentUserId,
@@ -69,17 +69,18 @@ export function NameEditor({
   }
 
   const onSubmit = async (data: ChangeNameFormValue) => {
-    const result = await changeName(data)
-    if (result.status === 'error') {
-      if (result.name === 'HttpError') {
-        handleHttpError(result)
+    startTransition(async () => {
+      const result = await changeName(data)
+      if (result.status === 'error') {
+        if (result.name === 'HttpError') {
+          handleHttpError(result)
+        } else {
+          openErrorSnackbar(result)
+        }
       } else {
-        openErrorSnackbar(result)
+        updateField(result.account.name)
       }
-    } else {
-      updateField(result.account.name)
-      closeEditor()
-    }
+    })
   }
 
   return (
@@ -94,7 +95,7 @@ export function NameEditor({
           <TextField
             ref={editorRef}
             type="text"
-            readOnly={isSubmitting}
+            readOnly={isPending}
             register={registerReturn}
             errors={fieldError}
           />
@@ -102,9 +103,10 @@ export function NameEditor({
         onFormSubmit={handleFormSubmit(onSubmit)}
         onCancelClick={handleCancelClick}
         onBlur={handleBlur(onSubmit)}
-        isSubmitting={isSubmitting}
+        isSubmitting={isPending}
         hasLocalStorageValue={hasLocalStorageValue}
-        {...rest}
+        isEditorOpen={isEditorOpen || isPending}
+        openEditor={openEditor}
       >
         {children}
       </EditableText>

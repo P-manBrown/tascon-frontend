@@ -99,7 +99,7 @@ export function EditableText({
         >
           {children}
           <button
-            className={`absolute left-0 top-0 h-full w-full rounded-sm duration-200 has-[>span]:hover:bg-black/10 ${
+            className={`absolute top-0 left-0 h-full w-full rounded-sm duration-200 has-[>span]:hover:bg-black/10 ${
               isTextSelected || isDraggingInside ? 'pointer-events-none' : ''
             }`}
             onClick={openEditor}
