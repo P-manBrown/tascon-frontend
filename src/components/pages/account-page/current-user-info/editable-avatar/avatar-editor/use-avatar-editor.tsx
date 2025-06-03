@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useState, useRef, useTransition } from 'react'
+import { useRef, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
@@ -20,12 +20,12 @@ const formErrorsSchema = createFormErrorsSchema(z.enum(['avatar']))
 
 export function useAvatarEditor() {
   const inputRef = useRef<HTMLInputElement | null>(null)
-  const [isPending, startTransition] = useTransition()
+  const [isSubmitting, startSubmitTransition] = useTransition()
+  const [isDeleting, startDeleteTransition] = useTransition()
   const { openErrorSnackbar } = useErrorSnackbar()
   const router = useRouter()
   const searchParams = useSearchParams()
   const redirectLoginPath = useRedirectLoginPath({ searchParams })
-  const [isDeletingAvatar, setIsDeletingAvatar] = useState(false)
   const {
     register,
     handleSubmit,
@@ -55,7 +55,7 @@ export function useAvatarEditor() {
       const formData = new FormData()
       formData.append('avatar', data.avatar[0])
 
-      startTransition(async () => {
+      startSubmitTransition(async () => {
         const result = await changeAvatar({ formData })
 
         if (result.status === 'error') {
@@ -80,20 +80,19 @@ export function useAvatarEditor() {
   }
 
   const handleXMarkClick = async () => {
-    setIsDeletingAvatar(true)
     reset()
 
-    const result = await changeAvatar({ formData: null })
+    startDeleteTransition(async () => {
+      const result = await changeAvatar({ formData: null })
 
-    if (result.status === 'error') {
-      if (result.name === 'HttpError') {
-        handleDeleteHttpError(result)
-      } else {
-        openErrorSnackbar(result)
+      if (result.status === 'error') {
+        if (result.name === 'HttpError') {
+          handleDeleteHttpError(result)
+        } else {
+          openErrorSnackbar(result)
+        }
       }
-    }
-
-    setIsDeletingAvatar(false)
+    })
   }
 
   return {
@@ -101,10 +100,10 @@ export function useAvatarEditor() {
     onSubmit,
     handleXMarkClick,
     ref,
-    isPending,
+    isSubmitting,
     errors,
     inputRef,
-    isDeletingAvatar,
+    isDeleting,
     registerRest,
   }
 }
