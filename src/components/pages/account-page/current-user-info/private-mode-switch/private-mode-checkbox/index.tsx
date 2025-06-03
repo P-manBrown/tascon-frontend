@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useState } from 'react'
+import { useTransition } from 'react'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
 import { Checkbox } from '@/components/form-controls/checkbox'
 import { ErrorObject } from '@/types/error'
@@ -25,7 +25,7 @@ export function PrivateModeCheckbox({
   const router = useRouter()
   const searchParams = useSearchParams()
   const redirectLoginPath = useRedirectLoginPath({ searchParams })
-  const [isChangingIsPrivate, setIsChangingIsPrivate] = useState(false)
+  const [isPending, startTransition] = useTransition()
 
   const handleKeyDown = (ev: React.KeyboardEvent<HTMLLabelElement>) => {
     if ((ev.key === 'Enter' || ev.key === ' ') && !ev.metaKey) {
@@ -43,22 +43,22 @@ export function PrivateModeCheckbox({
   }
 
   const handleChange = async (ev: React.ChangeEvent<HTMLInputElement>) => {
-    setIsChangingIsPrivate(true)
-    const result = await changeIsPrivate({ isPrivate: ev.target.checked })
-    if (result.status === 'error') {
-      if (result.name === 'HttpError') {
-        handleHttpError(result)
-      } else {
-        openErrorSnackbar(result)
+    startTransition(async () => {
+      const result = await changeIsPrivate({ isPrivate: ev.target.checked })
+      if (result.status === 'error') {
+        if (result.name === 'HttpError') {
+          handleHttpError(result)
+        } else {
+          openErrorSnackbar(result)
+        }
       }
-    }
-    setIsChangingIsPrivate(false)
+    })
   }
 
   return (
     <Checkbox
       checked={isPrivate}
-      disabled={isChangingIsPrivate}
+      disabled={isPending}
       toggleIcon={toggleIcon}
       description={description}
       onKeyDown={handleKeyDown}
