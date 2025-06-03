@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useState, useRef } from 'react'
+import { useState, useRef, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
@@ -20,6 +20,7 @@ const formErrorsSchema = createFormErrorsSchema(z.enum(['avatar']))
 
 export function useAvatarEditor() {
   const inputRef = useRef<HTMLInputElement | null>(null)
+  const [isPending, startTransition] = useTransition()
   const { openErrorSnackbar } = useErrorSnackbar()
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -30,7 +31,7 @@ export function useAvatarEditor() {
     handleSubmit,
     reset,
     setError,
-    formState: { isSubmitting, errors },
+    formState: { errors },
   } = useForm<ChangeAvatarFormValue>({
     mode: 'onChange',
     resolver: zodResolver(changeAvatarSchema),
@@ -54,17 +55,19 @@ export function useAvatarEditor() {
       const formData = new FormData()
       formData.append('avatar', data.avatar[0])
 
-      const result = await changeAvatar({ formData: formData })
+      startTransition(async () => {
+        const result = await changeAvatar({ formData })
 
-      if (result.status === 'error') {
-        if (result.name === 'HttpError') {
-          handleChangeHttpError(result)
+        if (result.status === 'error') {
+          if (result.name === 'HttpError') {
+            handleChangeHttpError(result)
+          } else {
+            openErrorSnackbar(result)
+          }
         } else {
-          openErrorSnackbar(result)
+          reset()
         }
-      } else {
-        reset()
-      }
+      })
     }
   }
 
@@ -98,7 +101,7 @@ export function useAvatarEditor() {
     onSubmit,
     handleXMarkClick,
     ref,
-    isSubmitting,
+    isPending,
     errors,
     inputRef,
     isDeletingAvatar,
