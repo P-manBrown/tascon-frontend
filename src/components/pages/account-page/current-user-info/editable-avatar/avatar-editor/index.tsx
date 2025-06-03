@@ -16,10 +16,10 @@ export function AvatarEditor({ avatarUrl, children }: Props) {
     onSubmit,
     handleXMarkClick,
     ref,
-    isPending,
+    isSubmitting,
     errors,
     inputRef,
-    isDeletingAvatar,
+    isDeleting,
     registerRest,
   } = useAvatarEditor()
 
@@ -29,23 +29,23 @@ export function AvatarEditor({ avatarUrl, children }: Props) {
         <button
           type="button"
           className={`peer clickable-avatar disabled:cursor-wait disabled:hover:brightness-100 ${
-            isPending ? 'disabled:animate-pulse' : ''
+            isSubmitting ? 'disabled:animate-pulse' : ''
           }`}
-          disabled={isPending || isDeletingAvatar}
+          disabled={isSubmitting || isDeleting}
           tabIndex={0}
           aria-label="アバター変更"
           onClick={() => inputRef.current?.click()}
         >
           {children}
         </button>
-        {avatarUrl && !isPending && (
+        {avatarUrl && !isSubmitting && (
           <IconButton
             type="button"
             className={`absolute top-0.5 right-0.5 z-10 duration-[1ms] peer-hover:visible hover:visible [@media(hover:hover)]:peer-focus-visible:visible [@media(hover:hover)]:focus-visible:visible ${
-              isDeletingAvatar ? '' : '[@media(hover:hover)]:invisible'
+              isDeleting ? '' : '[@media(hover:hover)]:invisible'
             }`}
             aria-label="アバター削除"
-            status={isDeletingAvatar ? 'pending' : 'idle'}
+            status={isDeleting ? 'pending' : 'idle'}
             onClick={handleXMarkClick}
           >
             <XCircleIcon className="size-6 fill-black stroke-white" />
