@@ -100,7 +100,7 @@ export function useAvatarEditor() {
     onSubmit,
     handleXMarkClick,
     ref,
-    isSubmitting,
+    isPending,
     errors,
     inputRef,
     isDeleting,
