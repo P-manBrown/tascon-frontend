@@ -19,18 +19,18 @@ export function NavLinks({ className }: Props) {
   return (
     <ul className={`flex ${className}`}>
       {navLinks.map((link) => {
-        const isActive = `/${segment}` === link.href
+        const isActive = link.href.startsWith(`/${segment}`)
         return (
           <li key={link.name}>
             <Link
               key={link.name}
               href={link.href}
-              className={`block px-2 py-1 ${
+              className={`block px-2 py-1 font-bold ${
                 isActive
-                  ? 'pointer-events-none relative font-bold text-black after:absolute after:-bottom-1 after:right-0 after:h-1 after:w-full after:rounded-t-sm after:bg-gradient-to-t after:from-gray-200 after:to-gray-500 after:to-35% after:content-[""]'
-                  : 'font-semibold text-gray-500 hover:text-black'
+                  ? 'pointer-events-none relative text-black after:absolute after:right-0 after:-bottom-1 after:h-1 after:w-full after:rounded-t-sm after:bg-gray-600 after:content-[""]'
+                  : 'text-gray-500 hover:text-black'
               }`}
-              prefetch={!isActive}
+              prefetch={isActive ? false : null}
               tabIndex={isActive ? -1 : undefined}
             >
               {link.name}

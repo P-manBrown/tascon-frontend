@@ -8,7 +8,7 @@ import { NavLinks } from './nav-links'
 
 export function MainHeader() {
   return (
-    <header className="bg-theme px-safe border-b border-b-gray-200">
+    <header className="bg-theme px-safe border-b border-b-gray-300">
       <nav className="px-2">
         <div className="flex justify-between py-1">
           <div className="flex flex-row">
