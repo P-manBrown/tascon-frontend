@@ -1,3 +1,4 @@
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { Snackbars } from './_components/snackbars'
 import './globals.css'
 import type { Metadata, Viewport } from 'next'
@@ -32,7 +33,7 @@ export default function RootLayout({ children }: Props) {
     <html lang="ja">
       {/* 'lg:overflow-hidden' for the route of the main group only. */}
       <body className="font-body has-[dialog:modal]:overflow-hidden has-[main#main]:overflow-hidden">
-        {children}
+        <NuqsAdapter>{children}</NuqsAdapter>
         <Snackbars />
       </body>
     </html>
