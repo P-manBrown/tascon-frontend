@@ -9,10 +9,10 @@ import { fetchData } from '../fetch-data'
 
 const dataSchema = z.object({
   user: z.object({
-    id: z.string(),
+    id: z.number(),
     name: z.string(),
-    bio: z.string(),
-    avatar_url: z.string(),
+    bio: z.string().optional(),
+    avatar_url: z.string().optional(),
   }),
 })
 
