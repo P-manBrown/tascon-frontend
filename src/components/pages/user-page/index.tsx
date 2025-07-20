@@ -65,7 +65,7 @@ export async function UserPage({ id }: Props) {
         <DetailItemHeading>自己紹介</DetailItemHeading>
       </DetailItemHeadingLayout>
       <DetailItemContentLayout>
-        {user.bio === '' ? (
+        {user.bio === undefined ? (
           <p className="text-gray-500">自己紹介は登録されていません...</p>
         ) : (
           <DetailMultiLineText>{user.bio}</DetailMultiLineText>
