@@ -29,6 +29,8 @@ module.exports = {
         'ctnr-yellow': '#7E611F',
         'ctnr-purple': '#5D355B',
         'ctnr-red': '#B1624D',
+        'ctnr-gray': '#6F747E',
+        'ctnr-pink': '#F2367E',
       },
       animation: {
         'scale-in-center':
@@ -45,6 +47,8 @@ module.exports = {
           'slide-out-bottom 0.2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both',
         'slide-in-left':
           'slide-in-left 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both',
+        'fade-in-delayed': 'fade-in 0.2s ease-in-out 0.1s both',
+        'expand-collapse': 'expand-collapse 2s ease-in-out infinite both',
       },
       keyframes: {
         'scale-in-center': {
@@ -115,6 +119,28 @@ module.exports = {
           to: {
             transform: 'translateX(0)',
             opacity: '1',
+          },
+        },
+        'fade-in': {
+          '0%': {
+            opacity: '0',
+          },
+          to: {
+            opacity: '1',
+          },
+        },
+        'expand-collapse': {
+          '0%, 100%': {
+            transform: 'translate(0px, 0px)',
+            'box-shadow': '0 0px 0px 0 rgb(0 0 0 / 0)',
+          },
+          '22.5%, 77.5%': {
+            transform: 'translate(0px, 0px)',
+            'box-shadow': '0 3px 6px 0 rgb(0 0 0 / 0.025)',
+          },
+          '45%, 55%': {
+            transform: 'translate(var(--end-x), var(--end-y))',
+            'box-shadow': '0 3px 6px 0 rgb(0 0 0 / 0.2)',
           },
         },
       },
