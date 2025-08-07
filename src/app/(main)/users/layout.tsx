@@ -12,7 +12,7 @@ export default async function UsersLayout({ children, modal }: Props) {
       <Suspense fallback={null}>
         <UsersSidebar />
       </Suspense>
-      <main className="flex-grow overflow-auto p-4 max-md:min-w-dvw">
+      <main className="flex-grow overflow-auto p-5 max-md:min-w-dvw md:px-10 md:py-5">
         {children}
       </main>
       {modal}
