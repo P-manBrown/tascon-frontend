@@ -215,6 +215,12 @@ module.exports = {
           'margin-inline': 'auto',
           'max-inline-size': 'max-content',
         },
+        '.line-clamp-2': {
+          overflow: 'hidden',
+          display: '-webkit-box',
+          '-webkit-box-orient': 'vertical',
+          '-webkit-line-clamp': '2',
+        },
       })
     }),
   ],
