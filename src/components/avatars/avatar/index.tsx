@@ -13,7 +13,7 @@ const shapeClasses = 'rounded-full'
 
 export function Avatar({ size, name, avatarUrl, priority = false }: Props) {
   return avatarUrl == null ? (
-    <span className="bg-gray-300">
+    <span className={`bg-gray-300 ${shapeClasses}`}>
       <DefaultAvatar
         size={size}
         name={name}
