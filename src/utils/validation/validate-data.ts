@@ -1,7 +1,6 @@
 import { z } from 'zod'
 import { createValidationError } from '../error/create-validation-error'
 import { ValidationError } from '../error/custom/validation-error'
-import { validateValue } from '../type-guard/validate-value'
 
 type Params<T> = {
   requestId: string
@@ -15,8 +14,8 @@ export function validateData<T extends z.ZodTypeAny>({
   data,
 }: Params<T>): z.infer<T> | ValidationError {
   try {
-    validateValue(dataSchema, data)
-    return data
+    const parsedData = dataSchema.parse(data)
+    return parsedData
   } catch (err) {
     if (err instanceof z.ZodError) {
       return createValidationError(requestId, err)
