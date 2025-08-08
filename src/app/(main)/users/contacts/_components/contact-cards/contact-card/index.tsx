@@ -33,7 +33,7 @@ export function ContactCard({
 
   return (
     <Link
-      href={`/users/${contactUserId}`}
+      href={`/users/profile/${contactUserId}`}
       className={`block transform transition-all duration-200 hover:scale-103 hover:drop-shadow-lg ${cardBaseClasses}`}
     >
       <div className={flexContainerClasses}>
