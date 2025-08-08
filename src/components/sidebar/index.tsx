@@ -59,7 +59,7 @@ export function Sidebar({
         </div>
       </aside>
       {!isOpen && (
-        <div className="animate-slide-in-left bg-theme max-md:mb-safe absolute bottom-0.5 rounded-e-sm border-y border-r border-gray-300">
+        <div className="animate-slide-in-left bg-theme max-md:mb-safe absolute bottom-0.5 z-50 rounded-e-sm border-y border-r border-gray-300">
           <IconButton
             className="h-10 w-8 rounded-s-none"
             aria-label="サイドバーを開く"
