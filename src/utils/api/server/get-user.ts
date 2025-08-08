@@ -13,6 +13,13 @@ const dataSchema = z.object({
     name: z.string(),
     bio: z.string().optional(),
     avatar_url: z.string().optional(),
+    current_user_contact: z
+      .object({
+        id: z.number(),
+        display_name: z.string().optional(),
+        note: z.string().optional(),
+      })
+      .optional(),
   }),
 })
 
