@@ -72,7 +72,7 @@ export function CollapsibleSection({
         } ${className}`}
         onClick={handleClick}
       >
-        <span className="flex select-none justify-center gap-1 group-hover:stroke-black">
+        <span className="flex justify-center gap-1 select-none group-hover:stroke-black">
           {isCollapsed ? (
             <>
               <ChevronDownIcon className="size-4 self-center" />

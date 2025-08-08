@@ -1,5 +1,6 @@
 import { notFound, redirect } from 'next/navigation'
 import { Avatar, LoadingAvatar } from '@/components/avatars/avatar'
+import { BioCollapsibleSection } from '@/components/collapsible-sections/bio-collapsible-section'
 import { DetailItemHeading } from '@/components/headings/detail-item-heading'
 import { DetailItemContentLayout } from '@/components/layouts/detail-item-content-layout'
 import { DetailItemHeadingLayout } from '@/components/layouts/detail-item-heading-layout'
@@ -22,6 +23,7 @@ type Props = {
 const userInfoLayoutClasses = 'flex flex-col space-y-10'
 const avatarLayoutClasses = 'flex justify-center'
 const avatarSize = 128
+const bioCollapsibleHeight = 160
 
 export async function UserPage({ id }: Props) {
   const handleHttpError = async (err: HttpError) => {
@@ -64,13 +66,15 @@ export async function UserPage({ id }: Props) {
       <DetailItemHeadingLayout>
         <DetailItemHeading>自己紹介</DetailItemHeading>
       </DetailItemHeadingLayout>
-      <DetailItemContentLayout>
-        {user.bio === undefined ? (
-          <p className="text-gray-500">自己紹介は登録されていません...</p>
-        ) : (
-          <DetailMultiLineText>{user.bio}</DetailMultiLineText>
-        )}
-      </DetailItemContentLayout>
+      <BioCollapsibleSection height={bioCollapsibleHeight}>
+        <DetailItemContentLayout>
+          {user.bio === undefined ? (
+            <p className="text-gray-500">自己紹介は登録されていません...</p>
+          ) : (
+            <DetailMultiLineText>{user.bio}</DetailMultiLineText>
+          )}
+        </DetailItemContentLayout>
+      </BioCollapsibleSection>
     </div>
   )
 }
@@ -93,9 +97,11 @@ export function LoadingUserPage() {
         <DetailItemHeadingLayout>
           <DetailItemHeading>自己紹介</DetailItemHeading>
         </DetailItemHeadingLayout>
-        <DetailItemContentLayout>
-          <LoadingDetailMultiLineText lines={5} />
-        </DetailItemContentLayout>
+        <div style={{ height: `${bioCollapsibleHeight}px` }}>
+          <DetailItemContentLayout>
+            <LoadingDetailMultiLineText lines={6} />
+          </DetailItemContentLayout>
+        </div>
       </div>
     </div>
   )
