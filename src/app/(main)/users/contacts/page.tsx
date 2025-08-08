@@ -1,4 +1,5 @@
 import { Suspense } from 'react'
+import { ScrollAnchor } from '@/components/scroll-anchor'
 import { ContactCards, LoadingContactCards } from './_components/contact-cards'
 import { ContactsPagination } from './_components/contacts-pagination'
 import { LoadingPagination } from './_components/contacts-pagination/pagination'
@@ -20,6 +21,7 @@ export default async function Contacts({ searchParams }: Props) {
 
   return (
     <div>
+      <ScrollAnchor page={page ?? '1'} />
       <h1 className="text-2xl font-bold">登録しているユーザー</h1>
       <p className="mt-1 text-sm">
         登録しているユーザーの一覧です。
