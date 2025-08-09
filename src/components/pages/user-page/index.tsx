@@ -1,6 +1,6 @@
 import { notFound, redirect } from 'next/navigation'
+import { Suspense } from 'react'
 import { Avatar, LoadingAvatar } from '@/components/avatars/avatar'
-import { Button } from '@/components/buttons/button'
 import { BioCollapsibleSection } from '@/components/collapsible-sections/bio-collapsible-section'
 import { MemoCollapsibleSection } from '@/components/collapsible-sections/memo-collapsible-section'
 import { DetailItemHeading } from '@/components/headings/detail-item-heading'
@@ -18,6 +18,10 @@ import {
 import { getUser } from '@/utils/api/server/get-user'
 import { HttpError } from '@/utils/error/custom/http-error'
 import { generateRedirectLoginPath } from '@/utils/login-path/generate-redirect-login-path.server'
+import {
+  CurrentUserRegistraterContactButton,
+  LoadingCurrentUserRegistraterContactButton,
+} from './current-user-register-contact-button'
 
 type Props = {
   id: string
@@ -112,7 +116,7 @@ export async function UserPage({ id }: Props) {
       ) : (
         <DetailItemContentLayout>
           <div className="rounded-sm bg-gray-100 p-6">
-            <div className="mb-6">
+            <div className="mb-3">
               <p>
                 このユーザーは登録されていません。
                 <br />
@@ -125,7 +129,11 @@ export async function UserPage({ id }: Props) {
                 <li>テンプレートの共有</li>
               </ul>
             </div>
-            <Button className="btn-primary">登録</Button>
+            <Suspense fallback={<LoadingCurrentUserRegistraterContactButton />}>
+              <CurrentUserRegistraterContactButton
+                userId={user.id.toString()}
+              />
+            </Suspense>
           </div>
         </DetailItemContentLayout>
       )}
