@@ -3,6 +3,7 @@ import camelcaseKeys from 'camelcase-keys'
 import { redirect } from 'next/navigation'
 import { cache } from 'react'
 import { z } from 'zod'
+import { contactSchema } from '@/schemas/response/contacts'
 import { fetchData } from '@/utils/api/fetch-data'
 import { getBearerToken } from '@/utils/cookie/bearer-token'
 import { HttpError } from '@/utils/error/custom/http-error'
@@ -11,19 +12,7 @@ import { getRequestId } from '@/utils/request-id/get-request-id'
 import { validateData } from '@/utils/validation/validate-data'
 
 const dataSchema = z.object({
-  contacts: z.array(
-    z.object({
-      id: z.number(),
-      display_name: z.string().optional(),
-      note: z.string().optional(),
-      contact_user: z.object({
-        id: z.number(),
-        name: z.string(),
-        bio: z.string().optional(),
-        avatar_url: z.string().optional(),
-      }),
-    }),
-  ),
+  contacts: z.array(contactSchema.shape.contact),
 })
 
 const paginationDataSchema = z.object({
