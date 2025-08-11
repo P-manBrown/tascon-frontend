@@ -22,46 +22,42 @@ type Params = {
 
 type Data = CamelCaseKeys<z.infer<typeof contactSchema>, true>
 
-// 表示名変更API関数
 export async function changeDisplayName({ contactId, bodyData }: Params) {
-  // APIリクエストを送信
   const fetchDataResult = await fetchData(
-    `${process.env.API_ORIGIN}/api/v1/contacts/${contactId}`, // 完全なURL
+    `${process.env.API_ORIGIN}/api/v1/contacts/${contactId}`,
     {
-      method: 'PATCH', // HTTPメソッド
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: await getBearerToken(), // 認証トークンを取得
+        Authorization: await getBearerToken(),
       },
-      body: JSON.stringify(snakecaseKeys(bodyData, { deep: false })), // リクエストボディをJSON文字列に変換
+      body: JSON.stringify(snakecaseKeys(bodyData, { deep: false })),
     },
   )
 
   let resultObject: ResultObject<Data>
 
   if (fetchDataResult instanceof Error) {
-    resultObject = createErrorObject(fetchDataResult) // エラーオブジェクトを作成
+    resultObject = createErrorObject(fetchDataResult)
   } else {
     const { headers, data } = fetchDataResult
-    const requestId = getRequestId(headers) // レスポンスヘッダーからリクエストIDを取得
+    const requestId = getRequestId(headers)
     const validateDataResult = validateData({
       requestId,
-      dataSchema: contactSchema, // レスポンスの検証スキーマ
+      dataSchema: contactSchema,
       data,
     })
 
     if (validateDataResult instanceof Error) {
-      resultObject = createErrorObject(validateDataResult) // バリデーションエラーの場合
+      resultObject = createErrorObject(validateDataResult)
     } else {
       resultObject = {
         status: 'success',
-        ...camelcaseKeys(validateDataResult, { deep: true }), // snake_caseからcamelCaseに変換
+        ...camelcaseKeys(validateDataResult, { deep: true }),
       }
-      // 成功時はページのキャッシュを更新
-      // TODO: 以下の記述は合っているのか。`id`と`contacts`のパス両方を記述する必要はあるのか。
-      revalidatePath(`/users/profile/${contactId}`) // ユーザープロフィールページのキャッシュを無効化
+      revalidatePath(`/users/profile/${contactId}`)
     }
   }
 
-  return resultObject // 結果を返す
+  return resultObject
 }

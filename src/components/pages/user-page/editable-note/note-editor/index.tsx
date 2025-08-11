@@ -17,26 +17,23 @@ import { changeNote } from './change-note.api'
 
 type Props = Pick<React.ComponentProps<typeof EditableText>, 'children'> & {
   currentUserId: string
-  contactId: string // コンタクトID
-  initialNote: string | undefined // 初期メモ内容
-  label: React.ReactElement // ラベル要素
-  unsavedChangeTag: React.ReactElement // 未保存変更タグ要素
+  contactId: string
+  initialNote: string | undefined
+  label: React.ReactElement
+  unsavedChangeTag: React.ReactElement
 }
 
-// メモ変更のスキーマ定義
 const noteSchema = z.object({
   note: z
-    .string() // 文字列型
-    .trim() // 前後の空白を削除
+    .string()
+    .trim()
     .refine((value) => countCharacters(value) <= 1000, {
       message: '最大文字数を超えています。',
     }),
 })
 
-// 型推論でフォームの値の型を定義
 type ChangeNoteFormValue = z.infer<typeof noteSchema>
 
-// メモエディターコンポーネント
 export function NoteEditor({
   currentUserId,
   contactId,
@@ -45,14 +42,13 @@ export function NoteEditor({
   unsavedChangeTag,
   children,
 }: Props) {
-  const [isPending, startTransition] = useTransition() // 送信状態の管理
-  const { openErrorSnackbar } = useErrorSnackbar() // エラースナックバーの表示
-  const router = useRouter() // ルーター
-  const searchParams = useSearchParams() // 検索パラメータ
-  const redirectLoginPath = useRedirectLoginPath({ searchParams }) // ログインページへのリダイレクトパス
-  const editorRef = useRef<HTMLTextAreaElement>(null) // エディター要素の参照
+  const [isPending, startTransition] = useTransition()
+  const { openErrorSnackbar } = useErrorSnackbar()
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const redirectLoginPath = useRedirectLoginPath({ searchParams })
+  const editorRef = useRef<HTMLTextAreaElement>(null)
 
-  // 編集可能テキストのカスタムフック
   const {
     updateField,
     isEditorOpen,
@@ -70,37 +66,34 @@ export function NoteEditor({
     defaultValue: initialNote,
     schema: noteSchema,
     name: 'note',
-    shouldSaveToLocalStorage: true, // ローカルストレージに保存する
+    shouldSaveToLocalStorage: true,
   })
 
-  // 複数行テキスト用のカスタムフック
   const { shadowRef, wordCount, handleInput } = useEditableMultiLineText({
     editorRef,
     isEditorOpen,
   })
 
-  // HTTPエラーの処理
   const handleHttpError = (err: ErrorObject<HttpError>) => {
     if (err.statusCode === 401) {
-      saveFieldValueToLocalStorage() // ローカルストレージに値を保存
-      router.push(redirectLoginPath) // ログインページにリダイレクト
+      saveFieldValueToLocalStorage()
+      router.push(redirectLoginPath)
     } else {
-      openErrorSnackbar(err) // エラースナックバーを表示
+      openErrorSnackbar(err)
     }
   }
 
-  // フォーム送信処理
   const onSubmit = (data: ChangeNoteFormValue) => {
     startTransition(async () => {
-      const result = await changeNote({ contactId, bodyData: data }) // メモ変更APIを呼び出し
+      const result = await changeNote({ contactId, bodyData: data })
       if (result.status === 'error') {
         if (result.name === 'HttpError') {
-          handleHttpError(result) // HTTPエラーの処理
+          handleHttpError(result)
         } else {
-          openErrorSnackbar(result) // その他のエラーの処理
+          openErrorSnackbar(result)
         }
       } else {
-        updateField(result.contact.note ?? '') // 成功時はフィールドを更新
+        updateField(result.contact.note ?? '')
       }
     })
   }
@@ -109,31 +102,30 @@ export function NoteEditor({
     <div>
       <DetailItemHeadingLayout>
         {label}
-        {/* 未保存の変更がある場合にタグを表示 */}
         {hasLocalStorageValue && unsavedChangeTag}
       </DetailItemHeadingLayout>
       <EditableText
         editor={
           <TextArea
             ref={editorRef}
-            shadowRef={shadowRef} // テキストエリア自動リサイズ用の影要素
-            rows={6} // 初期行数
-            readOnly={isPending} // 送信中は読み取り専用
-            wordCount={wordCount} // 文字数カウント
-            maxCount={1000} // 最大文字数
+            shadowRef={shadowRef}
+            rows={6}
+            readOnly={isPending}
+            wordCount={wordCount}
+            maxCount={1000}
             register={registerReturn}
             errors={fieldError}
-            onInput={handleInput} // 入力時のハンドラー
+            onInput={handleInput}
             placeholder="メモを入力してください"
           />
         }
-        isEditorOpen={isEditorOpen || isPending} // エディターが開いているかどうか
-        isSubmitting={isPending} // 送信中の状態
-        hasLocalStorageValue={hasLocalStorageValue} // ローカルストレージに値があるかどうか
-        onFormSubmit={handleFormSubmit(onSubmit)} // フォーム送信ハンドラー
-        onCancelClick={handleCancelClick} // キャンセルボタンのハンドラー
-        onBlur={handleBlur(onSubmit)} // フォーカス離脱時のハンドラー
-        openEditor={openEditor} // エディターを開く関数
+        isEditorOpen={isEditorOpen || isPending}
+        isSubmitting={isPending}
+        hasLocalStorageValue={hasLocalStorageValue}
+        onFormSubmit={handleFormSubmit(onSubmit)}
+        onCancelClick={handleCancelClick}
+        onBlur={handleBlur(onSubmit)}
+        openEditor={openEditor}
       >
         {children}
       </EditableText>

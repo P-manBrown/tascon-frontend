@@ -14,26 +14,25 @@ type Props = Pick<React.ComponentProps<typeof NoteEditor>, 'contactId'> & {
   note: string | undefined
 }
 
-const height = 160 // メモセクションの高さ
+const height = 160
 
-// メモの編集可能なコンポーネント
 export async function EditableNote({ contactId, note }: Props) {
   const { account: currentUser } = await getCurrentUser()
 
   return (
     <NoteEditor
       currentUserId={currentUser.id.toString()}
-      contactId={contactId} // コンタクトID
-      initialNote={note} // 初期メモ（nullの場合は空文字）
-      label={<DetailItemHeading>メモ</DetailItemHeading>} // ラベル要素
-      unsavedChangeTag={<Tag color="warning">未保存の変更あり</Tag>} // 未保存変更タグ
+      contactId={contactId}
+      initialNote={note}
+      label={<DetailItemHeading>メモ</DetailItemHeading>}
+      unsavedChangeTag={<Tag color="warning">未保存の変更あり</Tag>}
     >
       <NoteCollapsibleSection height={height}>
         <DetailItemContentLayout>
           {note === undefined || note === '' ? (
-            <p className="text-gray-500">メモを登録できます...</p> // メモ未設定時のプレースホルダー
+            <p className="text-gray-500">メモを登録できます...</p>
           ) : (
-            <DetailMultiLineText>{note}</DetailMultiLineText> // 設定済みのメモを表示
+            <DetailMultiLineText>{note}</DetailMultiLineText>
           )}
         </DetailItemContentLayout>
       </NoteCollapsibleSection>
@@ -41,7 +40,6 @@ export async function EditableNote({ contactId, note }: Props) {
   )
 }
 
-// ローディング状態のコンポーネント
 export function LoadingEditableNote() {
   return (
     <div>

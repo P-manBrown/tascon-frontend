@@ -16,26 +16,23 @@ import { changeDisplayName } from './change-display-name.api'
 
 type Props = Pick<React.ComponentProps<typeof EditableText>, 'children'> & {
   currentUserId: string
-  contactId: string // コンタクトID
-  initialDisplayName: string | undefined // 初期表示名
-  label: React.ReactElement // ラベル要素
-  unsavedChangeTag: React.ReactElement // 未保存変更タグ要素
+  contactId: string
+  initialDisplayName: string | undefined
+  label: React.ReactElement
+  unsavedChangeTag: React.ReactElement
 }
 
-// 表示名変更のスキーマ定義
 const displayNameSchema = z.object({
   displayName: z
-    .string() // 文字列型
-    .trim() // 前後の空白を削除
+    .string()
+    .trim()
     .refine((value) => countCharacters(value) <= 255, {
-      message: '255文字以下で入力してください。', // 最大255文字の制限
+      message: '255文字以下で入力してください。',
     }),
 })
 
-// 型推論でフォームの値の型を定義
 type ChangeDisplayNameFormValue = z.infer<typeof displayNameSchema>
 
-// 表示名エディターコンポーネント
 export function DisplayNameEditor({
   currentUserId,
   contactId,
@@ -44,14 +41,13 @@ export function DisplayNameEditor({
   unsavedChangeTag,
   children,
 }: Props) {
-  const [isPending, startTransition] = useTransition() // 送信状態の管理
-  const { openErrorSnackbar } = useErrorSnackbar() // エラースナックバーの表示
-  const router = useRouter() // ルーター
-  const searchParams = useSearchParams() // 検索パラメータ
-  const redirectLoginPath = useRedirectLoginPath({ searchParams }) // ログインページへのリダイレクトパス
-  const editorRef = useRef<HTMLInputElement>(null) // エディター要素の参照
+  const [isPending, startTransition] = useTransition()
+  const { openErrorSnackbar } = useErrorSnackbar()
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const redirectLoginPath = useRedirectLoginPath({ searchParams })
+  const editorRef = useRef<HTMLInputElement>(null)
 
-  // 編集可能テキストのカスタムフック
   const {
     updateField,
     isEditorOpen,
@@ -69,31 +65,29 @@ export function DisplayNameEditor({
     defaultValue: initialDisplayName,
     schema: displayNameSchema,
     name: 'displayName',
-    shouldSaveToLocalStorage: true, // ローカルストレージに保存する
+    shouldSaveToLocalStorage: true,
   })
 
-  // HTTPエラーの処理
   const handleHttpError = (err: ErrorObject<HttpError>) => {
     if (err.statusCode === 401) {
-      saveFieldValueToLocalStorage() // ローカルストレージに値を保存
-      router.push(redirectLoginPath) // ログインページにリダイレクト
+      saveFieldValueToLocalStorage()
+      router.push(redirectLoginPath)
     } else {
-      openErrorSnackbar(err) // エラースナックバーを表示
+      openErrorSnackbar(err)
     }
   }
 
-  // フォーム送信処理
   const onSubmit = (data: ChangeDisplayNameFormValue) => {
     startTransition(async () => {
-      const result = await changeDisplayName({ contactId, bodyData: data }) // 表示名変更APIを呼び出し
+      const result = await changeDisplayName({ contactId, bodyData: data })
       if (result.status === 'error') {
         if (result.name === 'HttpError') {
-          handleHttpError(result) // HTTPエラーの処理
+          handleHttpError(result)
         } else {
-          openErrorSnackbar(result) // その他のエラーの処理
+          openErrorSnackbar(result)
         }
       } else {
-        updateField(result.contact.displayName ?? '') // 成功時はフィールドを更新
+        updateField(result.contact.displayName ?? '')
       }
     })
   }
@@ -102,7 +96,6 @@ export function DisplayNameEditor({
     <div>
       <DetailItemHeadingLayout>
         {label}
-        {/* 未保存の変更がある場合にタグを表示 */}
         {hasLocalStorageValue && unsavedChangeTag}
       </DetailItemHeadingLayout>
       <EditableText
@@ -110,18 +103,18 @@ export function DisplayNameEditor({
           <TextField
             ref={editorRef}
             type="text"
-            readOnly={isPending} // 送信中は読み取り専用
+            readOnly={isPending}
             register={registerReturn}
             errors={fieldError}
           />
         }
-        onFormSubmit={handleFormSubmit(onSubmit)} // フォーム送信ハンドラー
-        onCancelClick={handleCancelClick} // キャンセルボタンのハンドラー
-        onBlur={handleBlur(onSubmit)} // フォーカス離脱時のハンドラー
-        isSubmitting={isPending} // 送信中の状態
-        hasLocalStorageValue={hasLocalStorageValue} // ローカルストレージに値があるかどうか
-        isEditorOpen={isEditorOpen || isPending} // エディターが開いているかどうか
-        openEditor={openEditor} // エディターを開く関数
+        onFormSubmit={handleFormSubmit(onSubmit)}
+        onCancelClick={handleCancelClick}
+        onBlur={handleBlur(onSubmit)}
+        isSubmitting={isPending}
+        hasLocalStorageValue={hasLocalStorageValue}
+        isEditorOpen={isEditorOpen || isPending}
+        openEditor={openEditor}
       >
         {children}
       </EditableText>
