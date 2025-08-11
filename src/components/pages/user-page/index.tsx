@@ -2,7 +2,6 @@ import { notFound, redirect } from 'next/navigation'
 import { Suspense } from 'react'
 import { Avatar, LoadingAvatar } from '@/components/avatars/avatar'
 import { BioCollapsibleSection } from '@/components/collapsible-sections/bio-collapsible-section'
-import { MemoCollapsibleSection } from '@/components/collapsible-sections/memo-collapsible-section'
 import { DetailItemHeading } from '@/components/headings/detail-item-heading'
 import { HorizontalRule } from '@/components/horizontal-rule'
 import { DetailItemContentLayout } from '@/components/layouts/detail-item-content-layout'
@@ -22,6 +21,11 @@ import {
   CurrentUserRegistraterContactButton,
   LoadingCurrentUserRegistraterContactButton,
 } from './current-user-register-contact-button'
+import {
+  EditableDisplayName,
+  LoadingEditableDisplayName,
+} from './editable-display-name'
+import { EditableNote, LoadingEditableNote } from './editable-note'
 
 type Props = {
   id: string
@@ -31,7 +35,6 @@ const userInfoLayoutClasses = 'flex flex-col space-y-10'
 const avatarLayoutClasses = 'flex justify-center'
 const avatarSize = 128
 const bioCollapsibleHeight = 160
-const memoCollapsibleHeight = 160
 
 export async function UserPage({ id }: Props) {
   const handleHttpError = async (err: HttpError) => {
@@ -84,36 +87,7 @@ export async function UserPage({ id }: Props) {
         </DetailItemContentLayout>
       </BioCollapsibleSection>
       <HorizontalRule />
-      {user.currentUserContact !== undefined ? (
-        <>
-          <DetailItemHeadingLayout>
-            <DetailItemHeading>表示名</DetailItemHeading>
-          </DetailItemHeadingLayout>
-          <DetailItemContentLayout>
-            {user.currentUserContact.displayName === undefined ? (
-              <p className="text-gray-500">表示名を設定できます...</p>
-            ) : (
-              <DetailSingleLineText>
-                {user.currentUserContact.displayName}
-              </DetailSingleLineText>
-            )}
-          </DetailItemContentLayout>
-          <DetailItemHeadingLayout>
-            <DetailItemHeading>メモ</DetailItemHeading>
-          </DetailItemHeadingLayout>
-          <MemoCollapsibleSection height={memoCollapsibleHeight}>
-            <DetailItemContentLayout>
-              {user.currentUserContact.note === undefined ? (
-                <p className="text-gray-500">メモを登録できます...</p>
-              ) : (
-                <DetailMultiLineText>
-                  {user.currentUserContact.note}
-                </DetailMultiLineText>
-              )}
-            </DetailItemContentLayout>
-          </MemoCollapsibleSection>
-        </>
-      ) : (
+      {user.currentUserContact === undefined ? (
         <DetailItemContentLayout>
           <div className="rounded-sm bg-gray-100 p-6">
             <div className="mb-3">
@@ -136,6 +110,17 @@ export async function UserPage({ id }: Props) {
             </Suspense>
           </div>
         </DetailItemContentLayout>
+      ) : (
+        <>
+          <EditableDisplayName
+            contactId={user.currentUserContact.id.toString()}
+            displayName={user.currentUserContact.displayName}
+          />
+          <EditableNote
+            contactId={user.currentUserContact.id.toString()}
+            note={user.currentUserContact.note}
+          />
+        </>
       )}
     </div>
   )
@@ -166,24 +151,8 @@ export function LoadingUserPage() {
         </div>
       </div>
       <HorizontalRule />
-      <div>
-        <DetailItemHeadingLayout>
-          <DetailItemHeading>表示名</DetailItemHeading>
-        </DetailItemHeadingLayout>
-        <DetailItemContentLayout>
-          <LoadingDetailSingleLineText />
-        </DetailItemContentLayout>
-      </div>
-      <div>
-        <DetailItemHeadingLayout>
-          <DetailItemHeading>メモ</DetailItemHeading>
-        </DetailItemHeadingLayout>
-        <div style={{ height: `${memoCollapsibleHeight}px` }}>
-          <DetailItemContentLayout>
-            <LoadingDetailMultiLineText lines={6} />
-          </DetailItemContentLayout>
-        </div>
-      </div>
+      <LoadingEditableDisplayName />
+      <LoadingEditableNote />
     </div>
   )
 }
