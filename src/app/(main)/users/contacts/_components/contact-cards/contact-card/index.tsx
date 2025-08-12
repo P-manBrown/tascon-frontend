@@ -49,7 +49,7 @@ export function ContactCard({
               : displayName}
           </h2>
           <p
-            className={`line-clamp-2 h-10 text-sm ${
+            className={`line-clamp-2 h-10 text-sm break-words ${
               isBioEmpty ? 'text-gray-500' : ''
             }`}
           >
@@ -60,7 +60,7 @@ export function ContactCard({
       <div className={memoSectionBaseClasses}>
         <h3 className={memoTitleClasses}>メモ</h3>
         <p
-          className={`line-clamp-2 h-10 text-sm ${isNoteEmpty ? 'text-gray-600/85' : ''}`}
+          className={`line-clamp-2 h-10 text-sm break-words ${isNoteEmpty ? 'text-gray-600/85' : ''}`}
         >
           {isNoteEmpty ? 'メモは登録されていません...' : note}
         </p>
