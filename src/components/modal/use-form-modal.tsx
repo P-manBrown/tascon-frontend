@@ -61,6 +61,7 @@ export function useFormModal({ skipPopstateButtonIds = [] }: Params = {}) {
           shouldTriggerPopstate.current = false
         } else {
           if (!shouldTriggerPopstate.current) {
+            // Exclude navigation other than back/forward
             shouldTriggerPopstate.current = true
           }
         }

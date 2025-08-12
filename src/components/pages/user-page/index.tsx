@@ -21,6 +21,7 @@ import {
   CurrentUserRegistraterContactButton,
   LoadingCurrentUserRegistraterContactButton,
 } from './current-user-register-contact-button'
+import { DeleteContactButton } from './delete-contact-button'
 import {
   EditableDisplayName,
   LoadingEditableDisplayName,
@@ -120,6 +121,12 @@ export async function UserPage({ id }: Props) {
             contactId={user.currentUserContact.id.toString()}
             note={user.currentUserContact.note}
           />
+          <DetailItemContentLayout>
+            <DeleteContactButton
+              contactId={user.currentUserContact.id.toString()}
+              contactUserId={user.id.toString()}
+            />
+          </DetailItemContentLayout>
         </>
       )}
     </div>
@@ -153,6 +160,9 @@ export function LoadingUserPage() {
       <HorizontalRule />
       <LoadingEditableDisplayName />
       <LoadingEditableNote />
+      <DetailItemContentLayout>
+        <div className="skeleton shape-btn" />
+      </DetailItemContentLayout>
     </div>
   )
 }
