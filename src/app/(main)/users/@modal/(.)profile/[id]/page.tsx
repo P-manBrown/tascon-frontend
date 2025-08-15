@@ -1,4 +1,5 @@
-import { UserPage } from '@/components/pages/user-page'
+import { Suspense } from 'react'
+import { LoadingUserPage, UserPage } from '@/components/pages/user-page'
 import type { Metadata } from 'next/types'
 
 export const metadata: Metadata = {
@@ -16,5 +17,9 @@ export default async function User(props: Props) {
   const params = await props.params
   const { id } = params
 
-  return <UserPage id={id} />
+  return (
+    <Suspense fallback={<LoadingUserPage />}>
+      <UserPage id={id} />
+    </Suspense>
+  )
 }
