@@ -1,5 +1,5 @@
+import Link from 'next/link'
 import { notFound, redirect } from 'next/navigation'
-import { Suspense } from 'react'
 import { Avatar, LoadingAvatar } from '@/components/avatars/avatar'
 import { BioCollapsibleSection } from '@/components/collapsible-sections/bio-collapsible-section'
 import { DetailItemHeading } from '@/components/headings/detail-item-heading'
@@ -17,10 +17,6 @@ import {
 import { getUser } from '@/utils/api/server/get-user'
 import { HttpError } from '@/utils/error/custom/http-error'
 import { generateRedirectLoginPath } from '@/utils/login-path/generate-redirect-login-path.server'
-import {
-  CurrentUserRegistraterContactButton,
-  LoadingCurrentUserRegistraterContactButton,
-} from './current-user-register-contact-button'
 import { DeleteContactButton } from './delete-contact-button'
 import {
   EditableDisplayName,
@@ -89,28 +85,18 @@ export async function UserPage({ id }: Props) {
       </BioCollapsibleSection>
       <HorizontalRule />
       {user.currentUserContact === undefined ? (
-        <DetailItemContentLayout>
-          <div className="rounded-sm bg-gray-100 p-6">
-            <div className="mb-3">
-              <p>
-                このユーザーは登録されていません。
-                <br />
-                ユーザーを登録すると以下ができるようになります。
-              </p>
-              <ul className="list-inside list-disc p-3">
-                <li>表示名の設定</li>
-                <li>メモの登録</li>
-                <li>チャット</li>
-                <li>テンプレートの共有</li>
-              </ul>
-            </div>
-            <Suspense fallback={<LoadingCurrentUserRegistraterContactButton />}>
-              <CurrentUserRegistraterContactButton
-                userId={user.id.toString()}
-              />
-            </Suspense>
-          </div>
-        </DetailItemContentLayout>
+        <div className="rounded-sm bg-gray-100 p-6">
+          <p>
+            このユーザーは登録されていません。
+            <br />
+            登録すると表示名やメモが設定できるようになります。
+            <br />
+            「登録しているユーザー一覧」ページで登録できます。
+          </p>
+          <Link href="/users/contacts" className="btn btn-success mt-6">
+            登録しているユーザー一覧
+          </Link>
+        </div>
       ) : (
         <>
           <EditableDisplayName

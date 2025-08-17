@@ -10,8 +10,8 @@ type Props = Omit<React.ComponentPropsWithRef<'input'>, 'type'> & {
 }
 
 export const TextField = forwardRef<HTMLInputElement, Props>(function TextField(
-  { register, errors, suffixIcon, ...rest },
-  ref
+  { register, errors, suffixIcon, className = '', ...rest },
+  ref,
 ) {
   const { ref: registerRef, ...registerRest } = register
 
@@ -27,7 +27,7 @@ export const TextField = forwardRef<HTMLInputElement, Props>(function TextField(
           }}
           className={`text-box [&::-ms-reveal]:hidden ${
             errors ? 'text-box-error' : ''
-          } ${suffixIcon ? 'pr-9' : ''}`}
+          } ${suffixIcon ? 'pr-9' : ''} ${className}`}
           {...registerRest}
           {...rest}
         />
