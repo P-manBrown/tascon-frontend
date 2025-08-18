@@ -7,7 +7,7 @@ type Props = Pick<
   'height' | 'children'
 >
 
-export function MemoCollapsibleSection({ height, children }: Props) {
+export function NoteCollapsibleSection({ height, children }: Props) {
   return (
     <CollapsibleSection height={height} className="z-10">
       {children}

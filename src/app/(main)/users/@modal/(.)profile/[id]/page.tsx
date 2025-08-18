@@ -1,4 +1,9 @@
 import { UserPage } from '@/components/pages/user-page'
+import type { Metadata } from 'next/types'
+
+export const metadata: Metadata = {
+  title: 'ユーザー詳細',
+}
 
 // TEMP: https://github.com/vercel/next.js/issues/58123
 // TEMP: https://github.com/vercel/next.js/issues/59316

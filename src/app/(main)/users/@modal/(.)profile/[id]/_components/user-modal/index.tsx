@@ -5,15 +5,23 @@ import { useRouter } from 'next/navigation'
 import { IconButton } from '@/components/buttons/icon-button'
 import { ModalContent } from '@/components/contents/modal-content'
 import { Modal } from '@/components/modal'
-import { useModal } from '@/components/modal/use-modal'
+import { useFormModal } from '@/components/modal/use-form-modal'
 
 type Props = Pick<React.ComponentProps<typeof ModalContent>, 'children'>
 
 export function UserModal({ children }: Props) {
   const router = useRouter()
-  const { isOpen, closeModal, handleAnimationEnd, handleCancel } = useModal({
-    initialIsOpen: true,
-  })
+  const {
+    isOpen,
+    closeModal,
+    handleAnimationEnd,
+    handleCancel,
+    handleBackdropMouseDown,
+    handleBackdropClick,
+    handleMouseDownCapture,
+    handleBlurCapture,
+    handleClickCapture,
+  } = useFormModal()
 
   return (
     <Modal
@@ -21,21 +29,29 @@ export function UserModal({ children }: Props) {
       onAnimationEnd={handleAnimationEnd}
       onCancel={handleCancel}
       onClose={router.back}
-      onBackdropClick={closeModal}
+      onBackdropMouseDown={handleBackdropMouseDown}
+      onBackdropClick={handleBackdropClick}
     >
-      <ModalContent
-        upperLeftIcon={
-          <IconButton
-            type="button"
-            aria-label="モーダルを閉じる"
-            onClick={closeModal}
-          >
-            <XMarkIcon className="size-6" />
-          </IconButton>
-        }
+      <div
+        onMouseDownCapture={handleMouseDownCapture}
+        onBlurCapture={handleBlurCapture}
+        onClickCapture={handleClickCapture}
       >
-        {children}
-      </ModalContent>
+        <ModalContent
+          upperLeftIcon={
+            <IconButton
+              type="button"
+              tabIndex={0}
+              aria-label="モーダルを閉じる"
+              onClick={closeModal}
+            >
+              <XMarkIcon className="size-6" />
+            </IconButton>
+          }
+        >
+          {children}
+        </ModalContent>
+      </div>
     </Modal>
   )
 }

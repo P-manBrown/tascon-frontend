@@ -1,5 +1,10 @@
 import { Suspense } from 'react'
 import { UserPage, LoadingUserPage } from '@/components/pages/user-page'
+import type { Metadata } from 'next/types'
+
+export const metadata: Metadata = {
+  title: 'ユーザー詳細',
+}
 
 type Props = {
   params: Promise<{ id: string }>
