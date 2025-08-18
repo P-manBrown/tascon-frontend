@@ -28,8 +28,8 @@ export function ContactCard({
   bio,
   avatarUrl,
 }: Props) {
-  const isBioUndefined = bio === undefined
-  const isNoteUndefined = note === undefined
+  const isBioEmpty = bio === undefined || bio === ''
+  const isNoteEmpty = note === undefined || note === ''
 
   return (
     <Link
@@ -44,23 +44,25 @@ export function ContactCard({
         />
         <div className={`min-w-0 ${contentContainerBaseClasses}`}>
           <h2 className="truncate text-lg font-bold">
-            {displayName === undefined ? contactUserName : displayName}
+            {displayName == undefined || displayName === ''
+              ? contactUserName
+              : displayName}
           </h2>
           <p
             className={`line-clamp-2 h-10 text-sm ${
-              isBioUndefined ? 'text-gray-500' : ''
+              isBioEmpty ? 'text-gray-500' : ''
             }`}
           >
-            {isBioUndefined ? '自己紹介は登録されていません...' : bio}
+            {isBioEmpty ? '自己紹介は登録されていません...' : bio}
           </p>
         </div>
       </div>
       <div className={memoSectionBaseClasses}>
         <h3 className={memoTitleClasses}>メモ</h3>
         <p
-          className={`line-clamp-2 h-10 text-sm ${isNoteUndefined ? 'text-gray-600/85' : ''}`}
+          className={`line-clamp-2 h-10 text-sm ${isNoteEmpty ? 'text-gray-600/85' : ''}`}
         >
-          {isNoteUndefined ? 'メモは登録されていません...' : note}
+          {isNoteEmpty ? 'メモは登録されていません...' : note}
         </p>
       </div>
     </Link>
