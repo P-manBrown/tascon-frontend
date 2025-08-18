@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { notFound, redirect } from 'next/navigation'
 import { Avatar, LoadingAvatar } from '@/components/avatars/avatar'
 import { BioCollapsibleSection } from '@/components/collapsible-sections/bio-collapsible-section'
 import { DetailItemHeading } from '@/components/headings/detail-item-heading'
@@ -15,8 +14,6 @@ import {
   LoadingDetailSingleLineText,
 } from '@/components/texts/detail-single-line-text'
 import { getUser } from '@/utils/api/server/get-user'
-import { HttpError } from '@/utils/error/custom/http-error'
-import { generateRedirectLoginPath } from '@/utils/login-path/generate-redirect-login-path.server'
 import { DeleteContactButton } from './delete-contact-button'
 import {
   EditableDisplayName,
@@ -34,26 +31,7 @@ const avatarSize = 128
 const bioCollapsibleHeight = 160
 
 export async function UserPage({ id }: Props) {
-  const handleHttpError = async (err: HttpError) => {
-    if (err.statusCode === 401) {
-      const redirectLoginPath = await generateRedirectLoginPath()
-      redirect(redirectLoginPath)
-    } else if (err.statusCode === 404) {
-      notFound()
-    }
-
-    throw err
-  }
-
-  const result = await getUser(id)
-  if (result instanceof Error) {
-    if (result instanceof HttpError) {
-      handleHttpError(result)
-    }
-
-    throw result
-  }
-  const { user } = result
+  const { user } = await getUser(id)
 
   return (
     <div className={userInfoLayoutClasses}>
