@@ -1,6 +1,6 @@
 'use client'
 
-import { CollapsibleSection } from '@/components/collapsible-section'
+import { CollapsibleSection } from '@/components/collapsible-sections/collapsible-section'
 
 type Props = Pick<
   React.ComponentProps<typeof CollapsibleSection>,

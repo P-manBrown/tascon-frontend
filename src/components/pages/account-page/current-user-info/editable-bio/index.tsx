@@ -1,3 +1,4 @@
+import { BioCollapsibleSection } from '@/components/collapsible-sections/bio-collapsible-section'
 import { DetailItemHeading } from '@/components/headings/detail-item-heading'
 import { DetailItemContentLayout } from '@/components/layouts/detail-item-content-layout'
 import { DetailItemHeadingLayout } from '@/components/layouts/detail-item-heading-layout'
@@ -7,7 +8,6 @@ import {
   LoadingDetailMultiLineText,
 } from '@/components/texts/detail-multi-line-text'
 import { getCurrentUser } from '@/utils/api/server/get-current-user'
-import { BioCollapsibleSection } from './bio-collapsible-section'
 import { BioEditor } from './bio-editor'
 
 const height = 160
