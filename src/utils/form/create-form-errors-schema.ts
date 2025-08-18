@@ -6,13 +6,18 @@ export function createFormErrorsSchema<
     | z.ZodEnum<[string, ...string[]]>
     | z.ZodEffects<z.ZodLiteral<string> | z.ZodEnum<[string, ...string[]]>>,
 >(attributeSchema: T) {
-  return z.object({
-    errors: z.array(
-      z.object({
-        attribute: attributeSchema,
-        type: z.string(),
-        full_message: z.string(),
-      }),
-    ),
+  const errorObjectSchema = z.object({
+    attribute: attributeSchema,
+    type: z.string(),
+    full_message: z.string(),
   })
+
+  return z.union([
+    z.object({
+      errors: z.array(errorObjectSchema),
+    }),
+    z.object({
+      error: errorObjectSchema,
+    }),
+  ])
 }
