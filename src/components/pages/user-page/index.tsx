@@ -1,7 +1,10 @@
 import { notFound, redirect } from 'next/navigation'
 import { Avatar, LoadingAvatar } from '@/components/avatars/avatar'
+import { Button } from '@/components/buttons/button'
 import { BioCollapsibleSection } from '@/components/collapsible-sections/bio-collapsible-section'
+import { MemoCollapsibleSection } from '@/components/collapsible-sections/memo-collapsible-section'
 import { DetailItemHeading } from '@/components/headings/detail-item-heading'
+import { HorizontalRule } from '@/components/horizontal-rule'
 import { DetailItemContentLayout } from '@/components/layouts/detail-item-content-layout'
 import { DetailItemHeadingLayout } from '@/components/layouts/detail-item-heading-layout'
 import {
@@ -24,6 +27,7 @@ const userInfoLayoutClasses = 'flex flex-col space-y-10'
 const avatarLayoutClasses = 'flex justify-center'
 const avatarSize = 128
 const bioCollapsibleHeight = 160
+const memoCollapsibleHeight = 160
 
 export async function UserPage({ id }: Props) {
   const handleHttpError = async (err: HttpError) => {
@@ -68,13 +72,63 @@ export async function UserPage({ id }: Props) {
       </DetailItemHeadingLayout>
       <BioCollapsibleSection height={bioCollapsibleHeight}>
         <DetailItemContentLayout>
-          {user.bio === undefined ? (
+          {user.bio === undefined || user.bio === '' ? (
             <p className="text-gray-500">自己紹介は登録されていません...</p>
           ) : (
             <DetailMultiLineText>{user.bio}</DetailMultiLineText>
           )}
         </DetailItemContentLayout>
       </BioCollapsibleSection>
+      <HorizontalRule />
+      {user.currentUserContact !== undefined ? (
+        <>
+          <DetailItemHeadingLayout>
+            <DetailItemHeading>表示名</DetailItemHeading>
+          </DetailItemHeadingLayout>
+          <DetailItemContentLayout>
+            {user.currentUserContact.displayName === undefined ? (
+              <p className="text-gray-500">表示名を設定できます...</p>
+            ) : (
+              <DetailSingleLineText>
+                {user.currentUserContact.displayName}
+              </DetailSingleLineText>
+            )}
+          </DetailItemContentLayout>
+          <DetailItemHeadingLayout>
+            <DetailItemHeading>メモ</DetailItemHeading>
+          </DetailItemHeadingLayout>
+          <MemoCollapsibleSection height={memoCollapsibleHeight}>
+            <DetailItemContentLayout>
+              {user.currentUserContact.note === undefined ? (
+                <p className="text-gray-500">メモを登録できます...</p>
+              ) : (
+                <DetailMultiLineText>
+                  {user.currentUserContact.note}
+                </DetailMultiLineText>
+              )}
+            </DetailItemContentLayout>
+          </MemoCollapsibleSection>
+        </>
+      ) : (
+        <DetailItemContentLayout>
+          <div className="rounded-sm bg-gray-100 p-6">
+            <div className="mb-6">
+              <p>
+                このユーザーは登録されていません。
+                <br />
+                ユーザーを登録すると以下ができるようになります。
+              </p>
+              <ul className="list-inside list-disc p-3">
+                <li>表示名の設定</li>
+                <li>メモの登録</li>
+                <li>チャット</li>
+                <li>テンプレートの共有</li>
+              </ul>
+            </div>
+            <Button className="btn-primary">登録</Button>
+          </div>
+        </DetailItemContentLayout>
+      )}
     </div>
   )
 }
@@ -98,6 +152,25 @@ export function LoadingUserPage() {
           <DetailItemHeading>自己紹介</DetailItemHeading>
         </DetailItemHeadingLayout>
         <div style={{ height: `${bioCollapsibleHeight}px` }}>
+          <DetailItemContentLayout>
+            <LoadingDetailMultiLineText lines={6} />
+          </DetailItemContentLayout>
+        </div>
+      </div>
+      <HorizontalRule />
+      <div>
+        <DetailItemHeadingLayout>
+          <DetailItemHeading>表示名</DetailItemHeading>
+        </DetailItemHeadingLayout>
+        <DetailItemContentLayout>
+          <LoadingDetailSingleLineText />
+        </DetailItemContentLayout>
+      </div>
+      <div>
+        <DetailItemHeadingLayout>
+          <DetailItemHeading>メモ</DetailItemHeading>
+        </DetailItemHeadingLayout>
+        <div style={{ height: `${memoCollapsibleHeight}px` }}>
           <DetailItemContentLayout>
             <LoadingDetailMultiLineText lines={6} />
           </DetailItemContentLayout>
