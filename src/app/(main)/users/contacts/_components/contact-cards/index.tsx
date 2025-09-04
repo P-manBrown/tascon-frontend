@@ -1,3 +1,4 @@
+import { getCurrentUser } from '@/utils/api/server/get-current-user'
 import { ContactCard, LoadingContactCard } from './contact-card'
 import { EmptyContacts } from './empty-contacts'
 import { getContacts } from '../../get-contacts.api'
@@ -10,7 +11,8 @@ const layoutClasses =
   'grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3'
 
 export async function ContactCards({ page }: Props) {
-  const { contacts } = await getContacts(page)
+  const { account: currentUser } = await getCurrentUser()
+  const { contacts } = await getContacts(page, currentUser.id.toString())
 
   return contacts.length === 0 ? (
     <EmptyContacts />

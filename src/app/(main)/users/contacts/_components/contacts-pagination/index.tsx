@@ -1,3 +1,4 @@
+import { getCurrentUser } from '@/utils/api/server/get-current-user'
 import { Pagination } from './pagination'
 import { getContacts } from '../../get-contacts.api'
 
@@ -6,7 +7,8 @@ type Props = {
 }
 
 export async function ContactsPagination({ page }: Props) {
-  const { pagination } = await getContacts(page)
+  const { account: currentUser } = await getCurrentUser()
+  const { pagination } = await getContacts(page, currentUser.id.toString())
 
   return pagination.totalPages > 1 ? <Pagination {...pagination} /> : null
 }
