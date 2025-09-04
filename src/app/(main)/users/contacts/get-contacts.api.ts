@@ -22,58 +22,60 @@ const paginationDataSchema = z.object({
   totalCount: z.coerce.number().int().nonnegative(),
 })
 
-export const getContacts = cache(async (page: string) => {
-  const fetchDataResult = await fetchData(
-    `${process.env.API_ORIGIN}/api/v1/users/1/contacts?page=${page}`,
-    {
-      method: 'GET',
-      headers: {
-        Authorization: await getBearerToken(),
+export const getContacts = cache(
+  async (page: string, currentUserId: string) => {
+    const fetchDataResult = await fetchData(
+      `${process.env.API_ORIGIN}/api/v1/users/${currentUserId}/contacts?page=${page}`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: await getBearerToken(),
+        },
       },
-    },
-  )
+    )
 
-  if (fetchDataResult instanceof Error) {
-    const isHttpError = fetchDataResult instanceof HttpError
-    const isUnauthorized = isHttpError && fetchDataResult.statusCode === 401
-    if (isUnauthorized) {
-      const redirectLoginPath = await generateRedirectLoginPath()
-      redirect(redirectLoginPath)
+    if (fetchDataResult instanceof Error) {
+      const isHttpError = fetchDataResult instanceof HttpError
+      const isUnauthorized = isHttpError && fetchDataResult.statusCode === 401
+      if (isUnauthorized) {
+        const redirectLoginPath = await generateRedirectLoginPath()
+        redirect(redirectLoginPath)
+      }
+
+      throw fetchDataResult
     }
 
-    throw fetchDataResult
-  }
+    const { headers, data } = fetchDataResult
+    const requestId = getRequestId(headers)
 
-  const { headers, data } = fetchDataResult
-  const requestId = getRequestId(headers)
+    const validateDataResult = validateData({ requestId, dataSchema, data })
 
-  const validateDataResult = validateData({ requestId, dataSchema, data })
+    if (validateDataResult instanceof Error) {
+      throw validateDataResult
+    }
 
-  if (validateDataResult instanceof Error) {
-    throw validateDataResult
-  }
+    const { contacts } = camelcaseKeys(validateDataResult, { deep: true })
 
-  const { contacts } = camelcaseKeys(validateDataResult, { deep: true })
+    const paginationData = {
+      currentPage: headers.get('current-page'),
+      pageItems: headers.get('page-items'),
+      totalPages: headers.get('total-pages'),
+      totalCount: headers.get('total-count'),
+    }
 
-  const paginationData = {
-    currentPage: headers.get('current-page'),
-    pageItems: headers.get('page-items'),
-    totalPages: headers.get('total-pages'),
-    totalCount: headers.get('total-count'),
-  }
+    const validatePaginationResult = validateData({
+      requestId,
+      dataSchema: paginationDataSchema,
+      data: paginationData,
+    })
 
-  const validatePaginationResult = validateData({
-    requestId,
-    dataSchema: paginationDataSchema,
-    data: paginationData,
-  })
+    if (validatePaginationResult instanceof Error) {
+      throw validatePaginationResult
+    }
 
-  if (validatePaginationResult instanceof Error) {
-    throw validatePaginationResult
-  }
-
-  return {
-    contacts,
-    pagination: validatePaginationResult,
-  }
-})
+    return {
+      contacts,
+      pagination: validatePaginationResult,
+    }
+  },
+)
