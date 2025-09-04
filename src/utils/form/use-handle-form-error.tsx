@@ -2,9 +2,9 @@ import { useCallback } from 'react'
 import type { FieldPath, FieldValues, UseFormSetError } from 'react-hook-form'
 
 type FormErrorItem<T extends FieldValues = FieldValues> = {
-  attribute: FieldPath<T>
+  source: FieldPath<T>
   type: string
-  full_message: string
+  message: string
 }
 
 type FormErrors<T extends FieldValues = FieldValues> = {
@@ -24,12 +24,12 @@ export function useHandleFormErrors<T extends FieldValues = FieldValues>(
   const handleFormErrors = useCallback(
     ({ shouldFocus = true, ...item }: FormErrors<T>) => {
       if ('errors' in item) {
-        item.errors.forEach(({ attribute, type, full_message }) => {
-          setError(attribute, { type, message: full_message }, { shouldFocus })
+        item.errors.forEach(({ source, type, message }) => {
+          setError(source, { type, message }, { shouldFocus })
         })
       } else {
-        const { attribute, type, full_message } = item.error
-        setError(attribute, { type, message: full_message }, { shouldFocus })
+        const { source, type, message } = item.error
+        setError(source, { type, message }, { shouldFocus })
       }
     },
     [setError],

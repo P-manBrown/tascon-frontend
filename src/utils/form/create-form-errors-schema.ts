@@ -5,11 +5,11 @@ export function createFormErrorsSchema<
     | z.ZodLiteral<string>
     | z.ZodEnum<[string, ...string[]]>
     | z.ZodEffects<z.ZodLiteral<string> | z.ZodEnum<[string, ...string[]]>>,
->(attributeSchema: T) {
+>(sourceSchema: T) {
   const errorObjectSchema = z.object({
-    attribute: attributeSchema,
+    source: sourceSchema,
     type: z.string(),
-    full_message: z.string(),
+    message: z.string(),
   })
 
   return z.union([
