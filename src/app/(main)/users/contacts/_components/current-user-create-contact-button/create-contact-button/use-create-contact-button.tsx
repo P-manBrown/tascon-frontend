@@ -1,5 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import camelcaseKeys from 'camelcase-keys'
 import { useRouter } from 'next/navigation'
 import { useCallback, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
@@ -22,7 +21,7 @@ const formErrorsSchema = createFormErrorsSchema(z.enum(['email']))
 const snackbarErrorsSchema = z.object({
   errors: z.array(
     z.object({
-      full_message: z.string(),
+      message: z.string(),
     }),
   ),
 })
@@ -73,8 +72,7 @@ export function useCreateContactButton({ currentUserId }: Params) {
       if (isValidValue(formErrorsSchema, data)) {
         handleFormErrors(data)
       } else if (isValidValue(snackbarErrorsSchema, data)) {
-        const camelcaseError = camelcaseKeys(data.errors[0])
-        openErrorSnackbar(err, camelcaseError.fullMessage)
+        openErrorSnackbar(err, data.errors[0].message)
       } else {
         openErrorSnackbar(err)
       }
