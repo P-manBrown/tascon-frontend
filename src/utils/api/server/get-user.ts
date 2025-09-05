@@ -2,29 +2,13 @@ import 'server-only'
 import camelcaseKeys from 'camelcase-keys'
 import { notFound, redirect } from 'next/navigation'
 import { cache } from 'react'
-import { z } from 'zod'
+import { userSchema } from '@/schemas/response/user'
 import { getBearerToken } from '@/utils/cookie/bearer-token'
 import { HttpError } from '@/utils/error/custom/http-error'
 import { generateRedirectLoginPath } from '@/utils/login-path/generate-redirect-login-path.server'
 import { getRequestId } from '../../request-id/get-request-id'
 import { validateData } from '../../validation/validate-data'
 import { fetchData } from '../fetch-data'
-
-const dataSchema = z.object({
-  user: z.object({
-    id: z.number(),
-    name: z.string(),
-    bio: z.string().optional(),
-    avatar_url: z.string().optional(),
-    current_user_contact: z
-      .object({
-        id: z.number(),
-        display_name: z.string().optional(),
-        note: z.string().optional(),
-      })
-      .optional(),
-  }),
-})
 
 export const getUser = cache(async (id: string) => {
   const fetchDataResult = await fetchData(
@@ -54,7 +38,11 @@ export const getUser = cache(async (id: string) => {
   const { headers, data } = fetchDataResult
   const requestId = getRequestId(headers)
 
-  const validateDataResult = validateData({ requestId, dataSchema, data })
+  const validateDataResult = validateData({
+    requestId,
+    dataSchema: userSchema,
+    data,
+  })
   if (validateDataResult instanceof Error) {
     throw validateDataResult
   }
