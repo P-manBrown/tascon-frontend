@@ -1,8 +1,11 @@
 import { Suspense } from 'react'
+import { UsersHeading } from '@/components/headings/users-heading'
+import { UsersHeaderLayout } from '@/components/layouts/users-header-layout'
+import { LoadingPagination } from '@/components/pagination'
 import { ScrollAnchor } from '@/components/scroll-anchor'
+import { UsersDescription } from '@/components/texts/users-description'
 import { ContactCards, LoadingContactCards } from './_components/contact-cards'
 import { ContactsPagination } from './_components/contacts-pagination'
-import { LoadingPagination } from './_components/contacts-pagination/pagination'
 import {
   CurrentUserCreateContactButton,
   LoadingCurrentUserCreateContactButton,
@@ -27,14 +30,14 @@ export default async function Contacts({ searchParams }: Props) {
     <div>
       <ScrollAnchor page={page ?? '1'} />
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between md:gap-0">
-        <div>
-          <h1 className="text-2xl font-bold">登録しているユーザー</h1>
-          <p className="mt-1 text-sm">
-            登録しているユーザーの一覧です。
+        <UsersHeaderLayout>
+          <UsersHeading>登録しているユーザー</UsersHeading>
+          <UsersDescription>
+            あなたが登録しているユーザーの一覧です。
             <br />
             ここに表示されているユーザーとチャットやテンプレートの共有ができます。
-          </p>
-        </div>
+          </UsersDescription>
+        </UsersHeaderLayout>
         <Suspense fallback={<LoadingCurrentUserCreateContactButton />}>
           <CurrentUserCreateContactButton />
         </Suspense>

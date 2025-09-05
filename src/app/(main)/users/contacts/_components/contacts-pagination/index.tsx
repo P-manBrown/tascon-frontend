@@ -1,5 +1,5 @@
+import { Pagination } from '@/components/pagination'
 import { getCurrentUser } from '@/utils/api/server/get-current-user'
-import { Pagination } from './pagination'
 import { getContacts } from '../../get-contacts.api'
 
 type Props = {
