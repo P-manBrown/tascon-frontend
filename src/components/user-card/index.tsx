@@ -20,9 +20,8 @@ export function UserCard({ id, name, bio, avatarUrl, children }: Props) {
   const isBioEmpty = bio === undefined || bio === ''
 
   return (
-    <Link
-      href={`/users/profile/${id}`}
-      className={`block transform transition-all duration-200 hover:scale-103 hover:drop-shadow-lg ${cardBaseClasses}`}
+    <div
+      className={`relative transform transition-all duration-200 hover:scale-103 hover:drop-shadow-lg ${cardBaseClasses}`}
     >
       <div className={flexContainerClasses}>
         <Avatar name={name} avatarUrl={avatarUrl} size={avatarSize} />
@@ -38,7 +37,12 @@ export function UserCard({ id, name, bio, avatarUrl, children }: Props) {
         </div>
       </div>
       {children}
-    </Link>
+      <Link
+        href={`/users/profile/${id}`}
+        className="absolute top-0 left-0 h-full w-full rounded-md"
+        aria-label={`${name}の詳細画面を表示`}
+      />
+    </div>
   )
 }
 
