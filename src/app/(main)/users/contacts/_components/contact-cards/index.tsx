@@ -1,6 +1,6 @@
+import { EmptyList } from '@/components/empty-list'
 import { getCurrentUser } from '@/utils/api/server/get-current-user'
 import { ContactCard, LoadingContactCard } from './contact-card'
-import { EmptyContacts } from './empty-contacts'
 import { getContacts } from '../../get-contacts.api'
 
 type Props = {
@@ -15,7 +15,9 @@ export async function ContactCards({ page }: Props) {
   const { contacts } = await getContacts(page, currentUser.id.toString())
 
   return contacts.length === 0 ? (
-    <EmptyContacts />
+    <div className="my-28 md:my-48">
+      <EmptyList description="登録しているユーザーは存在しません。" />
+    </div>
   ) : (
     <div>
       <div className={layoutClasses}>
@@ -24,8 +26,8 @@ export async function ContactCards({ page }: Props) {
             key={contact.id}
             displayName={contact.displayName}
             note={contact.note}
-            contactUserId={contact.contactUser.id}
-            contactUserName={contact.contactUser.name}
+            id={contact.contactUser.id}
+            name={contact.contactUser.name}
             bio={contact.contactUser.bio}
             avatarUrl={contact.contactUser.avatarUrl}
           />
