@@ -60,6 +60,7 @@ export async function createContactFromSuggestion({
         ...camelcaseKeys(validateDataResult, { deep: true }),
       }
       revalidatePath('/users/suggestions')
+      revalidatePath(`/users/profile/${contactUserId}`)
     }
   }
 

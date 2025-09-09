@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { Avatar, LoadingAvatar } from '@/components/avatars/avatar'
 import { BioCollapsibleSection } from '@/components/collapsible-sections/bio-collapsible-section'
 import { DetailItemHeading } from '@/components/headings/detail-item-heading'
@@ -14,6 +13,7 @@ import {
   LoadingDetailSingleLineText,
 } from '@/components/texts/detail-single-line-text'
 import { getUser } from '@/utils/api/server/get-user'
+import { CreateContactSection } from './create-contact-section'
 import { DeleteContactButton } from './delete-contact-button'
 import {
   EditableDisplayName,
@@ -62,32 +62,21 @@ export async function UserPage({ id }: Props) {
         </DetailItemContentLayout>
       </BioCollapsibleSection>
       <HorizontalRule />
-      {user.currentUserContact === undefined ? (
-        <div className="rounded-sm bg-gray-100 p-6">
-          <p>
-            このユーザーは登録されていません。
-            <br />
-            登録すると表示名やメモが設定できるようになります。
-            <br />
-            「登録しているユーザー一覧」ページで登録できます。
-          </p>
-          <Link href="/users/contacts" className="btn btn-success mt-6">
-            登録しているユーザー一覧
-          </Link>
-        </div>
+      {user.contact === undefined ? (
+        <CreateContactSection userId={user.id} isSuggested={user.isSuggested} />
       ) : (
         <>
           <EditableDisplayName
-            contactId={user.currentUserContact.id.toString()}
-            displayName={user.currentUserContact.displayName}
+            contactId={user.contact.id.toString()}
+            displayName={user.contact.displayName}
           />
           <EditableNote
-            contactId={user.currentUserContact.id.toString()}
-            note={user.currentUserContact.note}
+            contactId={user.contact.id.toString()}
+            note={user.contact.note}
           />
           <DetailItemContentLayout>
             <DeleteContactButton
-              contactId={user.currentUserContact.id.toString()}
+              contactId={user.contact.id.toString()}
               contactUserId={user.id.toString()}
             />
           </DetailItemContentLayout>
