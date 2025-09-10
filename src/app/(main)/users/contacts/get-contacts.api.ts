@@ -4,22 +4,17 @@ import { redirect } from 'next/navigation'
 import { cache } from 'react'
 import { z } from 'zod'
 import { contactSchema } from '@/schemas/response/contacts'
+import { paginationDataSchema } from '@/schemas/response/pagination'
 import { fetchData } from '@/utils/api/fetch-data'
 import { getBearerToken } from '@/utils/cookie/bearer-token'
 import { HttpError } from '@/utils/error/custom/http-error'
+import { extractPaginationData } from '@/utils/header/extract-pagination-data'
 import { generateRedirectLoginPath } from '@/utils/login-path/generate-redirect-login-path.server'
 import { getRequestId } from '@/utils/request-id/get-request-id'
 import { validateData } from '@/utils/validation/validate-data'
 
 const dataSchema = z.object({
   contacts: z.array(contactSchema.shape.contact),
-})
-
-const paginationDataSchema = z.object({
-  currentPage: z.coerce.number().int().positive(),
-  pageItems: z.coerce.number().int().nonnegative(),
-  totalPages: z.coerce.number().int().positive(),
-  totalCount: z.coerce.number().int().nonnegative(),
 })
 
 export const getContacts = cache(
@@ -56,12 +51,7 @@ export const getContacts = cache(
 
     const { contacts } = camelcaseKeys(validateDataResult, { deep: true })
 
-    const paginationData = {
-      currentPage: headers.get('current-page'),
-      pageItems: headers.get('page-items'),
-      totalPages: headers.get('total-pages'),
-      totalCount: headers.get('total-count'),
-    }
+    const paginationData = extractPaginationData(headers)
 
     const validatePaginationResult = validateData({
       requestId,

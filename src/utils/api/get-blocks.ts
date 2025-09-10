@@ -4,7 +4,6 @@ import { redirect } from 'next/navigation'
 import { cache } from 'react'
 import { z } from 'zod'
 import { paginationDataSchema } from '@/schemas/response/pagination'
-import { userSchema } from '@/schemas/response/user'
 import { fetchData } from '@/utils/api/fetch-data'
 import { getBearerToken } from '@/utils/cookie/bearer-token'
 import { HttpError } from '@/utils/error/custom/http-error'
@@ -14,14 +13,22 @@ import { getRequestId } from '@/utils/request-id/get-request-id'
 import { validateData } from '@/utils/validation/validate-data'
 
 const dataSchema = z.object({
-  users: z.array(
-    userSchema.shape.user.omit({ contact: true, is_suggested: true }),
+  blocks: z.array(
+    z.object({
+      id: z.number(),
+      blocked: z.object({
+        id: z.number(),
+        name: z.string(),
+        bio: z.string().optional(),
+        avatar_url: z.string().optional(),
+      }),
+    }),
   ),
 })
 
-export const getSuggestions = cache(async (page: string) => {
+export const getBlocks = cache(async (currentUserId: string, page: string) => {
   const fetchDataResult = await fetchData(
-    `${process.env.API_ORIGIN}/api/v1/users/suggestions?page=${page}`,
+    `${process.env.API_ORIGIN}/api/v1/users/${currentUserId}/blocks?page=${page}`,
     {
       method: 'GET',
       headers: {
@@ -50,7 +57,7 @@ export const getSuggestions = cache(async (page: string) => {
     throw validateDataResult
   }
 
-  const { users } = camelcaseKeys(validateDataResult, { deep: true })
+  const { blocks } = camelcaseKeys(validateDataResult, { deep: true })
 
   const paginationData = extractPaginationData(headers)
 
@@ -65,7 +72,7 @@ export const getSuggestions = cache(async (page: string) => {
   }
 
   return {
-    users,
+    blocks,
     pagination: validatePaginationResult,
   }
 })
