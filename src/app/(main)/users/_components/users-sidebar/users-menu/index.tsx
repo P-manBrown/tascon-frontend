@@ -2,6 +2,7 @@ import {
   UsersIcon,
   UserCircleIcon,
   FaceSmileIcon,
+  NoSymbolIcon,
 } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { useSelectedLayoutSegment } from 'next/navigation'
@@ -20,6 +21,11 @@ const links = [
     icon: <UserCircleIcon className="size-5" />,
     name: '登録している',
     pathname: '/users/contacts',
+  },
+  {
+    icon: <NoSymbolIcon className="size-5" />,
+    name: 'ブロックしている',
+    pathname: '/users/blocks',
   },
   {
     icon: <FaceSmileIcon className="size-5" />,
