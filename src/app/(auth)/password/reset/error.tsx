@@ -3,7 +3,7 @@
 import { Button } from '@/components/buttons/button'
 import { ErrorContent } from '@/components/contents/error-content'
 import { IconMessage } from '@/components/icon-message'
-import { ReportIssueLink } from '@/components/report-issue-link'
+import { ReportIssueLink } from '@/components/links/report-issue-link'
 import type { ErrorProps } from '@/types/error'
 
 export default function Error({ error, reset }: ErrorProps) {

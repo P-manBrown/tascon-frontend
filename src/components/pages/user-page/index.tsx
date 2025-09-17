@@ -28,7 +28,7 @@ type Props = {
 const userInfoLayoutClasses = 'flex flex-col space-y-10'
 const avatarLayoutClasses = 'flex justify-center'
 const avatarSize = 128
-const bioCollapsibleHeight = 160
+const bioMinHeight = 160
 
 export async function UserPage({ id }: Props) {
   const { user } = await getUser(id)
@@ -52,7 +52,7 @@ export async function UserPage({ id }: Props) {
       <DetailItemHeadingLayout>
         <DetailItemHeading>自己紹介</DetailItemHeading>
       </DetailItemHeadingLayout>
-      <BioCollapsibleSection height={bioCollapsibleHeight}>
+      <BioCollapsibleSection minHeight={bioMinHeight}>
         <DetailItemContentLayout>
           {user.bio === undefined || user.bio === '' ? (
             <p className="text-gray-500">自己紹介は登録されていません...</p>
@@ -104,7 +104,7 @@ export function LoadingUserPage() {
         <DetailItemHeadingLayout>
           <DetailItemHeading>自己紹介</DetailItemHeading>
         </DetailItemHeadingLayout>
-        <div style={{ height: `${bioCollapsibleHeight}px` }}>
+        <div style={{ height: `${bioMinHeight}px` }}>
           <DetailItemContentLayout>
             <LoadingDetailMultiLineText lines={6} />
           </DetailItemContentLayout>

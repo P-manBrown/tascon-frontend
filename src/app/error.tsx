@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/buttons/button'
 import { ErrorContent } from '@/components/contents/error-content'
-import { ReportIssueLink } from '@/components/report-issue-link'
+import { ReportIssueLink } from '@/components/links/report-issue-link'
 import type { ErrorProps } from '@/types/error'
 
 export default function Error({ error, reset }: ErrorProps) {
@@ -10,7 +10,7 @@ export default function Error({ error, reset }: ErrorProps) {
     <main className="flex min-h-dvh items-center justify-center max-md:mx-3">
       <div className="text-center">
         <p className="text-3xl font-semibold text-red-600 md:text-5xl">Error</p>
-        <h1 className="mb-3.5 mt-1.5 text-3xl font-bold tracking-tight md:mb-7 md:mt-3 md:text-6xl">
+        <h1 className="mt-1.5 mb-3.5 text-3xl font-bold tracking-tight md:mt-3 md:mb-7 md:text-6xl">
           Something went wrong
         </h1>
         <ErrorContent

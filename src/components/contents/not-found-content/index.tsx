@@ -1,5 +1,5 @@
 import { HorizontalRule } from '@/components/horizontal-rule'
-import { ReportIssueLink } from '@/components/report-issue-link'
+import { ReportIssueLink } from '@/components/links/report-issue-link'
 
 type Props = {
   message: string

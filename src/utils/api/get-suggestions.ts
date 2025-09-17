@@ -19,9 +19,17 @@ const dataSchema = z.object({
   ),
 })
 
-export const getSuggestions = cache(async (page: string) => {
+type Params = {
+  page: string
+  limit: string
+}
+
+export const getSuggestions = cache(async ({ page, limit }: Params) => {
+  const queryParams = new URLSearchParams({ page })
+  if (limit) queryParams.append('limit', limit.toString())
+
   const fetchDataResult = await fetchData(
-    `${process.env.API_ORIGIN}/api/v1/users/suggestions?page=${page}`,
+    `${process.env.API_ORIGIN}/api/v1/users/suggestions?${queryParams}`,
     {
       method: 'GET',
       headers: {
@@ -50,7 +58,9 @@ export const getSuggestions = cache(async (page: string) => {
     throw validateDataResult
   }
 
-  const { users } = camelcaseKeys(validateDataResult, { deep: true })
+  const { users: suggestions } = camelcaseKeys(validateDataResult, {
+    deep: true,
+  })
 
   const paginationData = extractPaginationData(headers)
 
@@ -65,7 +75,7 @@ export const getSuggestions = cache(async (page: string) => {
   }
 
   return {
-    users,
+    suggestions,
     pagination: validatePaginationResult,
   }
 })

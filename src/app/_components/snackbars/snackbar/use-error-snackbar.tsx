@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 import { useSnackbarsStore } from '@/app/_components/snackbars/use-snackbars-store'
-import { ReportIssueLink } from '@/components/report-issue-link'
+import { ReportIssueLink } from '@/components/links/report-issue-link'
 import type { ErrorObject, Errors } from '@/types/error'
 
 const criticalErrorNames = [

@@ -4,12 +4,12 @@ import { CollapsibleSection } from '@/components/collapsible-sections/collapsibl
 
 type Props = Pick<
   React.ComponentProps<typeof CollapsibleSection>,
-  'height' | 'children'
+  'minHeight' | 'children'
 >
 
-export function NoteCollapsibleSection({ height, children }: Props) {
+export function NoteCollapsibleSection({ minHeight, children }: Props) {
   return (
-    <CollapsibleSection height={height} className="z-10">
+    <CollapsibleSection minHeight={minHeight} className="z-10">
       {children}
     </CollapsibleSection>
   )
