@@ -1,11 +1,12 @@
 import { Suspense } from 'react'
 import { UsersHeading } from '@/components/headings/users-heading'
 import { UsersHeaderLayout } from '@/components/layouts/users-header-layout'
-import { LoadingPagination } from '@/components/pagination'
 import { ScrollAnchor } from '@/components/scroll-anchor'
 import { UsersDescription } from '@/components/texts/users-description'
-import { ContactCards, LoadingContactCards } from './_components/contact-cards'
-import { ContactsPagination } from './_components/contacts-pagination'
+import {
+  ContactsPaginatedList,
+  LoadingContactsPaginatedList,
+} from './_components/contacts-paginated-list'
 import {
   CurrentUserCreateContactButton,
   LoadingCurrentUserCreateContactButton,
@@ -29,7 +30,7 @@ export default async function Contacts({ searchParams }: Props) {
   return (
     <div>
       <ScrollAnchor page={page ?? '1'} />
-      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between md:gap-0">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between lg:gap-0">
         <UsersHeaderLayout>
           <UsersHeading>登録しているユーザー</UsersHeading>
           <UsersDescription>
@@ -38,21 +39,18 @@ export default async function Contacts({ searchParams }: Props) {
             ここに表示されているユーザーとチャットやテンプレートの共有ができます。
           </UsersDescription>
         </UsersHeaderLayout>
-        <Suspense fallback={<LoadingCurrentUserCreateContactButton />}>
-          <CurrentUserCreateContactButton />
-        </Suspense>
+        <div className="lg:w-20">
+          <Suspense fallback={<LoadingCurrentUserCreateContactButton />}>
+            <CurrentUserCreateContactButton />
+          </Suspense>
+        </div>
       </div>
       <div className="mt-5">
-        <Suspense key={page} fallback={<LoadingContactCards />}>
-          <ContactCards page={page ?? '1'} />
-        </Suspense>
-      </div>
-      <div className="mt-6">
         <Suspense
           key={page}
-          fallback={page === undefined ? null : <LoadingPagination />}
+          fallback={<LoadingContactsPaginatedList page={page} />}
         >
-          <ContactsPagination page={page ?? '1'} />
+          <ContactsPaginatedList page={page ?? '1'} />
         </Suspense>
       </div>
     </div>

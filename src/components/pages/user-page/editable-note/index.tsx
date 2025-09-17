@@ -14,7 +14,7 @@ type Props = Pick<React.ComponentProps<typeof NoteEditor>, 'contactId'> & {
   note: string | undefined
 }
 
-const height = 160
+const minHeight = 160
 
 export async function EditableNote({ contactId, note }: Props) {
   const { account: currentUser } = await getCurrentUser()
@@ -27,7 +27,7 @@ export async function EditableNote({ contactId, note }: Props) {
       label={<DetailItemHeading>メモ</DetailItemHeading>}
       unsavedChangeTag={<Tag color="warning">未保存の変更あり</Tag>}
     >
-      <NoteCollapsibleSection height={height}>
+      <NoteCollapsibleSection minHeight={minHeight}>
         <DetailItemContentLayout>
           {note === undefined || note === '' ? (
             <p className="text-gray-500">メモを登録できます...</p>
@@ -46,7 +46,7 @@ export function LoadingEditableNote() {
       <DetailItemHeadingLayout>
         <DetailItemHeading>メモ</DetailItemHeading>
       </DetailItemHeadingLayout>
-      <div style={{ height: `${height}px` }}>
+      <div style={{ height: `${minHeight}px` }}>
         <DetailItemContentLayout>
           <LoadingDetailMultiLineText lines={6} />
         </DetailItemContentLayout>

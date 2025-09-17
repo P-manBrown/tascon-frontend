@@ -10,7 +10,7 @@ import {
 import { getCurrentUser } from '@/utils/api/server/get-current-user'
 import { BioEditor } from './bio-editor'
 
-const height = 160
+const minHeight = 160
 
 export async function EditableBio() {
   const { account: currentUser } = await getCurrentUser()
@@ -25,7 +25,7 @@ export async function EditableBio() {
       unsavedChangeTag={<Tag color="warning">未保存の変更あり</Tag>}
     >
       {/* Pass 'key' so that the bio is re-rendered when it is re-validated */}
-      <BioCollapsibleSection key={currentUser.bio} height={height}>
+      <BioCollapsibleSection key={currentUser.bio} minHeight={minHeight}>
         <DetailItemContentLayout>
           {currentUser.bio === '' || currentUser.bio === undefined ? (
             <p className="text-gray-500">自己紹介を登録してください...</p>
@@ -45,7 +45,7 @@ export function LoadingEditableBio() {
         <DetailItemHeading>自己紹介</DetailItemHeading>
         <Tag color="gray">公開</Tag>
       </DetailItemHeadingLayout>
-      <div style={{ height: `${height}px` }}>
+      <div style={{ height: `${minHeight}px` }}>
         <DetailItemContentLayout>
           <LoadingDetailMultiLineText lines={6} />
         </DetailItemContentLayout>

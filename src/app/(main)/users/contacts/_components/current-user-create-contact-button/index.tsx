@@ -1,7 +1,7 @@
 import { getCurrentUser } from '@/utils/api/server/get-current-user'
 import { CreateContactButton } from './create-contact-button'
 
-const shapeClasses = 'h-10 md:w-20'
+const shapeClasses = 'h-10'
 
 export async function CurrentUserCreateContactButton() {
   const { account: currentUser } = await getCurrentUser()

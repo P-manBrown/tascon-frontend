@@ -36,7 +36,7 @@ const links = [
 
 export function UsersMenu({ sidebarQuery }: Props) {
   const segment = useSelectedLayoutSegment()
-  const currentPath = segment === null ? `/users` : `/users/${segment}`
+  const currentPath = segment === '(page)' ? `/users` : `/users/${segment}`
 
   return (
     <nav>

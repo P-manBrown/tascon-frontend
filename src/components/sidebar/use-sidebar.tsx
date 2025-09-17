@@ -25,7 +25,7 @@ export function useSidebar() {
     parseAsStringLiteral([
       sidebarStates.open,
       sidebarStates.closed,
-    ]).withDefault(sidebarStates.open),
+    ]).withDefault(sidebarStates.closed),
   )
   const isOpen = sidebar === sidebarStates.open
   const [isNarrowScreen, setIsNarrowScreen] = useState(false)

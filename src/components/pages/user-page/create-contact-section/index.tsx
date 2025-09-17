@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { CreateContactFromSuggestionButton } from '@/app/(main)/users/suggestions/_components/suggestion-cards/create-contact-from-suggestion-button'
+import { CreateContactFromSuggestionButton } from '@/components/cards/suggestion-cards/create-contact-from-suggestion-button'
 import { getCurrentUser } from '@/utils/api/server/get-current-user'
 
 type Props = Pick<

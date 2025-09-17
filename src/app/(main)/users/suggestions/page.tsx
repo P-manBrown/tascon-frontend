@@ -1,14 +1,12 @@
 import { Suspense } from 'react'
 import { UsersHeading } from '@/components/headings/users-heading'
 import { UsersHeaderLayout } from '@/components/layouts/users-header-layout'
-import { LoadingPagination } from '@/components/pagination'
 import { ScrollAnchor } from '@/components/scroll-anchor'
 import { UsersDescription } from '@/components/texts/users-description'
 import {
-  SuggestionCards,
-  LoadingSuggestionCards,
-} from './_components/suggestion-cards'
-import { SuggestionsPagination } from './_components/suggestions-pagination'
+  SuggestionsPaginatedList,
+  LoadingSuggestionsPaginatedList,
+} from './_components/suggestions-paginated-list'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -37,16 +35,11 @@ export default async function Suggestions({ searchParams }: Props) {
         </UsersDescription>
       </UsersHeaderLayout>
       <div className="mt-5">
-        <Suspense key={page} fallback={<LoadingSuggestionCards />}>
-          <SuggestionCards page={page ?? '1'} />
-        </Suspense>
-      </div>
-      <div className="mt-6">
         <Suspense
           key={page}
-          fallback={page === undefined ? null : <LoadingPagination />}
+          fallback={<LoadingSuggestionsPaginatedList page={page} />}
         >
-          <SuggestionsPagination page={page ?? '1'} />
+          <SuggestionsPaginatedList page={page ?? '1'} />
         </Suspense>
       </div>
     </div>

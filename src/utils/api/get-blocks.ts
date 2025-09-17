@@ -26,53 +26,64 @@ const dataSchema = z.object({
   ),
 })
 
-export const getBlocks = cache(async (currentUserId: string, page: string) => {
-  const fetchDataResult = await fetchData(
-    `${process.env.API_ORIGIN}/api/v1/users/${currentUserId}/blocks?page=${page}`,
-    {
-      method: 'GET',
-      headers: {
-        Authorization: await getBearerToken(),
-      },
-    },
-  )
+type Params = {
+  currentUserId: string
+  page: string
+  limit: string
+}
 
-  if (fetchDataResult instanceof Error) {
-    const isHttpError = fetchDataResult instanceof HttpError
-    const isUnauthorized = isHttpError && fetchDataResult.statusCode === 401
-    if (isUnauthorized) {
-      const redirectLoginPath = await generateRedirectLoginPath()
-      redirect(redirectLoginPath)
+export const getBlocks = cache(
+  async ({ currentUserId, page, limit }: Params) => {
+    const queryParams = new URLSearchParams({ page })
+    if (limit) queryParams.append('limit', limit)
+
+    const fetchDataResult = await fetchData(
+      `${process.env.API_ORIGIN}/api/v1/users/${currentUserId}/blocks?${queryParams}`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: await getBearerToken(),
+        },
+      },
+    )
+
+    if (fetchDataResult instanceof Error) {
+      const isHttpError = fetchDataResult instanceof HttpError
+      const isUnauthorized = isHttpError && fetchDataResult.statusCode === 401
+      if (isUnauthorized) {
+        const redirectLoginPath = await generateRedirectLoginPath()
+        redirect(redirectLoginPath)
+      }
+
+      throw fetchDataResult
     }
 
-    throw fetchDataResult
-  }
+    const { headers, data } = fetchDataResult
+    const requestId = getRequestId(headers)
 
-  const { headers, data } = fetchDataResult
-  const requestId = getRequestId(headers)
+    const validateDataResult = validateData({ requestId, dataSchema, data })
 
-  const validateDataResult = validateData({ requestId, dataSchema, data })
+    if (validateDataResult instanceof Error) {
+      throw validateDataResult
+    }
 
-  if (validateDataResult instanceof Error) {
-    throw validateDataResult
-  }
+    const { blocks } = camelcaseKeys(validateDataResult, { deep: true })
 
-  const { blocks } = camelcaseKeys(validateDataResult, { deep: true })
+    const paginationData = extractPaginationData(headers)
 
-  const paginationData = extractPaginationData(headers)
+    const validatePaginationResult = validateData({
+      requestId,
+      dataSchema: paginationDataSchema,
+      data: paginationData,
+    })
 
-  const validatePaginationResult = validateData({
-    requestId,
-    dataSchema: paginationDataSchema,
-    data: paginationData,
-  })
+    if (validatePaginationResult instanceof Error) {
+      throw validatePaginationResult
+    }
 
-  if (validatePaginationResult instanceof Error) {
-    throw validatePaginationResult
-  }
-
-  return {
-    blocks,
-    pagination: validatePaginationResult,
-  }
-})
+    return {
+      blocks,
+      pagination: validatePaginationResult,
+    }
+  },
+)

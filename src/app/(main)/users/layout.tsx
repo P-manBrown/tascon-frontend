@@ -3,10 +3,9 @@ import { UsersSidebar } from './_components/users-sidebar'
 
 type Props = {
   children: React.ReactNode
-  modal: React.ReactNode
 }
 
-export default async function UsersLayout({ children, modal }: Props) {
+export default async function UsersLayout({ children }: Props) {
   return (
     <div className="flex h-full">
       <Suspense fallback={null}>
@@ -15,7 +14,6 @@ export default async function UsersLayout({ children, modal }: Props) {
       <main className="flex-grow overflow-auto p-5 max-md:min-w-dvw md:px-10 md:py-5">
         {children}
       </main>
-      {modal}
     </div>
   )
 }

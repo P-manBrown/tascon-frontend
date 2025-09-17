@@ -2,92 +2,116 @@ import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/solid'
 import { useEffect, useRef, useState } from 'react'
 
 type Props = {
-  height: number
+  minHeight: number
   className?: string
+  initialIsCollapsible?: boolean
   children: React.ReactNode
 }
 
 export function CollapsibleSection({
-  height,
+  minHeight,
+  initialIsCollapsible = false,
   className = '',
   children,
 }: Props) {
-  const divRef = useRef<HTMLDivElement>(null)
-  const collapsibleDivRef = useRef<HTMLDivElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const buttonRef = useRef<HTMLButtonElement>(null)
   const [hasOverflowChecked, setHasOverflowChecked] = useState(false)
-  const [isOverflowing, setIsOverflowing] = useState(false)
+  const [isCollapsible, setIsCollapsible] = useState(initialIsCollapsible)
   const [isCollapsed, setIsCollapsed] = useState(true)
-  const [currentHeight, setCurrentHeight] = useState(height)
+  const [extendedHeight, setExtendedHeight] = useState<number | null>(null)
 
   const handleClick = () => {
     setIsCollapsed((prev) => !prev)
   }
 
   useEffect(() => {
-    const div = divRef.current
-    if (div && div.scrollHeight > div.clientHeight) {
-      setIsOverflowing(true)
+    const container = containerRef.current
+    if (container && container.scrollHeight > container.clientHeight) {
+      setIsCollapsible(true)
     } else {
-      setIsOverflowing(false)
+      setIsCollapsible(false)
     }
     setHasOverflowChecked(true)
   }, [])
 
   useEffect(() => {
-    if (collapsibleDivRef.current) {
-      if (isCollapsed) {
-        setCurrentHeight(height)
-      } else {
-        setCurrentHeight(collapsibleDivRef.current.scrollHeight)
+    const content = contentRef.current
+    if (content !== null) {
+      const resizeObserver = new ResizeObserver(() => {
+        const isCurrentlyOverflowing = content.clientHeight > minHeight
+        setIsCollapsible(isCurrentlyOverflowing)
+        const button = buttonRef.current
+        if (button !== null) {
+          setExtendedHeight(content.offsetHeight + button.offsetHeight)
+        } else {
+          setExtendedHeight(content.offsetHeight)
+        }
+      })
+
+      resizeObserver.observe(content)
+
+      return () => {
+        resizeObserver.disconnect()
       }
     }
-  }, [isCollapsed, height])
+  }, [minHeight])
 
-  if (!hasOverflowChecked) {
-    return (
-      <div
-        ref={divRef}
-        className="animate-pulse overflow-hidden blur-sm"
-        style={{ height: `${height}px` }}
-      >
-        {children}
-      </div>
-    )
-  }
+  useEffect(() => {
+    const container = containerRef.current
+    if (container !== null) {
+      if (isCollapsed) {
+        setExtendedHeight(minHeight)
+      } else {
+        setExtendedHeight(container.scrollHeight)
+      }
+    }
+  }, [isCollapsed, minHeight])
 
-  return isOverflowing ? (
+  return (
     <div
-      ref={collapsibleDivRef}
-      className={`relative overflow-hidden transition-[height] delay-100 duration-200 ease-out ${
-        isCollapsed ? '' : 'pb-10'
+      ref={containerRef}
+      className={`${hasOverflowChecked ? '' : 'pointer-events-none animate-pulse blur-sm'} ${
+        isCollapsible
+          ? `relative transition-[height] delay-100 duration-200 ease-out ${
+              isCollapsed ? 'overflow-clip' : 'overflow-hidden pb-10'
+            }`
+          : ''
       }`}
-      style={{ height: `${currentHeight}px` }}
+      style={{
+        height:
+          !isCollapsible || isCollapsed
+            ? `${minHeight}px`
+            : `${extendedHeight}px`,
+      }}
     >
-      {children}
-      <button
-        className={`group absolute bottom-0 left-0 flex w-full justify-center p-1.5 text-sm hover:font-semibold ${
-          isCollapsed
-            ? 'h-20 items-end bg-gradient-to-t from-white from-40% via-white/50'
-            : 'h-10 items-center bg-white'
-        } ${className}`}
-        onClick={handleClick}
-      >
-        <span className="flex justify-center gap-1 select-none group-hover:stroke-black">
-          {isCollapsed ? (
-            <>
-              <ChevronDownIcon className="size-4 self-center" />
-              全て表示
-            </>
-          ) : (
-            <>
-              <ChevronUpIcon className="size-4 self-center" />
-              詳細を非表示
-            </>
-          )}
-        </span>
-      </button>
+      <div ref={contentRef}>{children}</div>
+      {isCollapsible && (
+        <button
+          ref={buttonRef}
+          className={`group absolute bottom-0 left-0 flex w-full justify-center p-1.5 text-sm hover:font-semibold ${
+            isCollapsed
+              ? 'h-20 items-end bg-gradient-to-t from-white from-40% via-white/50'
+              : 'h-10 items-center bg-white'
+          } ${className}`}
+          onClick={handleClick}
+        >
+          <span className="flex justify-center gap-1.5 select-none group-hover:stroke-black">
+            {isCollapsed ? (
+              <>
+                <ChevronDownIcon className="size-4 self-center" />
+                展開する
+              </>
+            ) : (
+              <>
+                <ChevronUpIcon className="size-4 self-center" />
+                折りたたむ
+              </>
+            )}
+          </span>
+        </button>
+      )}
     </div>
-  ) : (
-    <div style={{ height: `${height}px` }}>{children}</div>
   )
 }
