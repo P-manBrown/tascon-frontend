@@ -15,7 +15,11 @@ import { validateData } from '@/utils/validation/validate-data'
 
 const dataSchema = z.object({
   users: z.array(
-    userSchema.shape.user.omit({ contact: true, is_suggested: true }),
+    userSchema.shape.user.omit({
+      contact: true,
+      is_suggested: true,
+      block: true,
+    }),
   ),
 })
 

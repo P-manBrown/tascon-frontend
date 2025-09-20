@@ -20,6 +20,7 @@ import {
   LoadingEditableDisplayName,
 } from './editable-display-name'
 import { EditableNote, LoadingEditableNote } from './editable-note'
+import { UserBlockSection } from './user-block-section'
 
 type Props = {
   id: string
@@ -62,26 +63,34 @@ export async function UserPage({ id }: Props) {
         </DetailItemContentLayout>
       </BioCollapsibleSection>
       <HorizontalRule />
-      {user.contact === undefined ? (
-        <CreateContactSection userId={user.id} isSuggested={user.isSuggested} />
-      ) : (
+      {user.block === undefined && (
         <>
-          <EditableDisplayName
-            contactId={user.contact.id.toString()}
-            displayName={user.contact.displayName}
-          />
-          <EditableNote
-            contactId={user.contact.id.toString()}
-            note={user.contact.note}
-          />
-          <DetailItemContentLayout>
-            <DeleteContactButton
-              contactId={user.contact.id.toString()}
-              contactUserId={user.id.toString()}
+          {user.contact === undefined ? (
+            <CreateContactSection
+              userId={user.id}
+              isSuggested={user.isSuggested}
             />
-          </DetailItemContentLayout>
+          ) : (
+            <>
+              <EditableDisplayName
+                contactId={user.contact.id.toString()}
+                displayName={user.contact.displayName}
+              />
+              <EditableNote
+                contactId={user.contact.id.toString()}
+                note={user.contact.note}
+              />
+              <DetailItemContentLayout>
+                <DeleteContactButton
+                  contactId={user.contact.id.toString()}
+                  contactUserId={user.id.toString()}
+                />
+              </DetailItemContentLayout>
+            </>
+          )}
         </>
       )}
+      {user.contact === undefined && <UserBlockSection userId={user.id} />}
     </div>
   )
 }
@@ -116,6 +125,7 @@ export function LoadingUserPage() {
       <DetailItemContentLayout>
         <div className="skeleton shape-btn" />
       </DetailItemContentLayout>
+      <div className="skeleton h-60 rounded-sm bg-gradient-to-b from-50% via-75% to-white" />
     </div>
   )
 }
