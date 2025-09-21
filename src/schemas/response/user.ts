@@ -14,5 +14,10 @@ export const userSchema = z.object({
       })
       .optional(),
     is_suggested: z.boolean(),
+    block: z
+      .object({
+        id: z.number(),
+      })
+      .optional(),
   }),
 })
