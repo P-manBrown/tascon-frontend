@@ -3,6 +3,7 @@
 import { XMarkIcon } from '@heroicons/react/24/solid'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useTransition } from 'react'
+import { z } from 'zod'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
 import { Button } from '@/components/buttons/button'
 import { IconButton } from '@/components/buttons/icon-button'
@@ -11,7 +12,18 @@ import { IconMessage } from '@/components/icon-message'
 import { Modal } from '@/components/modal'
 import { useModal } from '@/components/modal/use-modal'
 import { useRedirectLoginPath } from '@/utils/login-path/use-redirect-login-path'
+import { isValidValue } from '@/utils/type-guard/is-valid-value'
 import { createBlock } from './create-block.api'
+import type { ErrorObject } from '@/types/error'
+import type { HttpError } from '@/utils/error/custom/http-error'
+
+const snackbarErrorsSchema = z.object({
+  errors: z.array(
+    z.object({
+      message: z.string(),
+    }),
+  ),
+})
 
 type Props = {
   currentUserId: string
@@ -34,14 +46,25 @@ export function CreateBlockButton({ currentUserId, userId }: Props) {
     handleCancel,
   } = useModal()
 
+  const handleHttpError = (err: ErrorObject<HttpError>) => {
+    const { data } = err
+    if (isValidValue(snackbarErrorsSchema, data)) {
+      openErrorSnackbar(err, data.errors[0].message)
+    } else if (err.statusCode === 401) {
+      router.push(redirectLoginPath)
+    } else {
+      openErrorSnackbar(err)
+    }
+  }
+
   const handleOkClick = () => {
     closeModal()
     startTransition(async () => {
       const result = await createBlock({ currentUserId, userId })
 
       if (result.status === 'error') {
-        if (result.name === 'HttpError' && result.statusCode === 401) {
-          router.push(redirectLoginPath)
+        if (result.name === 'HttpError') {
+          handleHttpError(result)
         } else {
           openErrorSnackbar(result)
         }
