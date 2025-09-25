@@ -6,10 +6,10 @@ import { z } from 'zod'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
 import { useModal } from '@/components/modal/use-modal'
 import { signUpSchema } from '@/schemas/request/auth'
+import { createContact } from '@/utils/api/create-contact'
 import { createFormErrorsSchema } from '@/utils/form/create-form-errors-schema'
 import { useHandleFormErrors } from '@/utils/form/use-handle-form-error'
 import { isValidValue } from '@/utils/type-guard/is-valid-value'
-import { createContact } from './create-contact.api'
 import type { ErrorObject } from '@/types/error'
 import type { HttpError } from '@/utils/error/custom/http-error'
 import type { SubmitHandler } from 'react-hook-form'
@@ -83,10 +83,7 @@ export function useCreateContactButton({ currentUserId }: Params) {
   const onSubmit: SubmitHandler<CreateContactFormValues> = useCallback(
     (data) => {
       startTransition(async () => {
-        const result = await createContact({
-          currentUserId,
-          email: data.email,
-        })
+        const result = await createContact({ currentUserId, ...data })
         if (result.status === 'error') {
           if (result.name === 'HttpError') {
             handleHttpError(result)

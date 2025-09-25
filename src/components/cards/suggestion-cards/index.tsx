@@ -31,7 +31,7 @@ export function SuggestionCards({
         >
           <div className={buttonLayoutClasses}>
             <CreateContactFromSuggestionButton
-              userId={user.id}
+              contactUserId={user.id}
               currentUserId={currentUserId}
             />
           </div>
