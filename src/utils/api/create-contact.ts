@@ -2,7 +2,7 @@
 
 import camelcaseKeys from 'camelcase-keys'
 import { revalidatePath } from 'next/cache'
-import { contactSchema } from '@/schemas/response/contacts'
+import { contactSchema } from '@/schemas/response/contact'
 import { ResultObject } from '@/types/api'
 import { fetchData } from '@/utils/api/fetch-data'
 import { getBearerToken } from '@/utils/cookie/bearer-token'
