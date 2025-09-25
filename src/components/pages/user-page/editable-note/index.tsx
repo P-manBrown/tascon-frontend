@@ -1,11 +1,7 @@
 import { DetailItemHeading } from '@/components/headings/detail-item-heading'
 import { DetailItemContentLayout } from '@/components/layouts/detail-item-content-layout'
-import { DetailItemHeadingLayout } from '@/components/layouts/detail-item-heading-layout'
 import { Tag } from '@/components/tag'
-import {
-  DetailMultiLineText,
-  LoadingDetailMultiLineText,
-} from '@/components/texts/detail-multi-line-text'
+import { DetailMultiLineText } from '@/components/texts/detail-multi-line-text'
 import { getCurrentUser } from '@/utils/api/server/get-current-user'
 import { NoteCollapsibleSection } from './note-collapsible-section'
 import { NoteEditor } from './note-editor'
@@ -37,20 +33,5 @@ export async function EditableNote({ contactId, note }: Props) {
         </DetailItemContentLayout>
       </NoteCollapsibleSection>
     </NoteEditor>
-  )
-}
-
-export function LoadingEditableNote() {
-  return (
-    <div>
-      <DetailItemHeadingLayout>
-        <DetailItemHeading>メモ</DetailItemHeading>
-      </DetailItemHeadingLayout>
-      <div style={{ height: `${minHeight}px` }}>
-        <DetailItemContentLayout>
-          <LoadingDetailMultiLineText lines={6} />
-        </DetailItemContentLayout>
-      </div>
-    </div>
   )
 }

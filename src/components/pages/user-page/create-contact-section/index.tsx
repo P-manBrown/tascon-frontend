@@ -1,46 +1,52 @@
-import Link from 'next/link'
 import { CreateContactFromSuggestionButton } from '@/components/cards/suggestion-cards/create-contact-from-suggestion-button'
+import { DetailItemHeading } from '@/components/headings/detail-item-heading'
 import { getCurrentUser } from '@/utils/api/server/get-current-user'
+import { UserCreateContactForm } from './user-create-contact-form'
 
 type Props = Pick<
   React.ComponentProps<typeof CreateContactFromSuggestionButton>,
-  'userId'
+  'contactUserId'
 > & {
   isSuggested: boolean
 }
 
-export async function CreateContactSection({ userId, isSuggested }: Props) {
+export async function UserCreateContactSection({
+  contactUserId,
+  isSuggested,
+}: Props) {
   const { account: currentUser } = await getCurrentUser()
+  const currentUserId = currentUser.id.toString()
 
   return (
-    <div className="rounded-sm bg-gray-100 p-6">
-      <p>
+    <section className="rounded-sm bg-gray-100 p-6">
+      <DetailItemHeading>登録</DetailItemHeading>
+      <p className="mt-4">
         このユーザーは登録されていません。
         <br />
         登録すると表示名やメモが設定できるようになります。
       </p>
-      {isSuggested ? (
-        <>
-          <p>このユーザーを登録するには下のボタンをクリックしてください。</p>
-          <div className="mt-6">
-            <CreateContactFromSuggestionButton
-              userId={userId}
-              currentUserId={currentUser.id.toString()}
-            />
-          </div>
-        </>
-      ) : (
-        <>
+      <div className="mt-4">
+        {isSuggested ? (
+          <p>登録するには下のボタンをクリックしてください。</p>
+        ) : (
           <p>
-            このユーザーは「登録しているユーザー一覧」ページから登録できます。
+            登録するには下のフォームにこのユーザーのメールアドレスを入力してください。
           </p>
-          <div className="mt-6">
-            <Link href="/users/contacts" className="btn btn-success">
-              登録しているユーザー一覧
-            </Link>
-          </div>
-        </>
-      )}
-    </div>
+        )}
+        <div className="mt-6">
+          {isSuggested ? (
+            <CreateContactFromSuggestionButton
+              contactUserId={contactUserId}
+              currentUserId={currentUserId}
+            />
+          ) : (
+            <UserCreateContactForm
+              contactUserId={contactUserId}
+              currentUserId={currentUserId}
+            />
+          )}
+        </div>
+      </div>
+    </section>
   )
 }

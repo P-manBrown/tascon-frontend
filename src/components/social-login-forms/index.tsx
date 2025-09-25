@@ -1,9 +1,9 @@
 'use client'
 
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/solid'
+import { Button } from '@/components/buttons/button'
+import { SearchParamsLoader } from '@/components/search-params-loader'
 import { useSocialLoginForms } from './use-social-login-forms'
-import { Button } from '../buttons/button'
-import { SearchParamsLoader } from '../search-params-loader'
 import type { ReadonlyURLSearchParams } from 'next/navigation'
 
 const socialLoginForms = [

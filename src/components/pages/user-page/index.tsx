@@ -13,13 +13,10 @@ import {
   LoadingDetailSingleLineText,
 } from '@/components/texts/detail-single-line-text'
 import { getUser } from '@/utils/api/server/get-user'
-import { CreateContactSection } from './create-contact-section'
+import { UserCreateContactSection } from './create-contact-section'
 import { DeleteContactButton } from './delete-contact-button'
-import {
-  EditableDisplayName,
-  LoadingEditableDisplayName,
-} from './editable-display-name'
-import { EditableNote, LoadingEditableNote } from './editable-note'
+import { EditableDisplayName } from './editable-display-name'
+import { EditableNote } from './editable-note'
 import { UserBlockSection } from './user-block-section'
 
 type Props = {
@@ -66,8 +63,8 @@ export async function UserPage({ id }: Props) {
       {user.block === undefined && (
         <>
           {user.contact === undefined ? (
-            <CreateContactSection
-              userId={user.id}
+            <UserCreateContactSection
+              contactUserId={user.id}
               isSuggested={user.isSuggested}
             />
           ) : (
@@ -120,11 +117,6 @@ export function LoadingUserPage() {
         </div>
       </div>
       <HorizontalRule />
-      <LoadingEditableDisplayName />
-      <LoadingEditableNote />
-      <DetailItemContentLayout>
-        <div className="skeleton shape-btn" />
-      </DetailItemContentLayout>
       <div className="skeleton h-60 rounded-sm bg-gradient-to-b from-50% via-75% to-white" />
     </div>
   )

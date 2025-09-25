@@ -4,8 +4,8 @@ import { useTransition } from 'react'
 import { z } from 'zod'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
 import { Button } from '@/components/buttons/button'
+import { createContact } from '@/utils/api/create-contact'
 import { isValidValue } from '@/utils/type-guard/is-valid-value'
-import { createContactFromSuggestion } from './create-contact-from-suggestion.api'
 import type { ErrorObject } from '@/types/error'
 import type { HttpError } from '@/utils/error/custom/http-error'
 
@@ -20,12 +20,12 @@ const errorsObjectSchema = z.object({
 const snackbarErrorSchema = z.union([errorObjectSchema, errorsObjectSchema])
 
 type Props = {
-  userId: number
+  contactUserId: number
   currentUserId: string
 }
 
 export function CreateContactFromSuggestionButton({
-  userId,
+  contactUserId,
   currentUserId,
 }: Props) {
   const [isPending, startTransition] = useTransition()
@@ -47,10 +47,7 @@ export function CreateContactFromSuggestionButton({
 
   const handleClick = () => {
     startTransition(async () => {
-      const result = await createContactFromSuggestion({
-        currentUserId,
-        contactUserId: userId,
-      })
+      const result = await createContact({ currentUserId, contactUserId })
       if (result.status === 'error') {
         if (result.name === 'HttpError') {
           handleHttpError(result)

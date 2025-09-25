@@ -1,10 +1,8 @@
 import { DetailItemHeading } from '@/components/headings/detail-item-heading'
 import { DetailItemContentLayout } from '@/components/layouts/detail-item-content-layout'
-import { DetailItemHeadingLayout } from '@/components/layouts/detail-item-heading-layout'
 import { Tag } from '@/components/tag'
 import {
   DetailSingleLineText,
-  LoadingDetailSingleLineText,
 } from '@/components/texts/detail-single-line-text'
 import { getCurrentUser } from '@/utils/api/server/get-current-user'
 import { DisplayNameEditor } from './display-name-editor'
@@ -35,18 +33,5 @@ export async function EditableDisplayName({ contactId, displayName }: Props) {
         )}
       </DetailItemContentLayout>
     </DisplayNameEditor>
-  )
-}
-
-export function LoadingEditableDisplayName() {
-  return (
-    <div>
-      <DetailItemHeadingLayout>
-        <DetailItemHeading>表示名</DetailItemHeading>
-      </DetailItemHeadingLayout>
-      <DetailItemContentLayout>
-        <LoadingDetailSingleLineText />
-      </DetailItemContentLayout>
-    </div>
   )
 }
