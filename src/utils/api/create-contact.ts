@@ -14,12 +14,18 @@ import type { z } from 'zod'
 
 type Params = {
   currentUserId: string
-  email: string
-}
+} & (
+  | { contactUserId: number; email?: string }
+  | { contactUserId?: number; email: string }
+)
 
 type Data = CamelCaseKeys<z.infer<typeof contactSchema>, true>
 
-export async function createContact({ currentUserId, email }: Params) {
+export async function createContact({
+  currentUserId,
+  contactUserId,
+  email,
+}: Params) {
   const fetchDataResult = await fetchData(
     `${process.env.API_ORIGIN}/api/v1/users/${currentUserId}/contacts`,
     {
@@ -28,7 +34,12 @@ export async function createContact({ currentUserId, email }: Params) {
         'Content-Type': 'application/json',
         Authorization: await getBearerToken(),
       },
-      body: JSON.stringify({ email, display_name: '', note: '' }),
+      body: JSON.stringify({
+        contact_user_id: contactUserId,
+        display_name: '',
+        note: '',
+        email,
+      }),
     },
   )
 
@@ -52,7 +63,10 @@ export async function createContact({ currentUserId, email }: Params) {
         status: 'success',
         ...camelcaseKeys(validateDataResult, { deep: true }),
       }
+      revalidatePath('/users')
       revalidatePath('/users/contacts')
+      revalidatePath('/users/suggestions')
+      revalidatePath(`/users/profile/${resultObject.contact.contactUser.id}`)
     }
   }
 
