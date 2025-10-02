@@ -6,7 +6,9 @@ import { useSidebar } from '@/components/sidebar/use-sidebar'
 import { UsersMenu } from './users-menu'
 
 export function UsersSidebar() {
-  const { isOpen, linkSidebarQuery, openSidebar, closeSidebar } = useSidebar()
+  const { isOpen, linkSidebarQuery, openSidebar, closeSidebar } = useSidebar({
+    defaultState: 'closed',
+  })
 
   return (
     <Sidebar
