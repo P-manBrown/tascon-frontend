@@ -30,7 +30,7 @@ export function Sidebar({
         inert={!isOpen}
       >
         <div
-          className={`h-full border-b border-b-gray-300 p-3 max-sm:min-w-screen ${widthClasses}`}
+          className={`h-full overflow-auto border-b border-b-gray-300 p-3 max-sm:min-w-screen ${widthClasses}`}
         >
           {children}
         </div>
