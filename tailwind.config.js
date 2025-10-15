@@ -216,7 +216,7 @@ module.exports = {
             {},
         },
         '.btn-icon': {
-          '@apply btn-ghost inline-flex items-center justify-center rounded-sm p-1 disabled:cursor-wait disabled:bg-transparent disabled:duration-0':
+          '@apply btn-ghost inline-flex items-center justify-center rounded-sm p-0.5 disabled:cursor-wait disabled:bg-transparent disabled:duration-0':
             {},
         },
         '.clickable-avatar': {
