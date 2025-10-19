@@ -1,4 +1,7 @@
 import { Suspense } from 'react'
+import { HorizontalRule } from '@/components/horizontal-rule'
+import { DetailItemContentLayout } from '@/components/layouts/detail-item-content-layout'
+import { DeleteTaskGroupButton } from './delete-task-group-button'
 import {
   EditableTaskGroupIcon,
   LoadingEditableTaskGroupIcon,
@@ -29,6 +32,10 @@ export function TaskGroupDetail({ id }: Props) {
         <Suspense fallback={<LoadingEditableTaskGroupNote />}>
           <EditableTaskGroupNote taskGroupId={id} />
         </Suspense>
+        <HorizontalRule />
+        <DetailItemContentLayout>
+          <DeleteTaskGroupButton taskGroupId={id} />
+        </DetailItemContentLayout>
       </div>
     </div>
   )
