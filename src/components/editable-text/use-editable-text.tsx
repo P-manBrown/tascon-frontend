@@ -30,7 +30,8 @@ export function useEditableText<T extends FieldValues>({
     getValues,
     setValue,
     setError,
-    formState: { isDirty, isValid, isSubmitting, errors },
+    getFieldState,
+    formState: { isDirty, isValid, isSubmitting },
   } = useForm({
     mode: 'onChange',
     shouldFocusError: false,
@@ -157,7 +158,7 @@ export function useEditableText<T extends FieldValues>({
     hasLocalStorageValue,
     isSubmitting,
     registerReturn: register(name),
-    fieldError: errors[name],
+    fieldError: getFieldState(name).error,
     closeEditor,
     openEditor,
     handleFormErrors,
