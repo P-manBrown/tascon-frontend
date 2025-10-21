@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
-import { useCallback, useRef, useTransition } from 'react'
+import { useCallback, useId, useRef, useState, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
@@ -35,10 +35,12 @@ type Params = {
 }
 
 export function useCreateTaskGroupForm({ handleSubmitSuccess }: Params) {
+  const popoverId = useId()
   const popoverRef = useRef<HTMLDivElement>(null)
   const noteEditorRef = useRef<HTMLTextAreaElement>(null)
   const router = useRouter()
   const [isPending, startTransition] = useTransition()
+  const [shouldPickerMount, setShouldPickerMount] = useState(false)
   const { openErrorSnackbar } = useErrorSnackbar()
 
   const {
@@ -64,6 +66,12 @@ export function useCreateTaskGroupForm({ handleSubmitSuccess }: Params) {
     },
     [adjustHeight, updateWordCount],
   )
+
+  const handleButtonClick = useCallback(() => {
+    if (!shouldPickerMount) {
+      setShouldPickerMount(true)
+    }
+  }, [shouldPickerMount])
 
   const handleEmojiClick = useCallback(
     (emojiData: EmojiClickData) => {
@@ -101,6 +109,7 @@ export function useCreateTaskGroupForm({ handleSubmitSuccess }: Params) {
   )
 
   return {
+    popoverId,
     popoverRef,
     register,
     handleSubmit,
@@ -112,6 +121,8 @@ export function useCreateTaskGroupForm({ handleSubmitSuccess }: Params) {
     shadowRef,
     wordCount,
     handleNoteInput,
+    handleButtonClick,
     handleEmojiClick,
+    shouldPickerMount,
   }
 }

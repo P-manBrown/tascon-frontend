@@ -1,5 +1,4 @@
 import dynamic from 'next/dynamic'
-import { useId } from 'react'
 import { Button } from '@/components/buttons/button'
 import { Label } from '@/components/form-controls/label'
 import { TextArea } from '@/components/form-controls/text-area'
@@ -18,9 +17,8 @@ type Props = {
 }
 
 export function CreateTaskGroupForm({ handleSubmitSuccess }: Props) {
-  const popoverId = useId()
-
   const {
+    popoverId,
     popoverRef,
     register,
     handleSubmit,
@@ -31,7 +29,9 @@ export function CreateTaskGroupForm({ handleSubmitSuccess }: Props) {
     shadowRef,
     wordCount,
     handleNoteInput,
+    handleButtonClick,
     handleEmojiClick,
+    shouldPickerMount,
     watch,
   } = useCreateTaskGroupForm({ handleSubmitSuccess })
 
@@ -41,6 +41,7 @@ export function CreateTaskGroupForm({ handleSubmitSuccess }: Props) {
       <button
         type="button"
         className={`text-box size-11 ${errors.icon === undefined ? '' : 'text-box-error'}`}
+        onClick={handleButtonClick}
         popoverTarget={popoverId}
       >
         <Emoji unified={watch('icon')} size={32} />
@@ -51,13 +52,15 @@ export function CreateTaskGroupForm({ handleSubmitSuccess }: Props) {
         id={popoverId}
         className="top-[anchor(top)] left-[anchor(right)] ml-1 rounded-lg drop-shadow-md"
       >
-        <Picker
-          onEmojiClick={handleEmojiClick}
-          searchDisabled={true}
-          skinTonesDisabled={true}
-          previewConfig={{ showPreview: false }}
-          width="100%"
-        />
+        {shouldPickerMount && (
+          <Picker
+            onEmojiClick={handleEmojiClick}
+            searchDisabled={true}
+            skinTonesDisabled={true}
+            previewConfig={{ showPreview: false }}
+            width="100%"
+          />
+        )}
       </div>
       <TextField
         type="text"
