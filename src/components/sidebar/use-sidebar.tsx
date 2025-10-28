@@ -17,7 +17,11 @@ function getLinkSidebarQuery(isNarrowScreen: boolean) {
   return undefined
 }
 
-export function useSidebar() {
+type Params = {
+  defaultState: 'open' | 'closed'
+}
+
+export function useSidebar({ defaultState }: Params) {
   const pathname = usePathname()
   const params = useSearchParams()
   const [sidebar, setSidebar] = useQueryState(
@@ -25,7 +29,9 @@ export function useSidebar() {
     parseAsStringLiteral([
       sidebarStates.open,
       sidebarStates.closed,
-    ]).withDefault(sidebarStates.closed),
+    ]).withDefault(
+      defaultState === 'open' ? sidebarStates.open : sidebarStates.closed,
+    ),
   )
   const isOpen = sidebar === sidebarStates.open
   const [isNarrowScreen, setIsNarrowScreen] = useState(false)
