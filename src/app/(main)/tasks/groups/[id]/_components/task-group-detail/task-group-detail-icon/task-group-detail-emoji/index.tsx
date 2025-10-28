@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic'
 
-const iconSize = 24
+const iconSize = 32
 
 const Emoji = dynamic(
   () => import('emoji-picker-react').then((mod) => mod.Emoji),

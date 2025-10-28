@@ -2,12 +2,24 @@ import { useCallback, useEffect, useRef } from 'react'
 import { useModal } from '@/components/modal/use-modal'
 
 type Params = {
+  initialIsOpen?: boolean
   skipPopstateButtonIds?: string[]
 }
 
-export function useFormModal({ skipPopstateButtonIds = [] }: Params = {}) {
-  const { isOpen, closeModal, handleAnimationEnd, handleCancel } = useModal({
-    initialIsOpen: true,
+export function useFormModal({
+  initialIsOpen = true,
+  skipPopstateButtonIds = [],
+}: Params = {}) {
+  const {
+    isOpen,
+    shouldMount,
+    openModal,
+    closeModal,
+    unmountModal,
+    handleAnimationEnd,
+    handleCancel,
+  } = useModal({
+    initialIsOpen,
   })
 
   const shouldTriggerPopstate = useRef(true)
@@ -81,7 +93,10 @@ export function useFormModal({ skipPopstateButtonIds = [] }: Params = {}) {
 
   return {
     isOpen,
+    shouldMount,
+    openModal,
     closeModal,
+    unmountModal,
     handleAnimationEnd,
     handleCancel,
     handleBackdropMouseDown,
