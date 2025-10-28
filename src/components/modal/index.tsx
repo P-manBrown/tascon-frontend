@@ -7,7 +7,7 @@ type Props = Omit<
   isOpen: boolean
   onCancel: (ev: React.SyntheticEvent<HTMLDialogElement, Event>) => void
   onAnimationEnd: (ev: React.AnimationEvent<HTMLDialogElement>) => void
-  onClose: (ev: React.SyntheticEvent<HTMLDialogElement, Event>) => void
+  onClose?: (ev: React.SyntheticEvent<HTMLDialogElement, Event>) => void
   onBackdropClick?: (ev: React.MouseEvent<HTMLDialogElement>) => void
   onBackdropMouseDown?: (ev: React.MouseEvent<HTMLDialogElement>) => void
 }
