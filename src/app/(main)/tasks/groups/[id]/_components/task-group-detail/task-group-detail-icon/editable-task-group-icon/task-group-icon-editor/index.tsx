@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useId, useRef, useTransition } from 'react'
+import { useId, useRef, useState, useTransition } from 'react'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
 import { DetailItemContentLayout } from '@/components/layouts/detail-item-content-layout'
 import { DetailItemHeadingLayout } from '@/components/layouts/detail-item-heading-layout'
@@ -24,10 +24,17 @@ export function TaskGroupIconEditor({ taskGroupId, label, children }: Props) {
   const popoverId = useId()
   const popoverRef = useRef<HTMLDivElement>(null)
   const [isPending, startTransition] = useTransition()
+  const [shouldPickerMount, setShouldPickerMount] = useState(false)
   const router = useRouter()
   const searchParams = useSearchParams()
   const redirectLoginPath = useRedirectLoginPath({ searchParams })
   const { openErrorSnackbar } = useErrorSnackbar()
+
+  const handleButtonClick = () => {
+    if (!shouldPickerMount) {
+      setShouldPickerMount(true)
+    }
+  }
 
   const handleHttpError = (err: ErrorObject<HttpError>) => {
     if (err.statusCode === 401) {
@@ -61,6 +68,7 @@ export function TaskGroupIconEditor({ taskGroupId, label, children }: Props) {
         <button
           type="button"
           className="block duration-200 hover:brightness-75 disabled:animate-pulse disabled:cursor-not-allowed"
+          onClick={handleButtonClick}
           popoverTarget={popoverId}
           disabled={isPending}
         >
@@ -73,13 +81,15 @@ export function TaskGroupIconEditor({ taskGroupId, label, children }: Props) {
         id={popoverId}
         className="top-[anchor(top)] left-[anchor(right)] ml-1 rounded-lg drop-shadow-md"
       >
-        <Picker
-          onEmojiClick={handleEmojiClick}
-          searchDisabled={true}
-          skinTonesDisabled={true}
-          previewConfig={{ showPreview: false }}
-          width="100%"
-        />
+        {shouldPickerMount && (
+          <Picker
+            onEmojiClick={handleEmojiClick}
+            searchDisabled={true}
+            skinTonesDisabled={true}
+            previewConfig={{ showPreview: false }}
+            width="100%"
+          />
+        )}
       </div>
     </div>
   )
