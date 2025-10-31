@@ -49,7 +49,7 @@ export function Snackbar({
   return (
     <div
       ref={ref}
-      className={`inset-auto top-0 m-auto w-full bg-gray-900 p-4 md:bottom-7 md:left-7 md:top-auto md:w-auto md:rounded md:shadow-lg md:shadow-black/40 ${
+      className={`inset-auto top-0 m-auto w-full bg-gray-900 p-4 md:top-auto md:bottom-7 md:left-7 md:w-auto md:rounded md:shadow-lg md:shadow-black/40 ${
         isOpen
           ? 'animate-slide-in-top md:animate-slide-in-bottom'
           : 'animate-slide-out-top md:animate-slide-out-bottom'

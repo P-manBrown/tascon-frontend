@@ -9,7 +9,7 @@ export function useModal({ initialIsOpen = false }: Params = {}) {
   const [shouldMount, setShouldMount] = useState(initialIsOpen)
   const [isOpen, setIsOpen] = useState(initialIsOpen)
   const closeAllSnackbars = useSnackbarsStore(
-    (state) => state.closeAllSnackbars
+    (state) => state.closeAllSnackbars,
   )
 
   const openModal = useCallback(() => {
@@ -32,7 +32,7 @@ export function useModal({ initialIsOpen = false }: Params = {}) {
         ev.currentTarget.close()
       }
     },
-    [isOpen]
+    [isOpen],
   )
 
   const handleCancel = useCallback(
@@ -44,7 +44,7 @@ export function useModal({ initialIsOpen = false }: Params = {}) {
         closeModal()
       }
     },
-    [closeModal]
+    [closeModal],
   )
 
   return {

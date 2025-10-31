@@ -6,7 +6,7 @@ export default function NotFound() {
     <main className="mx-3 flex min-h-dvh items-center justify-center">
       <div className="text-center">
         <p className="text-4xl font-semibold text-red-600 md:text-5xl">404</p>
-        <h1 className="mb-5 mt-1.5 text-4xl font-bold tracking-tight md:mt-3 md:text-6xl">
+        <h1 className="mt-1.5 mb-5 text-4xl font-bold tracking-tight md:mt-3 md:text-6xl">
           Page not found
         </h1>
         <NotFoundContent
