@@ -47,7 +47,7 @@
     "eslint-config-next": "^15.3.2",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-unused-imports": "^4.3.0",
-    "knip": "^5.56.0",
+    "knip": "^5.66.3",
     "markdownlint-cli2": "^0.18.1",
     "markuplint": "^4.13.1",
     "pino-pretty": "^13.0.0",
