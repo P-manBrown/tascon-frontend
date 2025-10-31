@@ -4,7 +4,7 @@ const maxRetries = 5
 
 export function sendLogWithRetries(
   level: pino.Level,
-  messages: pino.LogEvent['messages']
+  messages: pino.LogEvent['messages'],
 ) {
   const requestId = crypto.randomUUID()
 
@@ -21,7 +21,7 @@ export function sendLogWithRetries(
           body: JSON.stringify({ level, messages }),
           keepalive: true,
           credentials: 'omit',
-        }
+        },
       )
 
       if ([408, 429].includes(res.status) || res.status >= 500) {

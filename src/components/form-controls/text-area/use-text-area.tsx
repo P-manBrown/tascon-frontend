@@ -31,7 +31,7 @@ export function useTextArea({ countGranularity }: Params) {
       const count = countFunction(trimmedValue)
       setWordCount(count)
     },
-    [countGranularity]
+    [countGranularity],
   )
 
   return {
