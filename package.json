@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
-    "@hookform/resolvers": "^5.0.1",
+    "@hookform/resolvers": "^5.2.2",
     "@next/bundle-analyzer": "^15.3.2",
     "@types/node": "22.15.21",
     "@types/react": "19.1.4",
@@ -30,7 +30,7 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-error-boundary": "^6.0.0",
-    "react-hook-form": "^7.56.4",
+    "react-hook-form": "^7.65.0",
     "server-only": "^0.0.1",
     "snakecase-keys": "^8.0.1",
     "typescript": "<5.9.0",
