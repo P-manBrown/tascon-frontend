@@ -5,7 +5,7 @@ export type UseEditableTextParams = {
   editorRef: React.RefObject<HTMLInputElement | HTMLTextAreaElement | null>
   currentUserId: string
   name: string
-  schema: ZodSchema
+  schema: ZodSchema & { _def: { typeName: string } }
   defaultValue: string
   shouldSaveToLocalStorage: boolean
 }
