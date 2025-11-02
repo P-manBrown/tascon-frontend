@@ -7,7 +7,7 @@ type LoadingProps = {
 }
 
 export function DetailMultiLineText({ children }: Props) {
-  return <p className="whitespace-pre-wrap break-words">{children}</p>
+  return <p className="break-words whitespace-pre-wrap">{children}</p>
 }
 
 const widthClasses = ['w-3/5', 'w-full', 'w-5/12', 'w-4/5', 'w-4/6']

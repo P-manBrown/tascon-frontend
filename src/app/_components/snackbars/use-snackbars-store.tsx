@@ -23,7 +23,7 @@ export const useSnackbarsStore = create<SnackbarsState>()(
     openSnackbar: (params) => {
       set((state) => {
         const oldSnackbars = state.snackbars.map((snackbar) =>
-          snackbar.isOpen ? { ...snackbar, isOpen: false } : snackbar
+          snackbar.isOpen ? { ...snackbar, isOpen: false } : snackbar,
         )
         const newSnackbar = {
           id: state.snackbars.splice(-1)[0]?.id + 1 || 0,
@@ -36,7 +36,7 @@ export const useSnackbarsStore = create<SnackbarsState>()(
     closeSnackbar: (id) => {
       set((state) => {
         const newSnackbars = state.snackbars.map((snackbar) =>
-          snackbar.id === id ? { ...snackbar, isOpen: false } : snackbar
+          snackbar.id === id ? { ...snackbar, isOpen: false } : snackbar,
         )
         return { snackbars: newSnackbars }
       })
@@ -53,10 +53,10 @@ export const useSnackbarsStore = create<SnackbarsState>()(
     cleanupSnackbar: (id) => {
       set((state) => {
         const newSnackbars = state.snackbars.filter(
-          (snackbar) => snackbar.id > id || snackbar.isOpen
+          (snackbar) => snackbar.id > id || snackbar.isOpen,
         )
         return { snackbars: newSnackbars }
       })
     },
-  }))
+  })),
 )
