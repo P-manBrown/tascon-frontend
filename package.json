@@ -51,7 +51,7 @@
     "markdownlint-cli2": "^0.18.1",
     "markuplint": "^4.13.1",
     "pino-pretty": "^13.0.0",
-    "postcss": "^8.5.3",
+    "postcss": "^8.5.6",
     "prettier": "3.6.2",
     "prettier-plugin-tailwindcss": "^0.7.1",
     "tailwindcss": "^4.1.17"
