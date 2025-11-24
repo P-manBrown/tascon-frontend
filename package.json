@@ -32,7 +32,7 @@
     "react-error-boundary": "^6.0.0",
     "react-hook-form": "^7.65.0",
     "server-only": "^0.0.1",
-    "snakecase-keys": "^8.0.1",
+    "snakecase-keys": "^9.0.2",
     "typescript": "<5.9.0",
     "zod": "^3.25.20",
     "zustand": "^5.0.8"
