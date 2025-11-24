@@ -1553,12 +1553,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@evilmartians/lefthook@npm:^1.10.8":
-  version: 1.10.8
-  resolution: "@evilmartians/lefthook@npm:1.10.8"
+"@evilmartians/lefthook@npm:^2.0.4":
+  version: 2.0.4
+  resolution: "@evilmartians/lefthook@npm:2.0.4"
   bin:
     lefthook: bin/index.js
-  checksum: 10/7b4884e41fd049d1dbcb79856efd729ad7deb1b6d85024df03ce34368a37ce347772cb8ad0923668900c509c71cdd0102f94c3e7e9dba66c3c23bdd5d8afd2a3
+  checksum: 10/d0bb7acda0ae582a681c61123a0f476a0d6fc87004f68cab813dd9a98cac5765afc0a1838f65a0e43c370974f836b4fe81d22d32ef42e959879df138538ce7dc
   conditions: (os=darwin | os=linux | os=win32) & (cpu=x64 | cpu=arm64 | cpu=ia32)
   languageName: node
   linkType: hard
@@ -10937,7 +10937,7 @@ __metadata:
   resolution: "tascon-frontend@workspace:."
   dependencies:
     "@eslint/eslintrc": "npm:^3.3.1"
-    "@evilmartians/lefthook": "npm:^1.10.8"
+    "@evilmartians/lefthook": "npm:^2.0.4"
     "@heroicons/react": "npm:^2.2.0"
     "@hookform/resolvers": "npm:^5.2.2"
     "@markuplint/jsx-parser": "npm:^4.7.21"
