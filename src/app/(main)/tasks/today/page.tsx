@@ -6,7 +6,7 @@ import { LoadingTaskList, TaskList } from '@/components/task-list'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'すべてのタスク一覧',
+  title: '今日のタスク一覧',
 }
 
 type Props = {
@@ -15,16 +15,16 @@ type Props = {
   }>
 }
 
-export default async function Tasks({ searchParams }: Props) {
+export default async function TodayTasks({ searchParams }: Props) {
   const params = await searchParams
   const { page = '1' } = params
 
   return (
     <TasksLayout>
-      <TasksHeading>すべてのタスク</TasksHeading>
+      <TasksHeading>今日のタスク</TasksHeading>
       <TaskListLayout>
         <Suspense fallback={<LoadingTaskList />}>
-          <TaskList page={page} />
+          <TaskList page={page} filter="actionable" />
         </Suspense>
       </TaskListLayout>
     </TasksLayout>
