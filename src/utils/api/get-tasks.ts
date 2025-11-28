@@ -21,58 +21,64 @@ type Params = {
   page: string
   limit: string
   filter?: 'actionable'
+  taskGroupId?: string
 }
 
-export const getTasks = cache(async ({ page, limit, filter }: Params) => {
-  const queryParams = new URLSearchParams({ page })
-  queryParams.append('limit', limit)
-  if (filter !== undefined) {
-    queryParams.append('filter', filter)
-  }
-
-  const fetchDataResult = await fetchData(
-    `${process.env.API_ORIGIN}/api/v1/tasks?${queryParams}`,
-    {
-      method: 'GET',
-      headers: {
-        Authorization: await getBearerToken(),
-      },
-    },
-  )
-
-  if (fetchDataResult instanceof Error) {
-    const isHttpError = fetchDataResult instanceof HttpError
-    const isUnauthorized = isHttpError && fetchDataResult.statusCode === 401
-
-    if (isUnauthorized) {
-      const redirectLoginPath = await generateRedirectLoginPath()
-      redirect(redirectLoginPath)
+export const getTasks = cache(
+  async ({ page, limit, filter, taskGroupId }: Params) => {
+    const queryParams = new URLSearchParams({ page })
+    queryParams.append('limit', limit)
+    if (filter !== undefined) {
+      queryParams.append('filter', filter)
+    }
+    if (taskGroupId !== undefined) {
+      queryParams.append('task_group_id', taskGroupId)
     }
 
-    throw fetchDataResult
-  }
+    const fetchDataResult = await fetchData(
+      `${process.env.API_ORIGIN}/api/v1/tasks?${queryParams}`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: await getBearerToken(),
+        },
+      },
+    )
 
-  const { headers, data } = fetchDataResult
-  const requestId = getRequestId(headers)
+    if (fetchDataResult instanceof Error) {
+      const isHttpError = fetchDataResult instanceof HttpError
+      const isUnauthorized = isHttpError && fetchDataResult.statusCode === 401
 
-  const validateDataResult = validateData({ requestId, dataSchema, data })
-  if (validateDataResult instanceof Error) {
-    throw validateDataResult
-  }
-  const { tasks } = camelcaseKeys(validateDataResult, { deep: true })
+      if (isUnauthorized) {
+        const redirectLoginPath = await generateRedirectLoginPath()
+        redirect(redirectLoginPath)
+      }
 
-  const paginationData = extractPaginationData(headers)
-  const validatePaginationResult = validateData({
-    requestId,
-    dataSchema: paginationDataSchema,
-    data: paginationData,
-  })
-  if (validatePaginationResult instanceof Error) {
-    throw validatePaginationResult
-  }
+      throw fetchDataResult
+    }
 
-  return {
-    tasks,
-    pagination: validatePaginationResult,
-  }
-})
+    const { headers, data } = fetchDataResult
+    const requestId = getRequestId(headers)
+
+    const validateDataResult = validateData({ requestId, dataSchema, data })
+    if (validateDataResult instanceof Error) {
+      throw validateDataResult
+    }
+    const { tasks } = camelcaseKeys(validateDataResult, { deep: true })
+
+    const paginationData = extractPaginationData(headers)
+    const validatePaginationResult = validateData({
+      requestId,
+      dataSchema: paginationDataSchema,
+      data: paginationData,
+    })
+    if (validatePaginationResult instanceof Error) {
+      throw validatePaginationResult
+    }
+
+    return {
+      tasks,
+      pagination: validatePaginationResult,
+    }
+  },
+)
