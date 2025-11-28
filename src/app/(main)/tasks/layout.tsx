@@ -14,7 +14,7 @@ export default function TasksLayout({ children }: Props) {
           <TasksSidebarContent />
         </TasksSidebar>
       </Suspense>
-      <main className="flex-grow overflow-auto p-5 max-md:min-w-dvw md:px-10 md:py-5">
+      <main className="grow overflow-auto p-5 max-md:min-w-dvw md:px-10 md:py-5">
         {children}
       </main>
     </div>
