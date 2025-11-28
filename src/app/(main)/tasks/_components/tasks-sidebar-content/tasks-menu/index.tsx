@@ -1,6 +1,6 @@
 'use client'
 
-import { RectangleStackIcon } from '@heroicons/react/24/outline'
+import { InboxIcon, RectangleStackIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { useSelectedLayoutSegment } from 'next/navigation'
 import { useContext } from 'react'
@@ -11,6 +11,11 @@ const links = [
     icon: <RectangleStackIcon className="size-5" />,
     name: 'すべて',
     pathname: '/tasks',
+  },
+  {
+    icon: <InboxIcon className="size-5" />,
+    name: '今日',
+    pathname: '/tasks/today',
   },
 ]
 
