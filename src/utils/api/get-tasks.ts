@@ -20,11 +20,15 @@ const dataSchema = z.object({
 type Params = {
   page: string
   limit: string
+  filter?: 'actionable'
 }
 
-export const getTasks = cache(async ({ page, limit }: Params) => {
+export const getTasks = cache(async ({ page, limit, filter }: Params) => {
   const queryParams = new URLSearchParams({ page })
   queryParams.append('limit', limit)
+  if (filter !== undefined) {
+    queryParams.append('filter', filter)
+  }
 
   const fetchDataResult = await fetchData(
     `${process.env.API_ORIGIN}/api/v1/tasks?${queryParams}`,
