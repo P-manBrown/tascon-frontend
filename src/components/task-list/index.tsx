@@ -20,6 +20,7 @@ export async function TaskList({ page, filter, taskGroupId }: Props) {
 
   return (
     <TaskCardsContainer
+      taskGroupId={taskGroupId}
       currentPage={pagination.currentPage}
       totalPages={pagination.totalPages}
       pageItems={pagination.pageItems.toString()}
