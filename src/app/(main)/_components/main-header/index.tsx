@@ -1,3 +1,4 @@
+import { PlusCircleIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Suspense } from 'react'
@@ -23,11 +24,22 @@ export function MainHeader() {
             </Link>
             <NavLinks className="space-x-3.5 max-md:hidden" />
           </div>
-          <AccountLink>
-            <Suspense fallback={<LoadingHeaderAvatar />}>
-              <HeaderAvatar />
-            </Suspense>
-          </AccountLink>
+          <div className="flex items-center gap-5">
+            <Link
+              href="/tasks/create"
+              className="btn btn-ghost h-fit p-1 text-sm"
+            >
+              <span className="flex items-center gap-x-0.5">
+                <PlusCircleIcon className="size-4 stroke-3" />
+                タスク作成
+              </span>
+            </Link>
+            <AccountLink>
+              <Suspense fallback={<LoadingHeaderAvatar />}>
+                <HeaderAvatar />
+              </Suspense>
+            </AccountLink>
+          </div>
         </div>
         <NavLinks className="hidden-scrollbar justify-between overflow-scroll py-1 text-sm whitespace-nowrap md:hidden" />
       </nav>
