@@ -1,5 +1,6 @@
 import {
   CheckCircleIcon,
+  InformationCircleIcon,
   XCircleIcon,
   XMarkIcon,
 } from '@heroicons/react/24/solid'
@@ -9,14 +10,14 @@ import { useSnackbarsStore } from '../use-snackbars-store'
 
 type Props = {
   id: number
-  severity: 'success' | 'error'
+  severity: 'info' | 'success' | 'error'
   isOpen: boolean
   message: string
   actionButton?: React.ReactElement
 }
 
 const iconBaseClasses =
-  'inline-flex size-8 flex-shrink-0 items-center justify-center rounded-md'
+  'inline-flex size-8 shrink-0 items-center justify-center rounded-md'
 const iconClasses = 'size-6'
 
 export function Snackbar({
@@ -31,6 +32,12 @@ export function Snackbar({
 
   const getIcon = () => {
     switch (severity) {
+      case 'info':
+        return (
+          <div className={`${iconBaseClasses} bg-sky-600`}>
+            <InformationCircleIcon className={`${iconClasses} fill-white`} />
+          </div>
+        )
       case 'success':
         return (
           <div className={`${iconBaseClasses} bg-green-700`}>

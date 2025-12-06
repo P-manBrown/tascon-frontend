@@ -1,5 +1,7 @@
 'use client'
 
+import { PlusIcon } from '@heroicons/react/24/outline'
+import Link from 'next/link'
 import { useRef, useEffect } from 'react'
 import { PageSelector } from '@/components/paginations/page-selector'
 import { ScrollTriggerNextLink } from './scroll-trigger-next-link'
@@ -8,6 +10,7 @@ import { ScrollTriggerPrevLink } from './scroll-trigger-prev-link'
 import { useScrollTriggerPrevLink } from './scroll-trigger-prev-link/use-scroll-trigger-prev-link'
 
 type Props = {
+  taskGroupId?: string
   currentPage: number
   totalPages: number
   pageItems: string
@@ -19,6 +22,7 @@ const wheelTransitionThreshold = 1000
 const touchTransitionThreshold = 500
 
 export function TaskCardsContainer({
+  taskGroupId,
   currentPage,
   totalPages,
   pageItems,
@@ -119,7 +123,18 @@ export function TaskCardsContainer({
           />
         )}
       </div>
-      <div className="flex h-12 shrink-0 items-center justify-center border-t border-gray-300">
+      <div className="relative flex h-12 shrink-0 items-center justify-center border-t border-gray-300">
+        <Link
+          href={{
+            pathname: '/tasks/create',
+            ...(taskGroupId !== undefined && {
+              query: { task_group_id: taskGroupId },
+            }),
+          }}
+          className="btn-icon absolute left-4"
+        >
+          <PlusIcon className="size-5 stroke-2" />
+        </Link>
         <PageSelector
           currentPage={currentPage}
           totalPages={totalPages}

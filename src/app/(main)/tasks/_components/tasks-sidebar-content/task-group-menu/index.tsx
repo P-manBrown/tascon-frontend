@@ -1,4 +1,4 @@
-import { getTaskGroups } from './get-task-groups.api'
+import { getTaskGroups } from '@/utils/api/get-task-groups'
 import { TaskGroupNavLinks } from './task-group-nav-links'
 
 const navLinksLayoutClasses = 'space-y-2 md:space-y-1'
