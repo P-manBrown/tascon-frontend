@@ -13,77 +13,79 @@ import { ErrorObject } from '@/types/error'
 import { HttpError } from '@/utils/error/custom/http-error'
 import { useRedirectLoginPath } from '@/utils/login-path/use-redirect-login-path'
 import { countCharacters } from '@/utils/string-count/count-characters'
-import { changeBio } from './change-bio.api'
+import { changeTaskNote } from './change-task-note.api'
 
-const bioSchema = z.object({
-  bio: z
+type Props = Pick<React.ComponentProps<typeof EditableText>, 'children'> & {
+  currentUserId: string
+  taskId: string
+  initialNote: string | undefined
+  label: React.ReactElement
+  unsavedChangeTag: React.ReactElement
+}
+
+const taskNoteSchema = z.object({
+  note: z
     .string()
     .trim()
-    .refine((value) => countCharacters(value) <= 250, {
+    .refine((value) => countCharacters(value) <= 1000, {
       message: '最大文字数を超えています。',
     }),
 })
 
-type ChangeBioFormValue = z.infer<typeof bioSchema>
+type TaskNoteFormValue = z.infer<typeof taskNoteSchema>
 
-type Props = Pick<React.ComponentProps<typeof EditableText>, 'children'> & {
-  currentUserId: string
-  initialBio: string | undefined
-  label: React.ReactElement
-  privacyTag: React.ReactElement
-  unsavedChangeTag: React.ReactElement
-}
-
-export function BioEditor({
+export function TaskNoteEditor({
   currentUserId,
-  initialBio = '',
+  taskId,
+  initialNote = '',
   label,
-  privacyTag,
   unsavedChangeTag,
   children,
 }: Props) {
   const [isPending, startTransition] = useTransition()
+  const { openErrorSnackbar } = useErrorSnackbar()
   const router = useRouter()
   const searchParams = useSearchParams()
   const redirectLoginPath = useRedirectLoginPath({ searchParams })
   const editorRef = useRef<HTMLTextAreaElement>(null)
+
   const {
-    isEditorOpen,
     updateField,
+    isEditorOpen,
     hasLocalStorageValue,
     handleFormSubmit,
-    handleBlur,
     handleCancelClick,
+    handleBlur,
     registerReturn,
     fieldError,
     saveFieldValueToLocalStorage,
     openEditor,
-  } = useEditableText<ChangeBioFormValue>({
+  } = useEditableText<TaskNoteFormValue>({
     editorRef,
     currentUserId,
-    defaultValue: initialBio,
-    schema: bioSchema,
-    name: 'bio',
+    defaultValue: initialNote,
+    schema: taskNoteSchema,
+    name: 'note',
     shouldSaveToLocalStorage: true,
   })
+
   const { shadowRef, wordCount, handleInput } = useEditableMultiLineText({
     editorRef,
     isEditorOpen,
   })
-  const { openErrorSnackbar } = useErrorSnackbar()
 
   const handleHttpError = (err: ErrorObject<HttpError>) => {
-    if (err.statusCode === 404) {
+    if (err.statusCode === 401) {
       saveFieldValueToLocalStorage()
-      router.replace(redirectLoginPath)
+      router.push(redirectLoginPath)
     } else {
       openErrorSnackbar(err)
     }
   }
 
-  const onSubmit = async (data: ChangeBioFormValue) => {
+  const onSubmit = (data: TaskNoteFormValue) => {
     startTransition(async () => {
-      const result = await changeBio(data)
+      const result = await changeTaskNote({ taskId, bodyData: data })
       if (result.status === 'error') {
         if (result.name === 'HttpError') {
           handleHttpError(result)
@@ -91,7 +93,7 @@ export function BioEditor({
           openErrorSnackbar(result)
         }
       } else {
-        updateField(result.account.bio ?? '')
+        updateField(result.task.note ?? '')
       }
     })
   }
@@ -100,7 +102,6 @@ export function BioEditor({
     <div>
       <DetailItemHeadingLayout>
         {label}
-        {privacyTag}
         {hasLocalStorageValue && unsavedChangeTag}
       </DetailItemHeadingLayout>
       <EditableText
@@ -110,19 +111,19 @@ export function BioEditor({
             shadowRef={shadowRef}
             rows={6}
             readOnly={isPending}
-            wordCount={wordCount}
-            maxCount={250}
             register={registerReturn}
             errors={fieldError}
+            wordCount={wordCount}
+            maxCount={1000}
             onInput={handleInput}
           />
         }
-        isEditorOpen={isEditorOpen || isPending}
-        isSubmitting={isPending}
-        hasLocalStorageValue={hasLocalStorageValue}
         onFormSubmit={handleFormSubmit(onSubmit)}
         onCancelClick={handleCancelClick}
         onBlur={handleBlur(onSubmit)}
+        isSubmitting={isPending}
+        hasLocalStorageValue={hasLocalStorageValue}
+        isEditorOpen={isEditorOpen || isPending}
         openEditor={openEditor}
       >
         {children}

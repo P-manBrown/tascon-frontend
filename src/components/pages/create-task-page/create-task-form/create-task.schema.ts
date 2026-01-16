@@ -34,7 +34,7 @@ function transformHoursMinutesToMinutes({
   return totalMinutes !== 0 ? totalMinutes : undefined
 }
 
-function validateEndDateAfterStartDate(
+export function validateEndDateAfterStartDate(
   startsAt: string | undefined,
   endsAt: string | undefined,
 ): boolean {

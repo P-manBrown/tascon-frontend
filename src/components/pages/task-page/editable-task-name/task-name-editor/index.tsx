@@ -5,85 +5,82 @@ import { useRef, useTransition } from 'react'
 import { z } from 'zod'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
 import { EditableText } from '@/components/editable-fields/editable-text'
-import { useEditableMultiLineText } from '@/components/editable-fields/editable-text/use-editable-multi-line-text'
 import { useEditableText } from '@/components/editable-fields/editable-text/use-editable-text'
-import { TextArea } from '@/components/form-controls/text-area'
+import { TextField } from '@/components/form-controls/text-field'
 import { DetailItemHeadingLayout } from '@/components/layouts/detail-item-heading-layout'
 import { ErrorObject } from '@/types/error'
 import { HttpError } from '@/utils/error/custom/http-error'
 import { useRedirectLoginPath } from '@/utils/login-path/use-redirect-login-path'
 import { countCharacters } from '@/utils/string-count/count-characters'
-import { changeBio } from './change-bio.api'
-
-const bioSchema = z.object({
-  bio: z
-    .string()
-    .trim()
-    .refine((value) => countCharacters(value) <= 250, {
-      message: '最大文字数を超えています。',
-    }),
-})
-
-type ChangeBioFormValue = z.infer<typeof bioSchema>
+import { changeTaskName } from './change-task-name.api'
 
 type Props = Pick<React.ComponentProps<typeof EditableText>, 'children'> & {
   currentUserId: string
-  initialBio: string | undefined
+  taskId: string
+  initialName: string
   label: React.ReactElement
-  privacyTag: React.ReactElement
   unsavedChangeTag: React.ReactElement
 }
 
-export function BioEditor({
+const taskNameSchema = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(1, 'タスク名を入力してください。')
+    .refine((value) => countCharacters(value) <= 255, {
+      message: '255文字以下で入力してください。',
+    }),
+})
+
+type TaskNameFormValue = z.infer<typeof taskNameSchema>
+
+export function TaskNameEditor({
   currentUserId,
-  initialBio = '',
+  taskId,
+  initialName,
   label,
-  privacyTag,
   unsavedChangeTag,
   children,
 }: Props) {
   const [isPending, startTransition] = useTransition()
+  const { openErrorSnackbar } = useErrorSnackbar()
   const router = useRouter()
   const searchParams = useSearchParams()
   const redirectLoginPath = useRedirectLoginPath({ searchParams })
-  const editorRef = useRef<HTMLTextAreaElement>(null)
+  const editorRef = useRef<HTMLInputElement>(null)
+
   const {
-    isEditorOpen,
     updateField,
+    isEditorOpen,
     hasLocalStorageValue,
     handleFormSubmit,
-    handleBlur,
     handleCancelClick,
+    handleBlur,
     registerReturn,
     fieldError,
     saveFieldValueToLocalStorage,
     openEditor,
-  } = useEditableText<ChangeBioFormValue>({
+  } = useEditableText<TaskNameFormValue>({
     editorRef,
     currentUserId,
-    defaultValue: initialBio,
-    schema: bioSchema,
-    name: 'bio',
+    defaultValue: initialName,
+    schema: taskNameSchema,
+    name: 'name',
     shouldSaveToLocalStorage: true,
   })
-  const { shadowRef, wordCount, handleInput } = useEditableMultiLineText({
-    editorRef,
-    isEditorOpen,
-  })
-  const { openErrorSnackbar } = useErrorSnackbar()
 
   const handleHttpError = (err: ErrorObject<HttpError>) => {
-    if (err.statusCode === 404) {
+    if (err.statusCode === 401) {
       saveFieldValueToLocalStorage()
-      router.replace(redirectLoginPath)
+      router.push(redirectLoginPath)
     } else {
       openErrorSnackbar(err)
     }
   }
 
-  const onSubmit = async (data: ChangeBioFormValue) => {
+  const onSubmit = (data: TaskNameFormValue) => {
     startTransition(async () => {
-      const result = await changeBio(data)
+      const result = await changeTaskName({ taskId, bodyData: data })
       if (result.status === 'error') {
         if (result.name === 'HttpError') {
           handleHttpError(result)
@@ -91,7 +88,7 @@ export function BioEditor({
           openErrorSnackbar(result)
         }
       } else {
-        updateField(result.account.bio ?? '')
+        updateField(result.task.name)
       }
     })
   }
@@ -100,29 +97,24 @@ export function BioEditor({
     <div>
       <DetailItemHeadingLayout>
         {label}
-        {privacyTag}
         {hasLocalStorageValue && unsavedChangeTag}
       </DetailItemHeadingLayout>
       <EditableText
         editor={
-          <TextArea
+          <TextField
             ref={editorRef}
-            shadowRef={shadowRef}
-            rows={6}
+            type="text"
             readOnly={isPending}
-            wordCount={wordCount}
-            maxCount={250}
             register={registerReturn}
             errors={fieldError}
-            onInput={handleInput}
           />
         }
-        isEditorOpen={isEditorOpen || isPending}
-        isSubmitting={isPending}
-        hasLocalStorageValue={hasLocalStorageValue}
         onFormSubmit={handleFormSubmit(onSubmit)}
         onCancelClick={handleCancelClick}
         onBlur={handleBlur(onSubmit)}
+        isSubmitting={isPending}
+        hasLocalStorageValue={hasLocalStorageValue}
+        isEditorOpen={isEditorOpen || isPending}
         openEditor={openEditor}
       >
         {children}

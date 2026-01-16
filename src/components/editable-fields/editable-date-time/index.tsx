@@ -1,8 +1,10 @@
+import { TrashIcon } from '@heroicons/react/24/outline'
 import { useRef } from 'react'
 import { Button } from '@/components/buttons/button'
-import { useDragInside } from './use-drag-inside'
-import { useEditableTextAnimation } from './use-editable-text-animation'
-import { useTextSelection } from './use-text-selection'
+import { IconButton } from '@/components/buttons/icon-button'
+import { useDragInside } from '@/components/editable-fields/use-drag-inside'
+import { useEditableFieldAnimation } from '@/components/editable-fields/use-editable-field-animation'
+import { useTextSelection } from '@/components/editable-fields/use-text-selection'
 
 type Props = {
   editor: React.ReactElement
@@ -11,19 +13,25 @@ type Props = {
   onFormSubmit: (ev: React.FormEvent<HTMLFormElement>) => void
   onBlur: (ev: React.FocusEvent<HTMLFormElement>) => void
   onCancelClick: () => void
+  onDeleteClick: () => void
   openEditor: () => void
   isSubmitting: boolean
+  isDeleting: boolean
+  showDeleteButton: boolean
   children: React.ReactElement
 }
 
-export function EditableText({
+export function EditableDateTime({
   editor,
   isEditorOpen,
   hasLocalStorageValue,
   onFormSubmit,
   onCancelClick,
+  onDeleteClick,
   openEditor,
   isSubmitting,
+  isDeleting,
+  showDeleteButton,
   children,
   ...rest
 }: Props) {
@@ -36,7 +44,7 @@ export function EditableText({
     handleMouseLeave,
     handleMouseUp,
   } = useDragInside()
-  const { isAnimating, containerHeight } = useEditableTextAnimation({
+  const { isAnimating, containerHeight } = useEditableFieldAnimation({
     containerRef,
     contentRef,
     isEditorOpen,
@@ -67,13 +75,31 @@ export function EditableText({
           onKeyDown={handleFormKeyDown}
           {...rest}
         >
-          {editor}
+          <div className="flex items-start justify-between gap-2">
+            {editor}
+            {showDeleteButton && (
+              <IconButton
+                type="button"
+                tabIndex={0}
+                onClick={onDeleteClick}
+                className="text-red-600"
+                status={
+                  isDeleting ? 'pending' : isSubmitting ? 'disabled' : 'idle'
+                }
+                aria-label="削除"
+              >
+                <TrashIcon className="size-5" />
+              </IconButton>
+            )}
+          </div>
           <div className="mt-2 flex items-center px-1">
             <Button
               type="submit"
               tabIndex={0}
               className="btn-primary h-9 w-28 text-sm"
-              status={isSubmitting ? 'pending' : 'idle'}
+              status={
+                isSubmitting ? 'pending' : isDeleting ? 'disabled' : 'idle'
+              }
             >
               保存
             </Button>

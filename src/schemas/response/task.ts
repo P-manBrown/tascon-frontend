@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { taskGroupSchema } from './task-group'
 
-export const taskSchema = z.object({
+export const taskBaseSchema = z.object({
   task: z.object({
     id: z.number(),
     name: z.string(),
@@ -11,6 +11,11 @@ export const taskSchema = z.object({
     estimated_minutes: z.number().optional(),
     note: z.string().optional(),
     status: z.enum(['not_started', 'in_progress', 'completed']),
-    task_group: taskGroupSchema.shape.task_group.optional(),
+  }),
+})
+
+export const taskSchema = z.object({
+  task: taskBaseSchema.shape.task.extend({
+    task_group: taskGroupSchema.shape.task_group,
   }),
 })

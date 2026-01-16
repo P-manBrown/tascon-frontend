@@ -4,7 +4,8 @@ import { redirect } from 'next/navigation'
 import { cache } from 'react'
 import { z } from 'zod'
 import { paginationDataSchema } from '@/schemas/response/pagination'
-import { taskSchema } from '@/schemas/response/tasks'
+import { taskBaseSchema } from '@/schemas/response/task'
+import { taskGroupSchema } from '@/schemas/response/task-group'
 import { fetchData } from '@/utils/api/fetch-data'
 import { getBearerToken } from '@/utils/cookie/bearer-token'
 import { HttpError } from '@/utils/error/custom/http-error'
@@ -14,7 +15,11 @@ import { getRequestId } from '@/utils/request-id/get-request-id'
 import { validateData } from '@/utils/validation/validate-data'
 
 const dataSchema = z.object({
-  tasks: z.array(taskSchema.shape.task),
+  tasks: z.array(
+    taskBaseSchema.shape.task.extend({
+      task_group: taskGroupSchema.shape.task_group.optional(),
+    }),
+  ),
 })
 
 type Params = {

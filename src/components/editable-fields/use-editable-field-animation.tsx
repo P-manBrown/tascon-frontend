@@ -18,7 +18,7 @@ const animateBaseOptions: KeyframeAnimationOptions = {
   fill: 'forwards',
 }
 
-export function useEditableTextAnimation({
+export function useEditableFieldAnimation({
   containerRef,
   contentRef,
   isEditorOpen,
