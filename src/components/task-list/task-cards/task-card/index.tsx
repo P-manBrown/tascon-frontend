@@ -3,6 +3,8 @@
 import { ClockIcon } from '@heroicons/react/24/outline'
 import { CalendarDateRangeIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
+import { usePathname, useSearchParams } from 'next/navigation'
+import { generateFromUrlParam } from '@/utils/login-path/generate-from-url-param'
 
 type Props = {
   id: number
@@ -42,6 +44,9 @@ export function TaskCard({
   status,
   children,
 }: Props) {
+  const pathname = usePathname()
+  const params = useSearchParams()
+  const fromUrl = generateFromUrlParam(pathname, params.toString())
   const isOverdue = endsAt ? new Date(endsAt) < new Date() : false
 
   return (
@@ -95,7 +100,7 @@ export function TaskCard({
         </div>
         {children}
         <Link
-          href={`/tasks/detail/${id}`}
+          href={`/tasks/detail/${id}?${fromUrl}`}
           className="absolute top-0 left-0 h-full w-full rounded-md"
           aria-label={`${name}の詳細画面を表示`}
         />
