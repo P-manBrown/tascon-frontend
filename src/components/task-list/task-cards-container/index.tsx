@@ -97,32 +97,34 @@ export function TaskCardsContainer({
       <div className="flex h-12 shrink-0 items-center justify-between border-b border-gray-300"></div>
       <div
         ref={scrollContainerRef}
-        className="overflow-y-auto overscroll-y-none"
+        className="flex-1 overflow-y-auto overscroll-y-none"
         onWheel={handleWheel}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
       >
-        {hasPrevPage && (
-          <ScrollTriggerPrevLink
-            currentPage={currentPage}
-            pageItems={pageItems}
-            linkRef={prevPageHook.linkRef}
-            pullProgress={prevPageHook.pullProgress}
-            shouldTransition={prevPageHook.shouldTransition}
-            onClick={handlePageTurnLinkClick}
-          />
-        )}
-        {children}
-        {hasNextPage && (
-          <ScrollTriggerNextLink
-            currentPage={currentPage}
-            pageItems={pageItems}
-            linkRef={nextPageHook.linkRef}
-            pullProgress={nextPageHook.pullProgress}
-            shouldTransition={nextPageHook.shouldTransition}
-            onClick={handlePageTurnLinkClick}
-          />
-        )}
+        <div className="min-h-[calc(100%+2.75rem)]">
+          {hasPrevPage && (
+            <ScrollTriggerPrevLink
+              currentPage={currentPage}
+              pageItems={pageItems}
+              linkRef={prevPageHook.linkRef}
+              pullProgress={prevPageHook.pullProgress}
+              shouldTransition={prevPageHook.shouldTransition}
+              onClick={handlePageTurnLinkClick}
+            />
+          )}
+          {children}
+          {hasNextPage && (
+            <ScrollTriggerNextLink
+              currentPage={currentPage}
+              pageItems={pageItems}
+              linkRef={nextPageHook.linkRef}
+              pullProgress={nextPageHook.pullProgress}
+              shouldTransition={nextPageHook.shouldTransition}
+              onClick={handlePageTurnLinkClick}
+            />
+          )}
+        </div>
       </div>
       <div className="relative flex h-12 shrink-0 items-center justify-center border-t border-gray-300">
         <Link
