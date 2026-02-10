@@ -1,5 +1,9 @@
 import { Suspense } from 'react'
+import { ErrorBoundary } from 'react-error-boundary'
+import { CalendarError } from '@/components/calendars/calendar-error'
+import { TaskCalendar } from '@/components/calendars/task-calendar'
 import { TasksHeading } from '@/components/headings/tasks-heading'
+import { DesktopTaskCalendarLayout } from '@/components/layouts/task-calendar-layout'
 import { TaskListLayout } from '@/components/layouts/task-list-layout'
 import TasksLayout from '@/components/layouts/tasks-layout'
 import { LoadingTaskList, TaskList } from '@/components/task-list'
@@ -26,6 +30,11 @@ export default async function TodayTasks({ searchParams }: Props) {
         <Suspense fallback={<LoadingTaskList />}>
           <TaskList page={page} filter="actionable" />
         </Suspense>
+        <DesktopTaskCalendarLayout>
+          <ErrorBoundary FallbackComponent={CalendarError}>
+            <TaskCalendar />
+          </ErrorBoundary>
+        </DesktopTaskCalendarLayout>
       </TaskListLayout>
     </TasksLayout>
   )

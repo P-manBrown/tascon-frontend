@@ -1,4 +1,8 @@
 import { Suspense } from 'react'
+import { ErrorBoundary } from 'react-error-boundary'
+import { CalendarError } from '@/components/calendars/calendar-error'
+import { TaskCalendar } from '@/components/calendars/task-calendar'
+import { DesktopTaskCalendarLayout } from '@/components/layouts/task-calendar-layout'
 import { TaskListLayout } from '@/components/layouts/task-list-layout'
 import TasksLayout from '@/components/layouts/tasks-layout'
 import { LoadingTaskList, TaskList } from '@/components/task-list'
@@ -50,6 +54,11 @@ export default async function TaskGroup(props: Props) {
         <Suspense fallback={<LoadingTaskList />}>
           <TaskList page={page} taskGroupId={id} />
         </Suspense>
+        <DesktopTaskCalendarLayout>
+          <ErrorBoundary FallbackComponent={CalendarError}>
+            <TaskCalendar />
+          </ErrorBoundary>
+        </DesktopTaskCalendarLayout>
       </TaskListLayout>
     </TasksLayout>
   )

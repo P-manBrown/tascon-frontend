@@ -146,6 +146,9 @@ export function TaskStartsAtEditor({
         const updatedStartsAt =
           startsAt === undefined ? undefined : parseDateTime(startsAt)
         updateFields(updatedStartsAt?.date ?? '', updatedStartsAt?.time ?? '')
+
+        // Notify calendar to refresh task events after update
+        window.dispatchEvent(new CustomEvent('task-updated'))
       }
     })
   }
@@ -167,6 +170,9 @@ export function TaskStartsAtEditor({
         updateFields('', '')
         removeLocalStorageValue()
         closeEditor()
+
+        // Notify calendar to refresh task events after update
+        window.dispatchEvent(new CustomEvent('task-updated'))
       }
     })
   }

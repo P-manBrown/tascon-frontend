@@ -48,6 +48,9 @@ export function DeleteTaskButton({ id }: Props) {
           openErrorSnackbar(result)
         }
       } else {
+        // Notify calendar to remove deleted task from events
+        window.dispatchEvent(new CustomEvent('task-deleted'))
+
         const targetUrl = getSafeRedirectUrl(fromUrlRef.current, '/tasks')
         router.replace(targetUrl)
       }

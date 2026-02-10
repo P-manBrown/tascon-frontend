@@ -1,5 +1,6 @@
 'use server'
 
+import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
 import { ResultObject } from '@/types/api'
 import { fetchData } from '@/utils/api/fetch-data'
@@ -41,6 +42,8 @@ export async function deleteTask({ taskId }: Params) {
       resultObject = createErrorObject(validateDataResult)
     } else {
       resultObject = { status: 'success' }
+
+      revalidatePath('/tasks', 'layout')
     }
   }
 

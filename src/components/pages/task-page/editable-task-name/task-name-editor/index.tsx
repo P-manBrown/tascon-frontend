@@ -89,6 +89,9 @@ export function TaskNameEditor({
         }
       } else {
         updateField(result.task.name)
+
+        // Notify calendar to refresh task events after update
+        window.dispatchEvent(new CustomEvent('task-updated'))
       }
     })
   }
