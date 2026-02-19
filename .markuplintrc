@@ -20,6 +20,12 @@
       "rules": {
         "invalid-attr": false
       }
+    },
+    {
+      "selector": "div[onTouchStart][onTouchMove][onWheel]",
+      "rules": {
+        "invalid-attr": false
+      }
     }
   ]
 }

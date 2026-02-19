@@ -3,7 +3,7 @@ import {
   LoadingSuggestionCards,
 } from '@/components/cards/suggestion-cards'
 import { EmptyList } from '@/components/empty-list'
-import { Pagination, LoadingPagination } from '@/components/pagination'
+import { Pagination, LoadingPagination } from '@/components/paginations'
 import { getSuggestions } from '@/utils/api/get-suggestions'
 import { getCurrentUser } from '@/utils/api/server/get-current-user'
 

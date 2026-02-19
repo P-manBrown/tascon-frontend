@@ -1,7 +1,7 @@
 import { LoadingContactCards } from '@/components/cards/contact-cards'
 import { ContactCards } from '@/components/cards/contact-cards'
 import { EmptyList } from '@/components/empty-list'
-import { Pagination, LoadingPagination } from '@/components/pagination'
+import { Pagination, LoadingPagination } from '@/components/paginations'
 import { getContacts } from '@/utils/api/get-contacts'
 import { getCurrentUser } from '@/utils/api/server/get-current-user'
 

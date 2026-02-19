@@ -1,9 +1,9 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
+import { MobilePageSelector } from './mobile-page-selector'
 import {
   LoadingMobilePageTurnLink,
   MobilePageTurnLink,
 } from './mobile-page-turn-link'
-import { PageSelector } from './page-selector'
 
 type Props = {
   currentPage: number
@@ -31,7 +31,7 @@ export function MobilePagination({
           前へ
         </MobilePageTurnLink>
       )}
-      <PageSelector currentPage={currentPage} totalPages={totalPages} />
+      <MobilePageSelector currentPage={currentPage} totalPages={totalPages} />
       {isLastPage ? (
         <span className={linkSizeClasses} />
       ) : (

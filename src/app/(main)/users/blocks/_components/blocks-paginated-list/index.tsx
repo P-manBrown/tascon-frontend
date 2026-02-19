@@ -1,6 +1,6 @@
 import { BlockCards, LoadingBlockCards } from '@/components/cards/block-cards'
 import { EmptyList } from '@/components/empty-list'
-import { Pagination, LoadingPagination } from '@/components/pagination'
+import { Pagination, LoadingPagination } from '@/components/paginations'
 import { getBlocks } from '@/utils/api/get-blocks'
 import { getCurrentUser } from '@/utils/api/server/get-current-user'
 
