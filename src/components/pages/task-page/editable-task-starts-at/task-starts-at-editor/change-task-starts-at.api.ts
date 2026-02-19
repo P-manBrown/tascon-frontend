@@ -14,21 +14,19 @@ import { validateData } from '@/utils/validation/validate-data'
 import type { CamelCaseKeys } from 'camelcase-keys'
 
 type Params = {
-  taskGroupId: number
-  name: string
-  startsAt?: string
-  endsAt?: string
-  estimatedMinutes?: number
-  note?: string
+  taskId: string
+  bodyData: {
+    startsAt: string | undefined | null
+  }
 }
 
 type Data = CamelCaseKeys<z.infer<typeof taskSchema>, true>
 
-export async function createTask(bodyData: Params) {
+export async function changeTaskStartsAt({ taskId, bodyData }: Params) {
   const fetchDataResult = await fetchData(
-    `${process.env.API_ORIGIN}/api/v1/tasks`,
+    `${process.env.API_ORIGIN}/api/v1/tasks/${taskId}`,
     {
-      method: 'POST',
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
         Authorization: await getBearerToken(),
@@ -44,7 +42,6 @@ export async function createTask(bodyData: Params) {
   } else {
     const { headers, data } = fetchDataResult
     const requestId = getRequestId(headers)
-
     const validateDataResult = validateData({
       requestId,
       dataSchema: taskSchema,
@@ -58,8 +55,7 @@ export async function createTask(bodyData: Params) {
         status: 'success',
         ...camelcaseKeys(validateDataResult, { deep: true }),
       }
-
-      revalidatePath('/tasks', 'layout')
+      revalidatePath(`/tasks/detail/${resultObject.task.id}`)
     }
   }
 

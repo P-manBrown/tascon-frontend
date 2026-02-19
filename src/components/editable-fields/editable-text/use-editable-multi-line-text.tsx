@@ -1,6 +1,6 @@
 import { useCallback, useLayoutEffect } from 'react'
-import { setCursorToEnd } from '../form-controls/text-area/set-cursor-to-end'
-import { useTextArea } from '../form-controls/text-area/use-text-area'
+import { setCursorToEnd } from '@/components/form-controls/text-area/set-cursor-to-end'
+import { useTextArea } from '@/components/form-controls/text-area/use-text-area'
 
 type Params = {
   editorRef: React.RefObject<HTMLTextAreaElement | null>

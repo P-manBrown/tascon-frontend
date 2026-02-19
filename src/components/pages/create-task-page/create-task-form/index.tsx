@@ -1,6 +1,7 @@
 'use client'
 
 import { Button } from '@/components/buttons/button'
+import { DateTimeInput } from '@/components/form-controls/date-time-input'
 import { Label } from '@/components/form-controls/label'
 import { TextArea } from '@/components/form-controls/text-area'
 import { TextField } from '@/components/form-controls/text-field'
@@ -75,46 +76,32 @@ export function CreateTaskForm({
       </div>
       <div className="mt-4">
         <Label htmlFor={`${id}-startsAtDate`}>開始日（任意）</Label>
-        <div className="flex items-baseline gap-2">
-          <input
-            id={`${id}-startsAtDate`}
-            type="date"
-            readOnly={isPending}
-            className="text-box w-fit"
-            aria-label="開始日の日付"
-            {...register('duration.startsAt.startsAtDate')}
-          />
-          <input
-            id={`${id}-startsAtTime`}
-            type="time"
-            readOnly={isPending}
-            className="text-box w-fit"
-            aria-label="開始日の時間"
-            {...register('duration.startsAt.startsAtTime')}
-          />
-        </div>
+        <DateTimeInput
+          dateId={`${id}-startsAtDate`}
+          timeId={`${id}-startsAtTime`}
+          dateLabel="開始日の日付"
+          timeLabel="開始日の時間"
+          dateRegister={register('duration.startsAt.startsAtDate')}
+          timeRegister={register('duration.startsAt.startsAtTime')}
+          dateError={errors.duration?.startsAt?.startsAtDate}
+          timeError={errors.duration?.startsAt?.startsAtTime}
+          readOnly={isPending}
+        />
       </div>
       <div className="mt-4">
         <Label htmlFor={`${id}-endsAtDate`}>期日（任意）</Label>
-        <div className="flex items-baseline gap-2">
-          <input
-            id={`${id}-endsAtDate`}
-            type="date"
-            readOnly={isPending}
-            className={`text-box w-fit ${errors.duration?.endsAt === undefined ? '' : 'text-box-error'}`}
-            aria-label="期日の日付"
-            {...register('duration.endsAt.endsAtDate')}
-          />
-          <input
-            id={`${id}-endsAtTime`}
-            type="time"
-            readOnly={isPending}
-            className={`text-box w-fit ${errors.duration?.endsAt === undefined ? '' : 'text-box-error'}`}
-            aria-label="期日の時間"
-            {...register('duration.endsAt.endsAtTime')}
-          />
-        </div>
-        {errors.duration?.endsAt !== undefined && (
+        <DateTimeInput
+          dateId={`${id}-endsAtDate`}
+          timeId={`${id}-endsAtTime`}
+          dateLabel="期日の日付"
+          timeLabel="期日の時間"
+          dateRegister={register('duration.endsAt.endsAtDate')}
+          timeRegister={register('duration.endsAt.endsAtTime')}
+          dateError={errors.duration?.endsAt?.endsAtDate}
+          timeError={errors.duration?.endsAt?.endsAtTime}
+          readOnly={isPending}
+        />
+        {errors.duration?.endsAt && 'message' in errors.duration.endsAt && (
           <ValidationErrorMessage>
             {errors.duration.endsAt.message}
           </ValidationErrorMessage>

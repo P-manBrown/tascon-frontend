@@ -95,7 +95,7 @@ export function TaskCard({
         </div>
         {children}
         <Link
-          href={`/tasks/${id}`}
+          href={`/tasks/detail/${id}`}
           className="absolute top-0 left-0 h-full w-full rounded-md"
           aria-label={`${name}の詳細画面を表示`}
         />
