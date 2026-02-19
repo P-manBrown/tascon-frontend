@@ -6,9 +6,12 @@ import { startTransition } from 'react'
 import { useErrorBoundary } from 'react-error-boundary'
 import { Button } from '@/components/buttons/button'
 import { ReportIssueLink } from '@/components/links/report-issue-link'
-import type { FallbackProps } from 'react-error-boundary'
 
-export function TaskGroupsError({ error }: FallbackProps) {
+type Props = {
+  error: Error & { digest?: string }
+}
+
+export function TaskGroupsError({ error }: Props) {
   const { resetBoundary } = useErrorBoundary()
   const router = useRouter()
 
