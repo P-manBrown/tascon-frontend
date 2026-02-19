@@ -11,6 +11,6 @@ export const taskSchema = z.object({
     estimated_minutes: z.number().optional(),
     note: z.string().optional(),
     status: z.enum(['not_started', 'in_progress', 'completed']),
-    task_group: taskGroupSchema.shape.task_group,
+    task_group: taskGroupSchema.shape.task_group.optional(),
   }),
 })
