@@ -138,11 +138,13 @@ export function TaskCardsContainer({
         >
           <PlusIcon className="size-5 stroke-2" />
         </Link>
-        <PageSelector
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onClick={handlePageSelectLinkClick}
-        />
+        {totalPages > 1 && (
+          <PageSelector
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onClick={handlePageSelectLinkClick}
+          />
+        )}
         <CalendarButton />
       </div>
     </div>
