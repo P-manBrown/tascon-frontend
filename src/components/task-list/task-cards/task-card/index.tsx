@@ -5,6 +5,12 @@ import { CalendarDateRangeIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { generateFromUrlParam } from '@/utils/login-path/generate-from-url-param'
+import { checkShouldShowSingleDate } from './date-utils'
+import {
+  formatStartDateTime,
+  formatEndDateTime,
+  formatMinutesToHoursAndMinutes,
+} from './format-utils'
 
 type Props = {
   id: number
@@ -16,21 +22,6 @@ type Props = {
   note?: string
   status: 'not_started' | 'in_progress' | 'completed'
   children?: React.ReactNode
-}
-
-function formatDateTime(dateString: string): string {
-  return new Date(dateString).toLocaleString('ja-JP', {
-    month: 'short',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-  })
-}
-
-function formatMinutesToHoursAndMinutes(minutes: number): string {
-  const hours = Math.floor(minutes / 60)
-  const remainingMinutes = minutes % 60
-  return `${hours}時間${remainingMinutes}分`
 }
 
 export function TaskCard({
@@ -48,6 +39,8 @@ export function TaskCard({
   const params = useSearchParams()
   const fromUrl = generateFromUrlParam(pathname, params.toString())
   const isOverdue = endsAt ? new Date(endsAt) < new Date() : false
+
+  const shouldShowSingleDate = checkShouldShowSingleDate(startsAt, endsAt)
 
   return (
     <div className="relative transform rounded-md border border-gray-300 bg-white p-6 drop-shadow-sm transition-all duration-200 hover:scale-103 hover:drop-shadow-lg">
@@ -77,9 +70,17 @@ export function TaskCard({
               className={`flex flex-wrap items-center gap-1 text-xs ${isOverdue ? 'text-red-700' : 'text-gray-600'}`}
             >
               <CalendarDateRangeIcon className="size-4" />
-              {startsAt && <span>{formatDateTime(startsAt)}</span>}
-              {(startsAt || endsAt) && <span>~</span>}
-              {endsAt && <span>{formatDateTime(endsAt)}</span>}
+              {shouldShowSingleDate && startsAt && endsAt ? (
+                <span>{formatEndDateTime(endsAt, startsAt)}</span>
+              ) : (
+                <>
+                  {startsAt && (
+                    <span>{formatStartDateTime(startsAt, endsAt)}</span>
+                  )}
+                  {(startsAt || endsAt) && <span>~</span>}
+                  {endsAt && <span>{formatEndDateTime(endsAt, startsAt)}</span>}
+                </>
+              )}
             </div>
           )}
 
