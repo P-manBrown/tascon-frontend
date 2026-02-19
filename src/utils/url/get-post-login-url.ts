@@ -1,14 +1,5 @@
-const origin = process.env.NEXT_PUBLIC_FRONTEND_ORIGIN
+import { getSafeRedirectUrl } from './get-safe-redirect-url'
 
 export function getPostLoginUrl(fromUrl: string | null) {
-  let targetUrl = `${origin}/tasks`
-
-  if (fromUrl && URL.canParse(fromUrl)) {
-    const fromOrigin = new URL(fromUrl).origin
-    if (fromOrigin === origin) {
-      targetUrl = fromUrl
-    }
-  }
-
-  return targetUrl
+  return getSafeRedirectUrl(fromUrl, '/tasks')
 }

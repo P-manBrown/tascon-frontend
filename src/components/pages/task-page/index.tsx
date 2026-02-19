@@ -1,4 +1,7 @@
 import { Suspense } from 'react'
+import { HorizontalRule } from '@/components/horizontal-rule'
+import { DetailItemContentLayout } from '@/components/layouts/detail-item-content-layout'
+import { DeleteTaskButton } from './delete-task-button'
 import {
   EditableTaskEndsAt,
   LoadingEditableTaskEndsAt,
@@ -54,6 +57,10 @@ export function TaskPage({ id }: Props) {
       <Suspense fallback={<LoadingEditableTaskNote />}>
         <EditableTaskNote id={id} />
       </Suspense>
+      <HorizontalRule />
+      <DetailItemContentLayout>
+        <DeleteTaskButton id={id} />
+      </DetailItemContentLayout>
     </div>
   )
 }
