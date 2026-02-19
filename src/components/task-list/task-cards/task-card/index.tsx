@@ -78,7 +78,7 @@ export function TaskCard({
             >
               <CalendarDateRangeIcon className="size-4" />
               {startsAt && <span>{formatDateTime(startsAt)}</span>}
-              {startsAt && endsAt && <span>~</span>}
+              {(startsAt || endsAt) && <span>~</span>}
               {endsAt && <span>{formatDateTime(endsAt)}</span>}
             </div>
           )}
