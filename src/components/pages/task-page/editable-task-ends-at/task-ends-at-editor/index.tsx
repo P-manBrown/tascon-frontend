@@ -62,8 +62,8 @@ function createTaskEndsAtSchema(startsAt: string | undefined) {
         return validateEndDateAfterStartDate(startsAt, data.endsAt)
       },
       {
-        message: '開始日以降の日時を入力してください。',
         path: ['endsAt.endsAtDate'],
+        error: '開始日以降の日時を入力してください。',
       },
     )
 }

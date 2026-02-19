@@ -3,7 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTransition } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import z from 'zod'
+import { z } from 'zod'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
 import { Button } from '@/components/buttons/button'
 import { Label } from '@/components/form-controls/label'

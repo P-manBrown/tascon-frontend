@@ -62,8 +62,8 @@ function createTaskDurationSchema(endsAt: string | undefined) {
         return validateEndDateAfterStartDate(data.startsAt, endsAt)
       },
       {
-        message: '期日以前の日時を入力してください。',
         path: ['startsAt.startsAtDate'],
+        error: '期日以前の日時を入力してください。',
       },
     )
 }

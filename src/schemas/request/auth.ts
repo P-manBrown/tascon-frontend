@@ -7,7 +7,7 @@ export const signUpSchema = z.object({
     .trim()
     .min(1, 'ユーザー名を入力してください。')
     .refine((value) => countCharacters(value) <= 255, {
-      message: '255文字以下で入力してください。',
+      error: '255文字以下で入力してください。',
     }),
   email: z
     .string()
@@ -15,17 +15,17 @@ export const signUpSchema = z.object({
     .min(1, 'メールアドレスを入力してください。')
     .email('正しいメールアドレスを入力してください。')
     .refine((value) => countCharacters(value) <= 100, {
-      message: '100文字以下で入力してください。',
+      error: '100文字以下で入力してください。',
     }),
   password: z
     .string()
     .trim()
     .min(1, 'パスワードを入力してください。')
     .refine((value) => countCharacters(value) >= 6, {
-      message: '6文字以上で入力してください。',
+      error: '6文字以上で入力してください。',
     })
     .refine((value) => countCharacters(value) <= 128, {
-      message: '128文字以下で入力してください。',
+      error: '128文字以下で入力してください。',
     }),
 })
 

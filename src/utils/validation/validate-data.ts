@@ -8,7 +8,7 @@ type Params<T> = {
   data: unknown
 }
 
-export function validateData<T extends z.ZodTypeAny>({
+export function validateData<T extends z.ZodType>({
   requestId,
   dataSchema,
   data,

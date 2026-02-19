@@ -20,7 +20,7 @@ const bioSchema = z.object({
     .string()
     .trim()
     .refine((value) => countCharacters(value) <= 250, {
-      message: '最大文字数を超えています。',
+      error: '最大文字数を超えています。',
     }),
 })
 

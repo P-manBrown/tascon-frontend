@@ -41,7 +41,7 @@
     "snakecase-keys": "^9.0.2",
     "temporal-polyfill": "^0.3.0",
     "typescript": "<5.9.0",
-    "zod": "^3.25.20",
+    "zod": "^4.1.13",
     "zustand": "^5.0.8"
   },
   "devDependencies": {

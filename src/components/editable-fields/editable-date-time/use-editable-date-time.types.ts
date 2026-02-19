@@ -1,12 +1,12 @@
 import type { FieldValues, SubmitHandler } from 'react-hook-form'
-import type { ZodSchema } from 'zod'
+import type { z } from 'zod'
 
-export type UseEditableDateTimeParams = {
+export type UseEditableDateTimeParams<T extends FieldValues = FieldValues> = {
   editorRef: React.RefObject<HTMLInputElement | null>
   currentUserId: string
   dateFieldName: string
   timeFieldName: string
-  schema: ZodSchema & { _def: { typeName: string } }
+  schema: z.core.$ZodType<T, FieldValues>
   defaultDate?: string
   defaultTime?: string
   shouldSaveToLocalStorage: boolean

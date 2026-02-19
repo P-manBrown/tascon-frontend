@@ -23,13 +23,13 @@ type Props = {
 }
 
 const taskTimeSpentSchema = z.object({
-  timeSpentHours: z
-    .number({ coerce: true })
+  timeSpentHours: z.coerce
+    .number()
     .int('時間には整数を入力してください。')
     .gte(0, '時間には0以上の数値を入力してください。')
     .optional(),
-  timeSpentMinutes: z
-    .number({ coerce: true })
+  timeSpentMinutes: z.coerce
+    .number()
     .int('分には整数を入力してください。')
     .gte(0, '分には0以上の数値を入力してください。')
     .lte(59, '分には59以下の数値を入力してください。')

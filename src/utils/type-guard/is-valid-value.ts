@@ -1,6 +1,6 @@
-import type z from 'zod'
+import type { z } from 'zod'
 
-export function isValidValue<T extends z.ZodTypeAny>(
+export function isValidValue<T extends z.ZodType>(
   schema: T,
   value: unknown,
 ): value is z.infer<T> {

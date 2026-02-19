@@ -1,4 +1,4 @@
-import z from 'zod'
+import { z } from 'zod'
 import { countCharacters } from '@/utils/string-count/count-characters'
 
 type transformDateTimeToIsoParams = {
@@ -46,9 +46,7 @@ export function validateEndDateAfterStartDate(
 }
 
 export const createTaskSchema = z.object({
-  taskGroupId: z
-    .number({ coerce: true })
-    .gt(0, 'タスクグループを選択してください。'),
+  taskGroupId: z.coerce.number().gt(0, 'タスクグループを選択してください。'),
   name: z
     .string()
     .trim()
@@ -92,13 +90,13 @@ export const createTaskSchema = z.object({
     ),
   estimatedTime: z
     .object({
-      estimatedHours: z
-        .number({ coerce: true })
+      estimatedHours: z.coerce
+        .number()
         .int('時間には整数を入力してください。')
         .gte(0, '時間には0以上の数値を入力してください。')
         .optional(),
-      estimatedMinutes: z
-        .number({ coerce: true })
+      estimatedMinutes: z.coerce
+        .number()
         .int('分には整数を入力してください。')
         .gte(0, '分には0以上の数値を入力してください。')
         .lte(59, '分には59以下の数値を入力してください。')

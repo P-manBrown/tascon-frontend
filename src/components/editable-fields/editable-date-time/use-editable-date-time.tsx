@@ -20,7 +20,7 @@ export function useEditableDateTime<T extends FieldValues>({
   defaultDate,
   defaultTime,
   shouldSaveToLocalStorage,
-}: UseEditableDateTimeParams) {
+}: UseEditableDateTimeParams<T>) {
   const [isEditorOpen, setIsEditorOpen] = useState(false)
   const isPageHidden = useRef(false)
   const pathname = usePathname()
