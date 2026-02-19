@@ -1,4 +1,4 @@
-export function isSameDay(startDate: Date, endDate: Date): boolean {
+function isSameDay(startDate: Date, endDate: Date): boolean {
   return (
     startDate.getFullYear() === endDate.getFullYear() &&
     startDate.getMonth() === endDate.getMonth() &&
@@ -6,11 +6,11 @@ export function isSameDay(startDate: Date, endDate: Date): boolean {
   )
 }
 
-export function isDefaultStartTime(startDate: Date): boolean {
+function isDefaultStartTime(startDate: Date): boolean {
   return startDate.getHours() === 0 && startDate.getMinutes() === 0
 }
 
-export function isDefaultEndTime(endDate: Date): boolean {
+function isDefaultEndTime(endDate: Date): boolean {
   return endDate.getHours() === 23 && endDate.getMinutes() === 59
 }
 
