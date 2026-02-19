@@ -1,6 +1,7 @@
 import { usePathname, useSearchParams } from 'next/navigation'
 import { useQueryState, parseAsStringLiteral } from 'nuqs'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect } from 'react'
+import { useMediaQuery } from '@/utils/media-query/use-media-query'
 
 const sidebarQueryKey = 'sidebar'
 const sidebarStates = Object.freeze({
@@ -34,7 +35,7 @@ export function useSidebar({ defaultState }: Params) {
     ),
   )
   const isOpen = sidebar === sidebarStates.open
-  const [isNarrowScreen, setIsNarrowScreen] = useState(false)
+  const { isMatch: isNarrowScreen } = useMediaQuery(narrowScreenBreakpoint)
   const linkSidebarQuery = getLinkSidebarQuery(isNarrowScreen)
 
   const openSidebar = useCallback(() => {
@@ -50,16 +51,6 @@ export function useSidebar({ defaultState }: Params) {
       setSidebar(sidebar)
     }
   }, [pathname, params, setSidebar, sidebar])
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia(narrowScreenBreakpoint)
-    setIsNarrowScreen(mediaQuery.matches)
-
-    const handleChange = () => setIsNarrowScreen(mediaQuery.matches)
-    mediaQuery.addEventListener('change', handleChange)
-
-    return () => mediaQuery.removeEventListener('change', handleChange)
-  }, [])
 
   return {
     isOpen,

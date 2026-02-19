@@ -2489,6 +2489,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@preact/signals-core@npm:^1.13.0":
+  version: 1.13.0
+  resolution: "@preact/signals-core@npm:1.13.0"
+  checksum: 10/692dadf943a8a26dc8d8b96b9216d932ab8464b738bc8ddc6da293b79189b7b3d6d3d47a1afb21ca106731692f61cd090b0ea72ef605a68201e70a9d0055eec1
+  languageName: node
+  linkType: hard
+
+"@preact/signals@npm:^2.7.0":
+  version: 2.7.0
+  resolution: "@preact/signals@npm:2.7.0"
+  dependencies:
+    "@preact/signals-core": "npm:^1.13.0"
+  peerDependencies:
+    preact: ">= 10.25.0 || >=11.0.0-0"
+  checksum: 10/bbfe49baa2af7c02ae4a4eb139aaec8f64fcd948143468eb3a2ad506db3e1cd1a7df1e120f256f3e6b8974a938944430d97f5d9905d480311f8b9435dc140b3b
+  languageName: node
+  linkType: hard
+
 "@rollup/plugin-babel@npm:^5.2.0":
   version: 5.3.1
   resolution: "@rollup/plugin-babel@npm:5.3.1"
@@ -2558,6 +2576,42 @@ __metadata:
   version: 1.10.4
   resolution: "@rushstack/eslint-patch@npm:1.10.4"
   checksum: 10/fa14a091cc800e1fac75c03112db03eaebbdc2de6e1532ed7702e106c3ce0cbf9b896794d885d455b225e9cc696a5e10c7bfb803d00774461d691e7a39915fc7
+  languageName: node
+  linkType: hard
+
+"@schedule-x/calendar@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "@schedule-x/calendar@npm:4.1.0"
+  peerDependencies:
+    "@preact/signals": ^2.0.2
+    preact: ^10.19.2
+    temporal-polyfill: 0.3.0
+  checksum: 10/a1ab66d9d0206dcdef92069d9952365b972de3609075b04d683d2f96e3003db39da466c74b7d94abd96c245e5d0d80d22c38a214c64f3e37c299bcca66c4f054
+  languageName: node
+  linkType: hard
+
+"@schedule-x/events-service@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "@schedule-x/events-service@npm:4.1.0"
+  checksum: 10/1529eb92566a7e8b1520631fd1326185ccf19b542372fedb5e8f1c332e7dc100c519aa9d67855b2b3266e5513a0e11c45307e73913a277b2150f7bcd7452f286
+  languageName: node
+  linkType: hard
+
+"@schedule-x/react@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "@schedule-x/react@npm:4.1.0"
+  peerDependencies:
+    "@schedule-x/calendar": ^3.1.0 || ^4.0.0
+    react: ^16.7.0 || ^17 || ^18 || ^19
+    react-dom: ^16.7.0 || ^17 || ^18 || ^19
+  checksum: 10/d882f1a47d895825684306c3a033a15b660ca4aad8cadb9f594974a842dbf230ac4642c5da1599ed379929903c199e67442cc8781e094032144752aeb6893827
+  languageName: node
+  linkType: hard
+
+"@schedule-x/theme-default@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "@schedule-x/theme-default@npm:4.1.0"
+  checksum: 10/666d117c19956f07a2ae7adf317fbc79b3312547b04f73a50ebbea42a85d46acf613ad3c0492c2d7fe3108a853c2274670a0155320b898bb37918a55f77aaff8
   languageName: node
   linkType: hard
 
@@ -9382,6 +9436,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"preact@npm:^10.28.3":
+  version: 10.28.3
+  resolution: "preact@npm:10.28.3"
+  checksum: 10/b89c328f7ea13976dc2849962141fb4268afbbb364fa2f0a235788c2dba2a32786db43531fec5b64960917a078e4b78bd88967f13120df350573a619c8286f86
+  languageName: node
+  linkType: hard
+
 "prelude-ls@npm:^1.2.1":
   version: 1.2.1
   resolution: "prelude-ls@npm:1.2.1"
@@ -10914,6 +10975,11 @@ __metadata:
     "@markuplint/jsx-parser": "npm:^4.7.21"
     "@markuplint/react-spec": "npm:^4.5.21"
     "@next/bundle-analyzer": "npm:^15.3.2"
+    "@preact/signals": "npm:^2.7.0"
+    "@schedule-x/calendar": "npm:^4.1.0"
+    "@schedule-x/events-service": "npm:^4.1.0"
+    "@schedule-x/react": "npm:^4.1.0"
+    "@schedule-x/theme-default": "npm:^4.1.0"
     "@tailwindcss/postcss": "npm:^4.1.17"
     "@types/node": "npm:22.15.21"
     "@types/react": "npm:19.1.4"
@@ -10935,6 +11001,7 @@ __metadata:
     pino: "npm:^10.1.0"
     pino-pretty: "npm:^13.1.2"
     postcss: "npm:^8.5.6"
+    preact: "npm:^10.28.3"
     prettier: "npm:3.6.2"
     prettier-plugin-tailwindcss: "npm:^0.7.1"
     react: "npm:^19.1.0"
@@ -10944,6 +11011,7 @@ __metadata:
     server-only: "npm:^0.0.1"
     snakecase-keys: "npm:^9.0.2"
     tailwindcss: "npm:^4.1.17"
+    temporal-polyfill: "npm:^0.3.0"
     typescript: "npm:<5.9.0"
     zod: "npm:^3.25.20"
     zustand: "npm:^5.0.8"
@@ -10954,6 +11022,22 @@ __metadata:
   version: 2.0.0
   resolution: "temp-dir@npm:2.0.0"
   checksum: 10/cc4f0404bf8d6ae1a166e0e64f3f409b423f4d1274d8c02814a59a5529f07db6cd070a749664141b992b2c1af337fa9bb451a460a43bb9bcddc49f235d3115aa
+  languageName: node
+  linkType: hard
+
+"temporal-polyfill@npm:^0.3.0":
+  version: 0.3.0
+  resolution: "temporal-polyfill@npm:0.3.0"
+  dependencies:
+    temporal-spec: "npm:0.3.0"
+  checksum: 10/e4f5c0e546bf663720569b8b68fc41aa43ea891a77043a5614f6c1f2109cd01fe60c90b9de2f5d4f92f3155bfbdd17ad3ec7de1e9aaf01fa3cf156f230a0e41a
+  languageName: node
+  linkType: hard
+
+"temporal-spec@npm:0.3.0":
+  version: 0.3.0
+  resolution: "temporal-spec@npm:0.3.0"
+  checksum: 10/5863e3e3f364a5cf64bf999c85bf19b08924a91ee8d618489d9bf6cfff2452e4f916080c8ede93fc91de609200fc20002928e0146c7fc15375b123b20234799b
   languageName: node
   linkType: hard
 

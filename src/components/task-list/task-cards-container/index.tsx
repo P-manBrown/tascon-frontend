@@ -4,6 +4,7 @@ import { PlusIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { useRef, useEffect } from 'react'
 import { PageSelector } from '@/components/paginations/page-selector'
+import { CalendarButton } from './calendar-button'
 import { ScrollTriggerNextLink } from './scroll-trigger-next-link'
 import { useScrollTriggerNextLink } from './scroll-trigger-next-link/use-scroll-trigger-next-link'
 import { ScrollTriggerPrevLink } from './scroll-trigger-prev-link'
@@ -140,6 +141,7 @@ export function TaskCardsContainer({
           totalPages={totalPages}
           onClick={handlePageSelectLinkClick}
         />
+        <CalendarButton />
       </div>
     </div>
   )

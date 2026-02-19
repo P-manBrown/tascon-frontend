@@ -228,6 +228,9 @@ export function useCreateTaskForm({
             adjustHeight(noteEditorRef.current)
             updateWordCount(noteEditorRef.current.value)
           }
+
+          // Notify calendar to add newly created task to events
+          window.dispatchEvent(new CustomEvent('task-created'))
         }
       })
     },

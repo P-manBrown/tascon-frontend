@@ -144,6 +144,9 @@ export function TaskEndsAtEditor({
         const updatedEndsAt =
           endsAt === undefined ? undefined : parseDateTime(endsAt)
         updateFields(updatedEndsAt?.date ?? '', updatedEndsAt?.time ?? '')
+
+        // Notify calendar to refresh task events after update
+        window.dispatchEvent(new CustomEvent('task-updated'))
       }
     })
   }
@@ -165,6 +168,9 @@ export function TaskEndsAtEditor({
         updateFields('', '')
         removeLocalStorageValue()
         closeEditor()
+
+        // Notify calendar to refresh task events after update
+        window.dispatchEvent(new CustomEvent('task-updated'))
       }
     })
   }
