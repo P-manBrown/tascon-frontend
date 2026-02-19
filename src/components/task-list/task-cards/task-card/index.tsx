@@ -11,6 +11,7 @@ import {
   formatEndDateTime,
   formatMinutesToHoursAndMinutes,
 } from './format-utils'
+import { TaskStatusBox } from './task-status-box'
 
 type Props = {
   id: number
@@ -39,6 +40,7 @@ export function TaskCard({
   const params = useSearchParams()
   const fromUrl = generateFromUrlParam(pathname, params.toString())
   const isOverdue = endsAt ? new Date(endsAt) < new Date() : false
+  const taskId = id.toString()
 
   const shouldShowSingleDate = checkShouldShowSingleDate(startsAt, endsAt)
 
@@ -47,13 +49,9 @@ export function TaskCard({
       <div className={`${status === 'completed' ? 'opacity-80' : ''}`}>
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-2">
-            <input
-              type="checkbox"
-              checked={status === 'completed'}
-              className="pointer-events-none size-5 rounded-md"
-              aria-label={`${name}の完了状態`}
-              onChange={() => {}}
-            />
+            <div className="z-10 flex items-center">
+              <TaskStatusBox taskId={taskId} taskName={name} status={status} />
+            </div>
             <h2
               className={`truncate text-lg font-bold ${status === 'completed' ? 'text-gray-600 line-through' : ''}`}
             >
@@ -101,7 +99,7 @@ export function TaskCard({
         </div>
         {children}
         <Link
-          href={`/tasks/detail/${id}?${fromUrl}`}
+          href={`/tasks/detail/${taskId}?${fromUrl}`}
           className="absolute top-0 left-0 h-full w-full rounded-md"
           aria-label={`${name}の詳細画面を表示`}
         />

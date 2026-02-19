@@ -55,7 +55,8 @@ export async function changeTaskStatus({ taskId, bodyData }: Params) {
         status: 'success',
         ...camelcaseKeys(validateDataResult, { deep: true }),
       }
-      revalidatePath(`/tasks/detail/${resultObject.task.id}`)
+
+      revalidatePath('/tasks', 'layout')
     }
   }
 

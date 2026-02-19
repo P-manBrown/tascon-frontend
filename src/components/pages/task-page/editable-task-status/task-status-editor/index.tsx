@@ -6,10 +6,10 @@ import { z } from 'zod'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
 import { taskSchema } from '@/schemas/response/task'
 import { ErrorObject } from '@/types/error'
+import { changeTaskStatus } from '@/utils/api/change-task-status'
 import { HttpError } from '@/utils/error/custom/http-error'
 import { useRedirectLoginPath } from '@/utils/login-path/use-redirect-login-path'
 import { isValidValue } from '@/utils/type-guard/is-valid-value'
-import { changeTaskStatus } from './change-task-status.api'
 
 type Props = {
   taskId: string
