@@ -42,6 +42,8 @@ export function TaskCard({
   status,
   children,
 }: Props) {
+  const isOverdue = endsAt ? new Date(endsAt) < new Date() : false
+
   return (
     <div className="relative transform rounded-md border border-gray-300 bg-white p-6 drop-shadow-sm transition-all duration-200 hover:scale-103 hover:drop-shadow-lg">
       <div className={`${status === 'completed' ? 'opacity-80' : ''}`}>
@@ -66,7 +68,9 @@ export function TaskCard({
             </p>
           )}
           {(startsAt ?? endsAt) && (
-            <div className="flex flex-wrap items-center gap-1 text-xs text-gray-600">
+            <div
+              className={`flex flex-wrap items-center gap-1 text-xs ${isOverdue ? 'text-red-700' : 'text-gray-600'}`}
+            >
               <CalendarDateRangeIcon className="size-4" />
               {startsAt && <span>{formatDateTime(startsAt)}</span>}
               {startsAt && endsAt && <span>~</span>}

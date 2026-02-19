@@ -1,15 +1,16 @@
-import { getTasks } from './get-tasks.api'
+import { getTasks } from '@/utils/api/get-tasks'
 import { TaskCards } from './task-cards'
 import { TaskCardsContainer } from './task-cards-container'
 
 type Props = {
   page: string
+  filter?: 'actionable'
 }
 
 const containerShapeClasses = 'h-full w-full rounded-md md:w-96'
 
-export async function TaskList({ page }: Props) {
-  const { tasks, pagination } = await getTasks({ page, limit: '10' })
+export async function TaskList({ page, filter }: Props) {
+  const { tasks, pagination } = await getTasks({ page, limit: '10', filter })
 
   return (
     <TaskCardsContainer
