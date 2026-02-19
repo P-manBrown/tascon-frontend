@@ -28,7 +28,7 @@ const taskNameSchema = z.object({
     .trim()
     .min(1, 'タスク名を入力してください。')
     .refine((value) => countCharacters(value) <= 255, {
-      message: '255文字以下で入力してください。',
+      error: '255文字以下で入力してください。',
     }),
 })
 

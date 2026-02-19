@@ -20,7 +20,7 @@ export function useEditableHoursMinutes<T extends FieldValues>({
   defaultHours,
   defaultMinutes,
   shouldSaveToLocalStorage,
-}: UseEditableHoursMinutesParams) {
+}: UseEditableHoursMinutesParams<T>) {
   const [isEditorOpen, setIsEditorOpen] = useState(false)
   const isPageHidden = useRef(false)
   const pathname = usePathname()
