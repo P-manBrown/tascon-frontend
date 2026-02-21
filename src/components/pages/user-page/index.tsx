@@ -117,7 +117,7 @@ export function LoadingUserPage() {
         </div>
       </div>
       <HorizontalRule />
-      <div className="skeleton h-60 rounded-sm bg-gradient-to-b from-50% via-75% to-white" />
+      <div className="skeleton h-60 rounded-sm bg-linear-to-b from-50% via-75% to-white" />
     </div>
   )
 }

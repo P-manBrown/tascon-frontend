@@ -7,17 +7,10 @@ const linkSizeClasses = 'w-full px-4 py-1'
 export async function SharedTaskGroupMenu() {
   const { taskGroupShares } = await getTaskGroupShares()
 
-  const taskGroups = taskGroupShares.map(({ taskGroup }) => ({
-    id: taskGroup.id,
-    name: taskGroup.name,
-    icon: taskGroup.icon,
-    owner: taskGroup.owner,
-  }))
-
   return (
     <nav>
       <SharedTaskGroupNavLinks
-        taskGroups={taskGroups}
+        taskGroupShares={taskGroupShares}
         className={navLinksLayoutClasses}
         linkSizeClasses={linkSizeClasses}
       />
