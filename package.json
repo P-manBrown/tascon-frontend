@@ -48,7 +48,7 @@
     "@eslint/eslintrc": "^3.3.1",
     "@evilmartians/lefthook": "^2.0.4",
     "@markuplint/jsx-parser": "^4.7.21",
-    "@markuplint/react-spec": "^4.5.21",
+    "@markuplint/react-spec": "^4.5.23",
     "@tailwindcss/postcss": "^4.1.17",
     "eslint": "9.38.0",
     "eslint-config-next": "^15.3.2",
