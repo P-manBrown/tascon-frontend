@@ -35,7 +35,7 @@
     "preact": "^10.28.3",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "react-error-boundary": "^6.0.0",
+    "react-error-boundary": "^6.1.1",
     "react-hook-form": "^7.65.0",
     "server-only": "^0.0.1",
     "snakecase-keys": "^9.0.2",

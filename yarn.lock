@@ -1328,13 +1328,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.12.5":
-  version: 7.28.4
-  resolution: "@babel/runtime@npm:7.28.4"
-  checksum: 10/6c9a70452322ea80b3c9b2a412bcf60771819213a67576c8cec41e88a95bb7bf01fc983754cda35dc19603eef52df22203ccbf7777b9d6316932f9fb77c25163
-  languageName: node
-  linkType: hard
-
 "@babel/template@npm:^7.22.15, @babel/template@npm:^7.24.0":
   version: 7.24.0
   resolution: "@babel/template@npm:7.24.0"
@@ -9627,14 +9620,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-error-boundary@npm:^6.0.0":
-  version: 6.0.0
-  resolution: "react-error-boundary@npm:6.0.0"
-  dependencies:
-    "@babel/runtime": "npm:^7.12.5"
+"react-error-boundary@npm:^6.1.1":
+  version: 6.1.1
+  resolution: "react-error-boundary@npm:6.1.1"
   peerDependencies:
-    react: ">=16.13.1"
-  checksum: 10/3de587be3e72bd3e32b3bd7769d09354b27ed94be580f33a80a85ddc8c1d1ed1cad90199bc24b22a7911ef1ebacc0163c664b2c395f7c37ffd493f59e6e5c9f9
+    react: ^18.0.0 || ^19.0.0
+  checksum: 10/6a2b2d75466c9917b1657048cecff8a617ce5a2de8208677eb98802f6d324ba8a8d3acdce2e23e3deae3b7d35876675bc982e97a9f929a19ce2e926588097d71
   languageName: node
   linkType: hard
 
@@ -11002,7 +10993,7 @@ __metadata:
     prettier-plugin-tailwindcss: "npm:^0.7.1"
     react: "npm:^19.2.4"
     react-dom: "npm:^19.2.4"
-    react-error-boundary: "npm:^6.0.0"
+    react-error-boundary: "npm:^6.1.1"
     react-hook-form: "npm:^7.65.0"
     server-only: "npm:^0.0.1"
     snakecase-keys: "npm:^9.0.2"
