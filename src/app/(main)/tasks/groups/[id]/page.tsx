@@ -2,6 +2,7 @@ import { Suspense } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { CalendarError } from '@/components/calendars/calendar-error'
 import { TaskCalendar } from '@/components/calendars/task-calendar'
+import { LoadingTaskGroupNameHeading } from '@/components/headings/task-group-name-heading'
 import { DesktopTaskCalendarLayout } from '@/components/layouts/task-calendar-layout'
 import { TaskListLayout } from '@/components/layouts/task-list-layout'
 import TasksLayout from '@/components/layouts/tasks-layout'
@@ -12,10 +13,7 @@ import {
   LoadingTaskGroupHeaderIcon,
   TaskGroupHeaderIcon,
 } from './_components/task-group-header-icon'
-import {
-  LoadingTaskGroupHeading,
-  TaskGroupHeading,
-} from './_components/task-group-heading'
+import { TaskGroupHeading } from './_components/task-group-heading'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -42,7 +40,7 @@ export default async function TaskGroup(props: Props) {
           <Suspense fallback={<LoadingTaskGroupHeaderIcon />}>
             <TaskGroupHeaderIcon id={id} />
           </Suspense>
-          <Suspense fallback={<LoadingTaskGroupHeading />}>
+          <Suspense fallback={<LoadingTaskGroupNameHeading />}>
             <TaskGroupHeading id={id} />
           </Suspense>
         </div>

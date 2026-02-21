@@ -3,8 +3,7 @@ import camelcaseKeys from 'camelcase-keys'
 import { redirect } from 'next/navigation'
 import { cache } from 'react'
 import { z } from 'zod'
-import { taskGroupSchema } from '@/schemas/response/task-group'
-import { userSchema } from '@/schemas/response/user'
+import { taskGroupShareSchema } from '@/schemas/response/task-group-share'
 import { fetchData } from '@/utils/api/fetch-data'
 import { getBearerToken } from '@/utils/cookie/bearer-token'
 import { HttpError } from '@/utils/error/custom/http-error'
@@ -12,23 +11,8 @@ import { generateRedirectLoginPath } from '@/utils/login-path/generate-redirect-
 import { getRequestId } from '@/utils/request-id/get-request-id'
 import { validateData } from '@/utils/validation/validate-data'
 
-const ownerSchema = userSchema.shape.user.omit({
-  contact: true,
-  is_suggested: true,
-  block: true,
-})
-
-const taskGroupWithOwnerSchema = taskGroupSchema.shape.task_group.extend({
-  owner: ownerSchema,
-})
-
 const dataSchema = z.object({
-  task_group_shares: z.array(
-    z.object({
-      id: z.number(),
-      task_group: taskGroupWithOwnerSchema,
-    }),
-  ),
+  task_group_shares: z.array(taskGroupShareSchema),
 })
 
 export const getTaskGroupShares = cache(async () => {

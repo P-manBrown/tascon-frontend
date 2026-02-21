@@ -6,18 +6,19 @@ import { LinkSidebarQueryContext } from '@/components/sidebar/link-sidebar-query
 import { SharedTaskGroupLink } from './shared-task-group-link'
 
 type Props = {
-  taskGroups: Array<
-    Pick<
+  taskGroupShares: Array<{
+    id: number
+    taskGroup: Pick<
       React.ComponentProps<typeof SharedTaskGroupLink>,
-      'id' | 'name' | 'icon' | 'owner'
+      'name' | 'icon' | 'owner'
     >
-  >
+  }>
   className?: string
   linkSizeClasses: string
 }
 
 export function SharedTaskGroupNavLinks({
-  taskGroups,
+  taskGroupShares,
   className,
   linkSizeClasses,
 }: Props) {
@@ -27,14 +28,14 @@ export function SharedTaskGroupNavLinks({
 
   return (
     <ul className={className}>
-      {taskGroups.map((taskGroup) => {
+      {taskGroupShares.map((taskGroupShare) => {
         return (
-          <li key={taskGroup.id}>
+          <li key={taskGroupShare.id}>
             <SharedTaskGroupLink
-              id={taskGroup.id}
-              name={taskGroup.name}
-              icon={taskGroup.icon}
-              owner={taskGroup.owner}
+              shareId={taskGroupShare.id.toString()}
+              name={taskGroupShare.taskGroup.name}
+              icon={taskGroupShare.taskGroup.icon}
+              owner={taskGroupShare.taskGroup.owner}
               currentPath={currentPath}
               sidebarQuery={linkSidebarQuery}
               className={linkSizeClasses}
