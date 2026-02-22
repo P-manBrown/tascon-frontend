@@ -1,17 +1,17 @@
-import { TaskCards } from '@/components/task-list/task-cards'
-import { TaskCardsContainer } from '@/components/task-list/task-cards-container'
-import { getSharedTaskGroupTasks } from '../get-shared-task-group-tasks.api'
+import { SharedTaskCards } from '@/app/(main)/tasks/shared-groups/[id]/_components/shared-task-group-task-list/shared-task-cards'
+import { TaskCardsContainer } from '@/components/tasks/task-cards-container'
+import { getSharedTasks } from '../get-shared-tasks.api'
 
 type Props = {
-  id: string
+  shareId: string
   page: string
 }
 
 const containerShapeClasses = 'h-full w-full rounded-md md:w-96'
 
-export async function SharedTaskGroupTaskList({ id, page }: Props) {
-  const { tasks, pagination } = await getSharedTaskGroupTasks({
-    id: id,
+export async function SharedTaskGroupTaskList({ shareId, page }: Props) {
+  const { tasks, pagination } = await getSharedTasks({
+    shareId,
     page,
     limit: '10',
   })
@@ -24,8 +24,8 @@ export async function SharedTaskGroupTaskList({ id, page }: Props) {
       className={containerShapeClasses}
       isReadonly={true}
     >
-      <div className="m-2 md:m-3">
-        <TaskCards tasks={tasks} isReadonly={true} />
+      <div className="m- md:m-3">
+        <SharedTaskCards shareId={shareId} tasks={tasks} />
       </div>
     </TaskCardsContainer>
   )

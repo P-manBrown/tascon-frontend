@@ -8,20 +8,11 @@ import {
 } from '@/components/texts/detail-single-line-text'
 import { getTask } from '@/utils/api/get-task'
 import { getCurrentUser } from '@/utils/api/server/get-current-user'
+import { formatDateTime } from '@/utils/task/format-date-time'
 import { TaskEndsAtEditor } from './task-ends-at-editor'
 
 type Props = {
   id: string
-}
-
-function formatDateTime(dateString: string): string {
-  return new Date(dateString).toLocaleString('ja-JP', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-  })
 }
 
 export async function EditableTaskEndsAt({ id }: Props) {

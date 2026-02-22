@@ -6,7 +6,7 @@ import { TasksHeading } from '@/components/headings/tasks-heading'
 import { DesktopTaskCalendarLayout } from '@/components/layouts/task-calendar-layout'
 import { TaskListLayout } from '@/components/layouts/task-list-layout'
 import TasksLayout from '@/components/layouts/tasks-layout'
-import { LoadingTaskList, TaskList } from '@/components/task-list'
+import { LoadingTaskList, TaskList } from '@/components/tasks/task-list'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
