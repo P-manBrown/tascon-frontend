@@ -5,7 +5,7 @@ import { ErrorObject } from '@/types/error'
 import { changeTaskStatus } from '@/utils/api/change-task-status'
 import { HttpError } from '@/utils/error/custom/http-error'
 import { useRedirectLoginPath } from '@/utils/login-path/use-redirect-login-path'
-import { StatusSquare } from './status-square'
+import { TaskStatusSquare } from './status-square'
 
 type Status = 'not_started' | 'in_progress' | 'completed'
 
@@ -29,7 +29,7 @@ function getNextStatus(currentStatus: Status): Status {
   return statusOrder[nextIndex]
 }
 
-export function TaskStatusBox({ taskId, taskName, status }: Props) {
+export function TaskStatusButton({ taskId, taskName, status }: Props) {
   const [isPending, startTransition] = useTransition()
   const { openErrorSnackbar } = useErrorSnackbar()
   const router = useRouter()
@@ -65,16 +65,17 @@ export function TaskStatusBox({ taskId, taskName, status }: Props) {
   }
 
   return (
-    <button
-      type="button"
-      onClick={handleClick}
-      disabled={isPending}
-      aria-label={`${taskName}のステータスを${currentLabel}から${nextLabel}に変更`}
-      className={
-        isPending ? 'animate-pulse cursor-not-allowed' : 'hover:brightness-75'
-      }
+    <div
+      className={`relative size-5 ${isPending ? 'animate-pulse cursor-not-allowed' : 'hover:brightness-75'}`}
     >
-      <StatusSquare status={status} />
-    </button>
+      <TaskStatusSquare status={status} />
+      <button
+        type="button"
+        onClick={handleClick}
+        disabled={isPending}
+        aria-label={`${taskName}のステータスを${currentLabel}から${nextLabel}に変更`}
+        className="absolute inset-0"
+      />
+    </div>
   )
 }
