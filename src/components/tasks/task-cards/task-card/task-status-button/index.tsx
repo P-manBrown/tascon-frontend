@@ -5,25 +5,21 @@ import { ErrorObject } from '@/types/error'
 import { changeTaskStatus } from '@/utils/api/change-task-status'
 import { HttpError } from '@/utils/error/custom/http-error'
 import { useRedirectLoginPath } from '@/utils/login-path/use-redirect-login-path'
-import { TaskStatusSquare } from './status-square'
-
-type Status = 'not_started' | 'in_progress' | 'completed'
+import { TASK_STATUS_LABELS } from '@/utils/task/task-status-labels'
+import { TaskStatusSquare } from '../task-status-square'
+import type { taskSchema } from '@/schemas/response/task'
+import type { z } from 'zod'
 
 type Props = {
   taskId: string
   taskName: string
-  status: Status
+  status: TaskStatus
 }
 
-const statusOrder: Status[] = ['not_started', 'in_progress', 'completed']
+type TaskStatus = z.infer<typeof taskSchema.shape.task.shape.status>
+const statusOrder: TaskStatus[] = ['not_started', 'in_progress', 'completed']
 
-const statusLabels: Record<Status, string> = {
-  not_started: '未着手',
-  in_progress: '対応中',
-  completed: '完了',
-}
-
-function getNextStatus(currentStatus: Status): Status {
+function getNextStatus(currentStatus: TaskStatus): TaskStatus {
   const currentIndex = statusOrder.indexOf(currentStatus)
   const nextIndex = (currentIndex + 1) % statusOrder.length
   return statusOrder[nextIndex]
@@ -36,8 +32,8 @@ export function TaskStatusButton({ taskId, taskName, status }: Props) {
   const searchParams = useSearchParams()
   const redirectLoginPath = useRedirectLoginPath({ searchParams })
   const nextStatus = getNextStatus(status)
-  const currentLabel = statusLabels[status]
-  const nextLabel = statusLabels[nextStatus]
+  const currentLabel = TASK_STATUS_LABELS[status]
+  const nextLabel = TASK_STATUS_LABELS[nextStatus]
 
   const handleHttpError = (err: ErrorObject<HttpError>) => {
     if (err.statusCode === 401) {

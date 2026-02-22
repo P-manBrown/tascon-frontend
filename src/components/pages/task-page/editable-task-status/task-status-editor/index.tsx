@@ -2,13 +2,13 @@
 
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useTransition } from 'react'
-import { z } from 'zod'
 import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
 import { taskSchema } from '@/schemas/response/task'
 import { ErrorObject } from '@/types/error'
 import { changeTaskStatus } from '@/utils/api/change-task-status'
 import { HttpError } from '@/utils/error/custom/http-error'
 import { useRedirectLoginPath } from '@/utils/login-path/use-redirect-login-path'
+import { TASK_STATUS_LABELS } from '@/utils/task/task-status-labels'
 import { isValidValue } from '@/utils/type-guard/is-valid-value'
 
 type Props = {
@@ -18,14 +18,6 @@ type Props = {
 }
 
 const statusSchema = taskSchema.shape.task.shape.status
-
-type Status = z.infer<typeof statusSchema>
-
-const statusLabels: Record<Status, string> = {
-  not_started: '未着手',
-  in_progress: '対応中',
-  completed: '完了',
-}
 
 export function TaskStatusEditor({
   taskId,
@@ -68,7 +60,7 @@ export function TaskStatusEditor({
 
   return (
     <fieldset disabled={isPending} className={layoutClasses}>
-      {Object.entries(statusLabels).map(([statusValue, statusLabel]) => (
+      {Object.entries(TASK_STATUS_LABELS).map(([statusValue, statusLabel]) => (
         <label
           key={statusValue}
           className={`flex items-center gap-1 ${isPending ? 'cursor-wait' : ''}`}

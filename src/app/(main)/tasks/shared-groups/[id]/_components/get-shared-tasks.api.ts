@@ -17,17 +17,17 @@ const dataSchema = z.object({
 })
 
 type Params = {
-  id: string
+  shareId: string
   page: string
   limit: string
 }
 
-export async function getSharedTaskGroupTasks({ id, page, limit }: Params) {
+export async function getSharedTasks({ shareId, page, limit }: Params) {
   const queryParams = new URLSearchParams({ page })
   queryParams.append('limit', limit)
 
   const fetchDataResult = await fetchData(
-    `${process.env.API_ORIGIN}/api/v1/task_group_shares/${id}/tasks?${queryParams}`,
+    `${process.env.API_ORIGIN}/api/v1/task_group_shares/${shareId}/tasks?${queryParams}`,
     {
       method: 'GET',
       headers: {
