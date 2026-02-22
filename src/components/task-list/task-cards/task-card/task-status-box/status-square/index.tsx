@@ -15,7 +15,7 @@ function getColorClasses(status: Props['status']) {
   }
 }
 
-export function StatusSquare({ status }: Props) {
+export function TaskStatusSquare({ status }: Props) {
   return (
     <div
       className={`flex size-5 items-center justify-center rounded-sm ${getColorClasses(status)}`}
