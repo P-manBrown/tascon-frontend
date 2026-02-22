@@ -1,6 +1,6 @@
 import { getTasks } from '@/utils/api/get-tasks'
-import { TaskCards } from './task-cards'
-import { TaskCardsContainer } from './task-cards-container'
+import { TaskCards } from '../task-cards'
+import { TaskCardsContainer } from '../task-cards-container'
 
 type Props = {
   page: string

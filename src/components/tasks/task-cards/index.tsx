@@ -1,19 +1,31 @@
+'use client'
+
+import { usePathname, useSearchParams } from 'next/navigation'
+import { generateFromUrlParam } from '@/utils/login-path/generate-from-url-param'
 import { TaskCard } from './task-card'
 import { TaskCardTaskGroupLink } from './task-card-task-group-link'
 
-type Props = Pick<React.ComponentProps<typeof TaskCard>, 'isReadonly'> & {
+type Props = {
   tasks: Array<
-    React.ComponentProps<typeof TaskCard> & {
+    Omit<React.ComponentProps<typeof TaskCard>, 'href'> & {
       taskGroup?: React.ComponentProps<typeof TaskCardTaskGroupLink>
     }
   >
 }
 
-export function TaskCards({ tasks, isReadonly }: Props) {
+export function TaskCards({ tasks }: Props) {
+  const pathname = usePathname()
+  const params = useSearchParams()
+  const fromUrl = generateFromUrlParam(pathname, params.toString())
+
   return (
     <div className="flex flex-col gap-2 md:gap-3">
       {tasks.map((task) => (
-        <TaskCard key={task.id} {...task} isReadonly={isReadonly}>
+        <TaskCard
+          key={task.id}
+          {...task}
+          href={`/tasks/detail/${task.id}?${fromUrl}`}
+        >
           {task.taskGroup !== undefined && (
             <div className="relative z-10 mt-3">
               <TaskCardTaskGroupLink
