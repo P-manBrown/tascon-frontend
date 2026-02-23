@@ -1,7 +1,11 @@
 import { Suspense } from 'react'
+import { ErrorBoundary } from 'react-error-boundary'
+import { CalendarError } from '@/components/calendars/calendar-error'
 import { LoadingTaskGroupNameHeading } from '@/components/headings/task-group-name-heading'
+import { DesktopTaskCalendarLayout } from '@/components/layouts/task-calendar-layout'
 import { TaskListLayout } from '@/components/layouts/task-list-layout'
 import TasksLayout from '@/components/layouts/tasks-layout'
+import { SharedTaskCalendar } from './_components/shared-task-calendar'
 import {
   LoadingSharedTaskGroupDetail,
   SharedTaskGroupDetail,
@@ -67,6 +71,11 @@ export default async function SharedTaskGroup(props: Props) {
         <Suspense fallback={<LoadingSharedTaskGroupTaskList />}>
           <SharedTaskGroupTaskList shareId={id} page={page} />
         </Suspense>
+        <DesktopTaskCalendarLayout>
+          <ErrorBoundary FallbackComponent={CalendarError}>
+            <SharedTaskCalendar shareId={id} />
+          </ErrorBoundary>
+        </DesktopTaskCalendarLayout>
       </TaskListLayout>
     </TasksLayout>
   )

@@ -1,3 +1,4 @@
+import { TaskCalendar } from '@/components/calendars/task-calendar'
 import { getTasks } from '@/utils/api/get-tasks'
 import { TaskCards } from '../task-cards'
 import { TaskCardsContainer } from '../task-cards-container'
@@ -25,6 +26,7 @@ export async function TaskList({ page, filter, taskGroupId }: Props) {
       totalPages={pagination.totalPages}
       pageItems={pagination.pageItems.toString()}
       className={containerShapeClasses}
+      calendar={<TaskCalendar />}
     >
       <div className="m-2 md:m-3">
         <TaskCards tasks={tasks} />

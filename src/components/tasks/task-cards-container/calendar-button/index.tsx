@@ -2,12 +2,15 @@ import { CalendarIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { ErrorBoundary } from 'react-error-boundary'
 import { IconButton } from '@/components/buttons/icon-button'
 import { CalendarError } from '@/components/calendars/calendar-error'
-import { TaskCalendar } from '@/components/calendars/task-calendar'
 import { ModalContent } from '@/components/contents/modal-content'
 import { Modal } from '@/components/modal'
 import { useModal } from '@/components/modal/use-modal'
 
-export function CalendarButton() {
+type Props = {
+  calendar: React.ReactNode
+}
+
+export function CalendarButton({ calendar }: Props) {
   const {
     shouldMount,
     isOpen,
@@ -47,7 +50,7 @@ export function CalendarButton() {
           >
             <div className="h-[calc(100vh-10rem)] w-full">
               <ErrorBoundary FallbackComponent={CalendarError}>
-                <TaskCalendar />
+                {calendar}
               </ErrorBoundary>
             </div>
           </ModalContent>

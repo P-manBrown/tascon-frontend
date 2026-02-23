@@ -1,17 +1,21 @@
 import { createEventsServicePlugin } from '@schedule-x/events-service'
 import { useNextCalendarApp } from '@schedule-x/react'
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import { useErrorBoundary } from 'react-error-boundary'
 import { CalendarRange } from '@/types/calendar-range'
 import { convertTasksToEvents } from '@/utils/calendar/convert-tasks-to-events'
 import { createCalendarConfig } from '@/utils/calendar/create-calendar-config'
 import { HttpError } from '@/utils/error/custom/http-error'
 import { generateFromUrlParam } from '@/utils/login-path/generate-from-url-param'
-import { getCalendarTasks } from './get-calendar-tasks.api'
+import { getSharedCalendarTasks } from '../get-shared-calendar-tasks.api'
 import type { CalendarEventExternal } from '@schedule-x/calendar'
 
-export function useTaskCalendar() {
+type Props = {
+  shareId: string
+}
+
+export function useSharedTaskCalendar({ shareId }: Props) {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -22,37 +26,41 @@ export function useTaskCalendar() {
 
   const handleEventClick = useCallback(
     (event: CalendarEventExternal) => {
-      const fromUrl = generateFromUrlParam(pathname, searchParams.toString())
-
-      router.push(`/tasks/detail/${event.id}?${fromUrl}`)
+      router.push(`/tasks/shared-groups/${shareId}/task/${event.id}`)
     },
-    [router, pathname, searchParams],
+    [router, shareId],
   )
 
   const handleCalendarError = useCallback(
     (err: unknown) => {
       if (err instanceof HttpError && err.statusCode === 401) {
-        const fromUrl = generateFromUrlParam(pathname, searchParams.toString())
+        const fromUrl = generateFromUrlParam(
+          initialPathnameRef.current,
+          searchParams.toString(),
+        )
         router.push(`/login?${fromUrl}`)
         return
       }
       showBoundary(err)
     },
-    [router, pathname, searchParams, showBoundary],
+    [router, searchParams, showBoundary],
   )
 
-  const fetchCalendarEvents = useCallback(async (range: CalendarRange) => {
-    const startDate = range.start.toPlainDate().toString()
-    const endDate = range.end.toPlainDate().toString()
+  const fetchCalendarEvents = useCallback(
+    async (range: CalendarRange) => {
+      const startDate = range.start.toPlainDate().toString()
+      const endDate = range.end.toPlainDate().toString()
 
-    const tasks = await getCalendarTasks(
-      startDate,
-      endDate,
-      initialPathnameRef.current,
-    )
+      const tasks = await getSharedCalendarTasks({
+        shareId,
+        start: startDate,
+        end: endDate,
+      })
 
-    return convertTasksToEvents(tasks)
-  }, [])
+      return convertTasksToEvents(tasks)
+    },
+    [shareId],
+  )
 
   const fetchEvents = useCallback(
     async (range: CalendarRange) => {
@@ -70,20 +78,6 @@ export function useTaskCalendar() {
     [fetchCalendarEvents, handleCalendarError],
   )
 
-  const handleTaskChange = useCallback(async () => {
-    try {
-      if (currentRangeRef.current === null) {
-        throw new Error('カレンダーの範囲が初期化されていません')
-      }
-
-      const events = await fetchCalendarEvents(currentRangeRef.current)
-
-      eventsService.set(events)
-    } catch (err: unknown) {
-      handleCalendarError(err)
-    }
-  }, [fetchCalendarEvents, eventsService, handleCalendarError])
-
   const calendar = useNextCalendarApp(
     createCalendarConfig({
       plugins: [eventsService],
@@ -91,18 +85,6 @@ export function useTaskCalendar() {
       fetchEvents,
     }),
   )
-
-  useEffect(() => {
-    window.addEventListener('task-created', handleTaskChange)
-    window.addEventListener('task-updated', handleTaskChange)
-    window.addEventListener('task-deleted', handleTaskChange)
-
-    return () => {
-      window.removeEventListener('task-created', handleTaskChange)
-      window.removeEventListener('task-updated', handleTaskChange)
-      window.removeEventListener('task-deleted', handleTaskChange)
-    }
-  }, [handleTaskChange])
 
   return { calendar }
 }
