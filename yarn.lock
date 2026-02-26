@@ -9524,10 +9524,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"preact@npm:^10.28.3":
-  version: 10.28.3
-  resolution: "preact@npm:10.28.3"
-  checksum: 10/b89c328f7ea13976dc2849962141fb4268afbbb364fa2f0a235788c2dba2a32786db43531fec5b64960917a078e4b78bd88967f13120df350573a619c8286f86
+"preact@npm:^10.28.4":
+  version: 10.28.4
+  resolution: "preact@npm:10.28.4"
+  checksum: 10/7deb25d04e811ca165a92a8a9d0be4c8038f4b8b4fa8cc941ac37fb4f5425440e24d73e53802bf822753a6acda3d4be4dd8ee9c75071fbbc89ca39c2fae80349
   languageName: node
   linkType: hard
 
@@ -11069,7 +11069,7 @@ __metadata:
     pino: "npm:^10.1.0"
     pino-pretty: "npm:^13.1.2"
     postcss: "npm:^8.5.6"
-    preact: "npm:^10.28.3"
+    preact: "npm:^10.28.4"
     prettier: "npm:3.6.2"
     prettier-plugin-tailwindcss: "npm:^0.7.1"
     react: "npm:^19.2.4"
