@@ -2613,14 +2613,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@schedule-x/calendar@npm:^4.1.0":
-  version: 4.1.0
-  resolution: "@schedule-x/calendar@npm:4.1.0"
+"@schedule-x/calendar@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "@schedule-x/calendar@npm:4.2.0"
   peerDependencies:
     "@preact/signals": ^2.0.2
     preact: ^10.19.2
     temporal-polyfill: 0.3.0
-  checksum: 10/a1ab66d9d0206dcdef92069d9952365b972de3609075b04d683d2f96e3003db39da466c74b7d94abd96c245e5d0d80d22c38a214c64f3e37c299bcca66c4f054
+  checksum: 10/69ad201c8927cb07b0dc5a626eed0a16688e0eb0e35d776b467171e0b31f8f2aff60abf06942a43e9445930812f21156c281ec294a32d63bbf1c3d64cd35a718
   languageName: node
   linkType: hard
 
@@ -11005,7 +11005,7 @@ __metadata:
     "@markuplint/react-spec": "npm:^4.5.23"
     "@next/bundle-analyzer": "npm:^15.3.2"
     "@preact/signals": "npm:^2.7.0"
-    "@schedule-x/calendar": "npm:^4.1.0"
+    "@schedule-x/calendar": "npm:^4.2.0"
     "@schedule-x/events-service": "npm:^4.1.0"
     "@schedule-x/react": "npm:^4.1.0"
     "@schedule-x/theme-default": "npm:^4.1.0"
