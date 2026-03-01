@@ -21,7 +21,7 @@
     "@schedule-x/events-service": "^4.1.0",
     "@schedule-x/react": "^4.1.0",
     "@schedule-x/theme-default": "^4.1.0",
-    "@types/node": "22.15.21",
+    "@types/node": "25.3.3",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "boring-avatars": "^2.0.4",
