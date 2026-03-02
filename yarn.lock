@@ -7020,10 +7020,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-network-error@npm:^1.3.0":
-  version: 1.3.0
-  resolution: "is-network-error@npm:1.3.0"
-  checksum: 10/56dc0b8ed9c0bb72202058f172ad0c3121cf68772e8cbba343d3775f6e2ec7877d423cbcea45f4cedcd345de8693de1b52dfe0c6fc15d652c4aa98c2abf0185a
+"is-network-error@npm:^1.3.1":
+  version: 1.3.1
+  resolution: "is-network-error@npm:1.3.1"
+  checksum: 10/96d0a3f21e7b3655a386ef11405fd0cd8e615d3ef3a463cfe937b78ec585f2ed3717841aada5306eb96c89984b1bddc6ff0da49e18fcd6e52aa86206a1431f56
   languageName: node
   linkType: hard
 
@@ -11029,7 +11029,7 @@ __metadata:
     eslint-config-next: "npm:^15.3.2"
     eslint-config-prettier: "npm:^10.1.8"
     eslint-plugin-unused-imports: "npm:^4.4.1"
-    is-network-error: "npm:^1.3.0"
+    is-network-error: "npm:^1.3.1"
     knip: "npm:^5.66.3"
     markdownlint-cli2: "npm:^0.18.1"
     markuplint: "npm:^4.14.1"
