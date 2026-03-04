@@ -18,7 +18,7 @@
     "@next/bundle-analyzer": "^15.3.2",
     "@preact/signals": "^2.7.0",
     "@schedule-x/calendar": "^4.2.0",
-    "@schedule-x/events-service": "^4.1.0",
+    "@schedule-x/events-service": "^4.3.0",
     "@schedule-x/react": "^4.1.0",
     "@schedule-x/theme-default": "^4.1.0",
     "@types/node": "22.15.21",
