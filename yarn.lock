@@ -2624,10 +2624,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@schedule-x/events-service@npm:^4.1.0":
-  version: 4.1.0
-  resolution: "@schedule-x/events-service@npm:4.1.0"
-  checksum: 10/1529eb92566a7e8b1520631fd1326185ccf19b542372fedb5e8f1c332e7dc100c519aa9d67855b2b3266e5513a0e11c45307e73913a277b2150f7bcd7452f286
+"@schedule-x/events-service@npm:^4.3.0":
+  version: 4.3.0
+  resolution: "@schedule-x/events-service@npm:4.3.0"
+  checksum: 10/65734bb550f9e0f892cef1d97f0c659e37984a7e57315febf90475605aa116c44f9ade04738864435cff3db8c137b0b81d42da3b329a093be5ff42c622dd3766
   languageName: node
   linkType: hard
 
@@ -11042,7 +11042,7 @@ __metadata:
     "@next/bundle-analyzer": "npm:^15.3.2"
     "@preact/signals": "npm:^2.7.0"
     "@schedule-x/calendar": "npm:^4.2.0"
-    "@schedule-x/events-service": "npm:^4.1.0"
+    "@schedule-x/events-service": "npm:^4.3.0"
     "@schedule-x/react": "npm:^4.1.0"
     "@schedule-x/theme-default": "npm:^4.1.0"
     "@tailwindcss/postcss": "npm:^4.1.17"
