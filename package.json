@@ -51,7 +51,7 @@
     "@markuplint/react-spec": "^4.5.23",
     "@tailwindcss/postcss": "^4.1.17",
     "eslint": "9.38.0",
-    "eslint-config-next": "^15.3.2",
+    "eslint-config-next": "^16.1.6",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-unused-imports": "^4.4.1",
     "knip": "^5.66.3",
