@@ -2427,12 +2427,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/bundle-analyzer@npm:^15.3.2":
-  version: 15.3.2
-  resolution: "@next/bundle-analyzer@npm:15.3.2"
+"@next/bundle-analyzer@npm:^16.1.6":
+  version: 16.1.6
+  resolution: "@next/bundle-analyzer@npm:16.1.6"
   dependencies:
     webpack-bundle-analyzer: "npm:4.10.1"
-  checksum: 10/67796684f1cf727e72768cdc1c112269b7b89f916c85fe8f6c9585caaa91a24b4a2a71b68247afa259b24838ef0fb539d2522c7d49e52afeadcecd1f184fa430
+  checksum: 10/595b9534775fb78497494fa4c42d1156e482596dfd9fa4f040bdbf738c8f1db368749a307cfb0687275caad3c5d3d923d20abbede728c60863551b4b66842a7c
   languageName: node
   linkType: hard
 
@@ -11707,7 +11707,7 @@ __metadata:
     "@hookform/resolvers": "npm:^5.2.2"
     "@markuplint/jsx-parser": "npm:^4.7.23"
     "@markuplint/react-spec": "npm:^4.5.23"
-    "@next/bundle-analyzer": "npm:^15.3.2"
+    "@next/bundle-analyzer": "npm:^16.1.6"
     "@preact/signals": "npm:^2.7.0"
     "@schedule-x/calendar": "npm:^4.2.0"
     "@schedule-x/events-service": "npm:^4.3.0"
