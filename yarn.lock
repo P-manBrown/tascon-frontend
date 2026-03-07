@@ -2725,14 +2725,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@preact/signals@npm:^2.7.0":
-  version: 2.7.0
-  resolution: "@preact/signals@npm:2.7.0"
+"@preact/signals@npm:^2.8.1":
+  version: 2.8.1
+  resolution: "@preact/signals@npm:2.8.1"
   dependencies:
     "@preact/signals-core": "npm:^1.13.0"
   peerDependencies:
     preact: ">= 10.25.0 || >=11.0.0-0"
-  checksum: 10/bbfe49baa2af7c02ae4a4eb139aaec8f64fcd948143468eb3a2ad506db3e1cd1a7df1e120f256f3e6b8974a938944430d97f5d9905d480311f8b9435dc140b3b
+  checksum: 10/381d3d5c983b92b7acf7344fdee564bcb88057d596e3efb70103913ff305bf6bad4b08a51b105916351b5773d3b2d013c1ace9a41d0111bc486880a961d9756a
   languageName: node
   linkType: hard
 
@@ -11708,7 +11708,7 @@ __metadata:
     "@markuplint/jsx-parser": "npm:^4.7.23"
     "@markuplint/react-spec": "npm:^4.5.23"
     "@next/bundle-analyzer": "npm:^15.3.2"
-    "@preact/signals": "npm:^2.7.0"
+    "@preact/signals": "npm:^2.8.1"
     "@schedule-x/calendar": "npm:^4.2.0"
     "@schedule-x/events-service": "npm:^4.3.0"
     "@schedule-x/react": "npm:^4.1.0"
