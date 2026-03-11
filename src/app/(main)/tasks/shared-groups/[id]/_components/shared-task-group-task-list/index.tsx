@@ -1,6 +1,7 @@
 import { SharedTaskCards } from '@/app/(main)/tasks/shared-groups/[id]/_components/shared-task-group-task-list/shared-task-cards'
 import { TaskCardsContainer } from '@/components/tasks/task-cards-container'
 import { getSharedTasks } from '../get-shared-tasks.api'
+import { SharedTaskCalendar } from '../shared-task-calendar'
 
 type Props = {
   shareId: string
@@ -23,6 +24,7 @@ export async function SharedTaskGroupTaskList({ shareId, page }: Props) {
       pageItems={pagination.pageItems.toString()}
       className={containerShapeClasses}
       isReadonly={true}
+      calendar={<SharedTaskCalendar shareId={shareId} />}
     >
       <div className="m- md:m-3">
         <SharedTaskCards shareId={shareId} tasks={tasks} />
