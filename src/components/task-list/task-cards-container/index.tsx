@@ -16,6 +16,7 @@ type Props = {
   totalPages: number
   pageItems: string
   className: string
+  isReadonly?: boolean
   children: React.ReactNode
 }
 
@@ -28,6 +29,7 @@ export function TaskCardsContainer({
   totalPages,
   pageItems,
   className,
+  isReadonly = false,
   children,
 }: Props) {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
@@ -127,17 +129,19 @@ export function TaskCardsContainer({
         </div>
       </div>
       <div className="relative flex h-12 shrink-0 items-center justify-center border-t border-gray-300">
-        <Link
-          href={{
-            pathname: '/tasks/create',
-            ...(taskGroupId !== undefined && {
-              query: { task_group_id: taskGroupId },
-            }),
-          }}
-          className="btn-icon absolute left-4"
-        >
-          <PlusIcon className="size-5 stroke-2" />
-        </Link>
+        {!isReadonly && (
+          <Link
+            href={{
+              pathname: '/tasks/create',
+              ...(taskGroupId !== undefined && {
+                query: { task_group_id: taskGroupId },
+              }),
+            }}
+            className="btn-icon absolute left-4"
+          >
+            <PlusIcon className="size-5 stroke-2" />
+          </Link>
+        )}
         {totalPages > 1 && (
           <PageSelector
             currentPage={currentPage}
@@ -145,7 +149,7 @@ export function TaskCardsContainer({
             onClick={handlePageSelectLinkClick}
           />
         )}
-        <CalendarButton />
+        {!isReadonly && <CalendarButton />}
       </div>
     </div>
   )

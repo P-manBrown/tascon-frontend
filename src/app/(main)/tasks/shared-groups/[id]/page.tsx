@@ -1,5 +1,6 @@
 import { Suspense } from 'react'
 import { LoadingTaskGroupNameHeading } from '@/components/headings/task-group-name-heading'
+import { TaskListLayout } from '@/components/layouts/task-list-layout'
 import TasksLayout from '@/components/layouts/tasks-layout'
 import {
   LoadingSharedTaskGroupDetail,
@@ -14,6 +15,10 @@ import {
   LoadingSharedTaskGroupOwner,
   SharedTaskGroupOwner,
 } from './_components/shared-task-group-owner'
+import {
+  LoadingSharedTaskGroupTaskList,
+  SharedTaskGroupTaskList,
+} from './_components/shared-task-group-task-list'
 import { ShowTaskGroupDetailModalButton } from '../../groups/[id]/_components/show-task-group-detail-modal-button'
 import type { Metadata } from 'next'
 
@@ -23,11 +28,16 @@ export const metadata: Metadata = {
 
 type Props = {
   params: Promise<{ id: string }>
+  searchParams: Promise<{
+    page?: string
+  }>
 }
 
 export default async function SharedTaskGroup(props: Props) {
   const params = await props.params
   const { id } = params
+  const searchParams = await props.searchParams
+  const { page = '1' } = searchParams
 
   return (
     <TasksLayout>
@@ -53,6 +63,11 @@ export default async function SharedTaskGroup(props: Props) {
           />
         </div>
       </div>
+      <TaskListLayout>
+        <Suspense fallback={<LoadingSharedTaskGroupTaskList />}>
+          <SharedTaskGroupTaskList id={id} page={page} />
+        </Suspense>
+      </TaskListLayout>
     </TasksLayout>
   )
 }
