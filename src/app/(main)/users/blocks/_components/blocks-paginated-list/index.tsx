@@ -1,25 +1,25 @@
-import { BlockCards, LoadingBlockCards } from '@/components/cards/block-cards'
-import { EmptyList } from '@/components/empty-list'
-import { Pagination, LoadingPagination } from '@/components/paginations'
-import { getBlocks } from '@/utils/api/get-blocks'
-import { getCurrentUser } from '@/utils/api/server/get-current-user'
+import { BlockCards, LoadingBlockCards } from "@/components/cards/block-cards";
+import { EmptyList } from "@/components/empty-list";
+import { LoadingPagination, Pagination } from "@/components/paginations";
+import { getBlocks } from "@/utils/api/get-blocks";
+import { getCurrentUser } from "@/utils/api/server/get-current-user";
 
 type Props = {
-  page: string
-}
+  page: string;
+};
 
-const limit = 18
+const limit = 18;
 const cardsLayoutClasses =
-  'grid gap-4 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3'
-const paginationLayoutClasses = 'mt-6'
+  "grid gap-4 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3";
+const paginationLayoutClasses = "mt-6";
 
 export async function BlocksPaginatedList({ page }: Props) {
-  const { account: currentUser } = await getCurrentUser()
+  const { account: currentUser } = await getCurrentUser();
   const { blocks, pagination } = await getBlocks({
     currentUserId: currentUser.id.toString(),
     page,
     limit: limit.toString(),
-  })
+  });
 
   return (
     <div>
@@ -36,12 +36,12 @@ export async function BlocksPaginatedList({ page }: Props) {
         </div>
       )}
     </div>
-  )
+  );
 }
 
 type LoadingBlocksPaginatedListProps = {
-  page: Props['page'] | undefined
-}
+  page: Props["page"] | undefined;
+};
 
 export function LoadingBlocksPaginatedList({
   page,
@@ -55,5 +55,5 @@ export function LoadingBlocksPaginatedList({
         </div>
       )}
     </div>
-  )
+  );
 }

@@ -1,35 +1,35 @@
-import { Avatar, LoadingAvatar } from '@/components/avatars/avatar'
-import { BioCollapsibleSection } from '@/components/collapsible-sections/bio-collapsible-section'
-import { DetailItemHeading } from '@/components/headings/detail-item-heading'
-import { HorizontalRule } from '@/components/horizontal-rule'
-import { DetailItemContentLayout } from '@/components/layouts/detail-item-content-layout'
-import { DetailItemHeadingLayout } from '@/components/layouts/detail-item-heading-layout'
+import { Avatar, LoadingAvatar } from "@/components/avatars/avatar";
+import { BioCollapsibleSection } from "@/components/collapsible-sections/bio-collapsible-section";
+import { DetailItemHeading } from "@/components/headings/detail-item-heading";
+import { HorizontalRule } from "@/components/horizontal-rule";
+import { DetailItemContentLayout } from "@/components/layouts/detail-item-content-layout";
+import { DetailItemHeadingLayout } from "@/components/layouts/detail-item-heading-layout";
 import {
   DetailMultiLineText,
   LoadingDetailMultiLineText,
-} from '@/components/texts/detail-multi-line-text'
+} from "@/components/texts/detail-multi-line-text";
 import {
   DetailSingleLineText,
   LoadingDetailSingleLineText,
-} from '@/components/texts/detail-single-line-text'
-import { getUser } from '@/utils/api/server/get-user'
-import { UserCreateContactSection } from './create-contact-section'
-import { DeleteContactButton } from './delete-contact-button'
-import { EditableDisplayName } from './editable-display-name'
-import { EditableNote } from './editable-note'
-import { UserBlockSection } from './user-block-section'
+} from "@/components/texts/detail-single-line-text";
+import { getUser } from "@/utils/api/server/get-user";
+import { UserCreateContactSection } from "./create-contact-section";
+import { DeleteContactButton } from "./delete-contact-button";
+import { EditableDisplayName } from "./editable-display-name";
+import { EditableNote } from "./editable-note";
+import { UserBlockSection } from "./user-block-section";
 
 type Props = {
-  id: string
-}
+  id: string;
+};
 
-const userInfoLayoutClasses = 'flex flex-col space-y-10'
-const avatarLayoutClasses = 'flex justify-center'
-const avatarSize = 128
-const bioMinHeight = 160
+const userInfoLayoutClasses = "flex flex-col space-y-10";
+const avatarLayoutClasses = "flex justify-center";
+const avatarSize = 128;
+const bioMinHeight = 160;
 
 export async function UserPage({ id }: Props) {
-  const { user } = await getUser(id)
+  const { user } = await getUser(id);
 
   return (
     <div className={userInfoLayoutClasses}>
@@ -52,7 +52,7 @@ export async function UserPage({ id }: Props) {
       </DetailItemHeadingLayout>
       <BioCollapsibleSection minHeight={bioMinHeight}>
         <DetailItemContentLayout>
-          {user.bio === undefined || user.bio === '' ? (
+          {user.bio === undefined || user.bio === "" ? (
             <p className="text-gray-500">自己紹介は登録されていません...</p>
           ) : (
             <DetailMultiLineText>{user.bio}</DetailMultiLineText>
@@ -60,36 +60,33 @@ export async function UserPage({ id }: Props) {
         </DetailItemContentLayout>
       </BioCollapsibleSection>
       <HorizontalRule />
-      {user.block === undefined && (
-        <>
-          {user.contact === undefined ? (
-            <UserCreateContactSection
-              contactUserId={user.id}
-              isSuggested={user.isSuggested}
+      {user.block === undefined &&
+        (user.contact === undefined ? (
+          <UserCreateContactSection
+            contactUserId={user.id}
+            isSuggested={user.isSuggested}
+          />
+        ) : (
+          <>
+            <EditableDisplayName
+              contactId={user.contact.id.toString()}
+              displayName={user.contact.displayName}
             />
-          ) : (
-            <>
-              <EditableDisplayName
+            <EditableNote
+              contactId={user.contact.id.toString()}
+              note={user.contact.note}
+            />
+            <DetailItemContentLayout>
+              <DeleteContactButton
                 contactId={user.contact.id.toString()}
-                displayName={user.contact.displayName}
+                contactUserId={user.id.toString()}
               />
-              <EditableNote
-                contactId={user.contact.id.toString()}
-                note={user.contact.note}
-              />
-              <DetailItemContentLayout>
-                <DeleteContactButton
-                  contactId={user.contact.id.toString()}
-                  contactUserId={user.id.toString()}
-                />
-              </DetailItemContentLayout>
-            </>
-          )}
-        </>
-      )}
+            </DetailItemContentLayout>
+          </>
+        ))}
       {user.contact === undefined && <UserBlockSection userId={user.id} />}
     </div>
-  )
+  );
 }
 
 export function LoadingUserPage() {
@@ -119,5 +116,5 @@ export function LoadingUserPage() {
       <HorizontalRule />
       <div className="skeleton h-60 rounded-sm bg-linear-to-b from-50% via-75% to-white" />
     </div>
-  )
+  );
 }

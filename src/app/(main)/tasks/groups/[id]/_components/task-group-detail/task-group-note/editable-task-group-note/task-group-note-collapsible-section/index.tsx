@@ -1,11 +1,11 @@
-'use client'
+"use client";
 
-import { CollapsibleSection } from '@/components/collapsible-sections/collapsible-section'
+import { CollapsibleSection } from "@/components/collapsible-sections/collapsible-section";
 
 type Props = Pick<
   React.ComponentProps<typeof CollapsibleSection>,
-  'minHeight' | 'children'
->
+  "minHeight" | "children"
+>;
 
 export function TaskGroupNoteCollapsibleSection({
   minHeight,
@@ -15,5 +15,5 @@ export function TaskGroupNoteCollapsibleSection({
     <CollapsibleSection minHeight={minHeight} className="z-10">
       {children}
     </CollapsibleSection>
-  )
+  );
 }

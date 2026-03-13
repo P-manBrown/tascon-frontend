@@ -1,19 +1,19 @@
-import { ValidationErrorMessage } from '../validation-error-message'
-import type { FieldError, UseFormRegisterReturn } from 'react-hook-form'
+import type { FieldError, UseFormRegisterReturn } from "react-hook-form";
+import { ValidationErrorMessage } from "../validation-error-message";
 
 type Props = {
-  dateId: string
-  timeId: string
-  dateLabel: string
-  timeLabel: string
-  dateRegister: UseFormRegisterReturn
-  timeRegister: UseFormRegisterReturn
-  dateError?: FieldError
-  timeError?: FieldError
-  readOnly?: boolean
-  className?: string
-  ref?: React.RefObject<HTMLInputElement | null>
-}
+  dateId: string;
+  timeId: string;
+  dateLabel: string;
+  timeLabel: string;
+  dateRegister: UseFormRegisterReturn;
+  timeRegister: UseFormRegisterReturn;
+  dateError?: FieldError;
+  timeError?: FieldError;
+  readOnly?: boolean;
+  className?: string;
+  ref?: React.RefObject<HTMLInputElement | null>;
+};
 
 export function DateTimeInput({
   dateId,
@@ -25,13 +25,13 @@ export function DateTimeInput({
   dateError,
   timeError,
   readOnly = false,
-  className = '',
+  className = "",
   ref,
 }: Props) {
-  const { ref: dateRegisterRef, ...dateRegisterRest } = dateRegister
-  const { ref: timeRegisterRef, ...timeRegisterRest } = timeRegister
+  const { ref: dateRegisterRef, ...dateRegisterRest } = dateRegister;
+  const { ref: timeRegisterRef, ...timeRegisterRest } = timeRegister;
 
-  const hasError = dateError || timeError
+  const hasError = dateError || timeError;
 
   return (
     <div>
@@ -40,12 +40,12 @@ export function DateTimeInput({
           id={dateId}
           type="date"
           readOnly={readOnly}
-          className={`text-box w-fit ${hasError ? 'text-box-error' : ''}`}
+          className={`w-fit text-box ${hasError ? "text-box-error" : ""}`}
           aria-label={dateLabel}
           ref={(node) => {
-            dateRegisterRef(node)
-            if (ref && typeof ref === 'object') {
-              ref.current = node
+            dateRegisterRef(node);
+            if (ref && typeof ref === "object") {
+              ref.current = node;
             }
           }}
           {...dateRegisterRest}
@@ -54,7 +54,7 @@ export function DateTimeInput({
           id={timeId}
           type="time"
           readOnly={readOnly}
-          className={`text-box w-fit ${hasError ? 'text-box-error' : ''}`}
+          className={`w-fit text-box ${hasError ? "text-box-error" : ""}`}
           aria-label={timeLabel}
           ref={timeRegisterRef}
           {...timeRegisterRest}
@@ -67,5 +67,5 @@ export function DateTimeInput({
         <ValidationErrorMessage>{timeError.message}</ValidationErrorMessage>
       )}
     </div>
-  )
+  );
 }

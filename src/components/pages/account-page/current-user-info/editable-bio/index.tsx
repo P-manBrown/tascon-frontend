@@ -1,20 +1,20 @@
-import { BioCollapsibleSection } from '@/components/collapsible-sections/bio-collapsible-section'
-import { DetailItemHeading } from '@/components/headings/detail-item-heading'
-import { DetailItemContentLayout } from '@/components/layouts/detail-item-content-layout'
-import { DetailItemHeadingLayout } from '@/components/layouts/detail-item-heading-layout'
-import { Tag } from '@/components/tag'
+import { BioCollapsibleSection } from "@/components/collapsible-sections/bio-collapsible-section";
+import { DetailItemHeading } from "@/components/headings/detail-item-heading";
+import { DetailItemContentLayout } from "@/components/layouts/detail-item-content-layout";
+import { DetailItemHeadingLayout } from "@/components/layouts/detail-item-heading-layout";
+import { Tag } from "@/components/tag";
 import {
   DetailMultiLineText,
   LoadingDetailMultiLineText,
-} from '@/components/texts/detail-multi-line-text'
-import { getCurrentUser } from '@/utils/api/server/get-current-user'
-import { BioEditor } from './bio-editor'
+} from "@/components/texts/detail-multi-line-text";
+import { getCurrentUser } from "@/utils/api/server/get-current-user";
+import { BioEditor } from "./bio-editor";
 
-const minHeight = 160
+const minHeight = 160;
 
 export async function EditableBio() {
-  const { account: currentUser } = await getCurrentUser()
-  const currentUserId = currentUser.id.toString()
+  const { account: currentUser } = await getCurrentUser();
+  const currentUserId = currentUser.id.toString();
 
   return (
     <BioEditor
@@ -27,7 +27,7 @@ export async function EditableBio() {
       {/* Pass 'key' so that the bio is re-rendered when it is re-validated */}
       <BioCollapsibleSection key={currentUser.bio} minHeight={minHeight}>
         <DetailItemContentLayout>
-          {currentUser.bio === '' || currentUser.bio === undefined ? (
+          {currentUser.bio === "" || currentUser.bio === undefined ? (
             <p className="text-gray-500">自己紹介を登録してください...</p>
           ) : (
             <DetailMultiLineText>{currentUser.bio}</DetailMultiLineText>
@@ -35,7 +35,7 @@ export async function EditableBio() {
         </DetailItemContentLayout>
       </BioCollapsibleSection>
     </BioEditor>
-  )
+  );
 }
 
 export function LoadingEditableBio() {
@@ -51,5 +51,5 @@ export function LoadingEditableBio() {
         </DetailItemContentLayout>
       </div>
     </div>
-  )
+  );
 }

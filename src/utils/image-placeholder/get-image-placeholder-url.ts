@@ -11,14 +11,14 @@ function skeleton(width: number, height: number) {
       <rect width="${width}" height="${height}" fill="#d1d5db" />
       <rect id="r" width="${width}" height="${height}" fill="url(#g)" />
       <animate xlink:href="#r" attributeName="x" from="-${width}" to="${width}" dur="1s" repeatCount="indefinite" />
-    </svg>`
+    </svg>`;
 }
 
 function toBase64(str: string) {
-  if (typeof window === 'undefined') {
-    return Buffer.from(str).toString('base64')
+  if (typeof window === "undefined") {
+    return Buffer.from(str).toString("base64");
   } else {
-    return window.btoa(str)
+    return window.btoa(str);
   }
 }
 
@@ -26,5 +26,5 @@ export function getImagePlaceholderUrl(
   width: number,
   height: number,
 ): `data:image/${string}` {
-  return `data:image/svg+xml;base64,${toBase64(skeleton(width, height))}`
+  return `data:image/svg+xml;base64,${toBase64(skeleton(width, height))}`;
 }

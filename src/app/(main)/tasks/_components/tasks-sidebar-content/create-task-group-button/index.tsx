@@ -1,11 +1,11 @@
-'use client'
+"use client";
 
-import { PlusIcon, XMarkIcon } from '@heroicons/react/24/solid'
-import { IconButton } from '@/components/buttons/icon-button'
-import { ModalContent } from '@/components/contents/modal-content'
-import { Modal } from '@/components/modal'
-import { useModal } from '@/components/modal/use-modal'
-import { CreateTaskGroupForm } from './create-task-group-form'
+import { PlusIcon, XMarkIcon } from "@heroicons/react/24/solid";
+import { IconButton } from "@/components/buttons/icon-button";
+import { ModalContent } from "@/components/contents/modal-content";
+import { Modal } from "@/components/modal";
+import { useModal } from "@/components/modal/use-modal";
+import { CreateTaskGroupForm } from "./create-task-group-form";
 
 export function CreateTaskGroupButton() {
   const {
@@ -15,7 +15,7 @@ export function CreateTaskGroupButton() {
     closeModal,
     handleAnimationEnd,
     handleCancel,
-  } = useModal()
+  } = useModal();
 
   return (
     <>
@@ -45,7 +45,7 @@ export function CreateTaskGroupButton() {
               </IconButton>
             }
           >
-            <h2 className="text-center text-xl font-bold">
+            <h2 className="text-center font-bold text-xl">
               タスクグループ追加
             </h2>
             <div className="mt-8 space-y-6">
@@ -58,5 +58,5 @@ export function CreateTaskGroupButton() {
         </Modal>
       )}
     </>
-  )
+  );
 }

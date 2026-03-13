@@ -1,11 +1,11 @@
-'use client'
+"use client";
 
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic";
 
-const iconSize = 28
+const iconSize = 28;
 
 const Emoji = dynamic(
-  () => import('emoji-picker-react').then((mod) => mod.Emoji),
+  () => import("emoji-picker-react").then((mod) => mod.Emoji),
   {
     loading: () => (
       <span
@@ -15,12 +15,12 @@ const Emoji = dynamic(
     ),
     ssr: false,
   },
-)
+);
 
 type Props = {
-  unified: string
-}
+  unified: string;
+};
 
 export function TaskGroupHeaderEmoji({ unified }: Props) {
-  return <Emoji unified={unified} size={iconSize} />
+  return <Emoji unified={unified} size={iconSize} />;
 }

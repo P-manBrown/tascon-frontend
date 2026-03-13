@@ -1,46 +1,46 @@
-'use client'
+"use client";
 
-import { useRouter, useSearchParams } from 'next/navigation'
-import { useRef, useTransition } from 'react'
-import { z } from 'zod'
-import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
-import { EditableText } from '@/components/editable-fields/editable-text'
-import { useEditableMultiLineText } from '@/components/editable-fields/editable-text/use-editable-multi-line-text'
-import { useEditableText } from '@/components/editable-fields/editable-text/use-editable-text'
-import { TextArea } from '@/components/form-controls/text-area'
-import { DetailItemHeadingLayout } from '@/components/layouts/detail-item-heading-layout'
-import { taskGroupSchema } from '@/schemas/request/task-group'
-import { ErrorObject } from '@/types/error'
-import { HttpError } from '@/utils/error/custom/http-error'
-import { useRedirectLoginPath } from '@/utils/login-path/use-redirect-login-path'
-import { changeTaskGroupNote } from './change-task-group-note.api'
+import { useRouter, useSearchParams } from "next/navigation";
+import { useRef, useTransition } from "react";
+import type { z } from "zod";
+import { useErrorSnackbar } from "@/app/_components/snackbars/snackbar/use-error-snackbar";
+import { EditableText } from "@/components/editable-fields/editable-text";
+import { useEditableMultiLineText } from "@/components/editable-fields/editable-text/use-editable-multi-line-text";
+import { useEditableText } from "@/components/editable-fields/editable-text/use-editable-text";
+import { TextArea } from "@/components/form-controls/text-area";
+import { DetailItemHeadingLayout } from "@/components/layouts/detail-item-heading-layout";
+import { taskGroupSchema } from "@/schemas/request/task-group";
+import type { ErrorObject } from "@/types/error";
+import type { HttpError } from "@/utils/error/custom/http-error";
+import { useRedirectLoginPath } from "@/utils/login-path/use-redirect-login-path";
+import { changeTaskGroupNote } from "./change-task-group-note.api";
 
-type Props = Pick<React.ComponentProps<typeof EditableText>, 'children'> & {
-  currentUserId: string
-  taskGroupId: string
-  initialNote: string | undefined
-  label: React.ReactElement
-  unsavedChangeTag: React.ReactElement
-}
+type Props = Pick<React.ComponentProps<typeof EditableText>, "children"> & {
+  currentUserId: string;
+  taskGroupId: string;
+  initialNote: string | undefined;
+  label: React.ReactElement;
+  unsavedChangeTag: React.ReactElement;
+};
 
-const taskGroupNoteSchema = taskGroupSchema.pick({ note: true })
+const taskGroupNoteSchema = taskGroupSchema.pick({ note: true });
 
-type UpdateTaskGroupNoteFormValue = z.infer<typeof taskGroupNoteSchema>
+type UpdateTaskGroupNoteFormValue = z.infer<typeof taskGroupNoteSchema>;
 
 export function TaskGroupNoteEditor({
   currentUserId,
   taskGroupId,
-  initialNote = '',
+  initialNote = "",
   label,
   unsavedChangeTag,
   children,
 }: Props) {
-  const [isPending, startTransition] = useTransition()
-  const { openErrorSnackbar } = useErrorSnackbar()
-  const router = useRouter()
-  const searchParams = useSearchParams()
-  const redirectLoginPath = useRedirectLoginPath({ searchParams })
-  const editorRef = useRef<HTMLTextAreaElement>(null)
+  const [isPending, startTransition] = useTransition();
+  const { openErrorSnackbar } = useErrorSnackbar();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectLoginPath = useRedirectLoginPath({ searchParams });
+  const editorRef = useRef<HTMLTextAreaElement>(null);
 
   const {
     updateField,
@@ -58,38 +58,38 @@ export function TaskGroupNoteEditor({
     currentUserId,
     defaultValue: initialNote,
     schema: taskGroupNoteSchema,
-    name: 'note',
+    name: "note",
     shouldSaveToLocalStorage: true,
-  })
+  });
 
   const { shadowRef, wordCount, handleInput } = useEditableMultiLineText({
     editorRef,
     isEditorOpen,
-  })
+  });
 
   const handleHttpError = (err: ErrorObject<HttpError>) => {
     if (err.statusCode === 401) {
-      saveFieldValueToLocalStorage()
-      router.push(redirectLoginPath)
+      saveFieldValueToLocalStorage();
+      router.push(redirectLoginPath);
     } else {
-      openErrorSnackbar(err)
+      openErrorSnackbar(err);
     }
-  }
+  };
 
   const onSubmit = (data: UpdateTaskGroupNoteFormValue) => {
     startTransition(async () => {
-      const result = await changeTaskGroupNote({ taskGroupId, bodyData: data })
-      if (result.status === 'error') {
-        if (result.name === 'HttpError') {
-          handleHttpError(result)
+      const result = await changeTaskGroupNote({ taskGroupId, bodyData: data });
+      if (result.status === "error") {
+        if (result.name === "HttpError") {
+          handleHttpError(result);
         } else {
-          openErrorSnackbar(result)
+          openErrorSnackbar(result);
         }
       } else {
-        updateField(result.taskGroup.note ?? '')
+        updateField(result.taskGroup.note ?? "");
       }
-    })
-  }
+    });
+  };
 
   return (
     <div>
@@ -122,5 +122,5 @@ export function TaskGroupNoteEditor({
         {children}
       </EditableText>
     </div>
-  )
+  );
 }

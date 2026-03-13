@@ -1,68 +1,68 @@
-import { useRouter, useSearchParams } from 'next/navigation'
-import { useTransition } from 'react'
-import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
-import { ErrorObject } from '@/types/error'
-import { changeTaskStatus } from '@/utils/api/change-task-status'
-import { HttpError } from '@/utils/error/custom/http-error'
-import { useRedirectLoginPath } from '@/utils/login-path/use-redirect-login-path'
-import { TASK_STATUS_LABELS } from '@/utils/task/task-status-labels'
-import { TaskStatusSquare } from '../task-status-square'
-import type { taskSchema } from '@/schemas/response/task'
-import type { z } from 'zod'
+import { useRouter, useSearchParams } from "next/navigation";
+import { useTransition } from "react";
+import type { z } from "zod";
+import { useErrorSnackbar } from "@/app/_components/snackbars/snackbar/use-error-snackbar";
+import type { taskSchema } from "@/schemas/response/task";
+import type { ErrorObject } from "@/types/error";
+import { changeTaskStatus } from "@/utils/api/change-task-status";
+import type { HttpError } from "@/utils/error/custom/http-error";
+import { useRedirectLoginPath } from "@/utils/login-path/use-redirect-login-path";
+import { TASK_STATUS_LABELS } from "@/utils/task/task-status-labels";
+import { TaskStatusSquare } from "../task-status-square";
 
 type Props = {
-  taskId: string
-  taskName: string
-  status: TaskStatus
-}
+  taskId: string;
+  taskName: string;
+  status: TaskStatus;
+};
 
-type TaskStatus = z.infer<typeof taskSchema.shape.task.shape.status>
-const statusOrder: TaskStatus[] = ['not_started', 'in_progress', 'completed']
+type TaskStatus = z.infer<typeof taskSchema.shape.task.shape.status>;
+const statusOrder: TaskStatus[] = ["not_started", "in_progress", "completed"];
 
 function getNextStatus(currentStatus: TaskStatus): TaskStatus {
-  const currentIndex = statusOrder.indexOf(currentStatus)
-  const nextIndex = (currentIndex + 1) % statusOrder.length
-  return statusOrder[nextIndex]
+  const currentIndex = statusOrder.indexOf(currentStatus);
+  const nextIndex = (currentIndex + 1) % statusOrder.length;
+  return statusOrder[nextIndex];
 }
 
 export function TaskStatusButton({ taskId, taskName, status }: Props) {
-  const [isPending, startTransition] = useTransition()
-  const { openErrorSnackbar } = useErrorSnackbar()
-  const router = useRouter()
-  const searchParams = useSearchParams()
-  const redirectLoginPath = useRedirectLoginPath({ searchParams })
-  const nextStatus = getNextStatus(status)
-  const currentLabel = TASK_STATUS_LABELS[status]
-  const nextLabel = TASK_STATUS_LABELS[nextStatus]
+  const [isPending, startTransition] = useTransition();
+  const { openErrorSnackbar } = useErrorSnackbar();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectLoginPath = useRedirectLoginPath({ searchParams });
+  const nextStatus = getNextStatus(status);
+  const currentLabel = TASK_STATUS_LABELS[status];
+  const nextLabel = TASK_STATUS_LABELS[nextStatus];
 
   const handleHttpError = (err: ErrorObject<HttpError>) => {
     if (err.statusCode === 401) {
-      router.push(redirectLoginPath)
+      router.push(redirectLoginPath);
     } else {
-      openErrorSnackbar(err)
+      openErrorSnackbar(err);
     }
-  }
+  };
 
   const handleClick = () => {
     startTransition(async () => {
       const result = await changeTaskStatus({
         taskId: taskId,
         bodyData: { status: nextStatus },
-      })
+      });
 
-      if (result.status === 'error') {
-        if (result.name === 'HttpError') {
-          handleHttpError(result)
+      if (result.status === "error") {
+        if (result.name === "HttpError") {
+          handleHttpError(result);
         } else {
-          openErrorSnackbar(result)
+          openErrorSnackbar(result);
         }
       }
-    })
-  }
+    });
+  };
 
   return (
     <div
-      className={`relative size-5 ${isPending ? 'animate-pulse cursor-not-allowed' : 'hover:brightness-75'}`}
+      className={`relative size-5 ${isPending ? "animate-pulse cursor-not-allowed" : "hover:brightness-75"}`}
     >
       <TaskStatusSquare status={status} />
       <button
@@ -73,5 +73,5 @@ export function TaskStatusButton({ taskId, taskName, status }: Props) {
         className="absolute inset-0"
       />
     </div>
-  )
+  );
 }

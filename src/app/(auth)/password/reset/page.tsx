@@ -1,10 +1,10 @@
-import { AuthHeading } from '@/components/headings/auth-heading'
-import { ResetPasswordForm } from './_components/reset-password-form'
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
+import { AuthHeading } from "@/components/headings/auth-heading";
+import { ResetPasswordForm } from "./_components/reset-password-form";
 
 export const metadata: Metadata = {
-  title: '新規パスワード設定',
-}
+  title: "新規パスワード設定",
+};
 
 export default function ResetPassword() {
   return (
@@ -14,5 +14,5 @@ export default function ResetPassword() {
         <ResetPasswordForm />
       </div>
     </>
-  )
+  );
 }
