@@ -1,23 +1,23 @@
-import { TaskCalendar } from '@/components/calendars/task-calendar'
-import { getTasks } from '@/utils/api/get-tasks'
-import { TaskCards } from '../task-cards'
-import { TaskCardsContainer } from '../task-cards-container'
+import { TaskCalendar } from "@/components/calendars/task-calendar";
+import { getTasks } from "@/utils/api/get-tasks";
+import { TaskCards } from "../task-cards";
+import { TaskCardsContainer } from "../task-cards-container";
 
 type Props = {
-  page: string
-  filter?: 'actionable'
-  taskGroupId?: string
-}
+  page: string;
+  filter?: "actionable";
+  taskGroupId?: string;
+};
 
-const containerShapeClasses = 'h-full w-full rounded-md md:w-96'
+const containerShapeClasses = "h-full w-full rounded-md md:w-96";
 
 export async function TaskList({ page, filter, taskGroupId }: Props) {
   const { tasks, pagination } = await getTasks({
     page,
-    limit: '10',
+    limit: "10",
     filter,
     taskGroupId,
-  })
+  });
 
   return (
     <TaskCardsContainer
@@ -32,9 +32,9 @@ export async function TaskList({ page, filter, taskGroupId }: Props) {
         <TaskCards tasks={tasks} />
       </div>
     </TaskCardsContainer>
-  )
+  );
 }
 
 export function LoadingTaskList() {
-  return <div className={`skeleton ${containerShapeClasses}`} />
+  return <div className={`skeleton ${containerShapeClasses}`} />;
 }

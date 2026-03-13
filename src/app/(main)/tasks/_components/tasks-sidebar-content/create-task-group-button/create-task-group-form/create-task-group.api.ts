@@ -1,63 +1,63 @@
-'use server'
+"use server";
 
-import camelcaseKeys from 'camelcase-keys'
-import { revalidatePath } from 'next/cache'
-import { z } from 'zod'
-import { taskGroupSchema } from '@/schemas/response/task-group'
-import { ResultObject } from '@/types/api'
-import { fetchData } from '@/utils/api/fetch-data'
-import { getBearerToken } from '@/utils/cookie/bearer-token'
-import { createErrorObject } from '@/utils/error/create-error-object'
-import { getRequestId } from '@/utils/request-id/get-request-id'
-import { validateData } from '@/utils/validation/validate-data'
-import type { CamelCaseKeys } from 'camelcase-keys'
+import type { CamelCaseKeys } from "camelcase-keys";
+import camelcaseKeys from "camelcase-keys";
+import { revalidatePath } from "next/cache";
+import type { z } from "zod";
+import { taskGroupSchema } from "@/schemas/response/task-group";
+import type { ResultObject } from "@/types/api";
+import { fetchData } from "@/utils/api/fetch-data";
+import { getBearerToken } from "@/utils/cookie/bearer-token";
+import { createErrorObject } from "@/utils/error/create-error-object";
+import { getRequestId } from "@/utils/request-id/get-request-id";
+import { validateData } from "@/utils/validation/validate-data";
 
 type Params = {
-  name: string
-  icon: string
-  note?: string
-}
+  name: string;
+  icon: string;
+  note?: string;
+};
 
-type Data = CamelCaseKeys<z.infer<typeof taskGroupSchema>, false>
+type Data = CamelCaseKeys<z.infer<typeof taskGroupSchema>, false>;
 
 export async function createTaskGroup(bodyData: Params) {
   const fetchDataResult = await fetchData(
     `${process.env.API_ORIGIN}/api/v1/task_groups`,
     {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: await getBearerToken(),
       },
       body: JSON.stringify(bodyData),
     },
-  )
+  );
 
-  let resultObject: ResultObject<Data>
+  let resultObject: ResultObject<Data>;
 
   if (fetchDataResult instanceof Error) {
-    resultObject = createErrorObject(fetchDataResult)
+    resultObject = createErrorObject(fetchDataResult);
   } else {
-    const { headers, data } = fetchDataResult
-    const requestId = getRequestId(headers)
+    const { headers, data } = fetchDataResult;
+    const requestId = getRequestId(headers);
 
     const validateDataResult = validateData({
       requestId,
       dataSchema: taskGroupSchema,
       data,
-    })
+    });
 
     if (validateDataResult instanceof Error) {
-      resultObject = createErrorObject(validateDataResult)
+      resultObject = createErrorObject(validateDataResult);
     } else {
       resultObject = {
-        status: 'success',
+        status: "success",
         ...camelcaseKeys(validateDataResult, { deep: false }),
-      }
+      };
 
-      revalidatePath('/tasks', 'layout')
+      revalidatePath("/tasks", "layout");
     }
   }
 
-  return resultObject
+  return resultObject;
 }

@@ -1,21 +1,21 @@
-import { FaceSmileIcon } from '@heroicons/react/24/solid'
-import { Suspense } from 'react'
-import { EmptyList } from '@/components/empty-list'
-import { UsersSectionHeading } from '@/components/headings/users-section-heading'
-import { UsersSectionHeaderLayout } from '@/components/layouts/users-section-header-layout'
-import { UsersSectionHeadingLayout } from '@/components/layouts/users-section-heading-layout'
-import { UsersSectionHeaderLink } from '@/components/links/users-section-header-link'
-import { SuggestionsCardsCollapsibleSection } from './_components/suggestions-cards-collapsible-section'
+import { FaceSmileIcon } from "@heroicons/react/24/solid";
+import { Suspense } from "react";
+import { EmptyList } from "@/components/empty-list";
+import { UsersSectionHeading } from "@/components/headings/users-section-heading";
+import { UsersSectionHeaderLayout } from "@/components/layouts/users-section-header-layout";
+import { UsersSectionHeadingLayout } from "@/components/layouts/users-section-heading-layout";
+import { UsersSectionHeaderLink } from "@/components/links/users-section-header-link";
+import { SuggestionsCardsCollapsibleSection } from "./_components/suggestions-cards-collapsible-section";
 import {
   LoadingSuggestionsItemCountSummary,
   SuggestionsItemCountSummary,
-} from './_components/suggestions-item-count-summary'
+} from "./_components/suggestions-item-count-summary";
 import {
   LoadingUsersSuggestionList,
   UsersSuggestionList,
-} from './_components/users-suggestion-list'
+} from "./_components/users-suggestion-list";
 
-const limit = 12
+const limit = 12;
 
 export default function UsersSuggestions() {
   return (
@@ -45,5 +45,5 @@ export default function UsersSuggestions() {
         </div>
       </SuggestionsCardsCollapsibleSection>
     </section>
-  )
+  );
 }

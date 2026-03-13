@@ -1,20 +1,15 @@
-import type { errorMessageSchema } from '../_schemas/error-message'
-import type { z } from 'zod'
+import type { z } from "zod";
+import type { errorMessageSchema } from "../_schemas/error-message";
 
-type ErrorMessage = z.infer<typeof errorMessageSchema>
+type ErrorMessage = z.infer<typeof errorMessageSchema>;
 
 export function serializeError(errorMessage: ErrorMessage) {
-  const hasErr = 'err' in errorMessage
+  const hasErr = "err" in errorMessage;
 
-  let oldErrorMessage
-  if (hasErr) {
-    oldErrorMessage = errorMessage.err
-  } else {
-    oldErrorMessage = errorMessage
-  }
+  const oldErrorMessage = hasErr ? errorMessage.err : errorMessage;
 
-  const { msg, type, stack, cause, ...messageRest } = oldErrorMessage
-  const { message: causeMessage, stack: causeStack } = cause ?? {}
+  const { msg, type, stack, cause, ...messageRest } = oldErrorMessage;
+  const { message: causeMessage, stack: causeStack } = cause ?? {};
   const newErrorMessage = {
     err: {
       type,
@@ -23,11 +18,11 @@ export function serializeError(errorMessage: ErrorMessage) {
       ...messageRest,
     },
     msg,
-  }
+  };
 
   if (hasErr) {
-    return { ...errorMessage, ...newErrorMessage }
+    return { ...errorMessage, ...newErrorMessage };
   } else {
-    return newErrorMessage
+    return newErrorMessage;
   }
 }

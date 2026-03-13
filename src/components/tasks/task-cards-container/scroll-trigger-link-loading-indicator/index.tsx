@@ -1,16 +1,16 @@
-import { useLinkStatus } from 'next/link'
+import { useLinkStatus } from "next/link";
 
 type Props = {
-  children: React.ReactNode
-}
+  children: React.ReactNode;
+};
 
 export function ScrollTriggerLinkLoadingIndicator({ children }: Props) {
-  const { pending } = useLinkStatus()
+  const { pending } = useLinkStatus();
 
   return (
     <span
       className={`relative inline-flex h-full w-full items-center justify-between overflow-hidden px-4 ${
-        pending ? 'cursor-wait' : ''
+        pending ? "cursor-wait" : ""
       }`}
     >
       {pending && (
@@ -18,5 +18,5 @@ export function ScrollTriggerLinkLoadingIndicator({ children }: Props) {
       )}
       {children}
     </span>
-  )
+  );
 }

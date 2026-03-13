@@ -1,15 +1,15 @@
-'use client'
+"use client";
 
-import { Button } from '@/components/buttons/button'
-import { CurrentPasswordInput } from './current-password-input'
-import { NewPasswordInput } from './new-password-input'
-import { useChangePasswordFormShowButton } from './use-change-password-form-show-button'
+import { Button } from "@/components/buttons/button";
+import { CurrentPasswordInput } from "./current-password-input";
+import { NewPasswordInput } from "./new-password-input";
+import { useChangePasswordFormShowButton } from "./use-change-password-form-show-button";
 
 type Props = {
-  provider: string
-  name: string
-  email: string
-}
+  provider: string;
+  name: string;
+  email: string;
+};
 
 export function ChangePasswordFormShowButton({ provider, name, email }: Props) {
   const {
@@ -22,7 +22,7 @@ export function ChangePasswordFormShowButton({ provider, name, email }: Props) {
     errors,
     handleResetPasswordButtonClick,
     onSubmit,
-  } = useChangePasswordFormShowButton({ email })
+  } = useChangePasswordFormShowButton({ email });
 
   return isShown ? (
     <form noValidate={true} onSubmit={handleSubmit(onSubmit)}>
@@ -42,14 +42,14 @@ export function ChangePasswordFormShowButton({ provider, name, email }: Props) {
       />
       <CurrentPasswordInput
         readOnly={isSubmitting}
-        register={register('currentPassword')}
+        register={register("currentPassword")}
         errors={errors.currentPassword}
       />
       <div className="mt-2 flex justify-end">
         <Button
           type="button"
-          className="btn-ghost h-6 w-60 text-base font-medium"
-          status={isSending ? 'pending' : 'idle'}
+          className="btn-ghost h-6 w-60 font-medium text-base"
+          status={isSending ? "pending" : "idle"}
           onClick={handleResetPasswordButtonClick}
         >
           パスワード再設定用メールを送信
@@ -57,13 +57,13 @@ export function ChangePasswordFormShowButton({ provider, name, email }: Props) {
       </div>
       <NewPasswordInput
         readOnly={isSubmitting}
-        register={register('password')}
+        register={register("password")}
         errors={errors.password}
       />
       <Button
         type="submit"
         className="btn-primary mt-8"
-        status={isSubmitting ? 'pending' : 'idle'}
+        status={isSubmitting ? "pending" : "idle"}
       >
         パスワード変更
       </Button>
@@ -72,12 +72,12 @@ export function ChangePasswordFormShowButton({ provider, name, email }: Props) {
     <Button
       type="button"
       className="btn-success"
-      status={provider !== 'email' ? 'disabled' : 'idle'}
+      status={provider !== "email" ? "disabled" : "idle"}
       onClick={showForm}
     >
-      {provider !== 'email'
-        ? 'SNS認証のため変更できません'
-        : 'パスワードを変更する'}
+      {provider !== "email"
+        ? "SNS認証のため変更できません"
+        : "パスワードを変更する"}
     </Button>
-  )
+  );
 }

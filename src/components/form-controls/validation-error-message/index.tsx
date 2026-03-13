@@ -1,7 +1,7 @@
 type Props = {
-  children: string | undefined
-}
+  children: string | undefined;
+};
 
 export function ValidationErrorMessage({ children }: Props) {
-  return <p className="px-1 text-sm font-semibold text-red-600">{children}</p>
+  return <p className="px-1 font-semibold text-red-600 text-sm">{children}</p>;
 }

@@ -1,11 +1,11 @@
-'use client'
+"use client";
 
-import { Snackbar } from './snackbar'
-import { SnackbarPortal } from './snackbar-portal'
-import { useSnackbarsStore } from './use-snackbars-store'
+import { Snackbar } from "./snackbar";
+import { SnackbarPortal } from "./snackbar-portal";
+import { useSnackbarsStore } from "./use-snackbars-store";
 
 export function Snackbars() {
-  const snackbars = useSnackbarsStore((state) => state.snackbars)
+  const snackbars = useSnackbarsStore((state) => state.snackbars);
 
   return (
     <>
@@ -21,8 +21,8 @@ export function Snackbars() {
               actionButton={snackbar.actionButton}
             />
           </SnackbarPortal>
-        )
+        );
       })}
     </>
-  )
+  );
 }

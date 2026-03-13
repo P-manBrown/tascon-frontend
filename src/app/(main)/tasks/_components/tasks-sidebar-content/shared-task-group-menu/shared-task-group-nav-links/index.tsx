@@ -1,30 +1,30 @@
-'use client'
+"use client";
 
-import { useSelectedLayoutSegments } from 'next/navigation'
-import { useContext } from 'react'
-import { LinkSidebarQueryContext } from '@/components/sidebar/link-sidebar-query-context'
-import { SharedTaskGroupLink } from './shared-task-group-link'
+import { useSelectedLayoutSegments } from "next/navigation";
+import { useContext } from "react";
+import { LinkSidebarQueryContext } from "@/components/sidebar/link-sidebar-query-context";
+import { SharedTaskGroupLink } from "./shared-task-group-link";
 
 type Props = {
   taskGroupShares: Array<{
-    id: number
+    id: number;
     taskGroup: Pick<
       React.ComponentProps<typeof SharedTaskGroupLink>,
-      'name' | 'icon' | 'owner'
-    >
-  }>
-  className?: string
-  linkSizeClasses: string
-}
+      "name" | "icon" | "owner"
+    >;
+  }>;
+  className?: string;
+  linkSizeClasses: string;
+};
 
 export function SharedTaskGroupNavLinks({
   taskGroupShares,
   className,
   linkSizeClasses,
 }: Props) {
-  const linkSidebarQuery = useContext(LinkSidebarQueryContext)
-  const segments = useSelectedLayoutSegments()
-  const currentPath = `/tasks/${segments.join('/')}`
+  const linkSidebarQuery = useContext(LinkSidebarQueryContext);
+  const segments = useSelectedLayoutSegments();
+  const currentPath = `/tasks/${segments.join("/")}`;
 
   return (
     <ul className={className}>
@@ -41,8 +41,8 @@ export function SharedTaskGroupNavLinks({
               className={linkSizeClasses}
             />
           </li>
-        )
+        );
       })}
     </ul>
-  )
+  );
 }

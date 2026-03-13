@@ -1,55 +1,55 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { useId } from 'react'
-import { Button } from '@/components/buttons/button'
-import { IconButton } from '@/components/buttons/icon-button'
-import { Label } from '@/components/form-controls/label'
-import { TextField } from '@/components/form-controls/text-field'
-import { SearchParamsLoader } from '@/components/search-params-loader'
-import { VisibilityToggleIcon } from '@/components/visibility-toggle-icon'
-import { useVisibilityToggle } from '@/components/visibility-toggle-icon/use-visibility-toggle'
-import { useLoginForm } from './use-login-form'
-import type { LabeledTextFields } from '@/types/labeled-text-fields'
-import type { ReadonlyURLSearchParams } from 'next/navigation'
+import Link from "next/link";
+import type { ReadonlyURLSearchParams } from "next/navigation";
+import { useId } from "react";
+import { Button } from "@/components/buttons/button";
+import { IconButton } from "@/components/buttons/icon-button";
+import { Label } from "@/components/form-controls/label";
+import { TextField } from "@/components/form-controls/text-field";
+import { SearchParamsLoader } from "@/components/search-params-loader";
+import { VisibilityToggleIcon } from "@/components/visibility-toggle-icon";
+import { useVisibilityToggle } from "@/components/visibility-toggle-icon/use-visibility-toggle";
+import type { LabeledTextFields } from "@/types/labeled-text-fields";
+import { useLoginForm } from "./use-login-form";
 
 export function LoginForm() {
-  const id = useId()
+  const id = useId();
   const { fromUrl, register, handleSubmit, onSubmit, isSubmitting, errors } =
-    useLoginForm()
-  const { isVisible, toggleVisible } = useVisibilityToggle()
+    useLoginForm();
+  const { isVisible, toggleVisible } = useVisibilityToggle();
 
   const labeledTextFields: LabeledTextFields = [
     {
       id: `${id}-email`,
-      type: 'email',
-      label: 'メールアドレス',
-      autoComplete: 'email',
-      register: register('email'),
+      type: "email",
+      label: "メールアドレス",
+      autoComplete: "email",
+      register: register("email"),
       errors: errors.email,
     },
     {
       id: `${id}-password`,
-      type: isVisible ? 'text' : 'password',
-      label: 'パスワード',
-      autoComplete: 'current-password',
-      register: register('password'),
+      type: isVisible ? "text" : "password",
+      label: "パスワード",
+      autoComplete: "current-password",
+      register: register("password"),
       errors: errors.password,
       suffixIcon: (
         <IconButton
           type="button"
-          aria-label={isVisible ? 'パスワードを隠す' : 'パスワードを表示する'}
+          aria-label={isVisible ? "パスワードを隠す" : "パスワードを表示する"}
           onClick={toggleVisible}
         >
           <VisibilityToggleIcon isVisible={isVisible} className="size-5" />
         </IconButton>
       ),
     },
-  ]
+  ];
 
   const handleParamsReceived = (searchParams: ReadonlyURLSearchParams) => {
-    fromUrl.current = searchParams.get('from_url')
-  }
+    fromUrl.current = searchParams.get("from_url");
+  };
 
   return (
     <>
@@ -80,12 +80,12 @@ export function LoginForm() {
         <Button
           type="submit"
           className="btn-primary mt-8"
-          status={isSubmitting ? 'pending' : 'idle'}
+          status={isSubmitting ? "pending" : "idle"}
         >
           ログイン
         </Button>
       </form>
       <SearchParamsLoader onParamsReceived={handleParamsReceived} />
     </>
-  )
+  );
 }

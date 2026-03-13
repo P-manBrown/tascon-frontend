@@ -4,13 +4,13 @@ export function generatePaginationState(
   maxVisible: number,
 ) {
   function createPageRange(start: number, length: number): number[] {
-    return Array.from({ length }, (_, i) => start + i)
+    return Array.from({ length }, (_, i) => start + i);
   }
 
-  const isFirstPage = currentPage === 1
-  const isLastPage = currentPage === totalPages
+  const isFirstPage = currentPage === 1;
+  const isLastPage = currentPage === totalPages;
 
-  const isAllPagesVisible = totalPages <= maxVisible
+  const isAllPagesVisible = totalPages <= maxVisible;
   if (isAllPagesVisible) {
     return {
       pages: createPageRange(1, totalPages),
@@ -20,12 +20,12 @@ export function generatePaginationState(
       isEndEllipsisVisible: false,
       isFirstPage,
       isLastPage,
-    }
+    };
   }
 
-  const halfVisible = Math.floor(maxVisible / 2)
+  const halfVisible = Math.floor(maxVisible / 2);
 
-  const isNearStart = currentPage <= halfVisible + 1
+  const isNearStart = currentPage <= halfVisible + 1;
   if (isNearStart) {
     return {
       pages: createPageRange(1, maxVisible - 1),
@@ -35,12 +35,12 @@ export function generatePaginationState(
       isEndEllipsisVisible: true,
       isFirstPage,
       isLastPage,
-    }
+    };
   }
 
-  const isNearEnd = currentPage >= totalPages - halfVisible
+  const isNearEnd = currentPage >= totalPages - halfVisible;
   if (isNearEnd) {
-    const startPage = totalPages - maxVisible + 2
+    const startPage = totalPages - maxVisible + 2;
     return {
       pages: createPageRange(startPage, maxVisible - 1),
       isFirstPageVisible: true,
@@ -49,11 +49,11 @@ export function generatePaginationState(
       isEndEllipsisVisible: false,
       isFirstPage,
       isLastPage,
-    }
+    };
   }
 
-  const middlePageCount = maxVisible - 2
-  const middleStartPage = currentPage - Math.floor(middlePageCount / 2)
+  const middlePageCount = maxVisible - 2;
+  const middleStartPage = currentPage - Math.floor(middlePageCount / 2);
   return {
     pages: createPageRange(middleStartPage, middlePageCount),
     isFirstPageVisible: true,
@@ -62,5 +62,5 @@ export function generatePaginationState(
     isEndEllipsisVisible: true,
     isFirstPage,
     isLastPage,
-  }
+  };
 }

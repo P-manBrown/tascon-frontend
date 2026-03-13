@@ -1,24 +1,24 @@
-'use client'
+"use client";
 
-import { Button } from '@/components/buttons/button'
-import { DateTimeInput } from '@/components/form-controls/date-time-input'
-import { Label } from '@/components/form-controls/label'
-import { TextArea } from '@/components/form-controls/text-area'
-import { TextField } from '@/components/form-controls/text-field'
-import { ValidationErrorMessage } from '@/components/form-controls/validation-error-message'
-import { useCreateTaskForm } from './use-create-task-form'
+import { Button } from "@/components/buttons/button";
+import { DateTimeInput } from "@/components/form-controls/date-time-input";
+import { Label } from "@/components/form-controls/label";
+import { TextArea } from "@/components/form-controls/text-area";
+import { TextField } from "@/components/form-controls/text-field";
+import { ValidationErrorMessage } from "@/components/form-controls/validation-error-message";
+import { useCreateTaskForm } from "./use-create-task-form";
 
 type TaskGroup = {
-  id: number
-  name: string
-  icon: string
-}
+  id: number;
+  name: string;
+  icon: string;
+};
 
 type Props = {
-  currentUserId: string
-  taskGroups: TaskGroup[]
-  defaultTaskGroupId?: number
-}
+  currentUserId: string;
+  taskGroups: TaskGroup[];
+  defaultTaskGroupId?: number;
+};
 
 export function CreateTaskForm({
   currentUserId,
@@ -39,7 +39,7 @@ export function CreateTaskForm({
   } = useCreateTaskForm({
     currentUserId,
     defaultTaskGroupId,
-  })
+  });
 
   return (
     <form noValidate={true} onSubmit={handleSubmit(onSubmit)}>
@@ -48,8 +48,8 @@ export function CreateTaskForm({
         <select
           id={`${id}-taskGroupId`}
           disabled={isPending}
-          className={`text-box ${errors.taskGroupId === undefined ? '' : 'text-box-error'}`}
-          {...register('taskGroupId')}
+          className={`text-box ${errors.taskGroupId === undefined ? "" : "text-box-error"}`}
+          {...register("taskGroupId")}
         >
           <option value="">選択してください</option>
           {taskGroups.map((group) => (
@@ -70,7 +70,7 @@ export function CreateTaskForm({
           id={`${id}-name`}
           type="text"
           readOnly={isPending}
-          register={register('name')}
+          register={register("name")}
           errors={errors.name}
         />
       </div>
@@ -81,8 +81,8 @@ export function CreateTaskForm({
           timeId={`${id}-startsAtTime`}
           dateLabel="開始日の日付"
           timeLabel="開始日の時間"
-          dateRegister={register('duration.startsAt.startsAtDate')}
-          timeRegister={register('duration.startsAt.startsAtTime')}
+          dateRegister={register("duration.startsAt.startsAtDate")}
+          timeRegister={register("duration.startsAt.startsAtTime")}
           dateError={errors.duration?.startsAt?.startsAtDate}
           timeError={errors.duration?.startsAt?.startsAtTime}
           readOnly={isPending}
@@ -95,13 +95,13 @@ export function CreateTaskForm({
           timeId={`${id}-endsAtTime`}
           dateLabel="期日の日付"
           timeLabel="期日の時間"
-          dateRegister={register('duration.endsAt.endsAtDate')}
-          timeRegister={register('duration.endsAt.endsAtTime')}
+          dateRegister={register("duration.endsAt.endsAtDate")}
+          timeRegister={register("duration.endsAt.endsAtTime")}
           dateError={errors.duration?.endsAt?.endsAtDate}
           timeError={errors.duration?.endsAt?.endsAtTime}
           readOnly={isPending}
         />
-        {errors.duration?.endsAt && 'message' in errors.duration.endsAt && (
+        {errors.duration?.endsAt && "message" in errors.duration.endsAt && (
           <ValidationErrorMessage>
             {errors.duration.endsAt.message}
           </ValidationErrorMessage>
@@ -115,11 +115,11 @@ export function CreateTaskForm({
               <input
                 id={`${id}-estimatedHours`}
                 type="number"
-                className={`text-box w-20 ${errors.estimatedTime?.estimatedHours === undefined ? '' : 'text-box-error'}`}
+                className={`w-20 text-box ${errors.estimatedTime?.estimatedHours === undefined ? "" : "text-box-error"}`}
                 min={0}
                 readOnly={isPending}
                 aria-label="見積もりの時間"
-                {...register('estimatedTime.estimatedHours')}
+                {...register("estimatedTime.estimatedHours")}
               />
               <span>時間</span>
             </div>
@@ -127,13 +127,13 @@ export function CreateTaskForm({
               <input
                 id={`${id}-estimatedMinutes`}
                 type="number"
-                className={`text-box w-20 ${errors.estimatedTime?.estimatedMinutes !== undefined ? 'text-box-error' : ''}`}
+                className={`w-20 text-box ${errors.estimatedTime?.estimatedMinutes !== undefined ? "text-box-error" : ""}`}
                 min={0}
                 max={59}
                 step={15}
                 readOnly={isPending}
                 aria-label="見積もりの分"
-                {...register('estimatedTime.estimatedMinutes')}
+                {...register("estimatedTime.estimatedMinutes")}
               />
               <span>分</span>
             </div>
@@ -158,7 +158,7 @@ export function CreateTaskForm({
           shadowRef={shadowRef}
           rows={6}
           readOnly={isPending}
-          register={register('note')}
+          register={register("note")}
           errors={errors.note}
           wordCount={wordCount}
           maxCount={1000}
@@ -168,10 +168,10 @@ export function CreateTaskForm({
       <Button
         type="submit"
         className="btn-primary mt-6 min-w-24"
-        status={isPending ? 'pending' : 'idle'}
+        status={isPending ? "pending" : "idle"}
       >
         作成
       </Button>
     </form>
-  )
+  );
 }

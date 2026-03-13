@@ -1,21 +1,21 @@
 type Props = {
-  children: string
-}
+  children: string;
+};
 
 type LoadingProps = {
-  lines: number
-}
+  lines: number;
+};
 
 export function DetailMultiLineText({ children }: Props) {
-  return <p className="break-words whitespace-pre-wrap">{children}</p>
+  return <p className="whitespace-pre-wrap break-words">{children}</p>;
 }
 
-const widthClasses = ['w-3/5', 'w-full', 'w-5/12', 'w-4/5', 'w-4/6']
+const widthClasses = ["w-3/5", "w-full", "w-5/12", "w-4/5", "w-4/6"];
 
 export function LoadingDetailMultiLineText({ lines }: LoadingProps) {
   return (
     <div className="my-1 space-y-2">
-      {Array.from({ length: lines }, (_, i) => (
+      {Array.from({ length: lines }, (_, i) => i).map((i) => (
         <div
           key={i}
           className={`skeleton h-4 rounded-full ${
@@ -24,5 +24,5 @@ export function LoadingDetailMultiLineText({ lines }: LoadingProps) {
         />
       ))}
     </div>
-  )
+  );
 }

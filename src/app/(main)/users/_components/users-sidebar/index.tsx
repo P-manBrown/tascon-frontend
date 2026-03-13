@@ -1,14 +1,14 @@
-'use client'
+"use client";
 
-import { SidebarHeading } from '@/components/headings/sidebar-heading'
-import { Sidebar } from '@/components/sidebar'
-import { useSidebar } from '@/components/sidebar/use-sidebar'
-import { UsersMenu } from './users-menu'
+import { SidebarHeading } from "@/components/headings/sidebar-heading";
+import { Sidebar } from "@/components/sidebar";
+import { useSidebar } from "@/components/sidebar/use-sidebar";
+import { UsersMenu } from "./users-menu";
 
 export function UsersSidebar() {
   const { isOpen, linkSidebarQuery, openSidebar, closeSidebar } = useSidebar({
-    defaultState: 'closed',
-  })
+    defaultState: "closed",
+  });
 
   return (
     <Sidebar
@@ -21,5 +21,5 @@ export function UsersSidebar() {
         <UsersMenu sidebarQuery={linkSidebarQuery} />
       </div>
     </Sidebar>
-  )
+  );
 }

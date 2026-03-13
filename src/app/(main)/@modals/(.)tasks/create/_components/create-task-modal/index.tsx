@@ -1,19 +1,19 @@
-'use client'
+"use client";
 
-import { XMarkIcon } from '@heroicons/react/24/solid'
-import { useRouter } from 'next/navigation'
-import { IconButton } from '@/components/buttons/icon-button'
-import { ModalContent } from '@/components/contents/modal-content'
-import { Modal } from '@/components/modal'
-import { useFormModal } from '@/components/modal/use-form-modal'
+import { XMarkIcon } from "@heroicons/react/24/solid";
+import { useRouter } from "next/navigation";
+import { IconButton } from "@/components/buttons/icon-button";
+import { ModalContent } from "@/components/contents/modal-content";
+import { Modal } from "@/components/modal";
+import { useFormModal } from "@/components/modal/use-form-modal";
 
 // TEMP: https://github.com/vercel/next.js/issues/58123
 // TEMP: https://github.com/vercel/next.js/issues/59316
 
-type Props = Pick<React.ComponentProps<typeof ModalContent>, 'children'>
+type Props = Pick<React.ComponentProps<typeof ModalContent>, "children">;
 
 export function CreateTaskModal({ children }: Props) {
-  const router = useRouter()
+  const router = useRouter();
   const {
     isOpen,
     closeModal,
@@ -24,7 +24,7 @@ export function CreateTaskModal({ children }: Props) {
     handleMouseDownCapture,
     handleBlurCapture,
     handleClickCapture,
-  } = useFormModal()
+  } = useFormModal();
 
   return (
     <Modal
@@ -56,5 +56,5 @@ export function CreateTaskModal({ children }: Props) {
         </ModalContent>
       </div>
     </Modal>
-  )
+  );
 }
