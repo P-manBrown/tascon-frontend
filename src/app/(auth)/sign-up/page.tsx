@@ -1,13 +1,13 @@
-import Link from 'next/link'
-import { AuthHeading } from '@/components/headings/auth-heading'
-import { HorizontalRule } from '@/components/horizontal-rule'
-import { SocialLoginForms } from '@/components/social-login-forms'
-import { SignUpForm } from './_components/sign-up-form'
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
+import Link from "next/link";
+import { AuthHeading } from "@/components/headings/auth-heading";
+import { HorizontalRule } from "@/components/horizontal-rule";
+import { SocialLoginForms } from "@/components/social-login-forms";
+import { SignUpForm } from "./_components/sign-up-form";
 
 export const metadata: Metadata = {
-  title: '新規登録',
-}
+  title: "新規登録",
+};
 
 export default function SignUp() {
   return (
@@ -24,5 +24,5 @@ export default function SignUp() {
         </Link>
       </div>
     </>
-  )
+  );
 }

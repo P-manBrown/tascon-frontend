@@ -1,34 +1,40 @@
-import { Suspense } from 'react'
-import { HorizontalRule } from '@/components/horizontal-rule'
-import { DetailItemContentLayout } from '@/components/layouts/detail-item-content-layout'
-import { DeleteTaskButton } from './delete-task-button'
+import { Suspense } from "react";
+import { HorizontalRule } from "@/components/horizontal-rule";
+import { DetailItemContentLayout } from "@/components/layouts/detail-item-content-layout";
+import { DeleteTaskButton } from "./delete-task-button";
 import {
   EditableTaskEndsAt,
   LoadingEditableTaskEndsAt,
-} from './editable-task-ends-at'
+} from "./editable-task-ends-at";
 import {
   EditableTaskEstimatedTime,
   LoadingEditableTaskEstimatedTime,
-} from './editable-task-estimated-time'
-import { EditableTaskName, LoadingEditableTaskName } from './editable-task-name'
-import { EditableTaskNote, LoadingEditableTaskNote } from './editable-task-note'
+} from "./editable-task-estimated-time";
+import {
+  EditableTaskName,
+  LoadingEditableTaskName,
+} from "./editable-task-name";
+import {
+  EditableTaskNote,
+  LoadingEditableTaskNote,
+} from "./editable-task-note";
 import {
   EditableTaskStartsAt,
   LoadingEditableTaskStartsAt,
-} from './editable-task-starts-at'
+} from "./editable-task-starts-at";
 import {
   EditableTaskStatus,
   LoadingEditableTaskStatus,
-} from './editable-task-status'
+} from "./editable-task-status";
 import {
   EditableTaskTimeSpent,
   LoadingEditableTaskTimeSpent,
-} from './editable-task-time-spent'
-import { LoadingTaskGroupLink, TaskGroupLink } from './task-group-link'
+} from "./editable-task-time-spent";
+import { LoadingTaskGroupLink, TaskGroupLink } from "./task-group-link";
 
 type Props = {
-  id: string
-}
+  id: string;
+};
 
 export function TaskPage({ id }: Props) {
   return (
@@ -62,5 +68,5 @@ export function TaskPage({ id }: Props) {
         <DeleteTaskButton id={id} />
       </DetailItemContentLayout>
     </div>
-  )
+  );
 }

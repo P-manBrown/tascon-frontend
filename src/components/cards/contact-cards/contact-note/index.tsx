@@ -1,26 +1,26 @@
 type Props = {
-  note?: string
-}
+  note?: string;
+};
 
 const noteSectionBaseClasses =
-  'rounded-sm bg-gray-100 p-3 mt-3 flex flex-col gap-1'
-const noteTitleClasses = 'text-xs font-bold'
+  "rounded-sm bg-gray-100 p-3 mt-3 flex flex-col gap-1";
+const noteTitleClasses = "text-xs font-bold";
 
 export function ContactNote({ note }: Props) {
-  const isNoteEmpty = note === undefined || note === ''
+  const isNoteEmpty = note === undefined || note === "";
 
   return (
     <div className={noteSectionBaseClasses}>
       <h2 className={noteTitleClasses}>メモ</h2>
       <p
-        className={`line-clamp-2 h-10 text-sm break-words ${
-          isNoteEmpty ? 'text-gray-600/85' : ''
+        className={`line-clamp-2 h-10 break-words text-sm ${
+          isNoteEmpty ? "text-gray-600/85" : ""
         }`}
       >
-        {isNoteEmpty ? 'メモは登録されていません...' : note}
+        {isNoteEmpty ? "メモは登録されていません..." : note}
       </p>
     </div>
-  )
+  );
 }
 
 export function LoadingContactNote() {
@@ -32,5 +32,5 @@ export function LoadingContactNote() {
         <div className="skeleton h-4 w-2/3 rounded-full" />
       </div>
     </div>
-  )
+  );
 }

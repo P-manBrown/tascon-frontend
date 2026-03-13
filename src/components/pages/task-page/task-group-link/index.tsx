@@ -1,16 +1,16 @@
-import Link from 'next/link'
-import { DetailItemHeading } from '@/components/headings/detail-item-heading'
-import { DetailItemContentLayout } from '@/components/layouts/detail-item-content-layout'
-import { DetailItemHeadingLayout } from '@/components/layouts/detail-item-heading-layout'
-import { LoadingDetailSingleLineText } from '@/components/texts/detail-single-line-text'
-import { getTask } from '@/utils/api/get-task'
+import Link from "next/link";
+import { DetailItemHeading } from "@/components/headings/detail-item-heading";
+import { DetailItemContentLayout } from "@/components/layouts/detail-item-content-layout";
+import { DetailItemHeadingLayout } from "@/components/layouts/detail-item-heading-layout";
+import { LoadingDetailSingleLineText } from "@/components/texts/detail-single-line-text";
+import { getTask } from "@/utils/api/get-task";
 
 type Props = {
-  id: string
-}
+  id: string;
+};
 
 export async function TaskGroupLink({ id }: Props) {
-  const { task } = await getTask(id)
+  const { task } = await getTask(id);
 
   return (
     <div>
@@ -26,7 +26,7 @@ export async function TaskGroupLink({ id }: Props) {
         </Link>
       </DetailItemContentLayout>
     </div>
-  )
+  );
 }
 
 export function LoadingTaskGroupLink() {
@@ -39,5 +39,5 @@ export function LoadingTaskGroupLink() {
         <LoadingDetailSingleLineText />
       </DetailItemContentLayout>
     </div>
-  )
+  );
 }

@@ -1,65 +1,65 @@
-'use client'
+"use client";
 
-import dynamic from 'next/dynamic'
-import { useRouter, useSearchParams } from 'next/navigation'
-import { useId, useRef, useState, useTransition } from 'react'
-import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
-import { DetailItemContentLayout } from '@/components/layouts/detail-item-content-layout'
-import { DetailItemHeadingLayout } from '@/components/layouts/detail-item-heading-layout'
-import { ErrorObject } from '@/types/error'
-import { HttpError } from '@/utils/error/custom/http-error'
-import { useRedirectLoginPath } from '@/utils/login-path/use-redirect-login-path'
-import { changeTaskGroupIcon } from './change-task-group-icon.api'
-import type { EmojiClickData } from 'emoji-picker-react'
+import type { EmojiClickData } from "emoji-picker-react";
+import dynamic from "next/dynamic";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useId, useRef, useState, useTransition } from "react";
+import { useErrorSnackbar } from "@/app/_components/snackbars/snackbar/use-error-snackbar";
+import { DetailItemContentLayout } from "@/components/layouts/detail-item-content-layout";
+import { DetailItemHeadingLayout } from "@/components/layouts/detail-item-heading-layout";
+import type { ErrorObject } from "@/types/error";
+import type { HttpError } from "@/utils/error/custom/http-error";
+import { useRedirectLoginPath } from "@/utils/login-path/use-redirect-login-path";
+import { changeTaskGroupIcon } from "./change-task-group-icon.api";
 
-const Picker = dynamic(() => import('emoji-picker-react'), { ssr: false })
+const Picker = dynamic(() => import("emoji-picker-react"), { ssr: false });
 
 type Props = {
-  taskGroupId: string
-  label: React.ReactElement
-  children: React.ReactElement
-}
+  taskGroupId: string;
+  label: React.ReactElement;
+  children: React.ReactElement;
+};
 
 export function TaskGroupIconEditor({ taskGroupId, label, children }: Props) {
-  const popoverId = useId()
-  const popoverRef = useRef<HTMLDivElement>(null)
-  const [isPending, startTransition] = useTransition()
-  const [shouldPickerMount, setShouldPickerMount] = useState(false)
-  const router = useRouter()
-  const searchParams = useSearchParams()
-  const redirectLoginPath = useRedirectLoginPath({ searchParams })
-  const { openErrorSnackbar } = useErrorSnackbar()
+  const popoverId = useId();
+  const popoverRef = useRef<HTMLDivElement>(null);
+  const [isPending, startTransition] = useTransition();
+  const [shouldPickerMount, setShouldPickerMount] = useState(false);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectLoginPath = useRedirectLoginPath({ searchParams });
+  const { openErrorSnackbar } = useErrorSnackbar();
 
   const handleButtonClick = () => {
     if (!shouldPickerMount) {
-      setShouldPickerMount(true)
+      setShouldPickerMount(true);
     }
-  }
+  };
 
   const handleHttpError = (err: ErrorObject<HttpError>) => {
     if (err.statusCode === 401) {
-      router.push(redirectLoginPath)
+      router.push(redirectLoginPath);
     } else {
-      openErrorSnackbar(err)
+      openErrorSnackbar(err);
     }
-  }
+  };
 
   const handleEmojiClick = (data: EmojiClickData) => {
     startTransition(async () => {
-      popoverRef.current?.hidePopover()
+      popoverRef.current?.hidePopover();
       const result = await changeTaskGroupIcon({
         taskGroupId,
         bodyData: { icon: data.unified },
-      })
-      if (result.status === 'error') {
-        if (result.name === 'HttpError') {
-          handleHttpError(result)
+      });
+      if (result.status === "error") {
+        if (result.name === "HttpError") {
+          handleHttpError(result);
         } else {
-          openErrorSnackbar(result)
+          openErrorSnackbar(result);
         }
       }
-    })
-  }
+    });
+  };
 
   return (
     <div>
@@ -92,5 +92,5 @@ export function TaskGroupIconEditor({ taskGroupId, label, children }: Props) {
         )}
       </div>
     </div>
-  )
+  );
 }

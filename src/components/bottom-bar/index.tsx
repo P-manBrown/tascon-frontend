@@ -1,14 +1,14 @@
 type Props = {
-  className?: string
-  children: React.ReactNode
-}
+  className?: string;
+  children: React.ReactNode;
+};
 
-export function BottomBar({ className = '', children }: Props) {
+export function BottomBar({ className = "", children }: Props) {
   return (
     <div
-      className={`bg-theme pb-safe fixed bottom-0 flex w-full items-center justify-center border-t border-gray-200 ${className}`}
+      className={`fixed bottom-0 flex w-full items-center justify-center border-gray-200 border-t bg-theme pb-safe ${className}`}
     >
       <div className="my-2.5">{children}</div>
     </div>
-  )
+  );
 }

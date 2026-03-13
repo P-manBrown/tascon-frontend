@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import { z } from "zod";
 
 const errorMessageBaseSchema = z.object({
   type: z.string(),
@@ -10,11 +10,11 @@ const errorMessageBaseSchema = z.object({
       stack: z.string(),
     })
     .optional(),
-})
+});
 
 export const errorMessageSchema = z.union([
   errorMessageBaseSchema,
   z.object({
     err: errorMessageBaseSchema,
   }),
-])
+]);

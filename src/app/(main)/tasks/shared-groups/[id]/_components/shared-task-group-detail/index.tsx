@@ -1,27 +1,27 @@
-import { TaskGroupDetailEmoji } from '@/app/(main)/tasks/groups/[id]/_components/task-group-detail/task-group-detail-icon/task-group-detail-emoji'
-import { TaskGroupNoteCollapsibleSection } from '@/app/(main)/tasks/groups/[id]/_components/task-group-detail/task-group-note/editable-task-group-note/task-group-note-collapsible-section'
-import { DetailItemHeading } from '@/components/headings/detail-item-heading'
-import { DetailItemContentLayout } from '@/components/layouts/detail-item-content-layout'
-import { DetailItemHeadingLayout } from '@/components/layouts/detail-item-heading-layout'
+import { TaskGroupDetailEmoji } from "@/app/(main)/tasks/groups/[id]/_components/task-group-detail/task-group-detail-icon/task-group-detail-emoji";
+import { TaskGroupNoteCollapsibleSection } from "@/app/(main)/tasks/groups/[id]/_components/task-group-detail/task-group-note/editable-task-group-note/task-group-note-collapsible-section";
+import { DetailItemHeading } from "@/components/headings/detail-item-heading";
+import { DetailItemContentLayout } from "@/components/layouts/detail-item-content-layout";
+import { DetailItemHeadingLayout } from "@/components/layouts/detail-item-heading-layout";
 import {
   DetailMultiLineText,
   LoadingDetailMultiLineText,
-} from '@/components/texts/detail-multi-line-text'
+} from "@/components/texts/detail-multi-line-text";
 import {
   DetailSingleLineText,
   LoadingDetailSingleLineText,
-} from '@/components/texts/detail-single-line-text'
-import { getTaskGroupShare } from '../get-task-group-share.api'
+} from "@/components/texts/detail-single-line-text";
+import { getTaskGroupShare } from "../get-task-group-share.api";
 
 type Props = {
-  id: string
-}
+  id: string;
+};
 
-const noteMinHeight = 160
+const noteMinHeight = 160;
 
 export async function SharedTaskGroupDetail({ id }: Props) {
-  const { taskGroupShare } = await getTaskGroupShare(id)
-  const { taskGroup } = taskGroupShare
+  const { taskGroupShare } = await getTaskGroupShare(id);
+  const { taskGroup } = taskGroupShare;
 
   return (
     <div className="md:w-160">
@@ -48,7 +48,7 @@ export async function SharedTaskGroupDetail({ id }: Props) {
           </DetailItemHeadingLayout>
           <TaskGroupNoteCollapsibleSection minHeight={noteMinHeight}>
             <DetailItemContentLayout>
-              {taskGroup.note === undefined || taskGroup.note === '' ? (
+              {taskGroup.note === undefined || taskGroup.note === "" ? (
                 <p className="text-gray-500">メモは登録されていません...</p>
               ) : (
                 <DetailMultiLineText>{taskGroup.note}</DetailMultiLineText>
@@ -58,7 +58,7 @@ export async function SharedTaskGroupDetail({ id }: Props) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export function LoadingSharedTaskGroupDetail() {
@@ -93,5 +93,5 @@ export function LoadingSharedTaskGroupDetail() {
         </div>
       </div>
     </div>
-  )
+  );
 }

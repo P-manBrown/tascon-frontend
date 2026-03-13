@@ -1,63 +1,63 @@
-'use server'
+"use server";
 
-import camelcaseKeys from 'camelcase-keys'
-import { revalidatePath } from 'next/cache'
-import snakecaseKeys from 'snakecase-keys'
-import { z } from 'zod'
-import { taskSchema } from '@/schemas/response/task'
-import { ResultObject } from '@/types/api'
-import { fetchData } from '@/utils/api/fetch-data'
-import { getBearerToken } from '@/utils/cookie/bearer-token'
-import { createErrorObject } from '@/utils/error/create-error-object'
-import { getRequestId } from '@/utils/request-id/get-request-id'
-import { validateData } from '@/utils/validation/validate-data'
-import type { CamelCaseKeys } from 'camelcase-keys'
+import type { CamelCaseKeys } from "camelcase-keys";
+import camelcaseKeys from "camelcase-keys";
+import { revalidatePath } from "next/cache";
+import snakecaseKeys from "snakecase-keys";
+import type { z } from "zod";
+import { taskSchema } from "@/schemas/response/task";
+import type { ResultObject } from "@/types/api";
+import { fetchData } from "@/utils/api/fetch-data";
+import { getBearerToken } from "@/utils/cookie/bearer-token";
+import { createErrorObject } from "@/utils/error/create-error-object";
+import { getRequestId } from "@/utils/request-id/get-request-id";
+import { validateData } from "@/utils/validation/validate-data";
 
 type Params = {
-  taskId: string
+  taskId: string;
   bodyData: {
-    endsAt: string | undefined | null
-  }
-}
+    endsAt: string | undefined | null;
+  };
+};
 
-type Data = CamelCaseKeys<z.infer<typeof taskSchema>, true>
+type Data = CamelCaseKeys<z.infer<typeof taskSchema>, true>;
 
 export async function changeTaskEndsAt({ taskId, bodyData }: Params) {
   const fetchDataResult = await fetchData(
     `${process.env.API_ORIGIN}/api/v1/tasks/${taskId}`,
     {
-      method: 'PATCH',
+      method: "PATCH",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: await getBearerToken(),
       },
       body: JSON.stringify(snakecaseKeys(bodyData, { deep: false })),
     },
-  )
+  );
 
-  let resultObject: ResultObject<Data>
+  let resultObject: ResultObject<Data>;
 
   if (fetchDataResult instanceof Error) {
-    resultObject = createErrorObject(fetchDataResult)
+    resultObject = createErrorObject(fetchDataResult);
   } else {
-    const { headers, data } = fetchDataResult
-    const requestId = getRequestId(headers)
+    const { headers, data } = fetchDataResult;
+    const requestId = getRequestId(headers);
     const validateDataResult = validateData({
       requestId,
       dataSchema: taskSchema,
       data,
-    })
+    });
 
     if (validateDataResult instanceof Error) {
-      resultObject = createErrorObject(validateDataResult)
+      resultObject = createErrorObject(validateDataResult);
     } else {
       resultObject = {
-        status: 'success',
+        status: "success",
         ...camelcaseKeys(validateDataResult, { deep: true }),
-      }
-      revalidatePath(`/tasks/detail/${resultObject.task.id}`)
+      };
+      revalidatePath(`/tasks/detail/${resultObject.task.id}`);
     }
   }
 
-  return resultObject
+  return resultObject;
 }

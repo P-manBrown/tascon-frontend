@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import { z } from "zod";
 
 export function createFormErrorsSchema<
   T extends
@@ -13,7 +13,7 @@ export function createFormErrorsSchema<
     source: sourceSchema,
     type: z.string(),
     message: z.string(),
-  })
+  });
 
   return z.union([
     z.object({
@@ -22,5 +22,5 @@ export function createFormErrorsSchema<
     z.object({
       error: errorObjectSchema,
     }),
-  ])
+  ]);
 }
