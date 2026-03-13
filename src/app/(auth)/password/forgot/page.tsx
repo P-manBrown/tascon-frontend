@@ -1,12 +1,12 @@
-import Link from 'next/link'
-import { AuthHeading } from '@/components/headings/auth-heading'
-import { ForgotPasswordQueryParamSnackbar } from './_components/forgot-password-query-param-snackbar'
-import { RequestResetPasswordEmailForm } from './_components/request-reset-password-email-form'
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
+import Link from "next/link";
+import { AuthHeading } from "@/components/headings/auth-heading";
+import { ForgotPasswordQueryParamSnackbar } from "./_components/forgot-password-query-param-snackbar";
+import { RequestResetPasswordEmailForm } from "./_components/request-reset-password-email-form";
 
 export const metadata: Metadata = {
-  title: 'パスワードリセット',
-}
+  title: "パスワードリセット",
+};
 
 export default function ForgotPassword() {
   return (
@@ -20,5 +20,5 @@ export default function ForgotPassword() {
       </div>
       <ForgotPasswordQueryParamSnackbar />
     </>
-  )
+  );
 }

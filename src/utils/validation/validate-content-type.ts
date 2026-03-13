@@ -1,12 +1,12 @@
-import { ContentTypeError } from '../error/custom/content-type-error'
+import { ContentTypeError } from "../error/custom/content-type-error";
 
 export function validateContentType(requestId: string, headers: Headers) {
-  const contentType = headers.get('content-type')
+  const contentType = headers.get("content-type");
 
-  if (!contentType || !contentType.includes('application/json')) {
+  if (!contentType || !contentType.includes("application/json")) {
     throw new ContentTypeError({
       requestId,
       contentType,
-    })
+    });
   }
 }

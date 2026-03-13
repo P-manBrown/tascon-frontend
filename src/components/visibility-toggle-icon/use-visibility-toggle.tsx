@@ -1,14 +1,14 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useState } from "react";
 
 export function useVisibilityToggle() {
-  const [isVisible, setIsVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(false);
 
   const toggleVisible = useCallback(() => {
-    setIsVisible((prev) => !prev)
-  }, [])
+    setIsVisible((prev) => !prev);
+  }, []);
 
   return {
     isVisible,
     toggleVisible,
-  }
+  };
 }

@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import { z } from "zod";
 
 export const authSchema = z.object({
   id: z.number(),
@@ -12,4 +12,4 @@ export const authSchema = z.object({
   provider: z.string(),
   created_at: z.string(),
   updated_at: z.string(),
-})
+});

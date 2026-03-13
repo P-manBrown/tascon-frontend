@@ -2,18 +2,14 @@ min_version: 2.0.0
 pre-commit:
   parallel: true
   commands:
-    eslint:
-      glob: '*.{js,jsx,ts,tsx}'
-      run: yarn eslint --fix --max-warnings=0 {staged_files}
+    biome:
+      glob: '*.{js,jsx,ts,tsx,json,jsonc}'
+      run: yarn biome check --write --error-on-warnings {staged_files}
       stage_fixed: true
       fail_text: 'Read the report above.'
     markuplint:
       glob: 'src/**/*.{jsx,tsx}'
       run: yarn markuplint --fix {staged_files}
-      stage_fixed: true
-      fail_text: 'Read the report above.'
-    prettier:
-      run: yarn prettier --write --ignore-unknown {staged_files}
       stage_fixed: true
       fail_text: 'Read the report above.'
     markdownlint:

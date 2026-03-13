@@ -1,8 +1,8 @@
-import Link from 'next/link'
+import Link from "next/link";
 
 type Props = {
-  className: string
-}
+  className: string;
+};
 
 export function SignUpLink({ className }: Props) {
   return (
@@ -12,5 +12,5 @@ export function SignUpLink({ className }: Props) {
     >
       TASCONを使ってみる
     </Link>
-  )
+  );
 }

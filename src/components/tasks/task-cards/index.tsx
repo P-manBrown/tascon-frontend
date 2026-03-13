@@ -1,22 +1,22 @@
-'use client'
+"use client";
 
-import { usePathname, useSearchParams } from 'next/navigation'
-import { generateFromUrlParam } from '@/utils/login-path/generate-from-url-param'
-import { TaskCard } from './task-card'
-import { TaskCardTaskGroupLink } from './task-card-task-group-link'
+import { usePathname, useSearchParams } from "next/navigation";
+import { generateFromUrlParam } from "@/utils/login-path/generate-from-url-param";
+import { TaskCard } from "./task-card";
+import { TaskCardTaskGroupLink } from "./task-card-task-group-link";
 
 type Props = {
   tasks: Array<
-    Omit<React.ComponentProps<typeof TaskCard>, 'href'> & {
-      taskGroup?: React.ComponentProps<typeof TaskCardTaskGroupLink>
+    Omit<React.ComponentProps<typeof TaskCard>, "href"> & {
+      taskGroup?: React.ComponentProps<typeof TaskCardTaskGroupLink>;
     }
-  >
-}
+  >;
+};
 
 export function TaskCards({ tasks }: Props) {
-  const pathname = usePathname()
-  const params = useSearchParams()
-  const fromUrl = generateFromUrlParam(pathname, params.toString())
+  const pathname = usePathname();
+  const params = useSearchParams();
+  const fromUrl = generateFromUrlParam(pathname, params.toString());
 
   return (
     <div className="flex flex-col gap-2 md:gap-3">
@@ -38,5 +38,5 @@ export function TaskCards({ tasks }: Props) {
         </TaskCard>
       ))}
     </div>
-  )
+  );
 }

@@ -1,41 +1,41 @@
-'use client'
+"use client";
 
-import { ArrowRightEndOnRectangleIcon } from '@heroicons/react/24/outline'
-import Link from 'next/link'
-import { useEffect, useState } from 'react'
-import { validateToken } from './validate-token.api'
+import { ArrowRightEndOnRectangleIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { validateToken } from "./validate-token.api";
 
 export function LoginLink() {
-  const [isValid, setIsValid] = useState(false)
+  const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
-    let ignore = false
+    let ignore = false;
     void (async () => {
-      const result = await validateToken()
-      if (!ignore && result.status === 'success') {
-        setIsValid(true)
+      const result = await validateToken();
+      if (!ignore && result.status === "success") {
+        setIsValid(true);
       }
-    })()
+    })();
 
     return () => {
-      ignore = true
-    }
-  }, [])
+      ignore = true;
+    };
+  }, []);
 
   return (
     <div>
       <Link
-        href={isValid ? '/tasks' : '/login'}
+        href={isValid ? "/tasks" : "/login"}
         className="btn btn-ghost h-8 w-24 rounded text-base max-lg:hidden"
       >
         ログイン
       </Link>
       <Link
-        href={isValid ? '/tasks' : '/login'}
+        href={isValid ? "/tasks" : "/login"}
         className="btn-icon align-middle lg:hidden"
       >
         <ArrowRightEndOnRectangleIcon className="size-8" />
       </Link>
     </div>
-  )
+  );
 }

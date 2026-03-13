@@ -1,18 +1,18 @@
-'use client'
+"use client";
 
-import { XMarkIcon } from '@heroicons/react/24/solid'
-import { useId } from 'react'
-import { Button } from '@/components/buttons/button'
-import { IconButton } from '@/components/buttons/icon-button'
-import { ModalContent } from '@/components/contents/modal-content'
-import { Label } from '@/components/form-controls/label'
-import { TextField } from '@/components/form-controls/text-field'
-import { Modal } from '@/components/modal'
-import { RequestResetPasswordEmailSuccessMessage } from './request-reset-password-email-success-message'
-import { useRequestResetPasswordEmailForm } from './use-request-reset-password-email-form'
+import { XMarkIcon } from "@heroicons/react/24/solid";
+import { useId } from "react";
+import { Button } from "@/components/buttons/button";
+import { IconButton } from "@/components/buttons/icon-button";
+import { ModalContent } from "@/components/contents/modal-content";
+import { Label } from "@/components/form-controls/label";
+import { TextField } from "@/components/form-controls/text-field";
+import { Modal } from "@/components/modal";
+import { RequestResetPasswordEmailSuccessMessage } from "./request-reset-password-email-success-message";
+import { useRequestResetPasswordEmailForm } from "./use-request-reset-password-email-form";
 
 export function RequestResetPasswordEmailForm() {
-  const id = useId()
+  const id = useId();
   const {
     shouldMount,
     isOpen,
@@ -26,7 +26,7 @@ export function RequestResetPasswordEmailForm() {
     register,
     handleSubmit,
     onSubmit,
-  } = useRequestResetPasswordEmailForm()
+  } = useRequestResetPasswordEmailForm();
 
   return (
     <>
@@ -43,13 +43,13 @@ export function RequestResetPasswordEmailForm() {
             type="email"
             autoComplete="email"
             readOnly={isSubmitting}
-            register={register('email')}
+            register={register("email")}
             errors={errors.email}
           />
           <Button
             type="submit"
             className="btn-primary my-7"
-            status={isSubmitting ? 'pending' : 'idle'}
+            status={isSubmitting ? "pending" : "idle"}
           >
             パスワード再設定用メール送信
           </Button>
@@ -78,5 +78,5 @@ export function RequestResetPasswordEmailForm() {
         </Modal>
       )}
     </>
-  )
+  );
 }

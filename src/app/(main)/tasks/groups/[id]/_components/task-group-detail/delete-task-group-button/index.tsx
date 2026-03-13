@@ -1,28 +1,28 @@
-'use client'
+"use client";
 
-import { XMarkIcon } from '@heroicons/react/24/solid'
-import { useRouter, useSearchParams } from 'next/navigation'
-import { useTransition } from 'react'
-import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
-import { Button } from '@/components/buttons/button'
-import { IconButton } from '@/components/buttons/icon-button'
-import { ModalContent } from '@/components/contents/modal-content'
-import { IconMessage } from '@/components/icon-message'
-import { Modal } from '@/components/modal'
-import { useModal } from '@/components/modal/use-modal'
-import { useRedirectLoginPath } from '@/utils/login-path/use-redirect-login-path'
-import { deleteTaskGroup } from './delete-task-group.api'
+import { XMarkIcon } from "@heroicons/react/24/solid";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useTransition } from "react";
+import { useErrorSnackbar } from "@/app/_components/snackbars/snackbar/use-error-snackbar";
+import { Button } from "@/components/buttons/button";
+import { IconButton } from "@/components/buttons/icon-button";
+import { ModalContent } from "@/components/contents/modal-content";
+import { IconMessage } from "@/components/icon-message";
+import { Modal } from "@/components/modal";
+import { useModal } from "@/components/modal/use-modal";
+import { useRedirectLoginPath } from "@/utils/login-path/use-redirect-login-path";
+import { deleteTaskGroup } from "./delete-task-group.api";
 
 type Props = {
-  taskGroupId: string
-}
+  taskGroupId: string;
+};
 
 export function DeleteTaskGroupButton({ taskGroupId }: Props) {
-  const router = useRouter()
-  const searchParams = useSearchParams()
-  const redirectLoginPath = useRedirectLoginPath({ searchParams })
-  const [isPending, startTransition] = useTransition()
-  const { openErrorSnackbar } = useErrorSnackbar()
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectLoginPath = useRedirectLoginPath({ searchParams });
+  const [isPending, startTransition] = useTransition();
+  const { openErrorSnackbar } = useErrorSnackbar();
   const {
     shouldMount,
     isOpen,
@@ -31,35 +31,35 @@ export function DeleteTaskGroupButton({ taskGroupId }: Props) {
     unmountModal,
     handleAnimationEnd,
     handleCancel,
-  } = useModal()
+  } = useModal();
 
   const handleOkClick = () => {
-    closeModal()
+    closeModal();
     startTransition(async () => {
-      const result = await deleteTaskGroup({ taskGroupId })
-      if (result.status === 'error') {
-        if (result.name === 'HttpError' && result.statusCode === 401) {
-          router.push(redirectLoginPath)
+      const result = await deleteTaskGroup({ taskGroupId });
+      if (result.status === "error") {
+        if (result.name === "HttpError" && result.statusCode === 401) {
+          router.push(redirectLoginPath);
         } else {
-          openErrorSnackbar(result)
+          openErrorSnackbar(result);
         }
       } else {
-        router.replace('/tasks')
+        router.replace("/tasks");
       }
-    })
-  }
+    });
+  };
 
   const handleClose = (ev: React.SyntheticEvent<HTMLDialogElement, Event>) => {
-    ev.stopPropagation()
-    unmountModal()
-  }
+    ev.stopPropagation();
+    unmountModal();
+  };
 
   return (
     <>
       <Button
         type="button"
         className="btn-danger"
-        status={isPending ? 'pending' : 'idle'}
+        status={isPending ? "pending" : "idle"}
         onClick={openModal}
       >
         削除
@@ -93,7 +93,7 @@ export function DeleteTaskGroupButton({ taskGroupId }: Props) {
                 <Button
                   type="button"
                   className="btn-danger"
-                  status={isPending ? 'disabled' : 'idle'}
+                  status={isPending ? "disabled" : "idle"}
                   onClick={handleOkClick}
                 >
                   削除
@@ -111,5 +111,5 @@ export function DeleteTaskGroupButton({ taskGroupId }: Props) {
         </Modal>
       )}
     </>
-  )
+  );
 }

@@ -1,151 +1,151 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from "react";
 
 type UseScrollTriggerLinkParams = {
-  hasNextPage: boolean
-  wheelTransitionThreshold: number
-  touchTransitionThreshold: number
-}
+  hasNextPage: boolean;
+  wheelTransitionThreshold: number;
+  touchTransitionThreshold: number;
+};
 
 export function useScrollTriggerNextLink({
   hasNextPage,
   wheelTransitionThreshold,
   touchTransitionThreshold,
 }: UseScrollTriggerLinkParams) {
-  const linkRef = useRef<HTMLAnchorElement>(null)
-  const accumulatedDeltaRef = useRef(0)
-  const wheelTimeoutRef = useRef<NodeJS.Timeout | null>(null)
-  const touchStartYRef = useRef(0)
-  const touchLastYRef = useRef(0)
-  const [isLinkVisible, setIsLinkVisible] = useState(false)
-  const [pullHeight, setPullHeight] = useState(0)
-  const [shouldTransition, setShouldTransition] = useState(false)
-  const [isTouch, setIsTouch] = useState(false)
+  const linkRef = useRef<HTMLAnchorElement>(null);
+  const accumulatedDeltaRef = useRef(0);
+  const wheelTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const touchStartYRef = useRef(0);
+  const touchLastYRef = useRef(0);
+  const [isLinkVisible, setIsLinkVisible] = useState(false);
+  const [pullHeight, setPullHeight] = useState(0);
+  const [shouldTransition, setShouldTransition] = useState(false);
+  const [isTouch, setIsTouch] = useState(false);
   const transitionThreshold = isTouch
     ? touchTransitionThreshold
-    : wheelTransitionThreshold
-  const pullProgress = Math.min((pullHeight / transitionThreshold) * 100, 100)
+    : wheelTransitionThreshold;
+  const pullProgress = Math.min((pullHeight / transitionThreshold) * 100, 100);
 
-  const resetPullState = () => {
-    accumulatedDeltaRef.current = 0
-    setPullHeight(0)
-    setShouldTransition(false)
-  }
+  const resetPullState = useCallback(() => {
+    accumulatedDeltaRef.current = 0;
+    setPullHeight(0);
+    setShouldTransition(false);
+  }, []);
 
   useEffect(() => {
     if (linkRef.current && hasNextPage) {
       const observer = new IntersectionObserver(
         ([entry]) => {
-          setIsLinkVisible(entry.isIntersecting)
+          setIsLinkVisible(entry.isIntersecting);
 
           if (!entry.isIntersecting) {
-            resetPullState()
+            resetPullState();
             if (wheelTimeoutRef.current) {
-              clearTimeout(wheelTimeoutRef.current)
+              clearTimeout(wheelTimeoutRef.current);
             }
           }
         },
         {
           threshold: 0.5,
         },
-      )
+      );
 
-      observer.observe(linkRef.current)
+      observer.observe(linkRef.current);
 
       return () => {
-        observer.disconnect()
-      }
+        observer.disconnect();
+      };
     }
-  }, [hasNextPage])
+  }, [hasNextPage, resetPullState]);
 
   const handleWheel = (ev: React.WheelEvent<HTMLDivElement>) => {
     if (!hasNextPage || !isLinkVisible || shouldTransition) {
-      return
+      return;
     }
 
-    setIsTouch(false)
+    setIsTouch(false);
 
     if (ev.deltaY > 0) {
-      accumulatedDeltaRef.current += ev.deltaY
-      setPullHeight(accumulatedDeltaRef.current)
+      accumulatedDeltaRef.current += ev.deltaY;
+      setPullHeight(accumulatedDeltaRef.current);
 
       const hasReachedThreshold =
-        accumulatedDeltaRef.current >= wheelTransitionThreshold
+        accumulatedDeltaRef.current >= wheelTransitionThreshold;
 
       if (hasReachedThreshold && !shouldTransition) {
-        setShouldTransition(true)
-        linkRef.current?.click()
+        setShouldTransition(true);
+        linkRef.current?.click();
       }
 
       if (wheelTimeoutRef.current) {
-        clearTimeout(wheelTimeoutRef.current)
+        clearTimeout(wheelTimeoutRef.current);
       }
 
       wheelTimeoutRef.current = setTimeout(() => {
         const isBelowThreshold =
-          accumulatedDeltaRef.current < wheelTransitionThreshold
+          accumulatedDeltaRef.current < wheelTransitionThreshold;
         if (isBelowThreshold) {
-          resetPullState()
+          resetPullState();
         }
-      }, 500)
+      }, 500);
     } else if (ev.deltaY < 0) {
-      resetPullState()
+      resetPullState();
       if (wheelTimeoutRef.current) {
-        clearTimeout(wheelTimeoutRef.current)
+        clearTimeout(wheelTimeoutRef.current);
       }
     }
-  }
+  };
 
   const handleTouchStart = (ev: React.TouchEvent<HTMLDivElement>) => {
     if (!hasNextPage || !isLinkVisible || shouldTransition) {
-      return
+      return;
     }
 
-    setIsTouch(true)
+    setIsTouch(true);
 
-    touchStartYRef.current = ev.touches[0].clientY
-    touchLastYRef.current = ev.touches[0].clientY
-  }
+    touchStartYRef.current = ev.touches[0].clientY;
+    touchLastYRef.current = ev.touches[0].clientY;
+  };
 
   const handleTouchMove = (ev: React.TouchEvent<HTMLDivElement>) => {
     if (!hasNextPage || !isLinkVisible || shouldTransition) {
-      return
+      return;
     }
 
-    const touchY = ev.touches[0].clientY
-    const deltaY = touchLastYRef.current - touchY
+    const touchY = ev.touches[0].clientY;
+    const deltaY = touchLastYRef.current - touchY;
 
     if (deltaY > 0) {
-      accumulatedDeltaRef.current += deltaY
-      touchLastYRef.current = touchY
-      setPullHeight(accumulatedDeltaRef.current)
+      accumulatedDeltaRef.current += deltaY;
+      touchLastYRef.current = touchY;
+      setPullHeight(accumulatedDeltaRef.current);
 
       const hasReachedThreshold =
-        accumulatedDeltaRef.current >= touchTransitionThreshold
+        accumulatedDeltaRef.current >= touchTransitionThreshold;
 
       if (hasReachedThreshold && !shouldTransition) {
-        setShouldTransition(true)
-        linkRef.current?.click()
+        setShouldTransition(true);
+        linkRef.current?.click();
       }
 
       if (wheelTimeoutRef.current) {
-        clearTimeout(wheelTimeoutRef.current)
+        clearTimeout(wheelTimeoutRef.current);
       }
 
       wheelTimeoutRef.current = setTimeout(() => {
         const isBelowThreshold =
-          accumulatedDeltaRef.current < touchTransitionThreshold
+          accumulatedDeltaRef.current < touchTransitionThreshold;
         if (isBelowThreshold) {
-          resetPullState()
+          resetPullState();
         }
-      }, 1000)
+      }, 1000);
     } else if (deltaY < 0) {
-      resetPullState()
-      touchLastYRef.current = touchY
+      resetPullState();
+      touchLastYRef.current = touchY;
       if (wheelTimeoutRef.current) {
-        clearTimeout(wheelTimeoutRef.current)
+        clearTimeout(wheelTimeoutRef.current);
       }
     }
-  }
+  };
 
   return {
     linkRef,
@@ -154,5 +154,5 @@ export function useScrollTriggerNextLink({
     handleWheel,
     handleTouchStart,
     handleTouchMove,
-  }
+  };
 }

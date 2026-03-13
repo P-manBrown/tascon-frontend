@@ -3,22 +3,22 @@ import {
   InformationCircleIcon,
   XCircleIcon,
   XMarkIcon,
-} from '@heroicons/react/24/solid'
-import { IconButton } from '@/components/buttons/icon-button'
-import { useSnackbar } from './use-snackbar'
-import { useSnackbarsStore } from '../use-snackbars-store'
+} from "@heroicons/react/24/solid";
+import { IconButton } from "@/components/buttons/icon-button";
+import { useSnackbarsStore } from "../use-snackbars-store";
+import { useSnackbar } from "./use-snackbar";
 
 type Props = {
-  id: number
-  severity: 'info' | 'success' | 'error'
-  isOpen: boolean
-  message: string
-  actionButton?: React.ReactElement
-}
+  id: number;
+  severity: "info" | "success" | "error";
+  isOpen: boolean;
+  message: string;
+  actionButton?: React.ReactElement;
+};
 
 const iconBaseClasses =
-  'inline-flex size-8 shrink-0 items-center justify-center rounded-md'
-const iconClasses = 'size-6'
+  "inline-flex size-8 shrink-0 items-center justify-center rounded-md";
+const iconClasses = "size-6";
 
 export function Snackbar({
   id,
@@ -27,39 +27,39 @@ export function Snackbar({
   message,
   actionButton,
 }: Props) {
-  const { ref, handleAnimationEnd } = useSnackbar({ id, isOpen, actionButton })
-  const closeSnackbar = useSnackbarsStore((state) => state.closeSnackbar)
+  const { ref, handleAnimationEnd } = useSnackbar({ id, isOpen, actionButton });
+  const closeSnackbar = useSnackbarsStore((state) => state.closeSnackbar);
 
   const getIcon = () => {
     switch (severity) {
-      case 'info':
+      case "info":
         return (
           <div className={`${iconBaseClasses} bg-sky-600`}>
             <InformationCircleIcon className={`${iconClasses} fill-white`} />
           </div>
-        )
-      case 'success':
+        );
+      case "success":
         return (
           <div className={`${iconBaseClasses} bg-green-700`}>
             <CheckCircleIcon className={`${iconClasses} fill-white`} />
           </div>
-        )
-      case 'error':
+        );
+      case "error":
         return (
           <div className={`${iconBaseClasses} bg-red-600`}>
             <XCircleIcon className={`${iconClasses} fill-white`} />
           </div>
-        )
+        );
     }
-  }
+  };
 
   return (
     <div
       ref={ref}
-      className={`inset-auto top-0 m-auto w-full bg-gray-900 p-4 md:top-auto md:bottom-7 md:left-7 md:w-auto md:rounded md:shadow-lg md:shadow-black/40 ${
+      className={`inset-auto top-0 m-auto w-full bg-gray-900 p-4 md:top-auto md:bottom-7 md:left-7 md:w-auto md:rounded md:shadow-black/40 md:shadow-lg ${
         isOpen
-          ? 'animate-slide-in-top md:animate-slide-in-bottom'
-          : 'animate-slide-out-top md:animate-slide-out-bottom'
+          ? "animate-slide-in-top md:animate-slide-in-bottom"
+          : "animate-slide-out-top md:animate-slide-out-bottom"
       }`}
       popover="manual"
       onAnimationEnd={handleAnimationEnd}
@@ -81,5 +81,5 @@ export function Snackbar({
         )}
       </div>
     </div>
-  )
+  );
 }

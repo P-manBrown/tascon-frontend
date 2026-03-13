@@ -1,14 +1,14 @@
-'use client'
+"use client";
 
-import { XCircleIcon } from '@heroicons/react/24/outline'
-import { IconButton } from '@/components/buttons/icon-button'
-import { ValidationErrorMessage } from '@/components/form-controls/validation-error-message'
-import { useAvatarEditor } from './use-avatar-editor'
+import { XCircleIcon } from "@heroicons/react/24/outline";
+import { IconButton } from "@/components/buttons/icon-button";
+import { ValidationErrorMessage } from "@/components/form-controls/validation-error-message";
+import { useAvatarEditor } from "./use-avatar-editor";
 
 type Props = {
-  avatarUrl?: string
-  children: React.ReactElement
-}
+  avatarUrl?: string;
+  children: React.ReactElement;
+};
 
 export function AvatarEditor({ avatarUrl, children }: Props) {
   const {
@@ -21,7 +21,7 @@ export function AvatarEditor({ avatarUrl, children }: Props) {
     inputRef,
     isDeleting,
     registerRest,
-  } = useAvatarEditor()
+  } = useAvatarEditor();
 
   return (
     <div className="flex w-fit flex-col items-center">
@@ -29,7 +29,7 @@ export function AvatarEditor({ avatarUrl, children }: Props) {
         <button
           type="button"
           className={`peer clickable-avatar disabled:cursor-wait disabled:hover:brightness-100 ${
-            isSubmitting ? 'disabled:animate-pulse' : ''
+            isSubmitting ? "disabled:animate-pulse" : ""
           }`}
           disabled={isSubmitting || isDeleting}
           tabIndex={0}
@@ -41,11 +41,11 @@ export function AvatarEditor({ avatarUrl, children }: Props) {
         {avatarUrl && !isSubmitting && (
           <IconButton
             type="button"
-            className={`absolute top-0.5 right-0.5 z-10 duration-[1ms] peer-hover:visible hover:visible [@media(hover:hover)]:peer-focus-visible:visible [@media(hover:hover)]:focus-visible:visible ${
-              isDeleting ? '' : '[@media(hover:hover)]:invisible'
+            className={`absolute top-0.5 right-0.5 z-10 duration-[1ms] hover:visible peer-hover:visible [@media(hover:hover)]:focus-visible:visible [@media(hover:hover)]:peer-focus-visible:visible ${
+              isDeleting ? "" : "[@media(hover:hover)]:invisible"
             }`}
             aria-label="アバター削除"
-            status={isDeleting ? 'pending' : 'idle'}
+            status={isDeleting ? "pending" : "idle"}
             onClick={handleXMarkClick}
           >
             <XCircleIcon className="size-6 fill-black stroke-white" />
@@ -62,8 +62,8 @@ export function AvatarEditor({ avatarUrl, children }: Props) {
           className="hidden"
           accept="image/png, image/jpeg"
           ref={(node) => {
-            ref(node)
-            inputRef.current = node
+            ref(node);
+            inputRef.current = node;
           }}
           {...registerRest}
         />
@@ -74,5 +74,5 @@ export function AvatarEditor({ avatarUrl, children }: Props) {
         )}
       </form>
     </div>
-  )
+  );
 }

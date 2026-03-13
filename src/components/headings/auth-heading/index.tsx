@@ -1,12 +1,12 @@
 type Props = {
-  className?: string
-  children: string
-}
+  className?: string;
+  children: string;
+};
 
-export function AuthHeading({ className = '', children }: Props) {
+export function AuthHeading({ className = "", children }: Props) {
   return (
-    <h1 className={`text-center text-3xl font-bold ${className}`}>
+    <h1 className={`text-center font-bold text-3xl ${className}`}>
       {children}
     </h1>
-  )
+  );
 }

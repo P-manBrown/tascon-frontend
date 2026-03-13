@@ -1,8 +1,8 @@
 type Props = {
-  currentCount: React.ReactNode
-  totalCount: React.ReactNode
-  className?: string
-}
+  currentCount: React.ReactNode;
+  totalCount: React.ReactNode;
+  className?: string;
+};
 
 export function ItemCountSummary({
   currentCount,
@@ -13,13 +13,13 @@ export function ItemCountSummary({
     <p className={className}>
       （{currentCount}件 / {totalCount}件）
     </p>
-  )
+  );
 }
 
-type LoadingItemCountSummaryProps = Pick<Props, 'className'>
+type LoadingItemCountSummaryProps = Pick<Props, "className">;
 
 export function LoadingItemCountSummary({
-  className = '',
+  className = "",
 }: LoadingItemCountSummaryProps) {
-  return <div className={`skeleton mx-2 h-5 w-24 rounded-full ${className}`} />
+  return <div className={`skeleton mx-2 h-5 w-24 rounded-full ${className}`} />;
 }

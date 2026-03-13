@@ -1,23 +1,23 @@
-import { DetailItemHeading } from '@/components/headings/detail-item-heading'
-import { DetailItemContentLayout } from '@/components/layouts/detail-item-content-layout'
-import { DetailItemHeadingLayout } from '@/components/layouts/detail-item-heading-layout'
-import { Tag } from '@/components/tag'
+import { DetailItemHeading } from "@/components/headings/detail-item-heading";
+import { DetailItemContentLayout } from "@/components/layouts/detail-item-content-layout";
+import { DetailItemHeadingLayout } from "@/components/layouts/detail-item-heading-layout";
+import { Tag } from "@/components/tag";
 import {
   DetailSingleLineText,
   LoadingDetailSingleLineText,
-} from '@/components/texts/detail-single-line-text'
-import { getTask } from '@/utils/api/get-task'
-import { getCurrentUser } from '@/utils/api/server/get-current-user'
-import { formatMinutes } from '@/utils/task/format-minutes'
-import { TaskEstimatedTimeEditor } from './task-estimated-time-editor'
+} from "@/components/texts/detail-single-line-text";
+import { getTask } from "@/utils/api/get-task";
+import { getCurrentUser } from "@/utils/api/server/get-current-user";
+import { formatMinutes } from "@/utils/task/format-minutes";
+import { TaskEstimatedTimeEditor } from "./task-estimated-time-editor";
 
 type Props = {
-  id: string
-}
+  id: string;
+};
 
 export async function EditableTaskEstimatedTime({ id }: Props) {
-  const { account: currentUser } = await getCurrentUser()
-  const { task } = await getTask(id)
+  const { account: currentUser } = await getCurrentUser();
+  const { task } = await getTask(id);
 
   return (
     <TaskEstimatedTimeEditor
@@ -37,7 +37,7 @@ export async function EditableTaskEstimatedTime({ id }: Props) {
         )}
       </DetailItemContentLayout>
     </TaskEstimatedTimeEditor>
-  )
+  );
 }
 
 export function LoadingEditableTaskEstimatedTime() {
@@ -50,5 +50,5 @@ export function LoadingEditableTaskEstimatedTime() {
         <LoadingDetailSingleLineText />
       </DetailItemContentLayout>
     </div>
-  )
+  );
 }

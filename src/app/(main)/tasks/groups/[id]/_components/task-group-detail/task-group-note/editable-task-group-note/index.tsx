@@ -1,25 +1,25 @@
-import { DetailItemHeading } from '@/components/headings/detail-item-heading'
-import { DetailItemContentLayout } from '@/components/layouts/detail-item-content-layout'
-import { DetailItemHeadingLayout } from '@/components/layouts/detail-item-heading-layout'
-import { Tag } from '@/components/tag'
+import { DetailItemHeading } from "@/components/headings/detail-item-heading";
+import { DetailItemContentLayout } from "@/components/layouts/detail-item-content-layout";
+import { DetailItemHeadingLayout } from "@/components/layouts/detail-item-heading-layout";
+import { Tag } from "@/components/tag";
 import {
   DetailMultiLineText,
   LoadingDetailMultiLineText,
-} from '@/components/texts/detail-multi-line-text'
-import { getTaskGroup } from '@/utils/api/get-task-group'
-import { getCurrentUser } from '@/utils/api/server/get-current-user'
-import { TaskGroupNoteCollapsibleSection } from './task-group-note-collapsible-section'
-import { TaskGroupNoteEditor } from './task-group-note-editor'
+} from "@/components/texts/detail-multi-line-text";
+import { getTaskGroup } from "@/utils/api/get-task-group";
+import { getCurrentUser } from "@/utils/api/server/get-current-user";
+import { TaskGroupNoteCollapsibleSection } from "./task-group-note-collapsible-section";
+import { TaskGroupNoteEditor } from "./task-group-note-editor";
 
 type Props = {
-  taskGroupId: string
-}
+  taskGroupId: string;
+};
 
-const minHeight = 160
+const minHeight = 160;
 
 export async function EditableTaskGroupNote({ taskGroupId }: Props) {
-  const { account: currentUser } = await getCurrentUser()
-  const { taskGroup } = await getTaskGroup(taskGroupId)
+  const { account: currentUser } = await getCurrentUser();
+  const { taskGroup } = await getTaskGroup(taskGroupId);
 
   return (
     <TaskGroupNoteEditor
@@ -31,7 +31,7 @@ export async function EditableTaskGroupNote({ taskGroupId }: Props) {
     >
       <TaskGroupNoteCollapsibleSection minHeight={minHeight}>
         <DetailItemContentLayout>
-          {taskGroup.note === undefined || taskGroup.note === '' ? (
+          {taskGroup.note === undefined || taskGroup.note === "" ? (
             <p className="text-gray-500">メモを登録できます...</p>
           ) : (
             <DetailMultiLineText>{taskGroup.note}</DetailMultiLineText>
@@ -39,7 +39,7 @@ export async function EditableTaskGroupNote({ taskGroupId }: Props) {
         </DetailItemContentLayout>
       </TaskGroupNoteCollapsibleSection>
     </TaskGroupNoteEditor>
-  )
+  );
 }
 
 export function LoadingEditableTaskGroupNote() {
@@ -54,5 +54,5 @@ export function LoadingEditableTaskGroupNote() {
         </DetailItemContentLayout>
       </div>
     </div>
-  )
+  );
 }

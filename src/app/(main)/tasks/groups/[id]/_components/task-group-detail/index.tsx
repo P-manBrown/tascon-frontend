@@ -1,23 +1,23 @@
-import { Suspense } from 'react'
-import { HorizontalRule } from '@/components/horizontal-rule'
-import { DetailItemContentLayout } from '@/components/layouts/detail-item-content-layout'
-import { DeleteTaskGroupButton } from './delete-task-group-button'
+import { Suspense } from "react";
+import { HorizontalRule } from "@/components/horizontal-rule";
+import { DetailItemContentLayout } from "@/components/layouts/detail-item-content-layout";
+import { DeleteTaskGroupButton } from "./delete-task-group-button";
 import {
   EditableTaskGroupIcon,
   LoadingEditableTaskGroupIcon,
-} from './task-group-detail-icon/editable-task-group-icon'
+} from "./task-group-detail-icon/editable-task-group-icon";
 import {
   EditableTaskGroupName,
   LoadingEditableTaskGroupName,
-} from './task-group-name/editable-task-group-name'
+} from "./task-group-name/editable-task-group-name";
 import {
   EditableTaskGroupNote,
   LoadingEditableTaskGroupNote,
-} from './task-group-note/editable-task-group-note'
+} from "./task-group-note/editable-task-group-note";
 
 type Props = {
-  id: string
-}
+  id: string;
+};
 
 export function TaskGroupDetail({ id }: Props) {
   return (
@@ -38,5 +38,5 @@ export function TaskGroupDetail({ id }: Props) {
         </DetailItemContentLayout>
       </div>
     </div>
-  )
+  );
 }

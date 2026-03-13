@@ -1,14 +1,14 @@
-'use client'
+"use client";
 
-import { Button } from '@/components/buttons/button'
-import { ErrorContent } from '@/components/contents/error-content'
-import { IconMessage } from '@/components/icon-message'
-import { ReportIssueLink } from '@/components/links/report-issue-link'
-import type { ErrorProps } from '@/types/error'
+import { Button } from "@/components/buttons/button";
+import { ErrorContent } from "@/components/contents/error-content";
+import { IconMessage } from "@/components/icon-message";
+import { ReportIssueLink } from "@/components/links/report-issue-link";
+import type { ErrorProps } from "@/types/error";
 
-export default function Error({ error, reset }: ErrorProps) {
+export default function ErrorBoundary({ error, reset }: ErrorProps) {
   return (
-    <div className="bg-theme rounded-lg p-3">
+    <div className="rounded-lg bg-theme p-3">
       <IconMessage severity="error" title="Error">
         <ErrorContent
           message="ブロックしているユーザー一覧の表示中に問題が発生しました。"
@@ -21,5 +21,5 @@ export default function Error({ error, reset }: ErrorProps) {
         />
       </IconMessage>
     </div>
-  )
+  );
 }

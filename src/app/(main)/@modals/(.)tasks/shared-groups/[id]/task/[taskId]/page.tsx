@@ -1,25 +1,25 @@
-import { Suspense } from 'react'
+import type { Metadata } from "next/types";
+import { Suspense } from "react";
 import {
-  SharedTaskPage,
   LoadingSharedTaskPage,
-} from '@/components/pages/shared-task-page'
-import type { Metadata } from 'next/types'
+  SharedTaskPage,
+} from "@/components/pages/shared-task-page";
 
 export const metadata: Metadata = {
-  title: 'タスク詳細',
-}
+  title: "タスク詳細",
+};
 
 type Props = {
-  params: Promise<{ id: string; taskId: string }>
-}
+  params: Promise<{ id: string; taskId: string }>;
+};
 
 export default async function SharedTask(props: Props) {
-  const params = await props.params
-  const { id, taskId } = params
+  const params = await props.params;
+  const { id, taskId } = params;
 
   return (
     <Suspense fallback={<LoadingSharedTaskPage />}>
       <SharedTaskPage shareId={id} taskId={taskId} />
     </Suspense>
-  )
+  );
 }

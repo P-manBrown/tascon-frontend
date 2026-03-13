@@ -1,8 +1,8 @@
-import { Button } from '@/components/buttons/button'
-import { ErrorContent } from '@/components/contents/error-content'
-import { IconMessage } from '@/components/icon-message'
-import { ReportIssueLink } from '@/components/links/report-issue-link'
-import type { ErrorProps } from '@/types/error'
+import { Button } from "@/components/buttons/button";
+import { ErrorContent } from "@/components/contents/error-content";
+import { IconMessage } from "@/components/icon-message";
+import { ReportIssueLink } from "@/components/links/report-issue-link";
+import type { ErrorProps } from "@/types/error";
 
 export function UserErrorPage({ error, reset }: ErrorProps) {
   return (
@@ -17,5 +17,5 @@ export function UserErrorPage({ error, reset }: ErrorProps) {
         reportIssueLink={<ReportIssueLink info={`Digest: ${error.digest}`} />}
       />
     </IconMessage>
-  )
+  );
 }

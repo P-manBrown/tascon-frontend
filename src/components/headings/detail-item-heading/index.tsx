@@ -1,7 +1,7 @@
 type Props = {
-  children: string
-}
+  children: string;
+};
 
 export function DetailItemHeading({ children }: Props) {
-  return <h2 className="font-semibold">{children}</h2>
+  return <h2 className="font-semibold">{children}</h2>;
 }

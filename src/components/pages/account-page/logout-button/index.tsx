@@ -1,37 +1,37 @@
-'use client'
+"use client";
 
-import { ReadonlyURLSearchParams, useRouter } from 'next/navigation'
-import { useId, useState } from 'react'
-import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
-import { Button } from '@/components/buttons/button'
-import { SearchParamsLoader } from '@/components/search-params-loader'
-import { useRedirectLoginPath } from '@/utils/login-path/use-redirect-login-path'
-import { logout } from './logout.api'
+import { type ReadonlyURLSearchParams, useRouter } from "next/navigation";
+import { useId, useState } from "react";
+import { useErrorSnackbar } from "@/app/_components/snackbars/snackbar/use-error-snackbar";
+import { Button } from "@/components/buttons/button";
+import { SearchParamsLoader } from "@/components/search-params-loader";
+import { useRedirectLoginPath } from "@/utils/login-path/use-redirect-login-path";
+import { logout } from "./logout.api";
 
 export function LogoutButton() {
   const [searchParams, setSearchParams] =
-    useState<ReadonlyURLSearchParams | null>(null)
-  const [isLoggingOut, setIsLoggingOut] = useState(false)
-  const redirectLoginPath = useRedirectLoginPath({ searchParams })
-  const id = useId()
-  const router = useRouter()
-  const { openErrorSnackbar } = useErrorSnackbar()
+    useState<ReadonlyURLSearchParams | null>(null);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const redirectLoginPath = useRedirectLoginPath({ searchParams });
+  const id = useId();
+  const router = useRouter();
+  const { openErrorSnackbar } = useErrorSnackbar();
 
   const handleClick = async () => {
-    setIsLoggingOut(true)
-    const result = await logout()
-    if (result.status === 'error') {
-      if (result.name === 'HttpError' && result.statusCode === 404) {
-        router.push(redirectLoginPath)
-        router.refresh()
+    setIsLoggingOut(true);
+    const result = await logout();
+    if (result.status === "error") {
+      if (result.name === "HttpError" && result.statusCode === 404) {
+        router.push(redirectLoginPath);
+        router.refresh();
       } else {
-        openErrorSnackbar(result)
+        openErrorSnackbar(result);
       }
     } else {
-      router.push('/')
+      router.push("/");
     }
-    setIsLoggingOut(false)
-  }
+    setIsLoggingOut(false);
+  };
 
   return (
     // 'id' is used to manage popstate events in AccountModal.
@@ -40,12 +40,12 @@ export function LogoutButton() {
         id={`${id}-logout-button`}
         type="button"
         className="btn-outline-danger"
-        status={isLoggingOut ? 'pending' : 'idle'}
+        status={isLoggingOut ? "pending" : "idle"}
         onClick={handleClick}
       >
         ログアウト
       </Button>
       <SearchParamsLoader onParamsReceived={setSearchParams} />
     </>
-  )
+  );
 }

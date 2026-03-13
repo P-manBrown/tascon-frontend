@@ -1,6 +1,6 @@
-import { HomeHeader } from './_components/home-header'
-import { SignUpLink } from './_components/sign-up-link'
-import { BottomBar } from '../components/bottom-bar'
+import { BottomBar } from "../components/bottom-bar";
+import { HomeHeader } from "./_components/home-header";
+import { SignUpLink } from "./_components/sign-up-link";
 
 export default function Home() {
   return (
@@ -12,5 +12,5 @@ export default function Home() {
         </BottomBar>
       </main>
     </>
-  )
+  );
 }

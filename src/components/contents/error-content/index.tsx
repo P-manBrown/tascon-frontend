@@ -1,12 +1,12 @@
-import { Button } from '@/components/buttons/button'
-import { HorizontalRule } from '@/components/horizontal-rule'
+import { Button } from "@/components/buttons/button";
+import { HorizontalRule } from "@/components/horizontal-rule";
 
 type Props = {
-  message: string
-  resetButton?: React.ReactElement
-  reportIssueLink: React.ReactElement
-  children?: React.ReactNode
-}
+  message: string;
+  resetButton?: React.ReactElement;
+  reportIssueLink: React.ReactElement;
+  children?: React.ReactNode;
+};
 
 export function ErrorContent({
   message,
@@ -37,5 +37,5 @@ export function ErrorContent({
         {reportIssueLink}
       </div>
     </div>
-  )
+  );
 }

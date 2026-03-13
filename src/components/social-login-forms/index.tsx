@@ -1,28 +1,28 @@
-'use client'
+"use client";
 
-import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/solid'
-import { Button } from '@/components/buttons/button'
-import { SearchParamsLoader } from '@/components/search-params-loader'
-import { useSocialLoginForms } from './use-social-login-forms'
-import type { ReadonlyURLSearchParams } from 'next/navigation'
+import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/solid";
+import type { ReadonlyURLSearchParams } from "next/navigation";
+import { Button } from "@/components/buttons/button";
+import { SearchParamsLoader } from "@/components/search-params-loader";
+import { useSocialLoginForms } from "./use-social-login-forms";
 
 const socialLoginForms = [
   {
-    provider: 'google_oauth2',
-    appName: 'Google',
-    className: 'bg-blue-500 text-white',
+    provider: "google_oauth2",
+    appName: "Google",
+    className: "bg-blue-500 text-white",
   },
-  { provider: 'twitter', appName: 'X', className: 'bg-black text-white' },
-]
-const apiBaseUrl = `${process.env.NEXT_PUBLIC_API_ORIGIN}/api/v1/auth`
+  { provider: "twitter", appName: "X", className: "bg-black text-white" },
+];
+const apiBaseUrl = `${process.env.NEXT_PUBLIC_API_ORIGIN}/api/v1/auth`;
 
 export function SocialLoginForms() {
   const { fromUrl, activeProvider, authActionText, handleClick, windowName } =
-    useSocialLoginForms()
+    useSocialLoginForms();
 
   const handleParamsReceived = (searchParams: ReadonlyURLSearchParams) => {
-    fromUrl.current = searchParams.get('from_url')
-  }
+    fromUrl.current = searchParams.get("from_url");
+  };
 
   return (
     <>
@@ -36,8 +36,8 @@ export function SocialLoginForms() {
           <input type="hidden" name="omniauth_window_type" value="newWindow" />
           <Button
             type="button"
-            className={`${activeProvider === form.provider ? 'btn-disabled' : `btn-shadow ${form.className}`}`}
-            status={activeProvider === form.provider ? 'pending' : 'idle'}
+            className={`${activeProvider === form.provider ? "btn-disabled" : `btn-shadow ${form.className}`}`}
+            status={activeProvider === form.provider ? "pending" : "idle"}
             onClick={handleClick}
           >
             {`${form.appName}で${authActionText}`}
@@ -49,5 +49,5 @@ export function SocialLoginForms() {
       ))}
       <SearchParamsLoader onParamsReceived={handleParamsReceived} />
     </>
-  )
+  );
 }

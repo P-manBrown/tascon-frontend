@@ -1,15 +1,15 @@
-import { PlusCircleIcon } from '@heroicons/react/24/outline'
-import Image from 'next/image'
-import Link from 'next/link'
-import { Suspense } from 'react'
-import smallLogo from 'public/logos/logo-small.png'
-import { AccountLink } from './account-avatar-link/account-link'
-import { HeaderAvatar, LoadingHeaderAvatar } from './header-avatar'
-import { NavLinks } from './nav-links'
+import { PlusCircleIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
+import Link from "next/link";
+import smallLogo from "public/logos/logo-small.png";
+import { Suspense } from "react";
+import { AccountLink } from "./account-avatar-link/account-link";
+import { HeaderAvatar, LoadingHeaderAvatar } from "./header-avatar";
+import { NavLinks } from "./nav-links";
 
 export function MainHeader() {
   return (
-    <header className="bg-theme px-safe border-b border-b-gray-300">
+    <header className="border-b border-b-gray-300 bg-theme px-safe">
       <nav className="px-2">
         <div className="flex justify-between py-1">
           <div className="flex flex-row">
@@ -41,8 +41,8 @@ export function MainHeader() {
             </AccountLink>
           </div>
         </div>
-        <NavLinks className="hidden-scrollbar justify-between overflow-scroll py-1 text-sm whitespace-nowrap md:hidden" />
+        <NavLinks className="hidden-scrollbar justify-between overflow-scroll whitespace-nowrap py-1 text-sm md:hidden" />
       </nav>
     </header>
-  )
+  );
 }

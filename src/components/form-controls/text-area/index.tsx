@@ -1,35 +1,35 @@
-import { forwardRef } from 'react'
-import { ValidationErrorMessage } from '../validation-error-message'
-import type { UseFormRegisterReturn, FieldError } from 'react-hook-form'
+import { forwardRef } from "react";
+import type { FieldError, UseFormRegisterReturn } from "react-hook-form";
+import { ValidationErrorMessage } from "../validation-error-message";
 
 type Props = Omit<
-  React.ComponentPropsWithRef<'textarea'>,
-  'className' | 'style'
+  React.ComponentPropsWithRef<"textarea">,
+  "className" | "style"
 > & {
-  wordCount?: number
-  maxCount?: number
-  register: UseFormRegisterReturn
-  errors: FieldError | undefined
-  shadowRef?: React.RefObject<HTMLTextAreaElement | null>
-}
+  wordCount?: number;
+  maxCount?: number;
+  register: UseFormRegisterReturn;
+  errors: FieldError | undefined;
+  shadowRef?: React.RefObject<HTMLTextAreaElement | null>;
+};
 
 export const TextArea = forwardRef<HTMLTextAreaElement, Props>(
   function TextArea(
     { rows, cols, wordCount, maxCount, register, errors, shadowRef, ...rest },
     ref,
   ) {
-    const { ref: registerRef, ...registerRest } = register
+    const { ref: registerRef, ...registerRest } = register;
     const textAreaClasses = `text-box overflow-hidden py-2.5 ${
-      errors ? 'text-box-error' : ''
-    } ${shadowRef ? 'resize-none' : ''}`
+      errors ? "text-box-error" : ""
+    } ${shadowRef ? "resize-none" : ""}`;
 
     return (
-      <div className={shadowRef ? 'relative' : ''}>
+      <div className={shadowRef ? "relative" : ""}>
         <textarea
           ref={(node) => {
-            registerRef(node)
-            if (ref && typeof ref === 'object') {
-              ref.current = node
+            registerRef(node);
+            if (ref && typeof ref === "object") {
+              ref.current = node;
             }
           }}
           rows={rows}
@@ -55,10 +55,10 @@ export const TextArea = forwardRef<HTMLTextAreaElement, Props>(
               <ValidationErrorMessage>{errors.message}</ValidationErrorMessage>
             )}
           </div>
-          {typeof wordCount === 'number' && (
+          {typeof wordCount === "number" && (
             <p
-              className={`px-1 text-sm font-semibold ${
-                maxCount && maxCount < wordCount ? 'text-rose-600' : ''
+              className={`px-1 font-semibold text-sm ${
+                maxCount && maxCount < wordCount ? "text-rose-600" : ""
               }`}
             >
               文字数：{wordCount}
@@ -67,6 +67,6 @@ export const TextArea = forwardRef<HTMLTextAreaElement, Props>(
           )}
         </div>
       </div>
-    )
+    );
   },
-)
+);

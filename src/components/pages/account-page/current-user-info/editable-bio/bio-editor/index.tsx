@@ -1,52 +1,52 @@
-'use client'
+"use client";
 
-import { useRouter, useSearchParams } from 'next/navigation'
-import { useRef, useTransition } from 'react'
-import { z } from 'zod'
-import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
-import { EditableText } from '@/components/editable-fields/editable-text'
-import { useEditableMultiLineText } from '@/components/editable-fields/editable-text/use-editable-multi-line-text'
-import { useEditableText } from '@/components/editable-fields/editable-text/use-editable-text'
-import { TextArea } from '@/components/form-controls/text-area'
-import { DetailItemHeadingLayout } from '@/components/layouts/detail-item-heading-layout'
-import { ErrorObject } from '@/types/error'
-import { HttpError } from '@/utils/error/custom/http-error'
-import { useRedirectLoginPath } from '@/utils/login-path/use-redirect-login-path'
-import { countCharacters } from '@/utils/string-count/count-characters'
-import { changeBio } from './change-bio.api'
+import { useRouter, useSearchParams } from "next/navigation";
+import { useRef, useTransition } from "react";
+import { z } from "zod";
+import { useErrorSnackbar } from "@/app/_components/snackbars/snackbar/use-error-snackbar";
+import { EditableText } from "@/components/editable-fields/editable-text";
+import { useEditableMultiLineText } from "@/components/editable-fields/editable-text/use-editable-multi-line-text";
+import { useEditableText } from "@/components/editable-fields/editable-text/use-editable-text";
+import { TextArea } from "@/components/form-controls/text-area";
+import { DetailItemHeadingLayout } from "@/components/layouts/detail-item-heading-layout";
+import type { ErrorObject } from "@/types/error";
+import type { HttpError } from "@/utils/error/custom/http-error";
+import { useRedirectLoginPath } from "@/utils/login-path/use-redirect-login-path";
+import { countCharacters } from "@/utils/string-count/count-characters";
+import { changeBio } from "./change-bio.api";
 
 const bioSchema = z.object({
   bio: z
     .string()
     .trim()
     .refine((value) => countCharacters(value) <= 250, {
-      error: '最大文字数を超えています。',
+      error: "最大文字数を超えています。",
     }),
-})
+});
 
-type ChangeBioFormValue = z.infer<typeof bioSchema>
+type ChangeBioFormValue = z.infer<typeof bioSchema>;
 
-type Props = Pick<React.ComponentProps<typeof EditableText>, 'children'> & {
-  currentUserId: string
-  initialBio: string | undefined
-  label: React.ReactElement
-  privacyTag: React.ReactElement
-  unsavedChangeTag: React.ReactElement
-}
+type Props = Pick<React.ComponentProps<typeof EditableText>, "children"> & {
+  currentUserId: string;
+  initialBio: string | undefined;
+  label: React.ReactElement;
+  privacyTag: React.ReactElement;
+  unsavedChangeTag: React.ReactElement;
+};
 
 export function BioEditor({
   currentUserId,
-  initialBio = '',
+  initialBio = "",
   label,
   privacyTag,
   unsavedChangeTag,
   children,
 }: Props) {
-  const [isPending, startTransition] = useTransition()
-  const router = useRouter()
-  const searchParams = useSearchParams()
-  const redirectLoginPath = useRedirectLoginPath({ searchParams })
-  const editorRef = useRef<HTMLTextAreaElement>(null)
+  const [isPending, startTransition] = useTransition();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectLoginPath = useRedirectLoginPath({ searchParams });
+  const editorRef = useRef<HTMLTextAreaElement>(null);
   const {
     isEditorOpen,
     updateField,
@@ -63,38 +63,38 @@ export function BioEditor({
     currentUserId,
     defaultValue: initialBio,
     schema: bioSchema,
-    name: 'bio',
+    name: "bio",
     shouldSaveToLocalStorage: true,
-  })
+  });
   const { shadowRef, wordCount, handleInput } = useEditableMultiLineText({
     editorRef,
     isEditorOpen,
-  })
-  const { openErrorSnackbar } = useErrorSnackbar()
+  });
+  const { openErrorSnackbar } = useErrorSnackbar();
 
   const handleHttpError = (err: ErrorObject<HttpError>) => {
     if (err.statusCode === 404) {
-      saveFieldValueToLocalStorage()
-      router.replace(redirectLoginPath)
+      saveFieldValueToLocalStorage();
+      router.replace(redirectLoginPath);
     } else {
-      openErrorSnackbar(err)
+      openErrorSnackbar(err);
     }
-  }
+  };
 
   const onSubmit = async (data: ChangeBioFormValue) => {
     startTransition(async () => {
-      const result = await changeBio(data)
-      if (result.status === 'error') {
-        if (result.name === 'HttpError') {
-          handleHttpError(result)
+      const result = await changeBio(data);
+      if (result.status === "error") {
+        if (result.name === "HttpError") {
+          handleHttpError(result);
         } else {
-          openErrorSnackbar(result)
+          openErrorSnackbar(result);
         }
       } else {
-        updateField(result.account.bio ?? '')
+        updateField(result.account.bio ?? "");
       }
-    })
-  }
+    });
+  };
 
   return (
     <div>
@@ -128,5 +128,5 @@ export function BioEditor({
         {children}
       </EditableText>
     </div>
-  )
+  );
 }
