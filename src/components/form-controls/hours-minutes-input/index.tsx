@@ -1,19 +1,19 @@
-import { ValidationErrorMessage } from '../validation-error-message'
-import type { FieldError, UseFormRegisterReturn } from 'react-hook-form'
+import type { FieldError, UseFormRegisterReturn } from "react-hook-form";
+import { ValidationErrorMessage } from "../validation-error-message";
 
 type Props = {
-  hoursId: string
-  minutesId: string
-  hoursLabel: string
-  minutesLabel: string
-  hoursRegister: UseFormRegisterReturn
-  minutesRegister: UseFormRegisterReturn
-  hoursError?: FieldError
-  minutesError?: FieldError
-  readOnly?: boolean
-  className?: string
-  ref?: React.RefObject<HTMLInputElement | null>
-}
+  hoursId: string;
+  minutesId: string;
+  hoursLabel: string;
+  minutesLabel: string;
+  hoursRegister: UseFormRegisterReturn;
+  minutesRegister: UseFormRegisterReturn;
+  hoursError?: FieldError;
+  minutesError?: FieldError;
+  readOnly?: boolean;
+  className?: string;
+  ref?: React.RefObject<HTMLInputElement | null>;
+};
 
 export function HoursMinutesInput({
   hoursId,
@@ -25,12 +25,12 @@ export function HoursMinutesInput({
   hoursError,
   minutesError,
   readOnly = false,
-  className = '',
+  className = "",
   ref,
 }: Props) {
-  const { ref: hoursRegisterRef, ...hoursRegisterRest } = hoursRegister
-  const { ref: minutesRegisterRef, ...minutesRegisterRest } = minutesRegister
-  const hasError = hoursError || minutesError
+  const { ref: hoursRegisterRef, ...hoursRegisterRest } = hoursRegister;
+  const { ref: minutesRegisterRef, ...minutesRegisterRest } = minutesRegister;
+  const hasError = hoursError || minutesError;
 
   return (
     <div>
@@ -40,13 +40,13 @@ export function HoursMinutesInput({
             id={hoursId}
             type="number"
             readOnly={readOnly}
-            className={`text-box w-20 ${hasError ? 'text-box-error' : ''}`}
+            className={`w-20 text-box ${hasError ? "text-box-error" : ""}`}
             min={0}
             aria-label={hoursLabel}
             ref={(node) => {
-              hoursRegisterRef(node)
-              if (ref && typeof ref === 'object') {
-                ref.current = node
+              hoursRegisterRef(node);
+              if (ref && typeof ref === "object") {
+                ref.current = node;
               }
             }}
             {...hoursRegisterRest}
@@ -58,7 +58,7 @@ export function HoursMinutesInput({
             id={minutesId}
             type="number"
             readOnly={readOnly}
-            className={`text-box w-20 ${hasError ? 'text-box-error' : ''}`}
+            className={`w-20 text-box ${hasError ? "text-box-error" : ""}`}
             min={0}
             max={59}
             step={15}
@@ -76,5 +76,5 @@ export function HoursMinutesInput({
         <ValidationErrorMessage>{minutesError.message}</ValidationErrorMessage>
       )}
     </div>
-  )
+  );
 }

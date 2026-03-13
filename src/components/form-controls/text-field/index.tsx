@@ -1,33 +1,33 @@
-import { forwardRef } from 'react'
-import { ValidationErrorMessage } from '../validation-error-message'
-import type { FieldError, UseFormRegisterReturn } from 'react-hook-form'
+import { forwardRef } from "react";
+import type { FieldError, UseFormRegisterReturn } from "react-hook-form";
+import { ValidationErrorMessage } from "../validation-error-message";
 
-type Props = Omit<React.ComponentPropsWithRef<'input'>, 'type'> & {
-  type: 'text' | 'email' | 'password'
-  register: UseFormRegisterReturn
-  suffixIcon?: React.ReactElement
-  errors: FieldError | undefined
-}
+type Props = Omit<React.ComponentPropsWithRef<"input">, "type"> & {
+  type: "text" | "email" | "password";
+  register: UseFormRegisterReturn;
+  suffixIcon?: React.ReactElement;
+  errors: FieldError | undefined;
+};
 
 export const TextField = forwardRef<HTMLInputElement, Props>(function TextField(
-  { register, errors, suffixIcon, className = '', ...rest },
+  { register, errors, suffixIcon, className = "", ...rest },
   ref,
 ) {
-  const { ref: registerRef, ...registerRest } = register
+  const { ref: registerRef, ...registerRest } = register;
 
   return (
     <div>
       <div className="relative">
         <input
           ref={(node) => {
-            registerRef(node)
-            if (ref && typeof ref === 'object') {
-              ref.current = node
+            registerRef(node);
+            if (ref && typeof ref === "object") {
+              ref.current = node;
             }
           }}
           className={`text-box [&::-ms-reveal]:hidden ${
-            errors ? 'text-box-error' : ''
-          } ${suffixIcon ? 'pr-9' : ''} ${className}`}
+            errors ? "text-box-error" : ""
+          } ${suffixIcon ? "pr-9" : ""} ${className}`}
           {...registerRest}
           {...rest}
         />
@@ -41,5 +41,5 @@ export const TextField = forwardRef<HTMLInputElement, Props>(function TextField(
         <ValidationErrorMessage>{errors.message}</ValidationErrorMessage>
       )}
     </div>
-  )
-})
+  );
+});

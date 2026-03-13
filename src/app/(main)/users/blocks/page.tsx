@@ -1,31 +1,31 @@
-import { Suspense } from 'react'
-import { UsersHeading } from '@/components/headings/users-heading'
-import { UsersHeaderLayout } from '@/components/layouts/users-header-layout'
-import { ScrollAnchor } from '@/components/scroll-anchor'
-import { UsersDescription } from '@/components/texts/users-description'
+import type { Metadata } from "next";
+import { Suspense } from "react";
+import { UsersHeading } from "@/components/headings/users-heading";
+import { UsersHeaderLayout } from "@/components/layouts/users-header-layout";
+import { ScrollAnchor } from "@/components/scroll-anchor";
+import { UsersDescription } from "@/components/texts/users-description";
 import {
   BlocksPaginatedList,
   LoadingBlocksPaginatedList,
-} from './_components/blocks-paginated-list'
-import type { Metadata } from 'next'
+} from "./_components/blocks-paginated-list";
 
 export const metadata: Metadata = {
-  title: 'ブロックしているユーザー一覧',
-}
+  title: "ブロックしているユーザー一覧",
+};
 
 type Props = {
   searchParams: Promise<{
-    page?: string
-  }>
-}
+    page?: string;
+  }>;
+};
 
 export default async function Blocks({ searchParams }: Props) {
-  const params = await searchParams
-  const { page } = params
+  const params = await searchParams;
+  const { page } = params;
 
   return (
     <div>
-      <ScrollAnchor page={page ?? '1'} />
+      <ScrollAnchor page={page ?? "1"} />
       <UsersHeaderLayout>
         <UsersHeading>ブロックしているユーザー</UsersHeading>
         <UsersDescription>
@@ -39,9 +39,9 @@ export default async function Blocks({ searchParams }: Props) {
           key={page}
           fallback={<LoadingBlocksPaginatedList page={page} />}
         >
-          <BlocksPaginatedList page={page ?? '1'} />
+          <BlocksPaginatedList page={page ?? "1"} />
         </Suspense>
       </div>
     </div>
-  )
+  );
 }

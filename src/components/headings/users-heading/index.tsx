@@ -1,7 +1,7 @@
 type Props = {
-  children: React.ReactNode
-}
+  children: React.ReactNode;
+};
 
 export function UsersHeading({ children }: Props) {
-  return <h1 className="text-2xl font-bold">{children}</h1>
+  return <h1 className="font-bold text-2xl">{children}</h1>;
 }

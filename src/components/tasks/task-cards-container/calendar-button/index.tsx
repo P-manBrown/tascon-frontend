@@ -1,14 +1,14 @@
-import { CalendarIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { ErrorBoundary } from 'react-error-boundary'
-import { IconButton } from '@/components/buttons/icon-button'
-import { CalendarError } from '@/components/calendars/calendar-error'
-import { ModalContent } from '@/components/contents/modal-content'
-import { Modal } from '@/components/modal'
-import { useModal } from '@/components/modal/use-modal'
+import { CalendarIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { ErrorBoundary } from "react-error-boundary";
+import { IconButton } from "@/components/buttons/icon-button";
+import { CalendarError } from "@/components/calendars/calendar-error";
+import { ModalContent } from "@/components/contents/modal-content";
+import { Modal } from "@/components/modal";
+import { useModal } from "@/components/modal/use-modal";
 
 type Props = {
-  calendar: React.ReactNode
-}
+  calendar: React.ReactNode;
+};
 
 export function CalendarButton({ calendar }: Props) {
   const {
@@ -18,7 +18,7 @@ export function CalendarButton({ calendar }: Props) {
     closeModal,
     handleAnimationEnd,
     handleCancel,
-  } = useModal()
+  } = useModal();
 
   return (
     <>
@@ -57,5 +57,5 @@ export function CalendarButton({ calendar }: Props) {
         </Modal>
       )}
     </>
-  )
+  );
 }

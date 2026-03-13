@@ -1,23 +1,23 @@
-import Link from 'next/link'
-import { Avatar, LoadingAvatar } from '@/components/avatars/avatar/index'
+import Link from "next/link";
+import { Avatar, LoadingAvatar } from "@/components/avatars/avatar/index";
 
 type Props = {
-  id: number
-  name: string
-  bio?: string
-  avatarUrl?: string
-  children?: React.ReactNode
-}
+  id: number;
+  name: string;
+  bio?: string;
+  avatarUrl?: string;
+  children?: React.ReactNode;
+};
 
-const avatarSize = 64
+const avatarSize = 64;
 
 const cardBaseClasses =
-  'rounded-md border border-gray-300 bg-white p-6 drop-shadow-sm'
-const flexContainerClasses = 'flex items-center gap-4'
-const contentContainerBaseClasses = 'flex flex-col gap-1'
+  "rounded-md border border-gray-300 bg-white p-6 drop-shadow-sm";
+const flexContainerClasses = "flex items-center gap-4";
+const contentContainerBaseClasses = "flex flex-col gap-1";
 
 export function UserCard({ id, name, bio, avatarUrl, children }: Props) {
-  const isBioEmpty = bio === undefined || bio === ''
+  const isBioEmpty = bio === undefined || bio === "";
 
   return (
     <div
@@ -26,13 +26,13 @@ export function UserCard({ id, name, bio, avatarUrl, children }: Props) {
       <div className={flexContainerClasses}>
         <Avatar name={name} avatarUrl={avatarUrl} size={avatarSize} />
         <div className={`min-w-0 ${contentContainerBaseClasses}`}>
-          <h2 className="truncate text-lg font-bold">{name}</h2>
+          <h2 className="truncate font-bold text-lg">{name}</h2>
           <p
-            className={`line-clamp-2 h-10 text-sm break-words ${
-              isBioEmpty ? 'text-gray-500' : ''
+            className={`line-clamp-2 h-10 break-words text-sm ${
+              isBioEmpty ? "text-gray-500" : ""
             }`}
           >
-            {isBioEmpty ? '自己紹介は登録されていません...' : bio}
+            {isBioEmpty ? "自己紹介は登録されていません..." : bio}
           </p>
         </div>
       </div>
@@ -43,10 +43,10 @@ export function UserCard({ id, name, bio, avatarUrl, children }: Props) {
         aria-label={`${name}の詳細画面を表示`}
       />
     </div>
-  )
+  );
 }
 
-type LoadingUserCardProps = Pick<Props, 'children'>
+type LoadingUserCardProps = Pick<Props, "children">;
 
 export function LoadingUserCard({ children }: LoadingUserCardProps) {
   return (
@@ -65,5 +65,5 @@ export function LoadingUserCard({ children }: LoadingUserCardProps) {
       </div>
       {children}
     </div>
-  )
+  );
 }

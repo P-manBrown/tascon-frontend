@@ -1,5 +1,5 @@
-import { LoadingPage } from '@/components/pages/loading-page'
+import { LoadingPage } from "@/components/pages/loading-page";
 
 export default function Loading() {
-  return <LoadingPage pageTitle="今日のタスク一覧" />
+  return <LoadingPage pageTitle="今日のタスク一覧" />;
 }

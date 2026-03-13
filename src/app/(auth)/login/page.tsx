@@ -1,14 +1,14 @@
-import Link from 'next/link'
-import { AuthHeading } from '@/components/headings/auth-heading'
-import { HorizontalRule } from '@/components/horizontal-rule'
-import { SocialLoginForms } from '@/components/social-login-forms'
-import { LoginForm } from './_components/login-form'
-import { LoginQueryParamSnackbar } from './_components/login-query-param-snackbar'
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
+import Link from "next/link";
+import { AuthHeading } from "@/components/headings/auth-heading";
+import { HorizontalRule } from "@/components/horizontal-rule";
+import { SocialLoginForms } from "@/components/social-login-forms";
+import { LoginForm } from "./_components/login-form";
+import { LoginQueryParamSnackbar } from "./_components/login-query-param-snackbar";
 
 export const metadata: Metadata = {
-  title: 'ログイン',
-}
+  title: "ログイン",
+};
 
 export default function Login() {
   return (
@@ -26,5 +26,5 @@ export default function Login() {
       </div>
       <LoginQueryParamSnackbar />
     </>
-  )
+  );
 }

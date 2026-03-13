@@ -1,22 +1,22 @@
-import { DetailItemHeading } from '@/components/headings/detail-item-heading'
-import { DetailItemContentLayout } from '@/components/layouts/detail-item-content-layout'
-import { DetailItemHeadingLayout } from '@/components/layouts/detail-item-heading-layout'
-import { Tag } from '@/components/tag'
+import { DetailItemHeading } from "@/components/headings/detail-item-heading";
+import { DetailItemContentLayout } from "@/components/layouts/detail-item-content-layout";
+import { DetailItemHeadingLayout } from "@/components/layouts/detail-item-heading-layout";
+import { Tag } from "@/components/tag";
 import {
   DetailSingleLineText,
   LoadingDetailSingleLineText,
-} from '@/components/texts/detail-single-line-text'
-import { getTask } from '@/utils/api/get-task'
-import { getCurrentUser } from '@/utils/api/server/get-current-user'
-import { TaskNameEditor } from './task-name-editor'
+} from "@/components/texts/detail-single-line-text";
+import { getTask } from "@/utils/api/get-task";
+import { getCurrentUser } from "@/utils/api/server/get-current-user";
+import { TaskNameEditor } from "./task-name-editor";
 
 type Props = {
-  id: string
-}
+  id: string;
+};
 
 export async function EditableTaskName({ id }: Props) {
-  const { account: currentUser } = await getCurrentUser()
-  const { task } = await getTask(id)
+  const { account: currentUser } = await getCurrentUser();
+  const { task } = await getTask(id);
 
   return (
     <TaskNameEditor
@@ -30,7 +30,7 @@ export async function EditableTaskName({ id }: Props) {
         <DetailSingleLineText>{task.name}</DetailSingleLineText>
       </DetailItemContentLayout>
     </TaskNameEditor>
-  )
+  );
 }
 
 export function LoadingEditableTaskName() {
@@ -43,5 +43,5 @@ export function LoadingEditableTaskName() {
         <LoadingDetailSingleLineText />
       </DetailItemContentLayout>
     </div>
-  )
+  );
 }

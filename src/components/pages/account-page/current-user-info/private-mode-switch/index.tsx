@@ -1,14 +1,14 @@
-import { getCurrentUser } from '@/utils/api/server/get-current-user'
-import { PrivateModeCheckbox } from './private-mode-checkbox'
+import { getCurrentUser } from "@/utils/api/server/get-current-user";
+import { PrivateModeCheckbox } from "./private-mode-checkbox";
 import {
   LoadingToggleSwitch,
   ToggleSwitch,
-} from './private-mode-checkbox/toggle-switch'
+} from "./private-mode-checkbox/toggle-switch";
 
-const descriptionLayoutClasses = 'ml-3 align-middle'
+const descriptionLayoutClasses = "ml-3 align-middle";
 
 export async function PrivateModeSwitch() {
-  const { account: currentUser } = await getCurrentUser()
+  const { account: currentUser } = await getCurrentUser();
 
   return (
     <PrivateModeCheckbox
@@ -20,7 +20,7 @@ export async function PrivateModeSwitch() {
         </span>
       }
     />
-  )
+  );
 }
 
 export function LoadingPrivateModeSwitch() {
@@ -31,5 +31,5 @@ export function LoadingPrivateModeSwitch() {
         メールアドレスでの検索・登録を拒否する
       </span>
     </>
-  )
+  );
 }

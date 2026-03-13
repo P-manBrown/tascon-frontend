@@ -1,28 +1,28 @@
-'use server'
+"use server";
 
-import { z } from 'zod'
-import { ResultObject } from '@/types/api'
-import { fetchData } from '@/utils/api/fetch-data'
-import { getBearerToken } from '@/utils/cookie/bearer-token'
-import { createErrorObject } from '@/utils/error/create-error-object'
-import { getRequestId } from '@/utils/request-id/get-request-id'
-import { validateData } from '@/utils/validation/validate-data'
+import { z } from "zod";
+import type { ResultObject } from "@/types/api";
+import { fetchData } from "@/utils/api/fetch-data";
+import { getBearerToken } from "@/utils/cookie/bearer-token";
+import { createErrorObject } from "@/utils/error/create-error-object";
+import { getRequestId } from "@/utils/request-id/get-request-id";
+import { validateData } from "@/utils/validation/validate-data";
 
 type Params = {
-  email: string
-}
+  email: string;
+};
 
-const dataSchema = z.null()
+const dataSchema = z.null();
 
-type Data = z.infer<typeof dataSchema>
+type Data = z.infer<typeof dataSchema>;
 
 export async function requestResetPasswordEmail(bodyData: Params) {
   const fetchDataResult = await fetchData(
     `${process.env.API_ORIGIN}/api/v1/auth/password`,
     {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: await getBearerToken(),
       },
       body: JSON.stringify({
@@ -30,23 +30,23 @@ export async function requestResetPasswordEmail(bodyData: Params) {
         redirect_url: `${process.env.NEXT_PUBLIC_FRONTEND_ORIGIN}/password/reset`,
       }),
     },
-  )
+  );
 
-  let resultObject: ResultObject<Data>
+  let resultObject: ResultObject<Data>;
 
   if (fetchDataResult instanceof Error) {
-    resultObject = createErrorObject(fetchDataResult)
+    resultObject = createErrorObject(fetchDataResult);
   } else {
-    const { headers, data } = fetchDataResult
-    const requestId = getRequestId(headers)
-    const validateDataResult = validateData({ requestId, dataSchema, data })
+    const { headers, data } = fetchDataResult;
+    const requestId = getRequestId(headers);
+    const validateDataResult = validateData({ requestId, dataSchema, data });
 
     if (validateDataResult instanceof Error) {
-      resultObject = createErrorObject(validateDataResult)
+      resultObject = createErrorObject(validateDataResult);
     } else {
-      resultObject = { status: 'success' }
+      resultObject = { status: "success" };
     }
   }
 
-  return resultObject
+  return resultObject;
 }

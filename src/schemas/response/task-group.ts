@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import { z } from "zod";
 
 export const taskGroupSchema = z.object({
   task_group: z.object({
@@ -7,4 +7,4 @@ export const taskGroupSchema = z.object({
     icon: z.string(),
     note: z.string().optional(),
   }),
-})
+});

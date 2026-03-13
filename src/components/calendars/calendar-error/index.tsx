@@ -1,38 +1,38 @@
-'use client'
+"use client";
 
-import { XCircleIcon } from '@heroicons/react/24/outline'
-import { useRouter } from 'next/navigation'
-import { startTransition } from 'react'
-import { useErrorBoundary } from 'react-error-boundary'
-import { Button } from '@/components/buttons/button'
-import { ReportIssueLink } from '@/components/links/report-issue-link'
+import { XCircleIcon } from "@heroicons/react/24/outline";
+import { useRouter } from "next/navigation";
+import { startTransition } from "react";
+import { useErrorBoundary } from "react-error-boundary";
+import { Button } from "@/components/buttons/button";
+import { ReportIssueLink } from "@/components/links/report-issue-link";
 
 type Props = {
-  error: Error & { digest?: string }
-}
+  error: Error & { digest?: string };
+};
 
 export function CalendarError({ error }: Props) {
-  const { resetBoundary } = useErrorBoundary()
-  const router = useRouter()
+  const { resetBoundary } = useErrorBoundary();
+  const router = useRouter();
 
   const handleButtonClick = () => {
     startTransition(() => {
-      resetBoundary()
-      router.refresh()
-    })
-  }
+      resetBoundary();
+      router.refresh();
+    });
+  };
 
   return (
     <div className="flex h-full items-center justify-center p-5">
       <div className="flex flex-col gap-3 rounded-sm border border-red-300 bg-red-50 p-5">
         <div className="flex items-center gap-1.5">
-          <XCircleIcon className="size-5 stroke-red-600 stroke-2" />
-          <p className="text-lg font-bold">Error</p>
+          <XCircleIcon className="size-5 stroke-2 stroke-red-600" />
+          <p className="font-bold text-lg">Error</p>
         </div>
         <p className="text-sm">カレンダーの表示中に問題が発生しました。</p>
         <Button
           type="button"
-          className="btn-success mx-auto my-3 h-8 max-w-44 text-sm font-medium"
+          className="btn-success mx-auto my-3 h-8 max-w-44 font-medium text-sm"
           onClick={handleButtonClick}
         >
           再読み込み
@@ -45,5 +45,5 @@ export function CalendarError({ error }: Props) {
         )}
       </div>
     </div>
-  )
+  );
 }

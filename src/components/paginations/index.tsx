@@ -1,19 +1,19 @@
 import {
   DesktopPagination,
   LoadingDesktopPagination,
-} from './desktop-pagination'
-import { generatePaginationState } from './generate-pagination-state'
-import { MobilePagination, LoadingMobilePagination } from './mobile-pagination'
+} from "./desktop-pagination";
+import { generatePaginationState } from "./generate-pagination-state";
+import { LoadingMobilePagination, MobilePagination } from "./mobile-pagination";
 
 type Props = {
-  currentPage: number
-  pageItems: number
-  totalPages: number
-  totalCount: number
-}
+  currentPage: number;
+  pageItems: number;
+  totalPages: number;
+  totalCount: number;
+};
 
-const containerClasses = 'border-t border-gray-300 px-4 py-3 sm:px-6'
-const maxVisiblePages = 5
+const containerClasses = "border-t border-gray-300 px-4 py-3 sm:px-6";
+const maxVisiblePages = 5;
 
 export function Pagination({
   currentPage,
@@ -25,7 +25,7 @@ export function Pagination({
     currentPage,
     totalPages,
     maxVisiblePages,
-  )
+  );
 
   return (
     <div className={containerClasses}>
@@ -43,7 +43,7 @@ export function Pagination({
         paginationState={paginationState}
       />
     </div>
-  )
+  );
 }
 
 export function LoadingPagination() {
@@ -52,5 +52,5 @@ export function LoadingPagination() {
       <LoadingMobilePagination />
       <LoadingDesktopPagination maxVisiblePages={maxVisiblePages} />
     </div>
-  )
+  );
 }

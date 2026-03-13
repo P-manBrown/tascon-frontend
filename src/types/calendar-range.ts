@@ -1,4 +1,4 @@
 export type CalendarRange = {
-  start: Temporal.ZonedDateTime
-  end: Temporal.ZonedDateTime
-}
+  start: Temporal.ZonedDateTime;
+  end: Temporal.ZonedDateTime;
+};

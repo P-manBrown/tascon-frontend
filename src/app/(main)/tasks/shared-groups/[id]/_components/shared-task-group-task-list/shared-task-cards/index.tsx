@@ -1,13 +1,13 @@
-'use client'
+"use client";
 
-import { TaskCard } from '@/components/tasks/task-cards/task-card'
+import { TaskCard } from "@/components/tasks/task-cards/task-card";
 
 type Props = {
-  shareId: string
+  shareId: string;
   tasks: Array<
-    Omit<React.ComponentProps<typeof TaskCard>, 'href' | 'isReadonly'>
-  >
-}
+    Omit<React.ComponentProps<typeof TaskCard>, "href" | "isReadonly">
+  >;
+};
 
 export function SharedTaskCards({ shareId, tasks }: Props) {
   return (
@@ -21,5 +21,5 @@ export function SharedTaskCards({ shareId, tasks }: Props) {
         />
       ))}
     </div>
-  )
+  );
 }

@@ -1,14 +1,14 @@
-import pino from 'pino'
-import { sendLogWithRetries } from './send-log-with-retries.api'
+import pino from "pino";
+import { sendLogWithRetries } from "./send-log-with-retries.api";
 
-const isProduction = process.env.NODE_ENV === 'production'
+const isProduction = process.env.NODE_ENV === "production";
 
 export const logger = pino({
-  name: 'tascon-frontend',
+  name: "tascon-frontend",
   timestamp: pino.stdTimeFunctions.isoTime,
   serializers: {
-    err: (err: Error | Record<'err', unknown>) => {
-      return err instanceof Error ? pino.stdSerializers.err(err) : err
+    err: (err: Error | Record<"err", unknown>) => {
+      return err instanceof Error ? pino.stdSerializers.err(err) : err;
     },
   },
   browser: {
@@ -16,29 +16,29 @@ export const logger = pino({
     write: () => void {},
     transmit: {
       send: (level, logEvent) => {
-        const messages = logEvent.messages
+        const messages = logEvent.messages;
         if (messages[0].cause && messages[0].cause instanceof Error) {
           messages[0].cause = {
             message: messages[0].cause.message,
             stack: messages[0].cause.stack,
-          }
+          };
         }
 
-        sendLogWithRetries(level, messages)
+        sendLogWithRetries(level, messages);
       },
     },
   },
   ...(isProduction
     ? {
-        level: 'info',
+        level: "info",
       }
     : {
-        level: 'trace',
+        level: "trace",
         transport: {
-          target: 'pino-pretty',
+          target: "pino-pretty",
           options: {
             colorize: true,
           },
         },
       }),
-})
+});

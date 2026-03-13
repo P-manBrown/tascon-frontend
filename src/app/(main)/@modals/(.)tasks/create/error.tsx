@@ -1,8 +1,8 @@
-'use client'
+"use client";
 
-import { CreateTaskErrorPage } from '@/components/pages/create-task-error-page'
-import type { ErrorProps } from '@/types/error'
+import { CreateTaskErrorPage } from "@/components/pages/create-task-error-page";
+import type { ErrorProps } from "@/types/error";
 
-export default function Error(props: ErrorProps) {
-  return <CreateTaskErrorPage {...props} />
+export default function ErrorBoundary(props: ErrorProps) {
+  return <CreateTaskErrorPage {...props} />;
 }

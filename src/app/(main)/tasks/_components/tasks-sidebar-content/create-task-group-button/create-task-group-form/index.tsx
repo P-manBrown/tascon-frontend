@@ -1,20 +1,20 @@
-import dynamic from 'next/dynamic'
-import { Button } from '@/components/buttons/button'
-import { Label } from '@/components/form-controls/label'
-import { TextArea } from '@/components/form-controls/text-area'
-import { TextField } from '@/components/form-controls/text-field'
-import { useCreateTaskGroupForm } from './use-create-task-group-form'
+import dynamic from "next/dynamic";
+import { Button } from "@/components/buttons/button";
+import { Label } from "@/components/form-controls/label";
+import { TextArea } from "@/components/form-controls/text-area";
+import { TextField } from "@/components/form-controls/text-field";
+import { useCreateTaskGroupForm } from "./use-create-task-group-form";
 
-const Picker = dynamic(() => import('emoji-picker-react'), { ssr: false })
+const Picker = dynamic(() => import("emoji-picker-react"), { ssr: false });
 
 const Emoji = dynamic(
-  () => import('emoji-picker-react').then((mod) => mod.Emoji),
+  () => import("emoji-picker-react").then((mod) => mod.Emoji),
   { ssr: false },
-)
+);
 
 type Props = {
-  handleSubmitSuccess?: () => void
-}
+  handleSubmitSuccess?: () => void;
+};
 
 export function CreateTaskGroupForm({ handleSubmitSuccess }: Props) {
   const {
@@ -33,18 +33,18 @@ export function CreateTaskGroupForm({ handleSubmitSuccess }: Props) {
     handleEmojiClick,
     shouldPickerMount,
     watch,
-  } = useCreateTaskGroupForm({ handleSubmitSuccess })
+  } = useCreateTaskGroupForm({ handleSubmitSuccess });
 
   return (
     <form noValidate={true} onSubmit={handleSubmit(onSubmit)}>
       <Label htmlFor="icon">アイコン</Label>
       <button
         type="button"
-        className={`text-box size-11 ${errors.icon === undefined ? '' : 'text-box-error'}`}
+        className={`size-11 text-box ${errors.icon === undefined ? "" : "text-box-error"}`}
         onClick={handleButtonClick}
         popoverTarget={popoverId}
       >
-        <Emoji unified={watch('icon')} size={32} />
+        <Emoji unified={watch("icon")} size={32} />
       </button>
       <div
         ref={popoverRef}
@@ -65,7 +65,7 @@ export function CreateTaskGroupForm({ handleSubmitSuccess }: Props) {
       <TextField
         type="text"
         readOnly={true}
-        register={register('icon')}
+        register={register("icon")}
         errors={errors.icon}
         hidden={true}
       />
@@ -74,7 +74,7 @@ export function CreateTaskGroupForm({ handleSubmitSuccess }: Props) {
         <TextField
           type="text"
           readOnly={isPending}
-          register={register('name')}
+          register={register("name")}
           errors={errors.name}
         />
       </div>
@@ -85,7 +85,7 @@ export function CreateTaskGroupForm({ handleSubmitSuccess }: Props) {
           shadowRef={shadowRef}
           rows={6}
           readOnly={isPending}
-          register={register('note')}
+          register={register("note")}
           errors={errors.note}
           wordCount={wordCount}
           maxCount={1000}
@@ -95,10 +95,10 @@ export function CreateTaskGroupForm({ handleSubmitSuccess }: Props) {
       <Button
         type="submit"
         className="btn-primary mt-6 min-w-24"
-        status={isPending ? 'pending' : 'idle'}
+        status={isPending ? "pending" : "idle"}
       >
         追加
       </Button>
     </form>
-  )
+  );
 }

@@ -1,18 +1,18 @@
-'use client'
+"use client";
 
-import { useLinkStatus } from 'next/link'
+import { useLinkStatus } from "next/link";
 
 type Props = {
-  children: React.ReactNode
-}
+  children: React.ReactNode;
+};
 
 export function MobilePageTurnLinkLoadingIndicator({ children }: Props) {
-  const { pending } = useLinkStatus()
+  const { pending } = useLinkStatus();
 
   return (
     <span
       className={`relative inline-flex h-full w-full items-center justify-center overflow-hidden ${
-        pending ? 'cursor-wait' : ''
+        pending ? "cursor-wait" : ""
       }`}
     >
       {pending && (
@@ -20,5 +20,5 @@ export function MobilePageTurnLinkLoadingIndicator({ children }: Props) {
       )}
       {children}
     </span>
-  )
+  );
 }

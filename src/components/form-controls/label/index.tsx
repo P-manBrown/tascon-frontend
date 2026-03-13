@@ -1,9 +1,9 @@
-type LabelProps = Omit<React.ComponentPropsWithoutRef<'label'>, 'className'>
+type LabelProps = Omit<React.ComponentPropsWithoutRef<"label">, "className">;
 
 export function Label({ children, htmlFor, ...rest }: LabelProps) {
   return (
-    <label className="mb-1 text-sm font-bold" htmlFor={htmlFor} {...rest}>
+    <label className="mb-1 font-bold text-sm" htmlFor={htmlFor} {...rest}>
       {children}
     </label>
-  )
+  );
 }

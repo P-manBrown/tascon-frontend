@@ -1,4 +1,4 @@
-import { LoadingPage } from '@/components/pages/loading-page'
+import { LoadingPage } from "@/components/pages/loading-page";
 
 export default function Loading() {
   return (
@@ -6,5 +6,5 @@ export default function Loading() {
     <div className="h-[calc(100dvh-2rem-6px-1px-6.75rem-env(safe-area-inset-bottom))]">
       <LoadingPage pageTitle="ユーザー詳細" />
     </div>
-  )
+  );
 }
