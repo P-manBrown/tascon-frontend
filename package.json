@@ -20,7 +20,7 @@
     "@schedule-x/calendar": "^4.2.0",
     "@schedule-x/events-service": "^4.3.0",
     "@schedule-x/react": "^4.1.0",
-    "@schedule-x/theme-default": "^4.1.0",
+    "@schedule-x/theme-default": "^4.3.1",
     "@types/node": "22.15.21",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
