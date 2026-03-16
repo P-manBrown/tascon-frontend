@@ -16,7 +16,7 @@
     "@heroicons/react": "^2.2.0",
     "@hookform/resolvers": "^5.2.2",
     "@next/bundle-analyzer": "^15.3.2",
-    "@preact/signals": "^2.7.0",
+    "@preact/signals": "^2.8.2",
     "@schedule-x/calendar": "^4.2.0",
     "@schedule-x/events-service": "^4.3.0",
     "@schedule-x/react": "^4.1.0",
