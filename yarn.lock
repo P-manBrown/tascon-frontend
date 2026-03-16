@@ -2858,10 +2858,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@schedule-x/theme-default@npm:^4.1.0":
-  version: 4.1.0
-  resolution: "@schedule-x/theme-default@npm:4.1.0"
-  checksum: 10/666d117c19956f07a2ae7adf317fbc79b3312547b04f73a50ebbea42a85d46acf613ad3c0492c2d7fe3108a853c2274670a0155320b898bb37918a55f77aaff8
+"@schedule-x/theme-default@npm:^4.3.1":
+  version: 4.3.1
+  resolution: "@schedule-x/theme-default@npm:4.3.1"
+  checksum: 10/4dbb6c6f095d63669e072fa24f490ebc553e527195022c9bb93b232add9a5a3f36e99b8f982a16d7afffd1298afb14a3c91bfd1ca782d7fb9705f1e37630050b
   languageName: node
   linkType: hard
 
@@ -11737,7 +11737,7 @@ __metadata:
     "@schedule-x/calendar": "npm:^4.2.0"
     "@schedule-x/events-service": "npm:^4.3.0"
     "@schedule-x/react": "npm:^4.1.0"
-    "@schedule-x/theme-default": "npm:^4.1.0"
+    "@schedule-x/theme-default": "npm:^4.3.1"
     "@tailwindcss/postcss": "npm:^4.1.17"
     "@types/node": "npm:22.15.21"
     "@types/react": "npm:19.2.14"
