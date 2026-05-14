@@ -1,13 +1,11 @@
 {
   "$schema": "https://unpkg.com/knip@5/schema.json",
-  "ignore": [".pnp.*"],
+  "ignoreUnresolved": ["\\.pnp\\.cjs$"],
   "ignoreDependencies": [
     "@evilmartians/lefthook",
     "@markuplint/jsx-parser",
     "@markuplint/react-spec",
     "client-only",
-    "eslint-config-next",
-    "eslint-config-prettier",
     "pino-pretty"
   ]
 }
