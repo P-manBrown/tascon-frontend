@@ -5,7 +5,7 @@ import { cache } from "react";
 import { z } from "zod";
 import { paginationDataSchema } from "@/schemas/response/pagination";
 import { taskBaseSchema } from "@/schemas/response/task";
-import { taskGroupSchema } from "@/schemas/response/task-group";
+import { taskGroupBaseSchema } from "@/schemas/response/task-group";
 import { fetchData } from "@/utils/api/fetch-data";
 import { getBearerToken } from "@/utils/cookie/bearer-token";
 import { HttpError } from "@/utils/error/custom/http-error";
@@ -17,7 +17,7 @@ import { validateData } from "@/utils/validation/validate-data";
 const dataSchema = z.object({
   tasks: z.array(
     taskBaseSchema.shape.task.extend({
-      task_group: taskGroupSchema.shape.task_group.optional(),
+      task_group: taskGroupBaseSchema.shape.task_group.optional(),
     }),
   ),
 });

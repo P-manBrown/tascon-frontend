@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { taskGroupSchema } from "@/schemas/response/task-group";
+import { taskGroupBaseSchema } from "@/schemas/response/task-group";
 import { userSchema } from "@/schemas/response/user";
 
 const ownerSchema = userSchema.shape.user.omit({
@@ -8,7 +8,7 @@ const ownerSchema = userSchema.shape.user.omit({
   block: true,
 });
 
-const taskGroupWithOwnerSchema = taskGroupSchema.shape.task_group.extend({
+const taskGroupWithOwnerSchema = taskGroupBaseSchema.shape.task_group.extend({
   owner: ownerSchema,
 });
 
