@@ -21,16 +21,13 @@ pre-commit:
       glob: 'src/**/*.{js,jsx,ts,tsx}'
       run: grep -nFH 'logger.trace' {staged_files} && exit 1 || exit 0
       fail_text: "ERROR: Remove 'logger.trace' before committing."
-    knip-files-exports:
-      run: yarn knip --include files --exports
-      fail_text: 'Read the report above.'
     protect-branch:
       run: git branch --show-current | tee /dev/tty | grep -Eqvx 'main'
       fail_text: "ERROR: Do NOT commit directly to 'main' branch."
 pre-push:
   commands:
-    knip-dependencies:
-      run: yarn knip --dependencies
+    knip:
+      run: yarn knip
       fail_text: 'Read the report above.'
     check-git-clean:
       run: test -z "$(git status --porcelain | tee /dev/tty)"
