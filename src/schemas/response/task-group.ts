@@ -2,7 +2,6 @@ import { z } from "zod";
 import { userSchema } from "@/schemas/response/user";
 
 const sharedUserSchema = userSchema.shape.user.omit({
-  avatar_url: true,
   contact: true,
   is_suggested: true,
   block: true,
