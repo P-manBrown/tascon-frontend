@@ -13,6 +13,8 @@ const taskGroupWithOwnerSchema = taskGroupBaseSchema.shape.task_group.extend({
 });
 
 export const taskGroupShareSchema = z.object({
-  id: z.number(),
-  task_group: taskGroupWithOwnerSchema,
+  task_group_share: z.object({
+    id: z.number(),
+    task_group: taskGroupWithOwnerSchema,
+  }),
 });
