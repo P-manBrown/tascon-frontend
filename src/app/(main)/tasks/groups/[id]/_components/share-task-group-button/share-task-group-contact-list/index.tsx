@@ -13,6 +13,7 @@ type Props = {
 };
 
 const cardsLayoutClasses = "grid gap-4 lg:grid-cols-2 xl:grid-cols-3";
+const contactListCardCount = 20;
 
 export default async function ShareTaskGroupContactList({
   taskGroupId,
@@ -25,7 +26,7 @@ export default async function ShareTaskGroupContactList({
   const { contacts, pagination } = await getContacts({
     page,
     currentUserId: currentUser.id.toString(),
-    limit: "20",
+    limit: contactListCardCount.toString(),
   });
 
   const sharedUserIds = new Set(taskGroup.sharedUsers.map((user) => user.id));
@@ -66,11 +67,13 @@ export default async function ShareTaskGroupContactList({
 export function LoadingShareTaskGroupContactList() {
   return (
     <div className={cardsLayoutClasses}>
-      {Array.from({ length: 3 }, (_, index) => index).map((index) => (
-        <LoadingUserCard key={index}>
-          <LoadingContactNote />
-        </LoadingUserCard>
-      ))}
+      {Array.from({ length: contactListCardCount }, (_, index) => index).map(
+        (index) => (
+          <LoadingUserCard key={index}>
+            <LoadingContactNote />
+          </LoadingUserCard>
+        ),
+      )}
     </div>
   );
 }
