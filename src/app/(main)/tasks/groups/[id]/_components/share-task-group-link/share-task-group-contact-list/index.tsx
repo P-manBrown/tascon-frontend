@@ -14,6 +14,7 @@ type Props = {
 
 const cardsLayoutClasses = "grid gap-4 lg:grid-cols-2 xl:grid-cols-3";
 const paginationLayoutClasses = "mt-6";
+const buttonLayoutClasses = "relative z-10 mt-4";
 const contactListCardCount = 20;
 
 export default async function ShareTaskGroupContactList({
@@ -49,6 +50,7 @@ export default async function ShareTaskGroupContactList({
               taskGroupId={taskGroupId}
               taskGroupName={taskGroup.name}
               isShared={sharedUserIds.has(contact.contactUser.id)}
+              buttonLayoutClasses={buttonLayoutClasses}
             />
           ))}
         </div>
@@ -73,6 +75,9 @@ export function LoadingShareTaskGroupContactList() {
           (index) => (
             <LoadingUserCard key={index}>
               <LoadingContactNote />
+              <div className={buttonLayoutClasses}>
+                <div className="skeleton shape-btn" />
+              </div>
             </LoadingUserCard>
           ),
         )}
