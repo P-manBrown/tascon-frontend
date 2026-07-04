@@ -1,7 +1,7 @@
 import { LoadingContactNote } from "@/components/cards/contact-cards/contact-note";
 import { LoadingUserCard } from "@/components/cards/user-card";
 import { EmptyList } from "@/components/empty-list";
-import { Pagination } from "@/components/paginations";
+import { LoadingPagination, Pagination } from "@/components/paginations";
 import { getContacts } from "@/utils/api/get-contacts";
 import { getTaskGroup } from "@/utils/api/get-task-group";
 import { getCurrentUser } from "@/utils/api/server/get-current-user";
@@ -13,6 +13,7 @@ type Props = {
 };
 
 const cardsLayoutClasses = "grid gap-4 lg:grid-cols-2 xl:grid-cols-3";
+const paginationLayoutClasses = "mt-6";
 const contactListCardCount = 20;
 
 export default async function ShareTaskGroupContactList({
@@ -52,7 +53,7 @@ export default async function ShareTaskGroupContactList({
           ))}
         </div>
       )}
-      <div className="mt-6">
+      <div className={paginationLayoutClasses}>
         <Pagination
           currentPage={pagination.currentPage}
           pageItems={contacts.length}
@@ -66,14 +67,19 @@ export default async function ShareTaskGroupContactList({
 
 export function LoadingShareTaskGroupContactList() {
   return (
-    <div className={cardsLayoutClasses}>
-      {Array.from({ length: contactListCardCount }, (_, index) => index).map(
-        (index) => (
-          <LoadingUserCard key={index}>
-            <LoadingContactNote />
-          </LoadingUserCard>
-        ),
-      )}
+    <div>
+      <div className={cardsLayoutClasses}>
+        {Array.from({ length: contactListCardCount }, (_, index) => index).map(
+          (index) => (
+            <LoadingUserCard key={index}>
+              <LoadingContactNote />
+            </LoadingUserCard>
+          ),
+        )}
+      </div>
+      <div className={paginationLayoutClasses}>
+        <LoadingPagination />
+      </div>
     </div>
   );
 }
