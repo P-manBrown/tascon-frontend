@@ -25,6 +25,7 @@ type Props = {
   taskGroupId: string;
   taskGroupName: string;
   isShared: boolean;
+  buttonLayoutClasses: string;
 };
 
 export function ShareTaskGroupContactCard({
@@ -34,6 +35,7 @@ export function ShareTaskGroupContactCard({
   taskGroupId,
   taskGroupName,
   isShared,
+  buttonLayoutClasses,
 }: Props) {
   const [isPending, startTransition] = useTransition();
   const { openErrorSnackbar } = useErrorSnackbar();
@@ -78,7 +80,7 @@ export function ShareTaskGroupContactCard({
       avatarUrl={contactUser.avatarUrl}
     >
       <ContactNote note={note} />
-      <div className="relative z-10 mt-4">
+      <div className={buttonLayoutClasses}>
         {isShared ? (
           <div className="flex items-center gap-1 font-bold text-green-700">
             <CheckIcon className="size-5" />
