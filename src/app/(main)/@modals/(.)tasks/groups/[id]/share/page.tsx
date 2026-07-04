@@ -16,7 +16,7 @@ export default async function ShareTaskGroup({ params, searchParams }: Props) {
   const [{ id }, { page }] = await Promise.all([params, searchParams]);
 
   return (
-    <Suspense fallback={<LoadingShareTaskGroupContactList />}>
+    <Suspense key={page} fallback={<LoadingShareTaskGroupContactList />}>
       <ShareTaskGroupContactList taskGroupId={id} page={page ?? "1"} />
     </Suspense>
   );
