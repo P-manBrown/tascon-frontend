@@ -35,7 +35,7 @@ export default async function ShareTaskGroupContactList({
     <div>
       {contacts.length === 0 ? (
         <div className="my-28 md:my-48">
-          <EmptyList description="コンタクトが登録されていません" />
+          <EmptyList description="ユーザーが登録されていません" />
         </div>
       ) : (
         <div className={cardsLayoutClasses}>
