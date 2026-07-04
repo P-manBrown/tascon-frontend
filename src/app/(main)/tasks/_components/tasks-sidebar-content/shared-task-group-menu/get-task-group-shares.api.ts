@@ -12,7 +12,7 @@ import { getRequestId } from "@/utils/request-id/get-request-id";
 import { validateData } from "@/utils/validation/validate-data";
 
 const dataSchema = z.object({
-  task_group_shares: z.array(taskGroupShareSchema),
+  task_group_shares: z.array(taskGroupShareSchema.shape.task_group_share),
 });
 
 export const getTaskGroupShares = cache(async () => {
