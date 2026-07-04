@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import ShareTaskGroupContactList, {
   LoadingShareTaskGroupContactList,
-} from "@/app/(main)/tasks/groups/[id]/_components/share-task-group-button/share-task-group-contact-list";
+} from "@/app/(main)/tasks/groups/[id]/_components/share-task-group-link/share-task-group-contact-list";
 
 type Props = {
   params: Promise<{

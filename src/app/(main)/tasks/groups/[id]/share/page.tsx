@@ -4,7 +4,7 @@ import { ScrollAnchor } from "@/components/scroll-anchor";
 import { getTaskGroup } from "@/utils/api/get-task-group";
 import ShareTaskGroupContactList, {
   LoadingShareTaskGroupContactList,
-} from "../_components/share-task-group-button/share-task-group-contact-list";
+} from "../_components/share-task-group-link/share-task-group-contact-list";
 
 type Props = {
   params: Promise<{ id: string }>;
