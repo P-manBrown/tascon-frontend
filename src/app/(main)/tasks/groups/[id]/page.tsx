@@ -8,9 +8,9 @@ import { DesktopTaskCalendarLayout } from "@/components/layouts/task-calendar-la
 import { TaskListLayout } from "@/components/layouts/task-list-layout";
 import TasksLayout from "@/components/layouts/tasks-layout";
 import { LoadingTaskList, TaskList } from "@/components/tasks/task-list";
-import ShareTaskGroupButton, {
-  LoadingShareTaskGroupButton,
-} from "./_components/share-task-group-button";
+import ShareTaskGroupLink, {
+  LoadingShareTaskGroupLink,
+} from "./_components/share-task-group-link";
 import { ShowTaskGroupDetailModalButton } from "./_components/show-task-group-detail-modal-button";
 import { TaskGroupDetail } from "./_components/task-group-detail";
 import {
@@ -48,8 +48,8 @@ export default async function TaskGroup(props: Props) {
           </Suspense>
         </div>
         <div className="flex items-center gap-x-2">
-          <Suspense fallback={<LoadingShareTaskGroupButton />}>
-            <ShareTaskGroupButton taskGroupId={id} />
+          <Suspense fallback={<LoadingShareTaskGroupLink />}>
+            <ShareTaskGroupLink taskGroupId={id} />
           </Suspense>
           <ShowTaskGroupDetailModalButton
             modalContent={<TaskGroupDetail id={id} />}
