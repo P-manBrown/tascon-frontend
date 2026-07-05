@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { TaskGroupNameHeading } from "@/components/headings/task-group-name-heading";
 import TasksLayout from "@/components/layouts/tasks-layout";
 import { ScrollAnchor } from "@/components/scroll-anchor";
 import { getTaskGroup } from "@/utils/api/get-task-group";
@@ -22,7 +23,9 @@ export default async function ShareTaskGroupPage({
   return (
     <TasksLayout>
       <ScrollAnchor page={page ?? "1"} />
-      <h1 className="font-bold text-lg">{taskGroup.name}を共有</h1>
+      <div className="mb-3">
+        <TaskGroupNameHeading>{`共有：${taskGroup.name}`}</TaskGroupNameHeading>
+      </div>
       <Suspense key={page} fallback={<LoadingShareTaskGroupContactList />}>
         <ShareTaskGroupContactList taskGroupId={id} page={page} />
       </Suspense>
