@@ -3,6 +3,8 @@
   "dockerComposeFile": ["../compose.yml", "./compose.devcontainer.yml"],
   "service": "frontend",
   "workspaceFolder": "/home/node/tascon-frontend",
+  // TEMP: without remoteUser, Zed connects as root
+  "remoteUser": "node",
   "postCreateCommand": "bash ./.devcontainer/postCreateCommand.sh",
   "features": {
     "ghcr.io/P-manBrown/devcontainer-features/common-utils:2": {
