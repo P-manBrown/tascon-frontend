@@ -100,6 +100,9 @@
         },
         "commitlint.preferBundledLibraries": true
       }
+    },
+    "zed": {
+      "extensions": ["dockerfile", "docker-compose", "env"]
     }
   }
 }
