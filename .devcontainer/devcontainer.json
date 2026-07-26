@@ -12,6 +12,7 @@
       "upgradePackages": false
     },
     "ghcr.io/P-manBrown/devcontainer-features/git-from-src-fast:1": {},
+    "ghcr.io/P-manBrown/devcontainer-features/git-spice:1": {},
     "ghcr.io/devcontainers/features/github-cli:1": {}
   },
   "customizations": {
