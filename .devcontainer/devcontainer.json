@@ -14,7 +14,8 @@
     "ghcr.io/P-manBrown/devcontainer-features/git-from-src-fast:1": {},
     "ghcr.io/P-manBrown/devcontainer-features/git-spice:1": {},
     "ghcr.io/devcontainers/features/github-cli:1": {},
-    "ghcr.io/P-manBrown/devcontainer-features/claude-code:1": {}
+    "ghcr.io/P-manBrown/devcontainer-features/claude-code:1": {},
+    "ghcr.io/P-manBrown/devcontainer-features/codex:1": {}
   },
   "customizations": {
     "vscode": {
