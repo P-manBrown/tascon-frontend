@@ -2,7 +2,6 @@ services:
   frontend:
     volumes:
       - shell-log:/home/${FRONTEND_USER_NAME}/shell_log
-      - codebase-memory-mcp-cache:/home/${FRONTEND_USER_NAME}/.cache/codebase-memory-mcp
     command: bash -c 'while sleep 1000; do :; done'
     environment:
       - COREPACK_ENABLE_STRICT=0
@@ -10,4 +9,3 @@ services:
       - ./.devcontainer/environment/gh-token.env
 volumes:
   shell-log:
-  codebase-memory-mcp-cache:
