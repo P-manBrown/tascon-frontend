@@ -19,7 +19,10 @@
     "ghcr.io/P-manBrown/devcontainer-features/codebase-memory-mcp:1": {
       "autoIndex": true
     },
-    "ghcr.io/devcontainers-extra/features/bun:1": {}
+    "ghcr.io/devcontainers-extra/features/bun:1": {},
+    "ghcr.io/P-manBrown/devcontainer-features/rtk:1": {
+      "claudeCodeHook": true
+    }
   },
   "customizations": {
     "vscode": {
