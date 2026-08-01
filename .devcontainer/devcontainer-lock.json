@@ -1,5 +1,10 @@
 {
   "features": {
+    "ghcr.io/devcontainers-extra/features/bun:1": {
+      "version": "1.1.0",
+      "resolved": "ghcr.io/devcontainers-extra/features/bun@sha256:0624284ecaead9dd4c6654616a7f939cfa4ebcbc60593700a74e35b1767befa5",
+      "integrity": "sha256:0624284ecaead9dd4c6654616a7f939cfa4ebcbc60593700a74e35b1767befa5"
+    },
     "ghcr.io/devcontainers/features/github-cli:1": {
       "version": "1.1.0",
       "resolved": "ghcr.io/devcontainers/features/github-cli@sha256:d22f50b70ed75339b4eed1ba9ecde3a1791f90e88d37936517e3bace0bbad671",
@@ -10,10 +15,15 @@
       "resolved": "ghcr.io/p-manbrown/devcontainer-features/claude-code@sha256:4c967a1c532f9ab494d899683eea695a2c33815ed8f33d7a8a9c7cf20c01d8f8",
       "integrity": "sha256:4c967a1c532f9ab494d899683eea695a2c33815ed8f33d7a8a9c7cf20c01d8f8"
     },
-    "ghcr.io/P-manBrown/devcontainer-features/codex:1": {
-      "version": "1.0.3",
-      "resolved": "ghcr.io/p-manbrown/devcontainer-features/codex@sha256:ac527329dcdea8054e86362debf51c396d5f1e1569c42009b017b2927b56a8cd",
-      "integrity": "sha256:ac527329dcdea8054e86362debf51c396d5f1e1569c42009b017b2927b56a8cd"
+    "ghcr.io/P-manBrown/devcontainer-features/codebase-memory-mcp:1": {
+      "version": "1.0.0",
+      "resolved": "ghcr.io/p-manbrown/devcontainer-features/codebase-memory-mcp@sha256:9333228d8e57b46e01714eec843c325aca4e424a5c0d82757e90e59d62e0ffc7",
+      "integrity": "sha256:9333228d8e57b46e01714eec843c325aca4e424a5c0d82757e90e59d62e0ffc7"
+    },
+    "ghcr.io/P-manBrown/devcontainer-features/codex:2": {
+      "version": "2.0.0",
+      "resolved": "ghcr.io/p-manbrown/devcontainer-features/codex@sha256:b3a5b7a6bae74f8cd896545a6225a298a5b10b04ec2e19ba049a70930379f935",
+      "integrity": "sha256:b3a5b7a6bae74f8cd896545a6225a298a5b10b04ec2e19ba049a70930379f935"
     },
     "ghcr.io/P-manBrown/devcontainer-features/common-utils:2": {
       "version": "2.0.8",
@@ -29,6 +39,11 @@
       "version": "1.0.0",
       "resolved": "ghcr.io/p-manbrown/devcontainer-features/git-spice@sha256:dbdfd638f1eec31bcd427674186b4eb860062f2dd9e54d120ce8928b9d75cf78",
       "integrity": "sha256:dbdfd638f1eec31bcd427674186b4eb860062f2dd9e54d120ce8928b9d75cf78"
+    },
+    "ghcr.io/P-manBrown/devcontainer-features/rtk:1": {
+      "version": "1.0.1",
+      "resolved": "ghcr.io/p-manbrown/devcontainer-features/rtk@sha256:2f2fc1f7c041070cfca2ddadd8fafab616b1481cf6f5a57302a02c40fb6758d0",
+      "integrity": "sha256:2f2fc1f7c041070cfca2ddadd8fafab616b1481cf6f5a57302a02c40fb6758d0"
     }
   }
 }
