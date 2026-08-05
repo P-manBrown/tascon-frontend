@@ -7,11 +7,11 @@
   "remoteUser": "node",
   "postCreateCommand": "bash ./.devcontainer/postCreateCommand.sh",
   "features": {
-    "ghcr.io/P-manBrown/devcontainer-features/common-utils:2": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
       "configureZshAsDefaultShell": true,
       "upgradePackages": false
     },
-    "ghcr.io/P-manBrown/devcontainer-features/git-from-src-fast:1": {},
+    "ghcr.io/devcontainers/features/git:1": {},
     "ghcr.io/P-manBrown/devcontainer-features/git-spice:1": {},
     "ghcr.io/devcontainers/features/github-cli:1": {},
     "ghcr.io/P-manBrown/devcontainer-features/claude-code:1": {},
