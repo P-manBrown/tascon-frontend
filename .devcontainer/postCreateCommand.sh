@@ -30,6 +30,7 @@ git config --local core.editor 'zed --wait'
 
 echo 'Setting up GitHub CLI...'
 gh config set editor 'zed --wait'
+gh skill install github/gh-stack
 
 echo 'Setting up Lefthook...'
 yarn lefthook install
