@@ -2,6 +2,8 @@ services:
   frontend:
     volumes:
       - shell-log:/home/${FRONTEND_USER_NAME}/shell_log
+    ports:
+      - '9749:9749'
     command: bash -c 'while sleep 1000; do :; done'
     env_file:
       - ./.devcontainer/environment/gh-token.env
