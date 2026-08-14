@@ -3,6 +3,8 @@ services:
     volumes:
       - shell-log:/home/${FRONTEND_USER_NAME}/shell_log
     command: bash -c 'while sleep 1000; do :; done'
+    environment:
+      - COREPACK_ENABLE_STRICT=0
     env_file:
       - ./.devcontainer/environment/gh-token.env
 volumes:
