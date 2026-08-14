@@ -5,6 +5,7 @@
   "workspaceFolder": "/home/node/tascon-frontend",
   // TEMP: without remoteUser, Zed connects as root
   "remoteUser": "node",
+  "overrideCommand": true,
   "postCreateCommand": "bash ./.devcontainer/postCreateCommand.sh",
   "features": {
     "ghcr.io/devcontainers/features/common-utils:2": {
