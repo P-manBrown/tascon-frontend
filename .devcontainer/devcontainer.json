@@ -15,7 +15,14 @@
     "ghcr.io/P-manBrown/devcontainer-features/git-spice:1": {},
     "ghcr.io/devcontainers/features/github-cli:1": {},
     "ghcr.io/P-manBrown/devcontainer-features/claude-code:1": {},
-    "ghcr.io/P-manBrown/devcontainer-features/codex:1": {}
+    "ghcr.io/P-manBrown/devcontainer-features/codex:2": {},
+    "ghcr.io/P-manBrown/devcontainer-features/codebase-memory-mcp:1": {
+      "autoIndex": true
+    },
+    "ghcr.io/devcontainers-extra/features/bun:1": {},
+    "ghcr.io/P-manBrown/devcontainer-features/rtk:1": {
+      "claudeCodeHook": true
+    }
   },
   "customizations": {
     "vscode": {
