@@ -5,6 +5,11 @@
       "resolved": "ghcr.io/devcontainers/features/github-cli@sha256:d22f50b70ed75339b4eed1ba9ecde3a1791f90e88d37936517e3bace0bbad671",
       "integrity": "sha256:d22f50b70ed75339b4eed1ba9ecde3a1791f90e88d37936517e3bace0bbad671"
     },
+    "ghcr.io/P-manBrown/devcontainer-features/claude-code:1": {
+      "version": "1.0.2",
+      "resolved": "ghcr.io/p-manbrown/devcontainer-features/claude-code@sha256:4c967a1c532f9ab494d899683eea695a2c33815ed8f33d7a8a9c7cf20c01d8f8",
+      "integrity": "sha256:4c967a1c532f9ab494d899683eea695a2c33815ed8f33d7a8a9c7cf20c01d8f8"
+    },
     "ghcr.io/P-manBrown/devcontainer-features/common-utils:2": {
       "version": "2.0.8",
       "resolved": "ghcr.io/p-manbrown/devcontainer-features/common-utils@sha256:62c2b1275270d9e1708bae3c05d1a27151fc67563bd3735135a4656425854923",
