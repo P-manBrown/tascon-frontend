@@ -120,7 +120,7 @@
       }
     },
     "zed": {
-      "extensions": ["dockerfile", "docker-compose", "env"]
+      "extensions": ["dockerfile", "docker-compose", "env", "biome"]
     }
   }
 }
