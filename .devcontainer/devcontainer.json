@@ -22,9 +22,9 @@
     },
     "ghcr.io/P-manBrown/devcontainer-features/claude-code:1": {},
     "ghcr.io/P-manBrown/devcontainer-features/codex:2": {},
-    "ghcr.io/P-manBrown/devcontainer-features/codebase-memory-mcp:1": {
+    "ghcr.io/P-manBrown/devcontainer-features/codebase-memory-mcp:2": {
       "autoIndex": true,
-      "ui": true
+      "portRelay": true
     },
     "ghcr.io/devcontainers-extra/features/bun:1": {},
     "ghcr.io/P-manBrown/devcontainer-features/rtk:1": {
