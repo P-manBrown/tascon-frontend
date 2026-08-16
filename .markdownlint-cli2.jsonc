@@ -7,5 +7,5 @@
     "MD033": false,
   },
   "gitignore": true,
-  "ignores": [".github/**/*"],
+  "ignores": [".github/**/*", ".claude/skills/gh-stack/**/*"],
 }
