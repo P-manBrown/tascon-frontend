@@ -3,7 +3,7 @@ services:
     volumes:
       - shell-log:/home/${FRONTEND_USER_NAME}/shell_log
     ports:
-      - '127.0.0.1:${CBM_UI_PORT:-9750}:9749'
+      - '127.0.0.1:${CBM_UI_PORT:-9750}:${CBM_UI_PORT:-9750}'
     command: bash -c 'while sleep 1000; do :; done'
     env_file:
       - ./.devcontainer/environment/gh-token.env
