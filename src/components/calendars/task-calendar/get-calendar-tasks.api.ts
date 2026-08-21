@@ -3,7 +3,7 @@
 import camelcaseKeys from "camelcase-keys";
 import { z } from "zod";
 import { taskBaseSchema } from "@/schemas/response/task";
-import { taskGroupSchema } from "@/schemas/response/task-group";
+import { taskGroupBaseSchema } from "@/schemas/response/task-group";
 import { fetchData } from "@/utils/api/fetch-data";
 import { getBearerToken } from "@/utils/cookie/bearer-token";
 import { getRequestId } from "@/utils/request-id/get-request-id";
@@ -14,7 +14,7 @@ const dataSchema = z.object({
     taskBaseSchema.shape.task.extend({
       starts_at: z.string(),
       ends_at: z.string(),
-      task_group: taskGroupSchema.shape.task_group.optional(),
+      task_group: taskGroupBaseSchema.shape.task_group.optional(),
     }),
   ),
 });
