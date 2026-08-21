@@ -1,20 +1,20 @@
-import { Suspense } from 'react'
-import { DetailItemHeading } from '@/components/headings/detail-item-heading'
-import { DetailItemContentLayout } from '@/components/layouts/detail-item-content-layout'
-import { DetailItemHeadingLayout } from '@/components/layouts/detail-item-heading-layout'
-import { Tag } from '@/components/tag'
+import { Suspense } from "react";
+import { DetailItemHeading } from "@/components/headings/detail-item-heading";
+import { DetailItemContentLayout } from "@/components/layouts/detail-item-content-layout";
+import { DetailItemHeadingLayout } from "@/components/layouts/detail-item-heading-layout";
+import { Tag } from "@/components/tag";
 import {
   CurrentUserChangePasswordFormShowButton,
   LoadingCurrentUserChangePasswordFormShowButton,
-} from './current-user-change-password-form-show-button'
-import { EditableAvatar, LoadingEditableAvatar } from './editable-avatar'
-import { EditableBio, LoadingEditableBio } from './editable-bio'
-import { LoadingEditableEmail, EditableEmail } from './editable-email'
-import { EditableName, LoadingEditableName } from './editable-name'
+} from "./current-user-change-password-form-show-button";
+import { EditableAvatar, LoadingEditableAvatar } from "./editable-avatar";
+import { EditableBio, LoadingEditableBio } from "./editable-bio";
+import { EditableEmail, LoadingEditableEmail } from "./editable-email";
+import { EditableName, LoadingEditableName } from "./editable-name";
 import {
   LoadingPrivateModeSwitch,
   PrivateModeSwitch,
-} from './private-mode-switch'
+} from "./private-mode-switch";
 
 export function CurrentUserInfo() {
   return (
@@ -58,5 +58,5 @@ export function CurrentUserInfo() {
         </DetailItemContentLayout>
       </div>
     </>
-  )
+  );
 }

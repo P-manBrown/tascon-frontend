@@ -1,9 +1,9 @@
-import { Suspense } from 'react'
-import { UsersSidebar } from './_components/users-sidebar'
+import { Suspense } from "react";
+import { UsersSidebar } from "./_components/users-sidebar";
 
 type Props = {
-  children: React.ReactNode
-}
+  children: React.ReactNode;
+};
 
 export default async function UsersLayout({ children }: Props) {
   return (
@@ -15,5 +15,5 @@ export default async function UsersLayout({ children }: Props) {
         {children}
       </main>
     </div>
-  )
+  );
 }

@@ -1,30 +1,30 @@
-'use client'
+"use client";
 
-import { XMarkIcon } from '@heroicons/react/24/solid'
-import { useRouter, useSearchParams } from 'next/navigation'
-import { useId, useState } from 'react'
-import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
-import { Button } from '@/components/buttons/button'
-import { IconButton } from '@/components/buttons/icon-button'
-import { ModalContent } from '@/components/contents/modal-content'
-import { IconMessage } from '@/components/icon-message'
-import { Modal } from '@/components/modal'
-import { useModal } from '@/components/modal/use-modal'
-import { useRedirectLoginPath } from '@/utils/login-path/use-redirect-login-path'
-import { cleanupLocalStorage } from './cleanup-local-storage'
-import { deleteAccount } from './delete-account.api'
+import { XMarkIcon } from "@heroicons/react/24/solid";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useId, useState } from "react";
+import { useErrorSnackbar } from "@/app/_components/snackbars/snackbar/use-error-snackbar";
+import { Button } from "@/components/buttons/button";
+import { IconButton } from "@/components/buttons/icon-button";
+import { ModalContent } from "@/components/contents/modal-content";
+import { IconMessage } from "@/components/icon-message";
+import { Modal } from "@/components/modal";
+import { useModal } from "@/components/modal/use-modal";
+import { useRedirectLoginPath } from "@/utils/login-path/use-redirect-login-path";
+import { cleanupLocalStorage } from "./cleanup-local-storage";
+import { deleteAccount } from "./delete-account.api";
 
 type Props = {
-  currentUserId: string
-}
+  currentUserId: string;
+};
 
 export function DeleteAccountButton({ currentUserId }: Props) {
-  const router = useRouter()
-  const id = useId()
-  const searchParams = useSearchParams()
-  const redirectLoginPath = useRedirectLoginPath({ searchParams })
-  const [isDeletingAccount, setIsDeletingAccount] = useState(false)
-  const { openErrorSnackbar } = useErrorSnackbar()
+  const router = useRouter();
+  const id = useId();
+  const searchParams = useSearchParams();
+  const redirectLoginPath = useRedirectLoginPath({ searchParams });
+  const [isDeletingAccount, setIsDeletingAccount] = useState(false);
+  const { openErrorSnackbar } = useErrorSnackbar();
   const {
     shouldMount,
     isOpen,
@@ -33,31 +33,35 @@ export function DeleteAccountButton({ currentUserId }: Props) {
     unmountModal,
     handleAnimationEnd,
     handleCancel,
-  } = useModal()
+  } = useModal();
 
   const handleOkClick = async () => {
-    setIsDeletingAccount(true)
-    const result = await deleteAccount()
-    if (result.status === 'error') {
-      if (result.name === 'HttpError' && result.statusCode === 404) {
-        router.push(redirectLoginPath)
-        router.refresh()
+    setIsDeletingAccount(true);
+    const result = await deleteAccount();
+    if (result.status === "error") {
+      if (result.name === "HttpError" && result.statusCode === 404) {
+        router.push(redirectLoginPath);
+        router.refresh();
       } else {
-        openErrorSnackbar(result)
+        openErrorSnackbar(result);
       }
     } else {
-      cleanupLocalStorage(currentUserId)
-      closeModal()
-      window.open('https://forms.gle/F9d8j2XnjT2mAfRc9', '_blank', 'noreferrer')
-      router.push('/')
+      cleanupLocalStorage(currentUserId);
+      closeModal();
+      window.open(
+        "https://forms.gle/F9d8j2XnjT2mAfRc9",
+        "_blank",
+        "noreferrer",
+      );
+      router.push("/");
     }
-    setIsDeletingAccount(false)
-  }
+    setIsDeletingAccount(false);
+  };
 
   const handleClose = (ev: React.SyntheticEvent<HTMLDialogElement, Event>) => {
-    ev.stopPropagation()
-    unmountModal()
-  }
+    ev.stopPropagation();
+    unmountModal();
+  };
 
   return (
     <>
@@ -91,7 +95,7 @@ export function DeleteAccountButton({ currentUserId }: Props) {
                   id={`${id}-confirm-delete-account-button`}
                   type="button"
                   className="btn-danger"
-                  status={isDeletingAccount ? 'pending' : 'idle'}
+                  status={isDeletingAccount ? "pending" : "idle"}
                   onClick={handleOkClick}
                 >
                   退会
@@ -109,5 +113,5 @@ export function DeleteAccountButton({ currentUserId }: Props) {
         </Modal>
       )}
     </>
-  )
+  );
 }

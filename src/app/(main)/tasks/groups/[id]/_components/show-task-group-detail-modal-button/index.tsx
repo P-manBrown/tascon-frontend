@@ -1,14 +1,14 @@
-'use client'
+"use client";
 
-import { EllipsisHorizontalIcon, XMarkIcon } from '@heroicons/react/24/solid'
-import { IconButton } from '@/components/buttons/icon-button'
-import { ModalContent } from '@/components/contents/modal-content'
-import { Modal } from '@/components/modal'
-import { useFormModal } from '@/components/modal/use-form-modal'
+import { EllipsisHorizontalIcon, XMarkIcon } from "@heroicons/react/24/solid";
+import { IconButton } from "@/components/buttons/icon-button";
+import { ModalContent } from "@/components/contents/modal-content";
+import { Modal } from "@/components/modal";
+import { useFormModal } from "@/components/modal/use-form-modal";
 
 type Props = {
-  modalContent: React.ReactNode
-}
+  modalContent: React.ReactNode;
+};
 
 export function ShowTaskGroupDetailModalButton({ modalContent }: Props) {
   const {
@@ -24,7 +24,7 @@ export function ShowTaskGroupDetailModalButton({ modalContent }: Props) {
     handleMouseDownCapture,
     handleBlurCapture,
     handleClickCapture,
-  } = useFormModal({ initialIsOpen: false })
+  } = useFormModal({ initialIsOpen: false });
 
   return (
     <>
@@ -66,5 +66,5 @@ export function ShowTaskGroupDetailModalButton({ modalContent }: Props) {
         </Modal>
       )}
     </>
-  )
+  );
 }

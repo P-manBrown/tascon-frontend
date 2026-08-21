@@ -1,32 +1,32 @@
-import { useState } from 'react'
-import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
-import { useSnackbarsStore } from '@/app/_components/snackbars/use-snackbars-store'
-import { Button } from '@/components/buttons/button'
-import { HorizontalRule } from '@/components/horizontal-rule'
-import { IconMessage } from '@/components/icon-message'
-import { requestResetPasswordEmail } from '@/utils/api/request-reset-password-email'
+import { useState } from "react";
+import { useErrorSnackbar } from "@/app/_components/snackbars/snackbar/use-error-snackbar";
+import { useSnackbarsStore } from "@/app/_components/snackbars/use-snackbars-store";
+import { Button } from "@/components/buttons/button";
+import { HorizontalRule } from "@/components/horizontal-rule";
+import { IconMessage } from "@/components/icon-message";
+import { requestResetPasswordEmail } from "@/utils/api/request-reset-password-email";
 
 type Props = {
-  email: string
-}
+  email: string;
+};
 
 export function RequestResetPasswordEmailSuccessMessage({ email }: Props) {
-  const [isSending, setIsSending] = useState(false)
-  const { openErrorSnackbar } = useErrorSnackbar()
-  const openSnackbar = useSnackbarsStore((state) => state.openSnackbar)
+  const [isSending, setIsSending] = useState(false);
+  const { openErrorSnackbar } = useErrorSnackbar();
+  const openSnackbar = useSnackbarsStore((state) => state.openSnackbar);
   const handleClick = async () => {
-    setIsSending(true)
-    const result = await requestResetPasswordEmail({ email })
-    if (result.status === 'error') {
-      openErrorSnackbar(result)
+    setIsSending(true);
+    const result = await requestResetPasswordEmail({ email });
+    if (result.status === "error") {
+      openErrorSnackbar(result);
     } else {
       openSnackbar({
-        severity: 'success',
-        message: '再設定用メールを再送信しました。',
-      })
+        severity: "success",
+        message: "再設定用メールを再送信しました。",
+      });
     }
-    setIsSending(false)
-  }
+    setIsSending(false);
+  };
 
   return (
     <IconMessage severity="success" title="再設定用メール送信完了">
@@ -40,12 +40,12 @@ export function RequestResetPasswordEmailSuccessMessage({ email }: Props) {
         <Button
           type="button"
           className="btn-primary"
-          status={isSending ? 'pending' : 'idle'}
+          status={isSending ? "pending" : "idle"}
           onClick={handleClick}
         >
           再設定用メールを再送信
         </Button>
       </div>
     </IconMessage>
-  )
+  );
 }

@@ -1,11 +1,11 @@
-import { HorizontalRule } from '@/components/horizontal-rule'
-import { ReportIssueLink } from '@/components/links/report-issue-link'
+import { HorizontalRule } from "@/components/horizontal-rule";
+import { ReportIssueLink } from "@/components/links/report-issue-link";
 
 type Props = {
-  message: string
-  link?: React.ReactElement
-  children?: React.ReactNode
-}
+  message: string;
+  link?: React.ReactElement;
+  children?: React.ReactNode;
+};
 
 export function NotFoundContent({ message, link, children }: Props) {
   return (
@@ -22,5 +22,5 @@ export function NotFoundContent({ message, link, children }: Props) {
         <ReportIssueLink />
       </div>
     </div>
-  )
+  );
 }

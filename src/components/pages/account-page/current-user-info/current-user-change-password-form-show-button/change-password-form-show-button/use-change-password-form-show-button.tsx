@@ -1,45 +1,45 @@
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useRouter, useSearchParams } from 'next/navigation'
-import { useRef, useState, useCallback } from 'react'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
-import { useSnackbarsStore } from '@/app/_components/snackbars/use-snackbars-store'
-import { changePasswordSchema } from '@/schemas/request/auth'
-import { ErrorObject } from '@/types/error'
-import { requestResetPasswordEmail } from '@/utils/api/request-reset-password-email'
-import { HttpError } from '@/utils/error/custom/http-error'
-import { createFormErrorsSchema } from '@/utils/form/create-form-errors-schema'
-import { useHandleFormErrors } from '@/utils/form/use-handle-form-error'
-import { useRedirectLoginPath } from '@/utils/login-path/use-redirect-login-path'
-import { changePassword } from './change-password.api'
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useCallback, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { useErrorSnackbar } from "@/app/_components/snackbars/snackbar/use-error-snackbar";
+import { useSnackbarsStore } from "@/app/_components/snackbars/use-snackbars-store";
+import { changePasswordSchema } from "@/schemas/request/auth";
+import type { ErrorObject } from "@/types/error";
+import { requestResetPasswordEmail } from "@/utils/api/request-reset-password-email";
+import type { HttpError } from "@/utils/error/custom/http-error";
+import { createFormErrorsSchema } from "@/utils/form/create-form-errors-schema";
+import { useHandleFormErrors } from "@/utils/form/use-handle-form-error";
+import { useRedirectLoginPath } from "@/utils/login-path/use-redirect-login-path";
+import { changePassword } from "./change-password.api";
 
-type ChangePasswordFormValues = z.infer<typeof changePasswordSchema>
+type ChangePasswordFormValues = z.infer<typeof changePasswordSchema>;
 
 type Params = {
-  email: string
-}
+  email: string;
+};
 
 const formErrorsSchema = createFormErrorsSchema(
-  z.enum(['password', 'current_password']).transform((value) => {
-    if (value === 'current_password') {
-      return 'currentPassword'
+  z.enum(["password", "current_password"]).transform((value) => {
+    if (value === "current_password") {
+      return "currentPassword";
     } else {
-      return value
+      return value;
     }
   }),
-)
+);
 
 export function useChangePasswordFormShowButton({ email }: Params) {
-  const searchParams = useSearchParams()
-  const contentRef = useRef<HTMLDivElement>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [isShown, setIsShown] = useState(false)
-  const [isSending, setIsSending] = useState(false)
-  const router = useRouter()
-  const redirectLoginPath = useRedirectLoginPath({ searchParams })
-  const openSnackbar = useSnackbarsStore((store) => store.openSnackbar)
-  const { openErrorSnackbar } = useErrorSnackbar()
+  const searchParams = useSearchParams();
+  const contentRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isShown, setIsShown] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+  const router = useRouter();
+  const redirectLoginPath = useRedirectLoginPath({ searchParams });
+  const openSnackbar = useSnackbarsStore((store) => store.openSnackbar);
+  const { openErrorSnackbar } = useErrorSnackbar();
 
   const {
     register,
@@ -48,74 +48,74 @@ export function useChangePasswordFormShowButton({ email }: Params) {
     setError,
     formState: { isSubmitting, errors },
   } = useForm<ChangePasswordFormValues>({
-    mode: 'onBlur',
+    mode: "onBlur",
     resolver: zodResolver(changePasswordSchema),
-  })
+  });
 
-  const { handleFormErrors } = useHandleFormErrors(setError)
+  const { handleFormErrors } = useHandleFormErrors(setError);
 
   const showForm = useCallback(() => {
-    setIsShown(true)
-  }, [])
+    setIsShown(true);
+  }, []);
 
   const hideForm = useCallback(() => {
-    setIsShown(false)
-  }, [])
+    setIsShown(false);
+  }, []);
 
   const handleResetPasswordButtonClick = useCallback(async () => {
-    setIsSending(true)
-    const result = await requestResetPasswordEmail({ email })
-    if (result.status === 'error') {
-      openErrorSnackbar(result)
+    setIsSending(true);
+    const result = await requestResetPasswordEmail({ email });
+    if (result.status === "error") {
+      openErrorSnackbar(result);
     } else {
       openSnackbar({
-        severity: 'success',
+        severity: "success",
         message: `'${email}' にパスワードリセットの案内を送信しました。`,
-      })
+      });
     }
-    setIsSending(false)
-  }, [email, openErrorSnackbar, openSnackbar])
+    setIsSending(false);
+  }, [email, openErrorSnackbar, openSnackbar]);
 
   const handleHttpError = useCallback(
     (err: ErrorObject<HttpError>) => {
-      const { statusCode, data } = err
+      const { statusCode, data } = err;
       if (statusCode === 401) {
-        router.push(redirectLoginPath)
-        router.refresh()
+        router.push(redirectLoginPath);
+        router.refresh();
       } else if (statusCode === 422) {
-        const parseResult = formErrorsSchema.safeParse(data)
+        const parseResult = formErrorsSchema.safeParse(data);
         if (parseResult.success) {
-          handleFormErrors(parseResult.data)
+          handleFormErrors(parseResult.data);
         } else {
-          openErrorSnackbar(err)
+          openErrorSnackbar(err);
         }
       } else {
-        openErrorSnackbar(err)
+        openErrorSnackbar(err);
       }
     },
     [router, redirectLoginPath, handleFormErrors, openErrorSnackbar],
-  )
+  );
 
   const onSubmit = useCallback(
     async (data: ChangePasswordFormValues) => {
-      const result = await changePassword(data)
-      if (result.status === 'error') {
-        if (result.name === 'HttpError') {
-          handleHttpError(result)
+      const result = await changePassword(data);
+      if (result.status === "error") {
+        if (result.name === "HttpError") {
+          handleHttpError(result);
         } else {
-          openErrorSnackbar(result)
+          openErrorSnackbar(result);
         }
       } else {
-        reset()
-        hideForm()
+        reset();
+        hideForm();
         openSnackbar({
-          severity: 'success',
-          message: 'パスワードを変更しました。',
-        })
+          severity: "success",
+          message: "パスワードを変更しました。",
+        });
       }
     },
     [handleHttpError, openErrorSnackbar, reset, openSnackbar, hideForm],
-  )
+  );
 
   return {
     contentRef,
@@ -129,5 +129,5 @@ export function useChangePasswordFormShowButton({ email }: Params) {
     errors,
     handleResetPasswordButtonClick,
     onSubmit,
-  }
+  };
 }

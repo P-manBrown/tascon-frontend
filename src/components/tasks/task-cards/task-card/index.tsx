@@ -1,28 +1,28 @@
-import { ClockIcon } from '@heroicons/react/24/outline'
-import { CalendarDateRangeIcon } from '@heroicons/react/24/solid'
-import Link from 'next/link'
-import { checkShouldShowSingleDate } from './date-utils'
+import { ClockIcon } from "@heroicons/react/24/outline";
+import { CalendarDateRangeIcon } from "@heroicons/react/24/solid";
+import Link from "next/link";
+import { checkShouldShowSingleDate } from "./date-utils";
 import {
-  formatStartDateTime,
   formatEndDateTime,
   formatMinutesToHoursAndMinutes,
-} from './format-utils'
-import { TaskStatusButton } from './task-status-button'
-import { TaskStatusSquare } from './task-status-square'
+  formatStartDateTime,
+} from "./format-utils";
+import { TaskStatusButton } from "./task-status-button";
+import { TaskStatusSquare } from "./task-status-square";
 
 type Props = {
-  id: number
-  name: string
-  startsAt?: string
-  endsAt?: string
-  estimatedMinutes?: number
-  timeSpent?: number
-  note?: string
-  status: 'not_started' | 'in_progress' | 'completed'
-  isReadonly?: boolean
-  href: string
-  children?: React.ReactNode
-}
+  id: number;
+  name: string;
+  startsAt?: string;
+  endsAt?: string;
+  estimatedMinutes?: number;
+  timeSpent?: number;
+  note?: string;
+  status: "not_started" | "in_progress" | "completed";
+  isReadonly?: boolean;
+  href: string;
+  children?: React.ReactNode;
+};
 
 export function TaskCard({
   id,
@@ -37,17 +37,17 @@ export function TaskCard({
   href,
   children,
 }: Props) {
-  const isOverdue = endsAt ? new Date(endsAt) < new Date() : false
-  const taskId = id.toString()
+  const isOverdue = endsAt ? new Date(endsAt) < new Date() : false;
+  const taskId = id.toString();
 
-  const shouldShowSingleDate = checkShouldShowSingleDate(startsAt, endsAt)
+  const shouldShowSingleDate = checkShouldShowSingleDate(startsAt, endsAt);
 
   return (
     <div className="relative transform rounded-md border border-gray-300 bg-white p-6 drop-shadow-sm transition-all duration-200 hover:scale-103 hover:drop-shadow-lg">
-      <div className={`${status === 'completed' ? 'opacity-80' : ''}`}>
+      <div className={`${status === "completed" ? "opacity-80" : ""}`}>
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-2">
-            <div className={!isReadonly ? 'z-10' : ''}>
+            <div className={!isReadonly ? "z-10" : ""}>
               {isReadonly ? (
                 <TaskStatusSquare status={status} />
               ) : (
@@ -59,19 +59,19 @@ export function TaskCard({
               )}
             </div>
             <h2
-              className={`truncate text-lg font-bold ${status === 'completed' ? 'text-gray-600 line-through' : ''}`}
+              className={`truncate font-bold text-lg ${status === "completed" ? "text-gray-600 line-through" : ""}`}
             >
               {name}
             </h2>
           </div>
           {note && (
-            <p className="line-clamp-3 text-sm wrap-break-word text-gray-600">
+            <p className="wrap-break-word line-clamp-3 text-gray-600 text-sm">
               {note}
             </p>
           )}
           {(startsAt ?? endsAt) && (
             <div
-              className={`flex flex-wrap items-center gap-1 text-xs ${isOverdue ? 'text-red-700' : 'text-gray-600'}`}
+              className={`flex flex-wrap items-center gap-1 text-xs ${isOverdue ? "text-red-700" : "text-gray-600"}`}
             >
               <CalendarDateRangeIcon className="size-4" />
               {shouldShowSingleDate && startsAt && endsAt ? (
@@ -89,7 +89,7 @@ export function TaskCard({
           )}
 
           {(estimatedMinutes ?? timeSpent) && (
-            <div className="flex flex-wrap items-center gap-1 text-xs text-gray-600">
+            <div className="flex flex-wrap items-center gap-1 text-gray-600 text-xs">
               <ClockIcon className="size-4" />
               {estimatedMinutes && (
                 <span>
@@ -111,5 +111,5 @@ export function TaskCard({
         />
       </div>
     </div>
-  )
+  );
 }

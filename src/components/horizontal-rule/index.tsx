@@ -1,11 +1,11 @@
 type Props = {
-  className?: string
-  children?: string
-}
+  className?: string;
+  children?: string;
+};
 
-const hrClasses = 'w-full border-gray-400'
+const hrClasses = "w-full border-gray-400";
 
-export function HorizontalRule({ className = '', children }: Props) {
+export function HorizontalRule({ className = "", children }: Props) {
   return children ? (
     <div
       className={`relative -mx-2 flex h-6 items-center justify-center ${className}`}
@@ -17,5 +17,5 @@ export function HorizontalRule({ className = '', children }: Props) {
     <div className={`-mx-2 ${className}`}>
       <hr className={hrClasses} />
     </div>
-  )
+  );
 }

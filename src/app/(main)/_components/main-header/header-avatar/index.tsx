@@ -1,11 +1,10 @@
-import { Avatar } from '@/components/avatars/avatar'
-import { LoadingAvatar } from '@/components/avatars/avatar'
-import { getCurrentUser } from '@/utils/api/server/get-current-user'
+import { Avatar, LoadingAvatar } from "@/components/avatars/avatar";
+import { getCurrentUser } from "@/utils/api/server/get-current-user";
 
-const size = 32
+const size = 32;
 
 export async function HeaderAvatar() {
-  const { account: currentUser } = await getCurrentUser()
+  const { account: currentUser } = await getCurrentUser();
 
   return (
     <Avatar
@@ -14,9 +13,9 @@ export async function HeaderAvatar() {
       size={size}
       priority={true}
     />
-  )
+  );
 }
 
 export function LoadingHeaderAvatar() {
-  return <LoadingAvatar size={size} />
+  return <LoadingAvatar size={size} />;
 }

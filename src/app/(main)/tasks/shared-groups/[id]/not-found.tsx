@@ -1,5 +1,5 @@
-import { NotFoundContent } from '@/components/contents/not-found-content'
-import { IconMessage } from '@/components/icon-message'
+import { NotFoundContent } from "@/components/contents/not-found-content";
+import { IconMessage } from "@/components/icon-message";
 
 export default function NotFound() {
   return (
@@ -8,5 +8,5 @@ export default function NotFound() {
         <NotFoundContent message="共有タスクグループが見つかりませんでした。" />
       </IconMessage>
     </div>
-  )
+  );
 }

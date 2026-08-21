@@ -1,18 +1,18 @@
-'use client'
+"use client";
 
-import { PlusIcon, XMarkIcon } from '@heroicons/react/24/solid'
-import { Button } from '@/components/buttons/button'
-import { IconButton } from '@/components/buttons/icon-button'
-import { ModalContent } from '@/components/contents/modal-content'
-import { Label } from '@/components/form-controls/label'
-import { TextField } from '@/components/form-controls/text-field'
-import { Modal } from '@/components/modal'
-import { useCreateContactButton } from './use-create-contact-button'
+import { PlusIcon, XMarkIcon } from "@heroicons/react/24/solid";
+import { Button } from "@/components/buttons/button";
+import { IconButton } from "@/components/buttons/icon-button";
+import { ModalContent } from "@/components/contents/modal-content";
+import { Label } from "@/components/form-controls/label";
+import { TextField } from "@/components/form-controls/text-field";
+import { Modal } from "@/components/modal";
+import { useCreateContactButton } from "./use-create-contact-button";
 
 type Props = {
-  currentUserId: string
-  className: string
-}
+  currentUserId: string;
+  className: string;
+};
 
 export function CreateContactButton({ currentUserId, className }: Props) {
   const {
@@ -28,7 +28,7 @@ export function CreateContactButton({ currentUserId, className }: Props) {
     errors,
     onSubmit,
     isPending,
-  } = useCreateContactButton({ currentUserId })
+  } = useCreateContactButton({ currentUserId });
 
   return (
     <div>
@@ -60,7 +60,7 @@ export function CreateContactButton({ currentUserId, className }: Props) {
             }
           >
             <div className="space-y-6">
-              <h2 className="text-center text-xl font-bold">ユーザー登録</h2>
+              <h2 className="text-center font-bold text-xl">ユーザー登録</h2>
               <p className="text-sm">
                 登録するユーザーのメールアドレスを入力してください。
               </p>
@@ -70,13 +70,13 @@ export function CreateContactButton({ currentUserId, className }: Props) {
                   type="email"
                   autoComplete="email"
                   readOnly={isPending}
-                  register={register('email')}
+                  register={register("email")}
                   errors={errors.email}
                 />
                 <Button
                   type="submit"
                   className="btn-primary mt-6 min-w-24"
-                  status={isPending ? 'pending' : 'idle'}
+                  status={isPending ? "pending" : "idle"}
                 >
                   登録
                 </Button>
@@ -86,5 +86,5 @@ export function CreateContactButton({ currentUserId, className }: Props) {
         </Modal>
       )}
     </div>
-  )
+  );
 }

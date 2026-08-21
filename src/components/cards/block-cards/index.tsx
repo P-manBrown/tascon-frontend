@@ -1,15 +1,15 @@
-import { UserCard, LoadingUserCard } from '@/components/cards/user-card'
-import { DeleteBlockButton } from './delete-block-button'
+import { LoadingUserCard, UserCard } from "@/components/cards/user-card";
+import { DeleteBlockButton } from "./delete-block-button";
 
 type Props = {
   blocks: Array<{
-    id: number
-    blocked: Omit<React.ComponentProps<typeof UserCard>, 'children'>
-  }>
-  className: string
-}
+    id: number;
+    blocked: Omit<React.ComponentProps<typeof UserCard>, "children">;
+  }>;
+  className: string;
+};
 
-const buttonLayoutClasses = 'relative z-10 mt-4'
+const buttonLayoutClasses = "relative z-10 mt-4";
 
 export function BlockCards({ blocks, className }: Props) {
   return (
@@ -28,12 +28,12 @@ export function BlockCards({ blocks, className }: Props) {
         </UserCard>
       ))}
     </div>
-  )
+  );
 }
 
-type LoadingBlockCardsProps = Pick<Props, 'className'> & {
-  limit: number
-}
+type LoadingBlockCardsProps = Pick<Props, "className"> & {
+  limit: number;
+};
 
 export function LoadingBlockCards({
   limit,
@@ -41,7 +41,7 @@ export function LoadingBlockCards({
 }: LoadingBlockCardsProps) {
   return (
     <div className={className}>
-      {Array.from({ length: limit }).map((_, index) => (
+      {Array.from({ length: limit }, (_, i) => i).map((index) => (
         <LoadingUserCard key={index}>
           <div className={buttonLayoutClasses}>
             <div className="skeleton shape-btn" />
@@ -49,5 +49,5 @@ export function LoadingBlockCards({
         </LoadingUserCard>
       ))}
     </div>
-  )
+  );
 }

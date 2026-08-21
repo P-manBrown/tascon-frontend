@@ -1,11 +1,11 @@
-import Image from 'next/image'
-import logo from 'public/logos/logo.png'
-import { LoginLink } from '../login-link'
-import { SignUpLink } from '../sign-up-link'
+import Image from "next/image";
+import logo from "public/logos/logo.png";
+import { LoginLink } from "../login-link";
+import { SignUpLink } from "../sign-up-link";
 
 export function HomeHeader() {
   return (
-    <header className="bg-theme px-safe border-b border-b-gray-300">
+    <header className="border-b border-b-gray-300 bg-theme px-safe">
       <nav className="flex h-14 items-center px-4 py-2">
         <Image
           src={logo}
@@ -20,5 +20,5 @@ export function HomeHeader() {
         </div>
       </nav>
     </header>
-  )
+  );
 }
