@@ -11,7 +11,8 @@ import {
   formatEndDateTime,
   formatMinutesToHoursAndMinutes,
 } from './format-utils'
-import { TaskStatusBox } from './task-status-box'
+import { TaskStatusButton } from './task-status-box'
+import { TaskStatusSquare } from './task-status-box/status-square'
 
 type Props = {
   id: number
@@ -22,6 +23,7 @@ type Props = {
   timeSpent?: number
   note?: string
   status: 'not_started' | 'in_progress' | 'completed'
+  isReadonly?: boolean
   children?: React.ReactNode
 }
 
@@ -34,6 +36,7 @@ export function TaskCard({
   timeSpent,
   note,
   status,
+  isReadonly = false,
   children,
 }: Props) {
   const pathname = usePathname()
@@ -49,8 +52,16 @@ export function TaskCard({
       <div className={`${status === 'completed' ? 'opacity-80' : ''}`}>
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-2">
-            <div className="z-10 flex items-center">
-              <TaskStatusBox taskId={taskId} taskName={name} status={status} />
+            <div className={!isReadonly ? 'z-10' : ''}>
+              {isReadonly ? (
+                <TaskStatusSquare status={status} />
+              ) : (
+                <TaskStatusButton
+                  taskId={taskId}
+                  taskName={name}
+                  status={status}
+                />
+              )}
             </div>
             <h2
               className={`truncate text-lg font-bold ${status === 'completed' ? 'text-gray-600 line-through' : ''}`}
