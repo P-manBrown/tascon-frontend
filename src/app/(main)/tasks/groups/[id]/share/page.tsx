@@ -1,11 +1,16 @@
 import { Suspense } from "react";
 import { TaskGroupNameHeading } from "@/components/headings/task-group-name-heading";
+import { HorizontalRule } from "@/components/horizontal-rule";
 import TasksLayout from "@/components/layouts/tasks-layout";
 import { ScrollAnchor } from "@/components/scroll-anchor";
 import { getTaskGroup } from "@/utils/api/get-task-group";
 import ShareTaskGroupContactList, {
   LoadingShareTaskGroupContactList,
 } from "../_components/share-task-group-link/share-task-group-contact-list";
+import { TaskGroupShareCardsCollapsibleSection } from "../_components/share-task-group-link/task-group-share-cards-collapsible-section";
+import TaskGroupShareList, {
+  LoadingTaskGroupShareList,
+} from "../_components/share-task-group-link/task-group-share-list";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -26,6 +31,12 @@ export default async function ShareTaskGroupPage({
       <div className="mb-3">
         <TaskGroupNameHeading>{`共有：${taskGroup.name}`}</TaskGroupNameHeading>
       </div>
+      <TaskGroupShareCardsCollapsibleSection>
+        <Suspense fallback={<LoadingTaskGroupShareList />}>
+          <TaskGroupShareList taskGroupId={id} />
+        </Suspense>
+      </TaskGroupShareCardsCollapsibleSection>
+      <HorizontalRule className="my-6" />
       <Suspense key={page} fallback={<LoadingShareTaskGroupContactList />}>
         <ShareTaskGroupContactList taskGroupId={id} page={page} />
       </Suspense>
