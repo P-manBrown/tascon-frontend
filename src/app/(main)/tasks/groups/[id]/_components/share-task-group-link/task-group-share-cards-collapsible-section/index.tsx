@@ -6,7 +6,7 @@ type Props = Pick<React.ComponentProps<typeof CollapsibleSection>, "children">;
 
 export function TaskGroupShareCardsCollapsibleSection({ children }: Props) {
   return (
-    <CollapsibleSection minHeight={484} initialIsCollapsible={true}>
+    <CollapsibleSection minHeight={372} initialIsCollapsible={true}>
       {children}
     </CollapsibleSection>
   );
