@@ -32,16 +32,19 @@ export default async function ShareTaskGroupContactList({
   });
 
   const sharedUserIds = new Set(taskGroup.sharedUsers.map((user) => user.id));
+  const unsharedContacts = contacts.filter(
+    (contact) => !sharedUserIds.has(contact.contactUser.id),
+  );
 
   return (
     <div>
-      {contacts.length === 0 ? (
+      {unsharedContacts.length === 0 ? (
         <div className="my-28 md:my-48">
           <EmptyList description="ユーザーが登録されていません" />
         </div>
       ) : (
         <div className={cardsLayoutClasses}>
-          {contacts.map((contact) => (
+          {unsharedContacts.map((contact) => (
             <ShareTaskGroupContactCard
               key={contact.id}
               contactUser={contact.contactUser}
@@ -49,19 +52,13 @@ export default async function ShareTaskGroupContactList({
               note={contact.note}
               taskGroupId={taskGroupId}
               taskGroupName={taskGroup.name}
-              isShared={sharedUserIds.has(contact.contactUser.id)}
               buttonLayoutClasses={buttonLayoutClasses}
             />
           ))}
         </div>
       )}
       <div className={paginationLayoutClasses}>
-        <Pagination
-          currentPage={pagination.currentPage}
-          pageItems={contacts.length}
-          totalPages={pagination.totalPages}
-          totalCount={pagination.totalCount}
-        />
+        <Pagination {...pagination} />
       </div>
     </div>
   );
