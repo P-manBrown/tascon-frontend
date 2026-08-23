@@ -7,12 +7,17 @@ type Props = {
   taskGroupId: string;
 };
 
+const shareCardsMinHeight = 372;
+
 export default async function TaskGroupShareList({ taskGroupId }: Props) {
   const { taskGroupShares } = await getOwnerTaskGroupShares(taskGroupId);
 
   if (taskGroupShares.length === 0) {
     return (
-      <div className="my-8">
+      <div
+        className="flex items-center justify-center p-4"
+        style={{ height: `${shareCardsMinHeight}px` }}
+      >
         <EmptyList description="共有中のユーザーはいません" />
       </div>
     );
