@@ -4,7 +4,6 @@ import { HorizontalRule } from "@/components/horizontal-rule";
 import ShareTaskGroupContactList, {
   LoadingShareTaskGroupContactList,
 } from "../share-task-group-link/share-task-group-contact-list";
-import { TaskGroupShareCardsCollapsibleSection } from "../share-task-group-link/task-group-share-cards-collapsible-section";
 import TaskGroupShareList, {
   LoadingTaskGroupShareList,
 } from "../share-task-group-link/task-group-share-list";
@@ -20,13 +19,9 @@ export function ShareTaskGroupPageContent({ taskGroupId, page }: Props) {
       <div className="mb-3">
         <ShareSectionHeading>共有中</ShareSectionHeading>
       </div>
-      <TaskGroupShareCardsCollapsibleSection>
-        <div className="p-4">
-          <Suspense fallback={<LoadingTaskGroupShareList />}>
-            <TaskGroupShareList taskGroupId={taskGroupId} />
-          </Suspense>
-        </div>
-      </TaskGroupShareCardsCollapsibleSection>
+      <Suspense fallback={<LoadingTaskGroupShareList />}>
+        <TaskGroupShareList taskGroupId={taskGroupId} />
+      </Suspense>
       <HorizontalRule className="my-6" />
       <div className="mb-3">
         <ShareSectionHeading>未共有</ShareSectionHeading>
