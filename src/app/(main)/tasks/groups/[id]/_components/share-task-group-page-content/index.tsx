@@ -21,9 +21,11 @@ export function ShareTaskGroupPageContent({ taskGroupId, page }: Props) {
         <ShareSectionHeading>共有中</ShareSectionHeading>
       </div>
       <TaskGroupShareCardsCollapsibleSection>
-        <Suspense fallback={<LoadingTaskGroupShareList />}>
-          <TaskGroupShareList taskGroupId={taskGroupId} />
-        </Suspense>
+        <div className="p-4">
+          <Suspense fallback={<LoadingTaskGroupShareList />}>
+            <TaskGroupShareList taskGroupId={taskGroupId} />
+          </Suspense>
+        </div>
       </TaskGroupShareCardsCollapsibleSection>
       <HorizontalRule className="my-6" />
       <div className="mb-3">
