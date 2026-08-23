@@ -30,8 +30,10 @@ export default async function TaskGroupShareList({ taskGroupId }: Props) {
 export function LoadingTaskGroupShareList() {
   return (
     <div className="grid gap-4 lg:grid-cols-2 xl:grid-cols-3">
-      {Array.from({ length: 3 }, (_, index) => index).map((index) => (
-        <LoadingUserCard key={index} />
+      {Array.from({ length: 6 }, (_, index) => index).map((index) => (
+        <LoadingUserCard key={index}>
+          <div className="skeleton mt-4 h-6 w-20 rounded" />
+        </LoadingUserCard>
       ))}
     </div>
   );
