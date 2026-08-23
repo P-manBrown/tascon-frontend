@@ -1,8 +1,7 @@
 import { LoadingUserCard } from "@/components/cards/user-card";
 import { EmptyList } from "@/components/empty-list";
-import { TaskGroupShareCardsCollapsibleSection } from "../task-group-share-cards-collapsible-section";
+import { CollapsibleTaskGroupShareCards } from "./collapsible-task-group-share-cards";
 import { getOwnerTaskGroupShares } from "./get-task-group-shares.api";
-import { TaskGroupShareCard } from "./task-group-share-card";
 
 type Props = {
   taskGroupId: string;
@@ -13,27 +12,15 @@ const shareCardsMinHeight = 372;
 export default async function TaskGroupShareList({ taskGroupId }: Props) {
   const { taskGroupShares } = await getOwnerTaskGroupShares(taskGroupId);
 
-  if (taskGroupShares.length === 0) {
-    return (
-      <div
-        className="flex items-center justify-center p-4"
-        style={{ height: `${shareCardsMinHeight}px` }}
-      >
-        <EmptyList description="共有中のユーザーはいません" />
-      </div>
-    );
-  }
-
-  return (
-    <TaskGroupShareCardsCollapsibleSection>
-      <div className="p-4">
-        <div className="grid gap-4 lg:grid-cols-2 xl:grid-cols-3">
-          {taskGroupShares.map((share) => (
-            <TaskGroupShareCard key={share.id} share={share} />
-          ))}
-        </div>
-      </div>
-    </TaskGroupShareCardsCollapsibleSection>
+  return taskGroupShares.length === 0 ? (
+    <div
+      className="flex items-center justify-center p-4"
+      style={{ height: `${shareCardsMinHeight}px` }}
+    >
+      <EmptyList description="共有中のユーザーはいません" />
+    </div>
+  ) : (
+    <CollapsibleTaskGroupShareCards taskGroupShares={taskGroupShares} />
   );
 }
 
