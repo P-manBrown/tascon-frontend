@@ -8,6 +8,7 @@ type Props = {
 };
 
 const shareCardsMinHeight = 372;
+const buttonLayoutClasses = "relative z-10 mt-4";
 
 export default async function TaskGroupShareList({ taskGroupId }: Props) {
   const { taskGroupShares } = await getOwnerTaskGroupShares(taskGroupId);
@@ -36,7 +37,9 @@ export function LoadingTaskGroupShareList() {
       <div className="grid gap-4 p-4 lg:grid-cols-2 xl:grid-cols-3">
         {Array.from({ length: 6 }, (_, index) => index).map((index) => (
           <LoadingUserCard key={index}>
-            <div className="skeleton mt-4 h-6 w-20 rounded" />
+            <div className={buttonLayoutClasses}>
+              <div className="skeleton shape-btn" />
+            </div>
           </LoadingUserCard>
         ))}
       </div>
