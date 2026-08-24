@@ -1,23 +1,14 @@
-import type { z } from "zod";
 import { UserCard } from "@/components/cards/user-card";
-import type { taskGroupShareStatusSchema } from "@/schemas/response/task-group-share";
 import { RequestHandoverButton } from "./request-handover-button";
-
-type TaskGroupShareStatus = z.infer<typeof taskGroupShareStatusSchema>;
 
 type Props = {
   taskGroupId: React.ComponentProps<
     typeof RequestHandoverButton
   >["taskGroupId"];
   share: {
-    id: number;
-    status: TaskGroupShareStatus;
-    user: {
-      id: number;
-      name: string;
-      bio?: string;
-      avatarUrl?: string;
-    };
+    id: React.ComponentProps<typeof RequestHandoverButton>["shareId"];
+    status: "shared" | "handover_pending";
+    user: Omit<React.ComponentProps<typeof UserCard>, "children">;
   };
 };
 
