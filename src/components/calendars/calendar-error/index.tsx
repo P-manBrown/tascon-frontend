@@ -8,8 +8,11 @@ import { Button } from "@/components/buttons/button";
 import { ReportIssueLink } from "@/components/links/report-issue-link";
 
 type Props = {
-  error: Error & { digest?: string };
+  error: unknown;
 };
+
+const hasDigest = (err: unknown): err is Error & { digest: string } =>
+  err instanceof Error && "digest" in err && typeof err.digest === "string";
 
 export function CalendarError({ error }: Props) {
   const { resetBoundary } = useErrorBoundary();
@@ -37,12 +40,10 @@ export function CalendarError({ error }: Props) {
         >
           再読み込み
         </Button>
-        {error.digest !== undefined && (
-          <ReportIssueLink
-            className="mx-auto text-sm"
-            info={`Digest: ${error.digest}`}
-          />
-        )}
+        <ReportIssueLink
+          className="mx-auto text-sm"
+          info={hasDigest(error) ? `Digest: ${error.digest}` : undefined}
+        />
       </div>
     </div>
   );
