@@ -1,21 +1,21 @@
 import {
   ItemCountSummary,
   LoadingItemCountSummary,
-} from '@/components/texts/item-count-summary'
-import { getSuggestions } from '@/utils/api/get-suggestions'
+} from "@/components/texts/item-count-summary";
+import { getSuggestions } from "@/utils/api/get-suggestions";
 
 type Props = {
-  limit: number
-}
+  limit: number;
+};
 
-const baseClasses = 'max-sm:hidden'
+const baseClasses = "max-sm:hidden";
 
 export async function SuggestionsItemCountSummary({ limit }: Props) {
   const { suggestions, pagination } = await getSuggestions({
-    page: '1',
+    page: "1",
     limit: limit.toString(),
-  })
-  const currentCount = Object.keys(suggestions).length
+  });
+  const currentCount = Object.keys(suggestions).length;
 
   return (
     <ItemCountSummary
@@ -23,9 +23,9 @@ export async function SuggestionsItemCountSummary({ limit }: Props) {
       currentCount={currentCount}
       totalCount={pagination.totalCount}
     />
-  )
+  );
 }
 
 export function LoadingSuggestionsItemCountSummary() {
-  return <LoadingItemCountSummary className={baseClasses} />
+  return <LoadingItemCountSummary className={baseClasses} />;
 }

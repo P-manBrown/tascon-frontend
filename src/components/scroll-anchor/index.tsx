@@ -1,22 +1,22 @@
-'use client'
+"use client";
 
-import { useRef, useEffect } from 'react'
+import { useEffect, useRef } from "react";
 
 type Props = {
-  page: string
-}
+  page: string;
+};
 
 // TEMP: https://github.com/vercel/next.js/issues/74485
 export function ScrollAnchor({ page }: Props) {
-  const ref = useRef<HTMLDivElement>(null)
-  const pageRef = useRef(page)
+  const ref = useRef<HTMLDivElement>(null);
+  const pageRef = useRef(page);
 
   useEffect(() => {
     if (page !== pageRef.current) {
-      ref.current?.scrollIntoView()
-      pageRef.current = page
+      ref.current?.scrollIntoView();
+      pageRef.current = page;
     }
-  }, [page])
+  }, [page]);
 
-  return <div ref={ref} />
+  return <div ref={ref} />;
 }

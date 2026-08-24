@@ -1,7 +1,7 @@
 type Props = {
-  children: string
-}
+  children: string;
+};
 
 export function TasksHeading({ children }: Props) {
-  return <h1 className="text-2xl font-bold">{children}</h1>
+  return <h1 className="font-bold text-2xl">{children}</h1>;
 }

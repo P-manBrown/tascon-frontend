@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import { z } from "zod";
 
 export const userSchema = z.object({
   user: z.object({
@@ -20,4 +20,4 @@ export const userSchema = z.object({
       })
       .optional(),
   }),
-})
+});

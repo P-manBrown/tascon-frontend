@@ -1,39 +1,39 @@
-import { zodResolver } from '@hookform/resolvers/zod'
-import { usePathname } from 'next/navigation'
-import { useCallback, useEffect, useId, useRef, useTransition } from 'react'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
-import { useSnackbarsStore } from '@/app/_components/snackbars/use-snackbars-store'
-import { Button } from '@/components/buttons/button'
-import { useTextArea } from '@/components/form-controls/text-area/use-text-area'
-import { createTask } from '@/components/pages/create-task-page/create-task-form/create-task.api'
-import { useLocalStorage } from '@/utils/local-storage/use-local-storage'
-import { createTaskSchema } from './create-task.schema'
-import type { SubmitHandler } from 'react-hook-form'
+import { zodResolver } from "@hookform/resolvers/zod";
+import { usePathname } from "next/navigation";
+import { useCallback, useEffect, useId, useRef, useTransition } from "react";
+import type { SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import type { z } from "zod";
+import { useErrorSnackbar } from "@/app/_components/snackbars/snackbar/use-error-snackbar";
+import { useSnackbarsStore } from "@/app/_components/snackbars/use-snackbars-store";
+import { Button } from "@/components/buttons/button";
+import { useTextArea } from "@/components/form-controls/text-area/use-text-area";
+import { createTask } from "@/components/pages/create-task-page/create-task-form/create-task.api";
+import { useLocalStorage } from "@/utils/local-storage/use-local-storage";
+import { createTaskSchema } from "./create-task.schema";
 
-type CreateTaskFormInput = z.input<typeof createTaskSchema>
-type CreateTaskFormOutput = z.output<typeof createTaskSchema>
+type CreateTaskFormInput = z.input<typeof createTaskSchema>;
+type CreateTaskFormOutput = z.output<typeof createTaskSchema>;
 
 type Params = {
-  currentUserId: string
-  defaultTaskGroupId?: number
-}
+  currentUserId: string;
+  defaultTaskGroupId?: number;
+};
 
 export function useCreateTaskForm({
   currentUserId,
   defaultTaskGroupId,
 }: Params) {
-  const noteEditorRef = useRef<HTMLTextAreaElement>(null)
-  const id = useId()
-  const [isPending, startTransition] = useTransition()
-  const openSnackbar = useSnackbarsStore((state) => state.openSnackbar)
-  const { openErrorSnackbar } = useErrorSnackbar()
-  const isPageHidden = useRef(false)
-  const pathname = usePathname()
-  const localStorageKey = `${currentUserId}_${pathname}_create-task-form`
+  const noteEditorRef = useRef<HTMLTextAreaElement>(null);
+  const id = useId();
+  const [isPending, startTransition] = useTransition();
+  const openSnackbar = useSnackbarsStore((state) => state.openSnackbar);
+  const { openErrorSnackbar } = useErrorSnackbar();
+  const isPageHidden = useRef(false);
+  const pathname = usePathname();
+  const localStorageKey = `${currentUserId}_${pathname}_create-task-form`;
   const { saveToLocalStorage, getLocalStorageValue, removeLocalStorageValue } =
-    useLocalStorage({ key: localStorageKey })
+    useLocalStorage({ key: localStorageKey });
 
   const {
     register,
@@ -43,146 +43,146 @@ export function useCreateTaskForm({
     setValue,
     formState: { errors, dirtyFields },
   } = useForm<CreateTaskFormInput, unknown, CreateTaskFormOutput>({
-    mode: 'onBlur',
+    mode: "onBlur",
     resolver: zodResolver(createTaskSchema),
     defaultValues: {
       taskGroupId: defaultTaskGroupId,
-      name: '',
+      name: "",
       duration: {
         startsAt: {
-          startsAtDate: '',
-          startsAtTime: '',
+          startsAtDate: "",
+          startsAtTime: "",
         },
         endsAt: {
-          endsAtDate: '',
-          endsAtTime: '',
+          endsAtDate: "",
+          endsAtTime: "",
         },
       },
       estimatedTime: {
         estimatedHours: undefined,
         estimatedMinutes: undefined,
       },
-      note: '',
+      note: "",
     },
-  })
+  });
 
   const { shadowRef, wordCount, adjustHeight, updateWordCount } = useTextArea({
-    countGranularity: 'character',
-  })
+    countGranularity: "character",
+  });
 
   const handleNoteInput = useCallback(
     (ev: React.FormEvent<HTMLTextAreaElement>) => {
-      adjustHeight(ev.currentTarget)
-      updateWordCount(ev.currentTarget.value)
+      adjustHeight(ev.currentTarget);
+      updateWordCount(ev.currentTarget.value);
     },
     [adjustHeight, updateWordCount],
-  )
+  );
 
   const setFormValuesFromLocalStorage = useCallback(() => {
-    const localStorageValue = getLocalStorageValue()
+    const localStorageValue = getLocalStorageValue();
     if (localStorageValue !== null) {
-      const parsedValue: CreateTaskFormInput = JSON.parse(localStorageValue)
+      const parsedValue: CreateTaskFormInput = JSON.parse(localStorageValue);
 
       if (parsedValue.taskGroupId !== undefined) {
-        setValue('taskGroupId', parsedValue.taskGroupId, {
+        setValue("taskGroupId", parsedValue.taskGroupId, {
           shouldValidate: true,
           shouldDirty: true,
-        })
+        });
       }
       if (parsedValue.name !== undefined) {
-        setValue('name', parsedValue.name, {
+        setValue("name", parsedValue.name, {
           shouldValidate: true,
           shouldDirty: true,
-        })
+        });
       }
       if (parsedValue.duration?.startsAt?.startsAtDate !== undefined) {
         setValue(
-          'duration.startsAt.startsAtDate',
+          "duration.startsAt.startsAtDate",
           parsedValue.duration.startsAt.startsAtDate,
           {
             shouldValidate: true,
             shouldDirty: true,
           },
-        )
+        );
       }
       if (parsedValue.duration?.startsAt?.startsAtTime !== undefined) {
         setValue(
-          'duration.startsAt.startsAtTime',
+          "duration.startsAt.startsAtTime",
           parsedValue.duration.startsAt.startsAtTime,
           {
             shouldValidate: true,
             shouldDirty: true,
           },
-        )
+        );
       }
       if (parsedValue.duration?.endsAt?.endsAtDate !== undefined) {
         setValue(
-          'duration.endsAt.endsAtDate',
+          "duration.endsAt.endsAtDate",
           parsedValue.duration.endsAt.endsAtDate,
           {
             shouldValidate: true,
             shouldDirty: true,
           },
-        )
+        );
       }
       if (parsedValue.duration?.endsAt?.endsAtTime !== undefined) {
         setValue(
-          'duration.endsAt.endsAtTime',
+          "duration.endsAt.endsAtTime",
           parsedValue.duration.endsAt.endsAtTime,
           {
             shouldValidate: true,
             shouldDirty: true,
           },
-        )
+        );
       }
       if (parsedValue.estimatedTime?.estimatedHours !== undefined) {
         setValue(
-          'estimatedTime.estimatedHours',
+          "estimatedTime.estimatedHours",
           parsedValue.estimatedTime.estimatedHours,
           {
             shouldValidate: true,
             shouldDirty: true,
           },
-        )
+        );
       }
       if (parsedValue.estimatedTime?.estimatedMinutes !== undefined) {
         setValue(
-          'estimatedTime.estimatedMinutes',
+          "estimatedTime.estimatedMinutes",
           parsedValue.estimatedTime.estimatedMinutes,
           {
             shouldValidate: true,
             shouldDirty: true,
           },
-        )
+        );
       }
       if (parsedValue.note !== undefined) {
-        setValue('note', parsedValue.note, {
+        setValue("note", parsedValue.note, {
           shouldValidate: true,
           shouldDirty: true,
-        })
+        });
         if (noteEditorRef.current) {
-          adjustHeight(noteEditorRef.current)
-          updateWordCount(parsedValue.note)
+          adjustHeight(noteEditorRef.current);
+          updateWordCount(parsedValue.note);
         }
       }
 
       const handleClick = () => {
-        reset()
-        removeLocalStorageValue()
-      }
+        reset();
+        removeLocalStorageValue();
+      };
 
       openSnackbar({
-        severity: 'info',
-        message: '前回の入力内容を復元しました。',
+        severity: "info",
+        message: "前回の入力内容を復元しました。",
         actionButton: (
           <Button
             onClick={handleClick}
-            className="btn-ghost h-fit p-1 text-sm text-red-500 hover:bg-white/20"
+            className="btn-ghost h-fit p-1 text-red-500 text-sm hover:bg-white/20"
           >
             リセット
           </Button>
         ),
-      })
+      });
     }
   }, [
     getLocalStorageValue,
@@ -192,21 +192,21 @@ export function useCreateTaskForm({
     openSnackbar,
     reset,
     removeLocalStorageValue,
-  ])
+  ]);
 
   const saveFormValuesToLocalStorage = useCallback(() => {
     // See https://is.gd/qYTBEq
-    const hasDirtyFields = Object.keys(dirtyFields).length > 0
+    const hasDirtyFields = Object.keys(dirtyFields).length > 0;
     if (hasDirtyFields) {
-      const formValues = getValues()
-      saveToLocalStorage(JSON.stringify(formValues))
+      const formValues = getValues();
+      saveToLocalStorage(JSON.stringify(formValues));
     }
-  }, [getValues, saveToLocalStorage, dirtyFields])
+  }, [getValues, saveToLocalStorage, dirtyFields]);
 
   const handlePageHide = useCallback(() => {
-    isPageHidden.current = true
-    saveFormValuesToLocalStorage()
-  }, [saveFormValuesToLocalStorage])
+    isPageHidden.current = true;
+    saveFormValuesToLocalStorage();
+  }, [saveFormValuesToLocalStorage]);
 
   const onSubmit: SubmitHandler<CreateTaskFormOutput> = useCallback(
     (data) => {
@@ -218,21 +218,21 @@ export function useCreateTaskForm({
           endsAt: data.duration.endsAt,
           estimatedMinutes: data.estimatedTime,
           note: data.note,
-        })
-        if (result.status === 'error') {
-          openErrorSnackbar(result)
+        });
+        if (result.status === "error") {
+          openErrorSnackbar(result);
         } else {
-          removeLocalStorageValue()
-          reset()
+          removeLocalStorageValue();
+          reset();
           if (noteEditorRef.current) {
-            adjustHeight(noteEditorRef.current)
-            updateWordCount(noteEditorRef.current.value)
+            adjustHeight(noteEditorRef.current);
+            updateWordCount(noteEditorRef.current.value);
           }
 
           // Notify calendar to add newly created task to events
-          window.dispatchEvent(new CustomEvent('task-created'))
+          window.dispatchEvent(new CustomEvent("task-created"));
         }
-      })
+      });
     },
     [
       reset,
@@ -241,21 +241,21 @@ export function useCreateTaskForm({
       updateWordCount,
       removeLocalStorageValue,
     ],
-  )
+  );
 
   useEffect(() => {
-    setFormValuesFromLocalStorage()
-  }, [setFormValuesFromLocalStorage])
+    setFormValuesFromLocalStorage();
+  }, [setFormValuesFromLocalStorage]);
 
   useEffect(() => {
-    window.addEventListener('pagehide', handlePageHide)
-    window.addEventListener('popstate', saveFormValuesToLocalStorage)
+    window.addEventListener("pagehide", handlePageHide);
+    window.addEventListener("popstate", saveFormValuesToLocalStorage);
 
     return () => {
-      window.removeEventListener('pagehide', handlePageHide)
-      window.removeEventListener('popstate', saveFormValuesToLocalStorage)
-    }
-  }, [saveFormValuesToLocalStorage, handlePageHide])
+      window.removeEventListener("pagehide", handlePageHide);
+      window.removeEventListener("popstate", saveFormValuesToLocalStorage);
+    };
+  }, [saveFormValuesToLocalStorage, handlePageHide]);
 
   return {
     id,
@@ -268,5 +268,5 @@ export function useCreateTaskForm({
     shadowRef,
     wordCount,
     handleNoteInput,
-  }
+  };
 }

@@ -1,15 +1,15 @@
-import { Suspense } from 'react'
-import { ErrorBoundary } from 'react-error-boundary'
-import { SidebarHeading } from '@/components/headings/sidebar-heading'
-import { CreateTaskGroupButton } from './create-task-group-button'
+import { Suspense } from "react";
+import { ErrorBoundary } from "react-error-boundary";
+import { SidebarHeading } from "@/components/headings/sidebar-heading";
+import { CreateTaskGroupButton } from "./create-task-group-button";
 import {
-  SharedTaskGroupMenu,
   LoadingSharedTaskGroupMenu,
-} from './shared-task-group-menu'
-import { SharedTaskGroupsError } from './shared-task-groups-error'
-import { TaskGroupMenu, LoadingTaskGroupMenu } from './task-group-menu'
-import { TaskGroupsError } from './task-groups-error'
-import { TasksMenu } from './tasks-menu'
+  SharedTaskGroupMenu,
+} from "./shared-task-group-menu";
+import { SharedTaskGroupsError } from "./shared-task-groups-error";
+import { LoadingTaskGroupMenu, TaskGroupMenu } from "./task-group-menu";
+import { TaskGroupsError } from "./task-groups-error";
+import { TasksMenu } from "./tasks-menu";
 
 export function TasksSidebarContent() {
   return (
@@ -42,5 +42,5 @@ export function TasksSidebarContent() {
         </ErrorBoundary>
       </div>
     </div>
-  )
+  );
 }

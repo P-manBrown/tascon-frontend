@@ -1,15 +1,15 @@
-import DefaultAvatar from 'boring-avatars'
-import Image from 'next/image'
-import { getImagePlaceholderUrl } from '@/utils/image-placeholder/get-image-placeholder-url'
+import DefaultAvatar from "boring-avatars";
+import Image from "next/image";
+import { getImagePlaceholderUrl } from "@/utils/image-placeholder/get-image-placeholder-url";
 
 type Props = {
-  size: number
-  name: string
-  avatarUrl?: string
-  priority?: boolean
-}
+  size: number;
+  name: string;
+  avatarUrl?: string;
+  priority?: boolean;
+};
 
-const shapeClasses = 'rounded-full'
+const shapeClasses = "rounded-full";
 
 export function Avatar({ size, name, avatarUrl, priority = false }: Props) {
   return avatarUrl == null ? (
@@ -18,7 +18,7 @@ export function Avatar({ size, name, avatarUrl, priority = false }: Props) {
         size={size}
         name={name}
         variant="pixel"
-        colors={['#5e8747', '#c75b5e', '#486690', '#c54c3d', '#b88330']}
+        colors={["#5e8747", "#c75b5e", "#486690", "#c54c3d", "#b88330"]}
       />
     </span>
   ) : (
@@ -31,14 +31,14 @@ export function Avatar({ size, name, avatarUrl, priority = false }: Props) {
       priority={priority}
       placeholder={getImagePlaceholderUrl(size, size)}
     />
-  )
+  );
 }
 
-export function LoadingAvatar({ size }: Pick<Props, 'size'>) {
+export function LoadingAvatar({ size }: Pick<Props, "size">) {
   return (
     <span
       className={`skeleton block ${shapeClasses}`}
       style={{ width: `${size}px`, height: `${size}px` }}
     />
-  )
+  );
 }

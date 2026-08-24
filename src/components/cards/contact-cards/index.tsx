@@ -1,25 +1,25 @@
-import { LoadingUserCard, UserCard } from '../user-card'
-import { ContactNote, LoadingContactNote } from './contact-note'
+import { LoadingUserCard, UserCard } from "../user-card";
+import { ContactNote, LoadingContactNote } from "./contact-note";
 
 type Props = {
   contacts: Array<
     React.ComponentProps<typeof ContactNote> & {
-      id: number
-      displayName?: string
-      contactUser: Omit<React.ComponentProps<typeof UserCard>, 'children'>
+      id: number;
+      displayName?: string;
+      contactUser: Omit<React.ComponentProps<typeof UserCard>, "children">;
     }
-  >
-  className: string
-}
+  >;
+  className: string;
+};
 
 export function ContactCards({ contacts, className }: Props) {
   return (
     <div className={className}>
       {contacts.map((contact) => {
         const userName =
-          contact.displayName === undefined || contact.displayName === ''
+          contact.displayName === undefined || contact.displayName === ""
             ? contact.contactUser.name
-            : contact.displayName
+            : contact.displayName;
         return (
           <UserCard
             key={contact.contactUser.id}
@@ -30,15 +30,15 @@ export function ContactCards({ contacts, className }: Props) {
           >
             <ContactNote note={contact.note} />
           </UserCard>
-        )
+        );
       })}
     </div>
-  )
+  );
 }
 
-type LoadingContactCardsProps = Pick<Props, 'className'> & {
-  limit: number
-}
+type LoadingContactCardsProps = Pick<Props, "className"> & {
+  limit: number;
+};
 
 export function LoadingContactCards({
   limit,
@@ -46,11 +46,11 @@ export function LoadingContactCards({
 }: LoadingContactCardsProps) {
   return (
     <div className={className}>
-      {Array.from({ length: limit }).map((_, index) => (
+      {Array.from({ length: limit }, (_, i) => i).map((index) => (
         <LoadingUserCard key={index}>
-          <LoadingContactNote key={index} />
+          <LoadingContactNote />
         </LoadingUserCard>
       ))}
     </div>
-  )
+  );
 }
