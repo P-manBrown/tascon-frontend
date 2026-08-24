@@ -8,23 +8,11 @@ import {
 } from '@/components/texts/detail-single-line-text'
 import { getTask } from '@/utils/api/get-task'
 import { getCurrentUser } from '@/utils/api/server/get-current-user'
+import { formatMinutes } from '@/utils/task/format-minutes'
 import { TaskTimeSpentEditor } from './task-time-spent-editor'
 
 type Props = {
   id: string
-}
-
-function formatMinutes(minutes: number) {
-  const hours = Math.floor(minutes / 60)
-  const mins = minutes % 60
-
-  if (hours === 0) {
-    return `${mins}分`
-  } else if (mins === 0) {
-    return `${hours}時間`
-  } else {
-    return `${hours}時間${mins}分`
-  }
 }
 
 export async function EditableTaskTimeSpent({ id }: Props) {
