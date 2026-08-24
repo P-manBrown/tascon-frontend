@@ -20,7 +20,10 @@ export default async function TaskGroupShareList({ taskGroupId }: Props) {
       <EmptyList description="共有中のユーザーはいません" />
     </div>
   ) : (
-    <CollapsibleTaskGroupShareCards taskGroupShares={taskGroupShares} />
+    <CollapsibleTaskGroupShareCards
+      taskGroupShares={taskGroupShares}
+      taskGroupId={taskGroupId}
+    />
   );
 }
 
