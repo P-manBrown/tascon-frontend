@@ -27,13 +27,13 @@ export function TaskGroupShareCard({ share }: Props) {
       bio={share.user.bio}
       avatarUrl={share.user.avatarUrl}
     >
-      <div
+      <p
         className={`mt-4 font-bold ${
           isHandoverPending ? "text-orange-600" : "text-gray-500"
         }`}
       >
         {isHandoverPending ? "引き継ぎ依頼中" : "共有中"}
-      </div>
+      </p>
     </UserCard>
   );
 }
