@@ -6,14 +6,19 @@ type Props = Pick<
   React.ComponentProps<typeof TaskGroupShareCards>,
   "taskGroupShares"
 > &
-  Pick<React.ComponentProps<typeof RequestHandoverButton>, "taskGroupId">;
+  Pick<React.ComponentProps<typeof RequestHandoverButton>, "taskGroupId"> &
+  Pick<
+    React.ComponentProps<typeof TaskGroupShareCardsCollapsibleSection>,
+    "minHeight"
+  >;
 
 export function CollapsibleTaskGroupShareCards({
   taskGroupShares,
   taskGroupId,
+  minHeight,
 }: Props) {
   return (
-    <TaskGroupShareCardsCollapsibleSection>
+    <TaskGroupShareCardsCollapsibleSection minHeight={minHeight}>
       <div className="p-4">
         <TaskGroupShareCards
           taskGroupShares={taskGroupShares}

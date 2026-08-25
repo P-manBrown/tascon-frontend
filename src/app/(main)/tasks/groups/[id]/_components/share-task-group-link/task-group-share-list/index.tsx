@@ -7,7 +7,7 @@ type Props = {
   taskGroupId: string;
 };
 
-const shareCardsMinHeight = 372;
+const shareCardsMinHeight = 412;
 const buttonLayoutClasses = "relative z-10 mt-4";
 
 export default async function TaskGroupShareList({ taskGroupId }: Props) {
@@ -24,6 +24,7 @@ export default async function TaskGroupShareList({ taskGroupId }: Props) {
     <CollapsibleTaskGroupShareCards
       taskGroupShares={taskGroupShares}
       taskGroupId={taskGroupId}
+      minHeight={shareCardsMinHeight}
     />
   );
 }
