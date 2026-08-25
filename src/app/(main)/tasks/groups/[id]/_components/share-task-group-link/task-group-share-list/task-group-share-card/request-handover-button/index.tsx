@@ -67,7 +67,6 @@ export function RequestHandoverButton({
   };
 
   const handleOkClick = () => {
-    closeModal();
     startTransition(async () => {
       const result = await requestHandover({ shareId, taskGroupId });
 
@@ -77,6 +76,8 @@ export function RequestHandoverButton({
         } else {
           openErrorSnackbar(result);
         }
+      } else {
+        closeModal();
       }
     });
   };
