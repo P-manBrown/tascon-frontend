@@ -1,10 +1,9 @@
 import { TaskGroupShareCard } from "../task-group-share-card";
-import type { RequestHandoverButton } from "../task-group-share-card/request-handover-button";
 
-type Props = {
-  taskGroupId: React.ComponentProps<
-    typeof RequestHandoverButton
-  >["taskGroupId"];
+type Props = Pick<
+  React.ComponentProps<typeof TaskGroupShareCard>,
+  "taskGroupId"
+> & {
   taskGroupShares: Array<
     React.ComponentProps<typeof TaskGroupShareCard>["share"]
   >;
