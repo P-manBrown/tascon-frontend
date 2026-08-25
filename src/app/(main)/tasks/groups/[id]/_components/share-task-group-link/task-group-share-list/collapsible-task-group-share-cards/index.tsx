@@ -1,12 +1,10 @@
 import { TaskGroupShareCardsCollapsibleSection } from "../../task-group-share-cards-collapsible-section";
-import type { RequestHandoverButton } from "../task-group-share-card/request-handover-button";
 import { TaskGroupShareCards } from "../task-group-share-cards";
 
 type Props = Pick<
   React.ComponentProps<typeof TaskGroupShareCards>,
-  "taskGroupShares"
+  "taskGroupShares" | "taskGroupId"
 > &
-  Pick<React.ComponentProps<typeof RequestHandoverButton>, "taskGroupId"> &
   Pick<
     React.ComponentProps<typeof TaskGroupShareCardsCollapsibleSection>,
     "minHeight"
