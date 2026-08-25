@@ -12,7 +12,7 @@ paths:
 
 ## Props
 
-- Props Drillingが発生し、かつそのPropsが他箇所で未使用・単一コンポーネントのみに渡っている場合→型は`React.ComponentProps`で取得
+- Props Drillingが発生し、かつそのPropsが他箇所で未使用・単一コンポーネントのみに渡っている場合→型は`React.ComponentProps`で取得。参照先は実際にレンダリングしている直近の子コンポーネント（孫以降まで遡らない）
 - 特定要素の機能拡張のみが目的のコンポーネント→`React.ComponentPropsWithRef`で型定義
 - Props型はConsumer-driven（使用側の要求）で決める。上流（APIスキーマ等）の型に引きずられない
 
