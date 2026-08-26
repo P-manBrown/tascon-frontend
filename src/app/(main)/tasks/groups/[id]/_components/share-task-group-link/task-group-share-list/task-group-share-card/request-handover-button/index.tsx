@@ -28,6 +28,7 @@ const errorsObjectSchema = z.object({
 const snackbarErrorSchema = z.union([errorObjectSchema, errorsObjectSchema]);
 
 type Props = {
+  disabled: boolean;
   shareId: number;
   taskGroupId: string;
   userName: string;
@@ -37,6 +38,7 @@ export function RequestHandoverButton({
   shareId,
   taskGroupId,
   userName,
+  disabled,
 }: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -92,7 +94,7 @@ export function RequestHandoverButton({
       <Button
         type="button"
         className="btn-primary"
-        status={isPending ? "pending" : "idle"}
+        status={isPending ? "pending" : disabled ? "disabled" : "idle"}
         onClick={openModal}
       >
         引き継ぎ依頼

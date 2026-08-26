@@ -2,14 +2,18 @@ import { TaskGroupShareCard } from "../task-group-share-card";
 
 type Props = Pick<
   React.ComponentProps<typeof TaskGroupShareCard>,
-  "taskGroupId"
+  "taskGroupId" | "disabled"
 > & {
   taskGroupShares: Array<
     React.ComponentProps<typeof TaskGroupShareCard>["share"]
   >;
 };
 
-export function TaskGroupShareCards({ taskGroupShares, taskGroupId }: Props) {
+export function TaskGroupShareCards({
+  taskGroupShares,
+  taskGroupId,
+  disabled,
+}: Props) {
   return (
     <div className="grid gap-4 lg:grid-cols-2 xl:grid-cols-3">
       {taskGroupShares.map((share) => (
@@ -17,6 +21,7 @@ export function TaskGroupShareCards({ taskGroupShares, taskGroupId }: Props) {
           key={share.id}
           share={share}
           taskGroupId={taskGroupId}
+          disabled={disabled}
         />
       ))}
     </div>

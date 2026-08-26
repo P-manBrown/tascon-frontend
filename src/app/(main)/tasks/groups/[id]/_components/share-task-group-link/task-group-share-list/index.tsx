@@ -12,6 +12,9 @@ const buttonLayoutClasses = "relative z-10 mt-4";
 
 export default async function TaskGroupShareList({ taskGroupId }: Props) {
   const { taskGroupShares } = await getOwnerTaskGroupShares(taskGroupId);
+  const disabled = taskGroupShares.some(
+    (share) => share.status === "handover_pending",
+  );
 
   return taskGroupShares.length === 0 ? (
     <div
@@ -25,6 +28,7 @@ export default async function TaskGroupShareList({ taskGroupId }: Props) {
       taskGroupShares={taskGroupShares}
       taskGroupId={taskGroupId}
       minHeight={shareCardsMinHeight}
+      disabled={disabled}
     />
   );
 }

@@ -3,7 +3,7 @@ import { TaskGroupShareCards } from "../task-group-share-cards";
 
 type Props = Pick<
   React.ComponentProps<typeof TaskGroupShareCards>,
-  "taskGroupShares" | "taskGroupId"
+  "taskGroupShares" | "taskGroupId" | "disabled"
 > &
   Pick<
     React.ComponentProps<typeof TaskGroupShareCardsCollapsibleSection>,
@@ -14,6 +14,7 @@ export function CollapsibleTaskGroupShareCards({
   taskGroupShares,
   taskGroupId,
   minHeight,
+  disabled,
 }: Props) {
   return (
     <TaskGroupShareCardsCollapsibleSection minHeight={minHeight}>
@@ -21,6 +22,7 @@ export function CollapsibleTaskGroupShareCards({
         <TaskGroupShareCards
           taskGroupShares={taskGroupShares}
           taskGroupId={taskGroupId}
+          disabled={disabled}
         />
       </div>
     </TaskGroupShareCardsCollapsibleSection>
