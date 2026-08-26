@@ -2,6 +2,7 @@ import { UserCard } from "@/components/cards/user-card";
 import { RequestHandoverButton } from "./request-handover-button";
 
 type Props = {
+  disabled: React.ComponentProps<typeof RequestHandoverButton>["disabled"];
   taskGroupId: React.ComponentProps<
     typeof RequestHandoverButton
   >["taskGroupId"];
@@ -12,7 +13,7 @@ type Props = {
   };
 };
 
-export function TaskGroupShareCard({ share, taskGroupId }: Props) {
+export function TaskGroupShareCard({ share, taskGroupId, disabled }: Props) {
   const isHandoverPending = share.status === "handover_pending";
 
   return (
@@ -30,6 +31,7 @@ export function TaskGroupShareCard({ share, taskGroupId }: Props) {
             shareId={share.id}
             taskGroupId={taskGroupId}
             userName={share.user.name}
+            disabled={disabled}
           />
         )}
       </div>
