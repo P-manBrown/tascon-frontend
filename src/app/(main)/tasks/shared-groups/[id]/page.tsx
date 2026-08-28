@@ -25,6 +25,10 @@ import {
   LoadingSharedTaskGroupTaskList,
   SharedTaskGroupTaskList,
 } from "./_components/shared-task-group-task-list";
+import {
+  LoadingTaskGroupShareHandoverNotice,
+  TaskGroupShareHandoverNotice,
+} from "./_components/task-group-share-handover-notice";
 
 export const metadata: Metadata = {
   title: "共有タスクグループ詳細",
@@ -55,6 +59,9 @@ export default async function SharedTaskGroup(props: Props) {
           </Suspense>
         </div>
         <div className="flex flex-none items-center gap-x-3">
+          <Suspense fallback={<LoadingTaskGroupShareHandoverNotice />}>
+            <TaskGroupShareHandoverNotice id={id} />
+          </Suspense>
           <Suspense fallback={<LoadingSharedTaskGroupOwner />}>
             <SharedTaskGroupOwner id={id} />
           </Suspense>
