@@ -7,10 +7,14 @@ type Props = {
   taskGroupId: string;
 };
 
-const shareCardsMinHeight = 372;
+const shareCardsMinHeight = 412;
+const buttonLayoutClasses = "relative z-10 mt-4";
 
 export default async function TaskGroupShareList({ taskGroupId }: Props) {
   const { taskGroupShares } = await getOwnerTaskGroupShares(taskGroupId);
+  const disabled = taskGroupShares.some(
+    (share) => share.status === "handover_pending",
+  );
 
   return taskGroupShares.length === 0 ? (
     <div
@@ -20,7 +24,12 @@ export default async function TaskGroupShareList({ taskGroupId }: Props) {
       <EmptyList description="共有中のユーザーはいません" />
     </div>
   ) : (
-    <CollapsibleTaskGroupShareCards taskGroupShares={taskGroupShares} />
+    <CollapsibleTaskGroupShareCards
+      taskGroupShares={taskGroupShares}
+      taskGroupId={taskGroupId}
+      minHeight={shareCardsMinHeight}
+      disabled={disabled}
+    />
   );
 }
 
@@ -33,7 +42,9 @@ export function LoadingTaskGroupShareList() {
       <div className="grid gap-4 p-4 lg:grid-cols-2 xl:grid-cols-3">
         {Array.from({ length: 6 }, (_, index) => index).map((index) => (
           <LoadingUserCard key={index}>
-            <div className="skeleton mt-4 h-6 w-20 rounded" />
+            <div className={buttonLayoutClasses}>
+              <div className="skeleton shape-btn" />
+            </div>
           </LoadingUserCard>
         ))}
       </div>
