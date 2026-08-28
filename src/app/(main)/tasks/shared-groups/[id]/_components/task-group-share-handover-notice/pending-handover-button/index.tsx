@@ -85,7 +85,7 @@ export function PendingHandoverButton({ shareId, shapeClasses }: Props) {
       <Button
         type="button"
         aria-label="引き継ぎ依頼あり"
-        className={`btn-primary gap-1 whitespace-nowrap font-medium text-sm ${shapeClasses}`}
+        className={`btn-success gap-1 whitespace-nowrap font-medium text-sm ${shapeClasses}`}
         status={isPending ? "pending" : "idle"}
         onClick={openModal}
       >
