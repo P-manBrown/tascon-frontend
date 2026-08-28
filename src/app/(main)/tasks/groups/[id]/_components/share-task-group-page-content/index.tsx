@@ -7,6 +7,7 @@ import ShareTaskGroupContactList, {
 import TaskGroupShareList, {
   LoadingTaskGroupShareList,
 } from "../share-task-group-link/task-group-share-list";
+import { UnsharedScrollAnchor } from "./unshared-scroll-anchor";
 
 type Props = {
   taskGroupId: string;
@@ -23,6 +24,7 @@ export function ShareTaskGroupPageContent({ taskGroupId, page }: Props) {
         <TaskGroupShareList taskGroupId={taskGroupId} />
       </Suspense>
       <HorizontalRule className="my-6" />
+      <UnsharedScrollAnchor page={page} />
       <div className="mb-3">
         <ShareSectionHeading>未共有</ShareSectionHeading>
       </div>

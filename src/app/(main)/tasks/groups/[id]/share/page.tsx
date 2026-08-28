@@ -1,6 +1,5 @@
 import { TaskGroupNameHeading } from "@/components/headings/task-group-name-heading";
 import TasksLayout from "@/components/layouts/tasks-layout";
-import { ScrollAnchor } from "@/components/scroll-anchor";
 import { getTaskGroup } from "@/utils/api/get-task-group";
 import { ShareTaskGroupPageContent } from "../_components/share-task-group-page-content";
 
@@ -19,7 +18,6 @@ export default async function ShareTaskGroupPage({
 
   return (
     <TasksLayout>
-      <ScrollAnchor page={page ?? "1"} />
       <div className="mb-3">
         <TaskGroupNameHeading>{`共有：${taskGroup.name}`}</TaskGroupNameHeading>
       </div>

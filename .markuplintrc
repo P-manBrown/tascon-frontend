@@ -26,6 +26,12 @@
       "rules": {
         "invalid-attr": false
       }
+    },
+    {
+      "selector": "div[onClickCapture]",
+      "rules": {
+        "invalid-attr": false
+      }
     }
   ]
 }
