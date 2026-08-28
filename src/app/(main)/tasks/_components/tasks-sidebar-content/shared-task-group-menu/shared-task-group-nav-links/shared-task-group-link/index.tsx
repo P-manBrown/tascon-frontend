@@ -26,6 +26,7 @@ type Props = {
     name: string;
     avatarUrl?: string;
   };
+  status: "shared" | "handover_pending";
   currentPath: string;
   sidebarQuery?: Record<string, string>;
   className: string;
@@ -36,6 +37,7 @@ export function SharedTaskGroupLink({
   name,
   icon,
   owner,
+  status,
   currentPath,
   sidebarQuery,
   className,
@@ -58,12 +60,18 @@ export function SharedTaskGroupLink({
         <Emoji unified={icon} size={iconSize} />
       </span>
       <span className="min-w-0 flex-1 truncate">{name}</span>
-      <span className="flex-none">
+      <span className="relative flex-none">
         <Avatar
           size={avatarSize}
           name={owner.name}
           avatarUrl={owner.avatarUrl}
         />
+        {status === "handover_pending" && (
+          <>
+            <span className="absolute -top-0.5 -right-0.5 size-2 rounded-full border border-white bg-green-700" />
+            <span className="sr-only">引き継ぎ依頼あり</span>
+          </>
+        )}
       </span>
     </Link>
   );
