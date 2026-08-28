@@ -1,6 +1,6 @@
 import "server-only";
 import camelcaseKeys from "camelcase-keys";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { cache } from "react";
 import { z } from "zod";
 import { taskGroupShareSchema } from "@/schemas/response/task-group-share";
@@ -29,10 +29,15 @@ export const getOwnerTaskGroupShares = cache(async (taskGroupId: string) => {
   if (fetchDataResult instanceof Error) {
     const isHttpError = fetchDataResult instanceof HttpError;
     const isUnauthorized = isHttpError && fetchDataResult.statusCode === 401;
+    const isNotFound = isHttpError && fetchDataResult.statusCode === 404;
 
     if (isUnauthorized) {
       const redirectLoginPath = await generateRedirectLoginPath();
       redirect(redirectLoginPath);
+    }
+
+    if (isNotFound) {
+      notFound();
     }
 
     throw fetchDataResult;
