@@ -8,6 +8,7 @@ import { SharedTaskGroupLink } from "./shared-task-group-link";
 type Props = {
   taskGroupShares: Array<{
     id: number;
+    status: React.ComponentProps<typeof SharedTaskGroupLink>["status"];
     taskGroup: Pick<
       React.ComponentProps<typeof SharedTaskGroupLink>,
       "name" | "icon" | "owner"
@@ -36,6 +37,7 @@ export function SharedTaskGroupNavLinks({
               name={taskGroupShare.taskGroup.name}
               icon={taskGroupShare.taskGroup.icon}
               owner={taskGroupShare.taskGroup.owner}
+              status={taskGroupShare.status}
               currentPath={currentPath}
               sidebarQuery={linkSidebarQuery}
               className={linkSizeClasses}
