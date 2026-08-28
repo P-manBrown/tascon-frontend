@@ -16,6 +16,7 @@ import type { HttpError } from "@/utils/error/custom/http-error";
 import { useRedirectLoginPath } from "@/utils/login-path/use-redirect-login-path";
 import { isValidValue } from "@/utils/type-guard/is-valid-value";
 import { acceptHandover } from "../accept-handover.api";
+import { declineHandover } from "../decline-handover.api";
 
 const errorObjectSchema = z.object({
   error: z.object({
@@ -36,7 +37,8 @@ export function PendingHandoverButton({ shareId, shapeClasses }: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirectLoginPath = useRedirectLoginPath({ searchParams });
-  const [isPending, startTransition] = useTransition();
+  const [isAcceptPending, startAcceptTransition] = useTransition();
+  const [isDeclinePending, startDeclineTransition] = useTransition();
   const { openErrorSnackbar } = useErrorSnackbar();
   const {
     shouldMount,
@@ -61,9 +63,23 @@ export function PendingHandoverButton({ shareId, shapeClasses }: Props) {
     }
   };
 
-  const handleOkClick = () => {
-    startTransition(async () => {
+  const handleAcceptClick = () => {
+    startAcceptTransition(async () => {
       const result = await acceptHandover({ shareId });
+
+      if (result.status === "error") {
+        if (result.name === "HttpError") {
+          handleHttpError(result);
+        } else {
+          openErrorSnackbar(result);
+        }
+      }
+    });
+  };
+
+  const handleDeclineClick = () => {
+    startDeclineTransition(async () => {
+      const result = await declineHandover({ shareId });
 
       if (result.status === "error") {
         if (result.name === "HttpError") {
@@ -86,7 +102,6 @@ export function PendingHandoverButton({ shareId, shapeClasses }: Props) {
         type="button"
         aria-label="引き継ぎ依頼あり"
         className={`btn-success gap-1 whitespace-nowrap font-medium text-sm ${shapeClasses}`}
-        status={isPending ? "pending" : "idle"}
         onClick={openModal}
       >
         <BellAlertIcon className="size-4" />
@@ -113,25 +128,40 @@ export function PendingHandoverButton({ shareId, shapeClasses }: Props) {
           >
             <IconMessage severity="warning" title="確認">
               <p className="mb-5 sm:text-center">
-                この引き継ぎ依頼を承認しますか？
+                承認すると、タスクグループの所有権が自分に移ります。
                 <br />
-                承認すると、タスクグループの所有権が自分に移ります。この操作は取り消せません。
+                拒否すると、この依頼はキャンセルされます。
+                <br />
+                いずれの操作も取り消せません。
               </p>
               <div className="mx-2.5 flex items-center justify-center gap-5">
                 <Button
                   type="button"
                   className="btn-primary"
-                  status={isPending ? "disabled" : "idle"}
-                  onClick={handleOkClick}
+                  status={
+                    isAcceptPending
+                      ? "pending"
+                      : isDeclinePending
+                        ? "disabled"
+                        : "idle"
+                  }
+                  onClick={handleAcceptClick}
                 >
                   承認する
                 </Button>
                 <Button
                   type="button"
-                  className="btn-ghost"
-                  onClick={closeModal}
+                  className="btn-danger"
+                  status={
+                    isDeclinePending
+                      ? "pending"
+                      : isAcceptPending
+                        ? "disabled"
+                        : "idle"
+                  }
+                  onClick={handleDeclineClick}
                 >
-                  キャンセル
+                  拒否する
                 </Button>
               </div>
             </IconMessage>
