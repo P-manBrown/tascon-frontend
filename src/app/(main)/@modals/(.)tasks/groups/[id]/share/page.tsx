@@ -1,7 +1,4 @@
-import { Suspense } from "react";
-import ShareTaskGroupContactList, {
-  LoadingShareTaskGroupContactList,
-} from "@/app/(main)/tasks/groups/[id]/_components/share-task-group-link/share-task-group-contact-list";
+import { ShareTaskGroupPageContent } from "@/app/(main)/tasks/groups/[id]/_components/share-task-group-page-content";
 
 type Props = {
   params: Promise<{
@@ -15,9 +12,5 @@ type Props = {
 export default async function ShareTaskGroup({ params, searchParams }: Props) {
   const [{ id }, { page }] = await Promise.all([params, searchParams]);
 
-  return (
-    <Suspense key={page} fallback={<LoadingShareTaskGroupContactList />}>
-      <ShareTaskGroupContactList taskGroupId={id} page={page ?? "1"} />
-    </Suspense>
-  );
+  return <ShareTaskGroupPageContent taskGroupId={id} page={page ?? "1"} />;
 }
