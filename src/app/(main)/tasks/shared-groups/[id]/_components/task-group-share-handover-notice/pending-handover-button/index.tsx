@@ -87,6 +87,8 @@ export function PendingHandoverButton({ shareId, shapeClasses }: Props) {
         } else {
           openErrorSnackbar(result);
         }
+      } else {
+        closeModal();
       }
     });
   };
