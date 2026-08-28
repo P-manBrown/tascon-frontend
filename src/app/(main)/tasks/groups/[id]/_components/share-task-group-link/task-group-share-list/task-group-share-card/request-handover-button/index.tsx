@@ -126,7 +126,7 @@ export function RequestHandoverButton({
                 <Button
                   type="button"
                   className="btn-primary"
-                  status={isPending ? "disabled" : "idle"}
+                  status={isPending ? "pending" : "idle"}
                   onClick={handleOkClick}
                 >
                   依頼する
