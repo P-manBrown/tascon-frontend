@@ -1,13 +1,12 @@
 import { UserCard } from "@/components/cards/user-card";
+import { CancelHandoverRequestButton } from "./cancel-handover-request-button";
 import { RequestHandoverButton } from "./request-handover-button";
 
 type Props = {
   disabled: React.ComponentProps<typeof RequestHandoverButton>["disabled"];
-  taskGroupId: React.ComponentProps<
-    typeof RequestHandoverButton
-  >["taskGroupId"];
+  taskGroupId: string;
   share: {
-    id: React.ComponentProps<typeof RequestHandoverButton>["shareId"];
+    id: number;
     status: "shared" | "handover_pending";
     user: Omit<React.ComponentProps<typeof UserCard>, "children">;
   };
@@ -23,9 +22,12 @@ export function TaskGroupShareCard({ share, taskGroupId, disabled }: Props) {
       bio={share.user.bio}
       avatarUrl={share.user.avatarUrl}
     >
-      <div className={`mt-4 ${isHandoverPending ? "" : "relative z-10"}`}>
+      <div className="relative z-10 mt-4">
         {isHandoverPending ? (
-          <p className="font-bold text-orange-600">引き継ぎ依頼中</p>
+          <CancelHandoverRequestButton
+            shareId={share.id}
+            taskGroupId={taskGroupId}
+          />
         ) : (
           <RequestHandoverButton
             shareId={share.id}
