@@ -2746,21 +2746,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@preact/signals-core@npm:^1.13.0":
-  version: 1.13.0
-  resolution: "@preact/signals-core@npm:1.13.0"
-  checksum: 10/692dadf943a8a26dc8d8b96b9216d932ab8464b738bc8ddc6da293b79189b7b3d6d3d47a1afb21ca106731692f61cd090b0ea72ef605a68201e70a9d0055eec1
+"@preact/signals-core@npm:^1.14.0":
+  version: 1.14.1
+  resolution: "@preact/signals-core@npm:1.14.1"
+  checksum: 10/2845a9b44eaadae181a1a23da1191d987b65cbf0b024e8e35bf121636084c7cd608233d6a405992d57fb5289dcfd885590331b4a6335d802d22cf6bd04e27c2c
   languageName: node
   linkType: hard
 
-"@preact/signals@npm:^2.7.0":
-  version: 2.7.0
-  resolution: "@preact/signals@npm:2.7.0"
+"@preact/signals@npm:^2.9.0":
+  version: 2.9.0
+  resolution: "@preact/signals@npm:2.9.0"
   dependencies:
-    "@preact/signals-core": "npm:^1.13.0"
+    "@preact/signals-core": "npm:^1.14.0"
   peerDependencies:
     preact: ">= 10.25.0 || >=11.0.0-0"
-  checksum: 10/bbfe49baa2af7c02ae4a4eb139aaec8f64fcd948143468eb3a2ad506db3e1cd1a7df1e120f256f3e6b8974a938944430d97f5d9905d480311f8b9435dc140b3b
+  checksum: 10/6b624e2a42e9951d2c5a82f916f53835263c6b1f6a862b5ca2ce8ec8cd50b31f4edbe1c2254fdda27764fcad656ee7c5466910bd0c81c0775e7f1996b750eacc
   languageName: node
   linkType: hard
 
@@ -11733,7 +11733,7 @@ __metadata:
     "@markuplint/jsx-parser": "npm:^4.7.23"
     "@markuplint/react-spec": "npm:^4.5.23"
     "@next/bundle-analyzer": "npm:^16.1.6"
-    "@preact/signals": "npm:^2.7.0"
+    "@preact/signals": "npm:^2.9.0"
     "@schedule-x/calendar": "npm:^4.2.0"
     "@schedule-x/events-service": "npm:^4.3.1"
     "@schedule-x/react": "npm:^4.1.0"
