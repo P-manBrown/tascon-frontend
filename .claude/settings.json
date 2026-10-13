@@ -1,4 +1,32 @@
 {
+  "plansDirectory": "./.claude/plans",
+  "hooks": {
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PROJECT_DIR}/.claude/hooks/plan-worktree-check.sh\""
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PROJECT_DIR}/.claude/hooks/check-docs-hook.sh\""
+          },
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PROJECT_DIR}/.claude/hooks/biome-on-edit.sh\""
+          }
+        ]
+      }
+    ]
+  },
   "enabledPlugins": {
     "genshijin@genshijin": true,
     "codex@openai-codex": true,
