@@ -35,3 +35,6 @@ gh skill install github/gh-stack gh-stack --agent claude-code --scope project --
 
 echo 'Setting up Lefthook...'
 yarn lefthook install
+
+echo 'Setting up TypeScript Language Server...'
+(cd "${HOME}" && sudo npm install -g typescript-language-server)
