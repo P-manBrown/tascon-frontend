@@ -25,6 +25,11 @@
       "resolved": "ghcr.io/p-manbrown/devcontainer-features/claude-code@sha256:4c967a1c532f9ab494d899683eea695a2c33815ed8f33d7a8a9c7cf20c01d8f8",
       "integrity": "sha256:4c967a1c532f9ab494d899683eea695a2c33815ed8f33d7a8a9c7cf20c01d8f8"
     },
+    "ghcr.io/P-manBrown/devcontainer-features/claude-mem:1": {
+      "version": "1.0.0",
+      "resolved": "ghcr.io/p-manbrown/devcontainer-features/claude-mem@sha256:01abeec2277f2d4e58eab5eec42bf72f3b398cf32307f4141705b1f24f411bed",
+      "integrity": "sha256:01abeec2277f2d4e58eab5eec42bf72f3b398cf32307f4141705b1f24f411bed"
+    },
     "ghcr.io/P-manBrown/devcontainer-features/codebase-memory-mcp:1": {
       "version": "1.0.0",
       "resolved": "ghcr.io/p-manbrown/devcontainer-features/codebase-memory-mcp@sha256:9333228d8e57b46e01714eec843c325aca4e424a5c0d82757e90e59d62e0ffc7",
