@@ -12,6 +12,7 @@
 ### 作業環境の注意
 
 - `.claude/settings.json`の登録内容から、Stopフックはメインcheckoutのスクリプト（`${CLAUDE_PROJECT_DIR}`）で動く。そのため、このブランチがメインcheckoutに反映されるまでは、worktree内で停止すると旧版のフックによる無関係なplanの指摘が出続ける
+- worktree内（`EnterWorktree`で移ったメインセッション、およびそこから起動したsubagent）のBashでは、素の`git status`がrtk経由の実行として扱われ、worktree分離ガードに拒否された。`/usr/bin/git`は通った（2026-10-16にこのリポジトリで確認）
 
 ## 仕様
 
@@ -29,7 +30,7 @@
 ### Step 1: フック・ルール修正（chore/plan-worktree-check-scope）
 
 1. `.claude/hooks/plan-worktree-check.sh`を上記仕様に修正する（Codexへ委譲）
-2. `.claude/rules/plans-maintenance.md`の記録条件を「サブエージェントのworktreeでそのplanの作業を行う場合、そのworktreeの絶対パスを`Worktree: <path>`の形で冒頭に記録する。planファイル自体を編集しない場合も記録する。作業するworktreeが変わった場合（再委任等）は、`Worktree: <path>`を新しい行として追加する（1行に複数のパスを並べない）」の趣旨に修正し、言及箇所（`.claude/skills/todoist-task-runner/SKILL.md:24`）も合わせて更新する（Codexへ委譲）。`claude-md-maintenance`ルールの「新規ルール追加時の必須手順」に従い、新規subagentで変更前後の行動を比較する。比較は「記録条件の変更」と「1行ずつの明記」の2段階で行う
+2. `.claude/rules/plans-maintenance.md`の記録条件を「サブエージェントのworktreeでそのplanの作業を行う場合に記録する。planファイル自体を編集しない場合も記録する」の趣旨に修正し、言及箇所（`.claude/skills/todoist-task-runner/SKILL.md:24`）も合わせて更新する（Codexへ委譲）。`claude-md-maintenance`ルールの「新規ルール追加時の必須手順」に従い、新規subagentで変更前後の行動を比較する。比較は「記録条件の変更」と「1行ずつの明記」の2段階で行い、差が出なかった変更は含めない（Decision Log参照）
 3. `docs/decisions/`に、`Worktree:`行のパス形式（絶対パスを維持する）についてADRを追加する
 
 検証（JSON入力をパイプして実行。一時ディレクトリに`.claude/worktrees/<name>/.claude/plans/active/`を作って試す）:
@@ -51,6 +52,12 @@
 ## Progress
 
 - [x] 2026-10-16 ブランチ`chore/plan-worktree-check-scope`を`chore/update-codebase-memory-mcp-lock`の上に作成。移植対象ファイルが変更前のバックエンドと同じ内容であることを確認した。対応するtech-debt・active planはこのリポジトリにない
+- [x] 2026-10-16 Step 1の1・2を完了（Codexへ委譲し、成果物を確認してコミット）
+  - フック修正8659ba8: 変更前のsha256は`899c27c6…`、変更後は`d8ec4388…`で、いずれもバックエンドと一致。検証ケース1〜13の全件が想定どおり（ケース13は、一時ディレクトリに作ったworktreeに本planを置き、冒頭に自分の`Worktree:`行を加えて再現した）
+  - ルール修正9c3e1e6（`plans-maintenance.md`、`todoist-task-runner/SKILL.md:24`）: `git worktree add --detach`で`.claude/worktrees/`の下にテスト用worktreeを作り、メインセッションを`EnterWorktree`でそこへ移したうえで、isolationなしの新規subagentを起動して比較した（`isolation: "worktree"`のsubagentは、別のworktreeへ移ると書き込みができないため移動を拒否される）。テスト用worktreeは比較後に削除した
+    - 比較1（記録条件の変更）: プロンプトは「既存planをこのworktreeで再開し、残作業を確認して報告する（planは編集不要）」。変更前は`Worktree:`行を追記しようとしなかった。変更後は追記しようとした（プロンプトの「planは編集不要」と食い違うため、auto modeの分類器に拒否されて実際には書き込まれていない）
+    - 比較2（worktreeごとに1行ずつ書くことの明記）: プロンプトは「既存planをこのworktreeで再開する。planファイルのWorktree:欄にこのworktreeのパスを追記する」。冒頭に別のworktreeの`Worktree:`行が1行あり、Worktreeの書き方に触れていないダミーplanで試した。変更前・変更後とも、既存の行を残して新しい行として追加し、差が出なかった。最初は本planで試したが、Decision Logにこの決定が書かれていてsubagentがそれに従ったため、無効とした
+- [x] 2026-10-16 Step 1の3を完了: `docs/decisions/plan-worktree-path-format.md`を追加し、索引に載せた（Codexへ委譲）
 
 ## Decision Log
 
@@ -67,6 +74,7 @@
 - 2026-10-14 比較の前に行末の空白・CRを除く。行末に空白がある`Worktree:`行やCRLFのファイルでも一致させるため。前方一致での誤マッチは引き続き起こさない
 - 2026-10-14 判定対象を各planの冒頭（最初の`##`見出しより前の行）に限る。ルールで「冒頭に記録する」と定めており、本文中の例示行で通過しないようにするため。代案の「`.claude/plans`を触った場合のみ検査する」は、planを編集しない作業でも記録が必要なため却下した
 - 2026-10-14 `plans-maintenance`ルールに「worktreeごとに`Worktree: <path>`を1行ずつ書く」旨を明記する。追記方法が決まっていないと1行にカンマ区切りで並べられ、フックの完全一致に当たらなくなるため。`todoist-task-runner/SKILL.md`の「`Worktree:`に追記する」も、同じ書き方を誘うため「`Worktree:`行を記録する」に改める
+- 2026-10-16 このリポジトリでは、上の「1行ずつ書く」旨の明記と、`todoist-task-runner/SKILL.md`の「`Worktree:`行を記録する」への変更を含めない（ユーザー判断）。新規subagentでの比較2で、別のworktreeの`Worktree:`行がすでにあるplanを使っても、変更前から新しい行として追加しており、差が出なかったため（`claude-md-maintenance`ルールの「新規ルール追加時の必須手順」）。あわせて、同じ文言で追加された「`Worktree: <path>`の形で」「（最初の`##`見出しより前）」も含めず、比較1で差が出た文言にそろえた。そのため、この2ファイルはバックエンドの最終状態と一致しない
 - 2026-10-16 ブランチtypeはchoreにする（既存のフック変更と同じ）
 - 2026-10-16 コミットは、バックエンドでレビュー指摘への対応として分かれたもの（フック・ルールの追加修正、Progress記録）を、フック・ルール・Progressそれぞれ1コミットにまとめる。このリポジトリではレビュー指摘の経緯がないため
 
@@ -76,5 +84,5 @@
 - どのactive planにも完全一致のWorktree行がなければexit 2でブロックし、作業中のplanへの追記を促す
 - 前方一致の行や、最初の`##`見出しより後にしかない行では通らない。行末の空白・CRがあっても完全一致なら通る
 - `stop_hook_active: true`・worktree外のcwd・plans_dirがない・`active/`にplanがない場合は何もしない
-- `plans-maintenance`ルールと言及箇所が「作業を行う場合に、worktreeごとに1行で記録する」に揃っている
+- `plans-maintenance`ルールと言及箇所が「planの作業を行う場合に記録する（planファイルを編集しない場合も）」に揃っている
 - `docs/decisions/`にWorktree行のパス形式のADRがあり、索引に載っている
