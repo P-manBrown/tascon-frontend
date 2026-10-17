@@ -3,7 +3,7 @@
 ## Context/Purpose
 
 - バックエンド（tascon-backend）の同名planで行った変更を、このリポジトリへ移植する。判断の経緯はバックエンドで決めたものを移植している（Decision Log参照）
-- `.claude/hooks/plan-worktree-check.sh`（`.claude/settings.json`のStopフック）は、cwdが`/.claude/worktrees/`配下のとき、`.claude/plans/active/*.md`の全ファイルに`Worktree: <cwd>`行があるかを確認し、1件でも欠けていればexit 2で停止をブロックする。そのため、無関係な既存planが毎回指摘される
+- `.claude/hooks/plan-worktree-check.sh`（`.claude/settings.json`のSubagentStopフック）は、cwdが`/.claude/worktrees/`配下のとき、`.claude/plans/active/*.md`の全ファイルに`Worktree: <cwd>`行があるかを確認し、1件でも欠けていればexit 2で停止をブロックする。そのため、無関係な既存planが毎回指摘される
 - `Worktree:`を記録する目的は、`execution-plan`完了処理の手順2（`Worktree:`のパスから解決されるproject識別子でclaude-memを照会する）にある。記録が必要かどうかは「そのworktreeでplanの作業をしたか」で決まり、planファイルを編集したかどうかは関係ない
 - 目的: フックの判定を「いずれか1件のactive planに、行全体が`Worktree: <cwd>`と一致する行があるか」へ変更し、`plans-maintenance`ルールの記録条件も同じ考え方に揃える
 - ブランチ: `chore/plan-worktree-check-scope`（`chore/update-codebase-memory-mcp-lock`の上にgit-spiceで作成済み）
@@ -11,7 +11,7 @@
 
 ### 作業環境の注意
 
-- `.claude/settings.json`の登録内容から、Stopフックはメインcheckoutのスクリプト（`${CLAUDE_PROJECT_DIR}`）で動く。そのため、このブランチがメインcheckoutに反映されるまでは、worktree内で停止すると旧版のフックによる無関係なplanの指摘が出続ける
+- `.claude/settings.json`の登録内容から、SubagentStopフックはメインcheckoutのスクリプト（`${CLAUDE_PROJECT_DIR}`）で動く。そのため、このブランチがメインcheckoutに反映されるまでは、サブエージェントがworktree内で停止すると旧版のフックによる無関係なplanの指摘が出続ける
 - worktree内（`EnterWorktree`で移ったメインセッション、およびそこから起動したsubagent）のBashでは、素の`git status`がrtk経由の実行として扱われ、worktree分離ガードに拒否された。`/usr/bin/git`は通った（2026-10-16にこのリポジトリで確認）
 
 ## 仕様
@@ -65,12 +65,12 @@
 - 2026-10-14 判定基準は「いずれか1件のactive planに`Worktree: <cwd>`の行があるか」にする（ユーザー判断）。`Worktree:`の記録目的は完了処理でのclaude-mem照会であり、記録要否はそのworktreeでplanの作業をしたかで決まる。1つのworktreeで扱うplanは基本的に1つで、どのplanが正しいかという意味的な検証は形式的な検査ではできないため、検査は「どれか1件に記載があるか」までに留める
 - 2026-10-14 一致判定は行全体の完全一致にする。前方一致だと`agent-x`が`agent-xy`のworktreeに誤ってマッチする
 - 2026-10-14 git-spiceで親ブランチを取得し、git差分で変更されたplanだけを検査する案は採用しない。planファイルを編集したかどうかは、記録の要否と関係ないため
-- 2026-10-14 agent hook（`type: "agent"`）は採用しない。公式ドキュメント上experimentalで、Stopのたびにコストがかかり、結果も非決定的なため
+- 2026-10-14 agent hook（`type: "agent"`）は採用しない。公式ドキュメント上experimentalで、サブエージェントの停止のたびにコストがかかり、結果も非決定的なため
 - 2026-10-14 `completed/`は検査しない。完了処理を行うworktreeは記録不要である。完了処理ではclaude-memを照会した後にplanを移動するので、そのworktreeの記録は照会で使われない
 - 2026-10-14 既知の制約として記録のみ: 将来、完了処理をサブエージェントのworktreeで行うと、planが`completed/`へ移動した時点で該当するactive planがなくなり、フックが1回ブロックする（`stop_hook_active`により2回目は通る）。現状、完了処理をサブエージェントへ委ねる手順はないため対処しない
 - 2026-10-14 `plans-maintenance`ルールの記録条件を「作成・更新する場合」から「そのplanの作業を行う場合」へ変更する。フックの判定基準と考え方を揃えるため
 - 2026-10-14 `active/`に`*.md`が1件もなければexit 0にする。記録先のplanがないのでブロックしても意味がなく、旧版もexit 0だった
-- 2026-10-14 exit 2のメッセージに「planの作業をしていない場合（レビュー・調査等）は対応不要。無関係なplanに追記しない」旨を明記する。`stop_hook_active`により2回目のStopは通るので、作業していないworktreeでは無視すればよい。指示どおり無関係なplanに追記されると`Worktree:`の記録が崩れる
+- 2026-10-14 exit 2のメッセージに「planの作業をしていない場合（レビュー・調査等）は対応不要。無関係なplanに追記しない」旨を明記する。`stop_hook_active`により2回目の停止は通るので、作業していないworktreeでは無視すればよい。指示どおり無関係なplanに追記されると`Worktree:`の記録が崩れる
 - 2026-10-14 比較の前に行末の空白・CRを除く。行末に空白がある`Worktree:`行やCRLFのファイルでも一致させるため。前方一致での誤マッチは引き続き起こさない
 - 2026-10-14 判定対象を各planの冒頭（最初の`##`見出しより前の行）に限る。ルールで「冒頭に記録する」と定めており、本文中の例示行で通過しないようにするため。代案の「`.claude/plans`を触った場合のみ検査する」は、planを編集しない作業でも記録が必要なため却下した
 - 2026-10-14 `plans-maintenance`ルールに「worktreeごとに`Worktree: <path>`を1行ずつ書く」旨を明記する。追記方法が決まっていないと1行にカンマ区切りで並べられ、フックの完全一致に当たらなくなるため。`todoist-task-runner/SKILL.md`の「`Worktree:`に追記する」も、同じ書き方を誘うため「`Worktree:`行を記録する」に改める
