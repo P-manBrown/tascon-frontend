@@ -17,6 +17,7 @@ type Props = {
   pageItems: string
   className: string
   isReadonly?: boolean
+  calendar: React.ReactNode
   children: React.ReactNode
 }
 
@@ -30,6 +31,7 @@ export function TaskCardsContainer({
   pageItems,
   className,
   isReadonly = false,
+  calendar,
   children,
 }: Props) {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
@@ -149,7 +151,7 @@ export function TaskCardsContainer({
             onClick={handlePageSelectLinkClick}
           />
         )}
-        {!isReadonly && <CalendarButton />}
+        {calendar !== undefined && <CalendarButton calendar={calendar} />}
       </div>
     </div>
   )

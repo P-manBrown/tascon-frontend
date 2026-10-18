@@ -1,56 +1,15 @@
-import {
-  createViewMonthAgenda,
-  createViewMonthGrid,
-  createViewWeek,
-} from '@schedule-x/calendar'
 import { createEventsServicePlugin } from '@schedule-x/events-service'
 import { useNextCalendarApp } from '@schedule-x/react'
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useErrorBoundary } from 'react-error-boundary'
+import { CalendarRange } from '@/types/calendar-range'
+import { convertTasksToEvents } from '@/utils/calendar/convert-tasks-to-events'
+import { createCalendarConfig } from '@/utils/calendar/create-calendar-config'
 import { HttpError } from '@/utils/error/custom/http-error'
 import { generateFromUrlParam } from '@/utils/login-path/generate-from-url-param'
 import { getCalendarTasks } from './get-calendar-tasks.api'
 import type { CalendarEventExternal } from '@schedule-x/calendar'
-
-const timezone = 'Asia/Tokyo'
-
-type CalendarRange = {
-  start: Temporal.ZonedDateTime
-  end: Temporal.ZonedDateTime
-}
-
-function parseDateTime(isoString: string) {
-  const hasTimeComponent = isoString.includes('T')
-
-  if (hasTimeComponent) {
-    const instant = Temporal.Instant.from(isoString)
-    return instant.toZonedDateTimeISO(timezone)
-  }
-
-  return Temporal.PlainDate.from(isoString)
-}
-
-type ConvertTasksToEventsParams = {
-  id: number
-  name: string
-  startsAt: string
-  endsAt: string
-}[]
-
-function convertTasksToEvents(tasks: ConvertTasksToEventsParams) {
-  return tasks.map((task) => {
-    const start = parseDateTime(task.startsAt)
-    const end = parseDateTime(task.endsAt)
-
-    return {
-      id: task.id,
-      title: task.name,
-      start,
-      end,
-    }
-  })
-}
 
 export function useTaskCalendar() {
   const router = useRouter()
@@ -125,25 +84,13 @@ export function useTaskCalendar() {
     }
   }, [fetchCalendarEvents, eventsService, handleCalendarError])
 
-  const calendar = useNextCalendarApp({
-    views: [createViewWeek(), createViewMonthGrid(), createViewMonthAgenda()],
-    defaultView: 'month-grid',
-    locale: 'ja-JP',
-    timezone,
-    firstDayOfWeek: 1,
-    dayBoundaries: {
-      start: '06:00',
-      end: '24:00',
-    },
-    weekOptions: {
-      gridHeight: 1000,
-    },
-    plugins: [eventsService],
-    callbacks: {
+  const calendar = useNextCalendarApp(
+    createCalendarConfig({
+      plugins: [eventsService],
       onEventClick: handleEventClick,
       fetchEvents,
-    },
-  })
+    }),
+  )
 
   useEffect(() => {
     window.addEventListener('task-created', handleTaskChange)
