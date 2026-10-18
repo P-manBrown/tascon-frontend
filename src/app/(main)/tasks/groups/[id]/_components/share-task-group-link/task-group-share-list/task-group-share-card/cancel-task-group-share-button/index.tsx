@@ -67,6 +67,7 @@ export function CancelTaskGroupShareButton({
   };
 
   const handleOkClick = () => {
+    closeModal();
     startTransition(async () => {
       const result = await cancelTaskGroupShare({ shareId, taskGroupId });
 
@@ -76,8 +77,6 @@ export function CancelTaskGroupShareButton({
         } else {
           openErrorSnackbar(result);
         }
-      } else {
-        closeModal();
       }
     });
   };
@@ -124,7 +123,7 @@ export function CancelTaskGroupShareButton({
                 <Button
                   type="button"
                   className="btn-danger"
-                  status={isPending ? "pending" : "idle"}
+                  status={isPending ? "disabled" : "idle"}
                   onClick={handleOkClick}
                 >
                   解除する
