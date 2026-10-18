@@ -1,4 +1,5 @@
 import { UserCard } from "@/components/cards/user-card";
+import { getTaskGroup } from "@/utils/api/get-task-group";
 import { CancelHandoverRequestButton } from "./cancel-handover-request-button";
 import { CancelTaskGroupShareButton } from "./cancel-task-group-share-button";
 import { RequestHandoverButton } from "./request-handover-button";
@@ -13,7 +14,12 @@ type Props = {
   };
 };
 
-export function TaskGroupShareCard({ share, taskGroupId, disabled }: Props) {
+export async function TaskGroupShareCard({
+  share,
+  taskGroupId,
+  disabled,
+}: Props) {
+  const { taskGroup } = await getTaskGroup(taskGroupId);
   const isHandoverPending = share.status === "handover_pending";
 
   return (
@@ -42,6 +48,7 @@ export function TaskGroupShareCard({ share, taskGroupId, disabled }: Props) {
             <CancelTaskGroupShareButton
               shareId={share.id}
               taskGroupId={taskGroupId}
+              taskGroupName={taskGroup.name}
               userName={share.user.name}
             />
           </div>

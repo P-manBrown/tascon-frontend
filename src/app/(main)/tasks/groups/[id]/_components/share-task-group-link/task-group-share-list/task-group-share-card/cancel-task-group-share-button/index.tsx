@@ -30,12 +30,14 @@ const snackbarErrorSchema = z.union([errorObjectSchema, errorsObjectSchema]);
 type Props = {
   shareId: number;
   taskGroupId: string;
+  taskGroupName: string;
   userName: string;
 };
 
 export function CancelTaskGroupShareButton({
   shareId,
   taskGroupId,
+  taskGroupName,
   userName,
 }: Props) {
   const router = useRouter();
@@ -117,7 +119,7 @@ export function CancelTaskGroupShareButton({
           >
             <IconMessage severity="warning" title="確認">
               <p className="mb-5 text-center">
-                {userName}さんとの共有を解除しますか？
+                {taskGroupName} の {userName} との共有を解除しますか？
               </p>
               <div className="flex items-center justify-center gap-5">
                 <Button
