@@ -1,27 +1,27 @@
 // See https://is.gd/4CpzNm
 
-import { useSearchParams } from 'next/navigation'
-import { Suspense, useEffect } from 'react'
-import type { ReadonlyURLSearchParams } from 'next/navigation'
+import type { ReadonlyURLSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import { Suspense, useEffect } from "react";
 
 type Props = {
-  onParamsReceived: (searchParams: ReadonlyURLSearchParams) => void
-}
+  onParamsReceived: (searchParams: ReadonlyURLSearchParams) => void;
+};
 
 export function SearchParamsLoader(props: Props) {
   return (
     <Suspense>
       <SearchParamsLoaderInner {...props} />
     </Suspense>
-  )
+  );
 }
 
 function SearchParamsLoaderInner({ onParamsReceived }: Props) {
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
 
   useEffect(() => {
-    onParamsReceived(searchParams)
-  }, [onParamsReceived, searchParams])
+    onParamsReceived(searchParams);
+  }, [onParamsReceived, searchParams]);
 
-  return null
+  return null;
 }

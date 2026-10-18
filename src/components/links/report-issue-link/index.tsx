@@ -1,18 +1,18 @@
-import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/solid'
+import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/solid";
 
 type Props = {
-  className?: string
-  info?: string
-}
+  className?: string;
+  info?: string;
+};
 
-export function ReportIssueLink({ className = '', info }: Props) {
+export function ReportIssueLink({ className = "", info }: Props) {
   const params = new URLSearchParams({
     title: `[Bug]: タイトル(${info})`,
-    assignee: 'P-manBrown',
-    template: 'bug.yml',
-  }).toString()
-  const issueUrl = 'https://github.com/P-manBrown/tascon-frontend/issues/new'
-  const href = `${issueUrl}${info ? `?${params}` : ''}`
+    assignee: "P-manBrown",
+    template: "bug.yml",
+  }).toString();
+  const issueUrl = "https://github.com/P-manBrown/tascon-frontend/issues/new";
+  const href = `${issueUrl}${info ? `?${params}` : ""}`;
 
   return (
     <a
@@ -27,5 +27,5 @@ export function ReportIssueLink({ className = '', info }: Props) {
         <ArrowTopRightOnSquareIcon className="size-4" />
       </span>
     </a>
-  )
+  );
 }

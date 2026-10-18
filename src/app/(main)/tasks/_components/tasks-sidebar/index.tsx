@@ -1,17 +1,17 @@
-'use client'
+"use client";
 
-import { Sidebar } from '@/components/sidebar'
-import { LinkSidebarQueryContext } from '@/components/sidebar/link-sidebar-query-context'
-import { useSidebar } from '@/components/sidebar/use-sidebar'
+import { Sidebar } from "@/components/sidebar";
+import { LinkSidebarQueryContext } from "@/components/sidebar/link-sidebar-query-context";
+import { useSidebar } from "@/components/sidebar/use-sidebar";
 
 type Props = {
-  children: React.ReactNode
-}
+  children: React.ReactNode;
+};
 
 export function TasksSidebar({ children }: Props) {
   const { isOpen, openSidebar, closeSidebar, linkSidebarQuery } = useSidebar({
-    defaultState: 'open',
-  })
+    defaultState: "open",
+  });
 
   return (
     <Sidebar
@@ -23,5 +23,5 @@ export function TasksSidebar({ children }: Props) {
         {children}
       </LinkSidebarQueryContext>
     </Sidebar>
-  )
+  );
 }

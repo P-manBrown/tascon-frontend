@@ -1,21 +1,21 @@
-'use client'
+"use client";
 
-import { XMarkIcon } from '@heroicons/react/24/solid'
-import { useRouter, useSearchParams } from 'next/navigation'
-import { useTransition } from 'react'
-import { z } from 'zod'
-import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
-import { Button } from '@/components/buttons/button'
-import { IconButton } from '@/components/buttons/icon-button'
-import { ModalContent } from '@/components/contents/modal-content'
-import { IconMessage } from '@/components/icon-message'
-import { Modal } from '@/components/modal'
-import { useModal } from '@/components/modal/use-modal'
-import { useRedirectLoginPath } from '@/utils/login-path/use-redirect-login-path'
-import { isValidValue } from '@/utils/type-guard/is-valid-value'
-import { createBlock } from './create-block.api'
-import type { ErrorObject } from '@/types/error'
-import type { HttpError } from '@/utils/error/custom/http-error'
+import { XMarkIcon } from "@heroicons/react/24/solid";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useTransition } from "react";
+import { z } from "zod";
+import { useErrorSnackbar } from "@/app/_components/snackbars/snackbar/use-error-snackbar";
+import { Button } from "@/components/buttons/button";
+import { IconButton } from "@/components/buttons/icon-button";
+import { ModalContent } from "@/components/contents/modal-content";
+import { IconMessage } from "@/components/icon-message";
+import { Modal } from "@/components/modal";
+import { useModal } from "@/components/modal/use-modal";
+import type { ErrorObject } from "@/types/error";
+import type { HttpError } from "@/utils/error/custom/http-error";
+import { useRedirectLoginPath } from "@/utils/login-path/use-redirect-login-path";
+import { isValidValue } from "@/utils/type-guard/is-valid-value";
+import { createBlock } from "./create-block.api";
 
 const snackbarErrorsSchema = z.object({
   errors: z.array(
@@ -23,19 +23,19 @@ const snackbarErrorsSchema = z.object({
       message: z.string(),
     }),
   ),
-})
+});
 
 type Props = {
-  currentUserId: string
-  userId: number
-}
+  currentUserId: string;
+  userId: number;
+};
 
 export function CreateBlockButton({ currentUserId, userId }: Props) {
-  const router = useRouter()
-  const searchParams = useSearchParams()
-  const redirectLoginPath = useRedirectLoginPath({ searchParams })
-  const [isPending, startTransition] = useTransition()
-  const { openErrorSnackbar } = useErrorSnackbar()
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectLoginPath = useRedirectLoginPath({ searchParams });
+  const [isPending, startTransition] = useTransition();
+  const { openErrorSnackbar } = useErrorSnackbar();
   const {
     shouldMount,
     isOpen,
@@ -44,45 +44,45 @@ export function CreateBlockButton({ currentUserId, userId }: Props) {
     unmountModal,
     handleAnimationEnd,
     handleCancel,
-  } = useModal()
+  } = useModal();
 
   const handleHttpError = (err: ErrorObject<HttpError>) => {
-    const { data } = err
+    const { data } = err;
     if (isValidValue(snackbarErrorsSchema, data)) {
-      openErrorSnackbar(err, data.errors[0].message)
+      openErrorSnackbar(err, data.errors[0].message);
     } else if (err.statusCode === 401) {
-      router.push(redirectLoginPath)
+      router.push(redirectLoginPath);
     } else {
-      openErrorSnackbar(err)
+      openErrorSnackbar(err);
     }
-  }
+  };
 
   const handleOkClick = () => {
-    closeModal()
+    closeModal();
     startTransition(async () => {
-      const result = await createBlock({ currentUserId, userId })
+      const result = await createBlock({ currentUserId, userId });
 
-      if (result.status === 'error') {
-        if (result.name === 'HttpError') {
-          handleHttpError(result)
+      if (result.status === "error") {
+        if (result.name === "HttpError") {
+          handleHttpError(result);
         } else {
-          openErrorSnackbar(result)
+          openErrorSnackbar(result);
         }
       }
-    })
-  }
+    });
+  };
 
   const handleClose = (ev: React.SyntheticEvent<HTMLDialogElement, Event>) => {
-    ev.stopPropagation()
-    unmountModal()
-  }
+    ev.stopPropagation();
+    unmountModal();
+  };
 
   return (
     <>
       <Button
         type="button"
         className="btn-danger"
-        status={isPending ? 'pending' : 'idle'}
+        status={isPending ? "pending" : "idle"}
         onClick={openModal}
       >
         ブロック
@@ -108,11 +108,11 @@ export function CreateBlockButton({ currentUserId, userId }: Props) {
           >
             <IconMessage severity="warning" title="確認">
               <p className="mb-5 text-center">本当にブロックしますか？</p>
-              <div className="min-w-items-center flex min-w-60 justify-center gap-5">
+              <div className="flex min-w-60 min-w-items-center justify-center gap-5">
                 <Button
                   type="button"
                   className="btn-danger"
-                  status={isPending ? 'disabled' : 'idle'}
+                  status={isPending ? "disabled" : "idle"}
                   onClick={handleOkClick}
                 >
                   ブロック
@@ -130,5 +130,5 @@ export function CreateBlockButton({ currentUserId, userId }: Props) {
         </Modal>
       )}
     </>
-  )
+  );
 }

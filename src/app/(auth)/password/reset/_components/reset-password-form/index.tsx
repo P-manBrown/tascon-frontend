@@ -1,65 +1,65 @@
-'use client'
+"use client";
 
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useRouter } from 'next/navigation'
-import { useId } from 'react'
-import { useForm } from 'react-hook-form'
-import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
-import { Button } from '@/components/buttons/button'
-import { IconButton } from '@/components/buttons/icon-button'
-import { Label } from '@/components/form-controls/label'
-import { TextField } from '@/components/form-controls/text-field'
-import { VisibilityToggleIcon } from '@/components/visibility-toggle-icon'
-import { useVisibilityToggle } from '@/components/visibility-toggle-icon/use-visibility-toggle'
-import { resetPasswordSchema } from '@/schemas/request/auth'
-import { resetPassword } from './reset-password.api'
-import type { SubmitHandler } from 'react-hook-form'
-import type { z } from 'zod'
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { useId } from "react";
+import type { SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import type { z } from "zod";
+import { useErrorSnackbar } from "@/app/_components/snackbars/snackbar/use-error-snackbar";
+import { Button } from "@/components/buttons/button";
+import { IconButton } from "@/components/buttons/icon-button";
+import { Label } from "@/components/form-controls/label";
+import { TextField } from "@/components/form-controls/text-field";
+import { VisibilityToggleIcon } from "@/components/visibility-toggle-icon";
+import { useVisibilityToggle } from "@/components/visibility-toggle-icon/use-visibility-toggle";
+import { resetPasswordSchema } from "@/schemas/request/auth";
+import { resetPassword } from "./reset-password.api";
 
-type ResetPasswordFormValues = z.infer<typeof resetPasswordSchema>
+type ResetPasswordFormValues = z.infer<typeof resetPasswordSchema>;
 
 export function ResetPasswordForm() {
-  const id = useId()
-  const { isVisible, toggleVisible } = useVisibilityToggle()
-  const router = useRouter()
-  const { openErrorSnackbar } = useErrorSnackbar()
+  const id = useId();
+  const { isVisible, toggleVisible } = useVisibilityToggle();
+  const router = useRouter();
+  const { openErrorSnackbar } = useErrorSnackbar();
   const {
     register,
     handleSubmit,
     reset,
     formState: { isSubmitting, errors },
   } = useForm<ResetPasswordFormValues>({
-    mode: 'onBlur',
+    mode: "onBlur",
     resolver: zodResolver(resetPasswordSchema),
-  })
+  });
 
   const onSubmit: SubmitHandler<ResetPasswordFormValues> = async (data) => {
-    const result = await resetPassword(data)
-    if (result.status === 'error') {
-      if (result.name === 'HttpError' && result.statusCode === 401) {
-        router.push('/password/forgot?err=invalid_token')
+    const result = await resetPassword(data);
+    if (result.status === "error") {
+      if (result.name === "HttpError" && result.statusCode === 401) {
+        router.push("/password/forgot?err=invalid_token");
       } else {
-        openErrorSnackbar(result)
+        openErrorSnackbar(result);
       }
     } else {
-      reset()
-      router.push('/tasks')
+      reset();
+      router.push("/tasks");
     }
-  }
+  };
 
   return (
     <form noValidate={true} onSubmit={handleSubmit(onSubmit)}>
       <Label htmlFor={`${id}-password`}>新しいパスワード</Label>
       <TextField
         id={`${id}-password`}
-        type={isVisible ? 'text' : 'password'}
+        type={isVisible ? "text" : "password"}
         autoComplete="new-password"
-        register={register('password')}
+        register={register("password")}
         errors={errors.password}
         suffixIcon={
           <IconButton
             type="button"
-            aria-label={isVisible ? 'パスワードを隠す' : 'パスワードを表示する'}
+            aria-label={isVisible ? "パスワードを隠す" : "パスワードを表示する"}
             onClick={toggleVisible}
           >
             <VisibilityToggleIcon isVisible={isVisible} className="size-5" />
@@ -69,10 +69,10 @@ export function ResetPasswordForm() {
       <Button
         type="submit"
         className="btn-primary mt-9"
-        status={isSubmitting ? 'pending' : 'idle'}
+        status={isSubmitting ? "pending" : "idle"}
       >
         パスワード再設定
       </Button>
     </form>
-  )
+  );
 }

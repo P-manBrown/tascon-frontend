@@ -1,21 +1,21 @@
-import { UserCircleIcon } from '@heroicons/react/24/solid'
-import { Suspense } from 'react'
-import { EmptyList } from '@/components/empty-list'
-import { UsersSectionHeading } from '@/components/headings/users-section-heading'
-import { UsersSectionHeaderLayout } from '@/components/layouts/users-section-header-layout'
-import { UsersSectionHeadingLayout } from '@/components/layouts/users-section-heading-layout'
-import { UsersSectionHeaderLink } from '@/components/links/users-section-header-link'
-import { ContactsCardsCollapsibleSection } from './_components/contact-cards-collapsible-section'
+import { UserCircleIcon } from "@heroicons/react/24/solid";
+import { Suspense } from "react";
+import { EmptyList } from "@/components/empty-list";
+import { UsersSectionHeading } from "@/components/headings/users-section-heading";
+import { UsersSectionHeaderLayout } from "@/components/layouts/users-section-header-layout";
+import { UsersSectionHeadingLayout } from "@/components/layouts/users-section-heading-layout";
+import { UsersSectionHeaderLink } from "@/components/links/users-section-header-link";
+import { ContactsCardsCollapsibleSection } from "./_components/contact-cards-collapsible-section";
 import {
   ContactsItemCountSummary,
   LoadingContactsItemCountSummary,
-} from './_components/contacts-item-count-summary'
+} from "./_components/contacts-item-count-summary";
 import {
   LoadingUsersContactList,
   UsersContactList,
-} from './_components/users-contact-list'
+} from "./_components/users-contact-list";
 
-const limit = 12
+const limit = 12;
 
 export default function UsersContacts() {
   return (
@@ -46,5 +46,5 @@ export default function UsersContacts() {
         </div>
       </ContactsCardsCollapsibleSection>
     </section>
-  )
+  );
 }

@@ -1,14 +1,14 @@
-import { ErrorBaseObject, ErrorObject, Errors } from '@/types/error'
-import { HttpError } from '@/utils/error/custom/http-error'
+import type { ErrorBaseObject, ErrorObject, Errors } from "@/types/error";
+import { HttpError } from "@/utils/error/custom/http-error";
 
 export function createErrorObject(err: Errors) {
   const errorBaseObject: ErrorBaseObject = {
-    status: 'error',
+    status: "error",
     message: err.message,
     requestId: err.requestId,
-  }
+  };
 
-  let errorObject: ErrorObject<Errors>
+  let errorObject: ErrorObject<Errors>;
 
   if (err instanceof HttpError) {
     errorObject = {
@@ -16,13 +16,13 @@ export function createErrorObject(err: Errors) {
       name: err.name,
       statusCode: err.statusCode,
       data: err.data,
-    }
+    };
   } else {
     errorObject = {
       ...errorBaseObject,
       name: err.name,
-    }
+    };
   }
 
-  return errorObject
+  return errorObject;
 }

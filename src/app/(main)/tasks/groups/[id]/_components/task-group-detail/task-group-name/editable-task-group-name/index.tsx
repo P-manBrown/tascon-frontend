@@ -1,22 +1,22 @@
-import { DetailItemHeading } from '@/components/headings/detail-item-heading'
-import { DetailItemContentLayout } from '@/components/layouts/detail-item-content-layout'
-import { DetailItemHeadingLayout } from '@/components/layouts/detail-item-heading-layout'
-import { Tag } from '@/components/tag'
+import { DetailItemHeading } from "@/components/headings/detail-item-heading";
+import { DetailItemContentLayout } from "@/components/layouts/detail-item-content-layout";
+import { DetailItemHeadingLayout } from "@/components/layouts/detail-item-heading-layout";
+import { Tag } from "@/components/tag";
 import {
   DetailSingleLineText,
   LoadingDetailSingleLineText,
-} from '@/components/texts/detail-single-line-text'
-import { getTaskGroup } from '@/utils/api/get-task-group'
-import { getCurrentUser } from '@/utils/api/server/get-current-user'
-import { TaskGroupNameEditor } from './task-group-name-editor'
+} from "@/components/texts/detail-single-line-text";
+import { getTaskGroup } from "@/utils/api/get-task-group";
+import { getCurrentUser } from "@/utils/api/server/get-current-user";
+import { TaskGroupNameEditor } from "./task-group-name-editor";
 
 type Props = {
-  taskGroupId: string
-}
+  taskGroupId: string;
+};
 
 export async function EditableTaskGroupName({ taskGroupId }: Props) {
-  const { account: currentUser } = await getCurrentUser()
-  const { taskGroup } = await getTaskGroup(taskGroupId)
+  const { account: currentUser } = await getCurrentUser();
+  const { taskGroup } = await getTaskGroup(taskGroupId);
 
   return (
     <TaskGroupNameEditor
@@ -30,7 +30,7 @@ export async function EditableTaskGroupName({ taskGroupId }: Props) {
         <DetailSingleLineText>{taskGroup.name}</DetailSingleLineText>
       </DetailItemContentLayout>
     </TaskGroupNameEditor>
-  )
+  );
 }
 
 export function LoadingEditableTaskGroupName() {
@@ -43,5 +43,5 @@ export function LoadingEditableTaskGroupName() {
         <LoadingDetailSingleLineText />
       </DetailItemContentLayout>
     </div>
-  )
+  );
 }

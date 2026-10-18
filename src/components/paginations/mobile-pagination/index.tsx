@@ -1,19 +1,19 @@
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
-import { MobilePageSelector } from './mobile-page-selector'
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import { MobilePageSelector } from "./mobile-page-selector";
 import {
   LoadingMobilePageTurnLink,
   MobilePageTurnLink,
-} from './mobile-page-turn-link'
+} from "./mobile-page-turn-link";
 
 type Props = {
-  currentPage: number
-  totalPages: number
-  isFirstPage: boolean
-  isLastPage: boolean
-}
+  currentPage: number;
+  totalPages: number;
+  isFirstPage: boolean;
+  isLastPage: boolean;
+};
 
-const layoutClasses = 'flex items-center justify-between md:hidden'
-const linkSizeClasses = 'h-10 w-16'
+const layoutClasses = "flex items-center justify-between md:hidden";
+const linkSizeClasses = "h-10 w-16";
 
 export function MobilePagination({
   currentPage,
@@ -41,7 +41,7 @@ export function MobilePagination({
         </MobilePageTurnLink>
       )}
     </nav>
-  )
+  );
 }
 
 export function LoadingMobilePagination() {
@@ -51,5 +51,5 @@ export function LoadingMobilePagination() {
       <span className="skeleton h-5 w-14 rounded-full" />
       <LoadingMobilePageTurnLink className={`skeleton ${linkSizeClasses}`} />
     </div>
-  )
+  );
 }

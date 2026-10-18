@@ -1,12 +1,12 @@
-'use client'
+"use client";
 
-import { Button } from '@/components/buttons/button'
-import { ErrorContent } from '@/components/contents/error-content'
-import { IconMessage } from '@/components/icon-message'
-import { ReportIssueLink } from '@/components/links/report-issue-link'
-import type { ErrorProps } from '@/types/error'
+import { Button } from "@/components/buttons/button";
+import { ErrorContent } from "@/components/contents/error-content";
+import { IconMessage } from "@/components/icon-message";
+import { ReportIssueLink } from "@/components/links/report-issue-link";
+import type { ErrorProps } from "@/types/error";
 
-export default function Error({ error, reset }: ErrorProps) {
+export default function ErrorBoundary({ error, reset }: ErrorProps) {
   return (
     <IconMessage severity="error" title="Error">
       <ErrorContent
@@ -19,5 +19,5 @@ export default function Error({ error, reset }: ErrorProps) {
         reportIssueLink={<ReportIssueLink info={`Digest: ${error.digest}`} />}
       />
     </IconMessage>
-  )
+  );
 }

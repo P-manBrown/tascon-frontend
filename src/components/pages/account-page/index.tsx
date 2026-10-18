@@ -1,12 +1,12 @@
-import { Suspense } from 'react'
-import { HorizontalRule } from '@/components/horizontal-rule'
-import { AccountQueryParamSnackbar } from './account-query-param-snackbar'
-import { CurrentUserInfo } from './current-user-info'
+import { Suspense } from "react";
+import { HorizontalRule } from "@/components/horizontal-rule";
+import { AccountQueryParamSnackbar } from "./account-query-param-snackbar";
+import { CurrentUserInfo } from "./current-user-info";
 import {
   DeleteCurrentUserAccountButton,
   LoadingDeleteCurrentUserAccountButton,
-} from './delete-current-user-account-button'
-import { LogoutButton } from './logout-button'
+} from "./delete-current-user-account-button";
+import { LogoutButton } from "./logout-button";
 
 export function AccountPage() {
   return (
@@ -19,5 +19,5 @@ export function AccountPage() {
       </Suspense>
       <AccountQueryParamSnackbar />
     </div>
-  )
+  );
 }

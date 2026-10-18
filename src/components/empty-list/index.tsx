@@ -1,8 +1,8 @@
-import { InboxIcon } from '@heroicons/react/24/outline'
+import { InboxIcon } from "@heroicons/react/24/outline";
 
 type Props = {
-  description: string
-}
+  description: string;
+};
 
 export function EmptyList({ description }: Props) {
   return (
@@ -12,5 +12,5 @@ export function EmptyList({ description }: Props) {
       </div>
       <p className="text-center text-gray-500">{description}</p>
     </div>
-  )
+  );
 }

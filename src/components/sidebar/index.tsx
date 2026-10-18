@@ -2,17 +2,17 @@ import {
   ArrowTopRightOnSquareIcon,
   ChevronDoubleLeftIcon,
   ChevronDoubleRightIcon,
-} from '@heroicons/react/24/outline'
-import { IconButton } from '../buttons/icon-button'
+} from "@heroicons/react/24/outline";
+import { IconButton } from "../buttons/icon-button";
 
 type Props = {
-  isOpen: boolean
-  onOpenButtonClick: (ev: React.MouseEvent<HTMLButtonElement>) => void
-  onCloseButtonClick: (ev: React.MouseEvent<HTMLButtonElement>) => void
-  children: React.ReactNode
-}
+  isOpen: boolean;
+  onOpenButtonClick: (ev: React.MouseEvent<HTMLButtonElement>) => void;
+  onCloseButtonClick: (ev: React.MouseEvent<HTMLButtonElement>) => void;
+  children: React.ReactNode;
+};
 
-const widthClasses = 'w-64 max-md:w-screen'
+const widthClasses = "w-64 max-md:w-screen";
 
 export function Sidebar({
   isOpen,
@@ -21,10 +21,10 @@ export function Sidebar({
   children,
 }: Props) {
   return (
-    <div className={`h-full ${isOpen ? '' : 'relative'}`}>
+    <div className={`h-full ${isOpen ? "" : "relative"}`}>
       <aside
-        className={`bg-theme max-md:pb-safe flex h-full flex-col overflow-hidden border-r border-r-gray-300 transition-[width] duration-200 ease-out ${
-          isOpen ? widthClasses : 'w-0'
+        className={`flex h-full flex-col overflow-hidden border-r border-r-gray-300 bg-theme transition-[width] duration-200 ease-out max-md:pb-safe ${
+          isOpen ? widthClasses : "w-0"
         }`}
         aria-label="サイドバー"
         inert={!isOpen}
@@ -41,7 +41,7 @@ export function Sidebar({
             href="https://forms.gle/F9d8j2XnjT2mAfRc9"
             target="_blank"
             rel="noreferrer"
-            className="btn btn-outline-success h-8 text-base font-normal"
+            className="btn btn-outline-success h-8 font-normal text-base"
           >
             お問い合わせ
             <span className="ml-1">
@@ -59,7 +59,7 @@ export function Sidebar({
         </div>
       </aside>
       {!isOpen && (
-        <div className="animate-slide-in-left bg-theme max-md:mb-safe absolute bottom-0.5 z-50 rounded-e-sm border-y border-r border-gray-300">
+        <div className="absolute bottom-0.5 z-50 animate-slide-in-left rounded-e-sm border-gray-300 border-y border-r bg-theme max-md:mb-safe">
           <IconButton
             className="h-10 w-8 rounded-s-none"
             aria-label="サイドバーを開く"
@@ -70,5 +70,5 @@ export function Sidebar({
         </div>
       )}
     </div>
-  )
+  );
 }

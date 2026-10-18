@@ -1,7 +1,7 @@
 type Props = {
-  children: React.ReactNode
-}
+  children: React.ReactNode;
+};
 
 export function UsersDescription({ children }: Props) {
-  return <p className="text-sm">{children}</p>
+  return <p className="text-sm">{children}</p>;
 }

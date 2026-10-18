@@ -1,30 +1,30 @@
-import { DetailItemHeading } from '@/components/headings/detail-item-heading'
-import { DetailItemContentLayout } from '@/components/layouts/detail-item-content-layout'
-import { DetailItemHeadingLayout } from '@/components/layouts/detail-item-heading-layout'
-import { getSharedTask } from '@/components/pages/shared-task-page/get-shared-task.api'
-import { TaskNoteCollapsibleSection } from '@/components/pages/task-page/editable-task-note/task-note-collapsible-section'
-import { TaskStatusSquare } from '@/components/tasks/task-cards/task-card/task-status-square'
+import { DetailItemHeading } from "@/components/headings/detail-item-heading";
+import { DetailItemContentLayout } from "@/components/layouts/detail-item-content-layout";
+import { DetailItemHeadingLayout } from "@/components/layouts/detail-item-heading-layout";
+import { getSharedTask } from "@/components/pages/shared-task-page/get-shared-task.api";
+import { TaskNoteCollapsibleSection } from "@/components/pages/task-page/editable-task-note/task-note-collapsible-section";
+import { TaskStatusSquare } from "@/components/tasks/task-cards/task-card/task-status-square";
 import {
   DetailMultiLineText,
   LoadingDetailMultiLineText,
-} from '@/components/texts/detail-multi-line-text'
+} from "@/components/texts/detail-multi-line-text";
 import {
   DetailSingleLineText,
   LoadingDetailSingleLineText,
-} from '@/components/texts/detail-single-line-text'
-import { formatDateTime } from '@/utils/task/format-date-time'
-import { formatMinutes } from '@/utils/task/format-minutes'
-import { TASK_STATUS_LABELS } from '@/utils/task/task-status-labels'
+} from "@/components/texts/detail-single-line-text";
+import { formatDateTime } from "@/utils/task/format-date-time";
+import { formatMinutes } from "@/utils/task/format-minutes";
+import { TASK_STATUS_LABELS } from "@/utils/task/task-status-labels";
 
 type Props = {
-  shareId: string
-  taskId: string
-}
+  shareId: string;
+  taskId: string;
+};
 
-const noteMinHeight = 160
+const noteMinHeight = 160;
 
 export async function SharedTaskPage({ shareId, taskId }: Props) {
-  const { task } = await getSharedTask({ shareId: shareId, taskId })
+  const { task } = await getSharedTask({ shareId: shareId, taskId });
 
   return (
     <div className="flex flex-col space-y-10">
@@ -117,7 +117,7 @@ export async function SharedTaskPage({ shareId, taskId }: Props) {
         </DetailItemHeadingLayout>
         <TaskNoteCollapsibleSection minHeight={noteMinHeight}>
           <DetailItemContentLayout>
-            {task.note === undefined || task.note === '' ? (
+            {task.note === undefined || task.note === "" ? (
               <p className="text-gray-500">メモは設定されていません...</p>
             ) : (
               <DetailMultiLineText>{task.note}</DetailMultiLineText>
@@ -126,7 +126,7 @@ export async function SharedTaskPage({ shareId, taskId }: Props) {
         </TaskNoteCollapsibleSection>
       </div>
     </div>
-  )
+  );
 }
 
 export function LoadingSharedTaskPage() {
@@ -199,5 +199,5 @@ export function LoadingSharedTaskPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

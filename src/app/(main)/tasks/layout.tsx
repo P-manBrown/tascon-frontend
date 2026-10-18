@@ -1,10 +1,10 @@
-import { Suspense } from 'react'
-import { TasksSidebar } from './_components/tasks-sidebar'
-import { TasksSidebarContent } from './_components/tasks-sidebar-content'
+import { Suspense } from "react";
+import { TasksSidebar } from "./_components/tasks-sidebar";
+import { TasksSidebarContent } from "./_components/tasks-sidebar-content";
 
 type Props = {
-  children: React.ReactNode
-}
+  children: React.ReactNode;
+};
 
 export default function TasksLayout({ children }: Props) {
   return (
@@ -18,5 +18,5 @@ export default function TasksLayout({ children }: Props) {
         {children}
       </main>
     </div>
-  )
+  );
 }

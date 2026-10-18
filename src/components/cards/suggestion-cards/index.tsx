@@ -1,18 +1,18 @@
-import { UserCard, LoadingUserCard } from '@/components/cards/user-card'
-import { CreateContactFromSuggestionButton } from './create-contact-from-suggestion-button'
+import { LoadingUserCard, UserCard } from "@/components/cards/user-card";
+import { CreateContactFromSuggestionButton } from "./create-contact-from-suggestion-button";
 
 type SuggestionCardsProps = {
   users: Array<{
-    id: number
-    name: string
-    bio?: string
-    avatarUrl?: string
-  }>
-  currentUserId: string
-  className: string
-}
+    id: number;
+    name: string;
+    bio?: string;
+    avatarUrl?: string;
+  }>;
+  currentUserId: string;
+  className: string;
+};
 
-const buttonLayoutClasses = 'relative z-10 mt-4'
+const buttonLayoutClasses = "relative z-10 mt-4";
 
 export function SuggestionCards({
   users,
@@ -38,12 +38,12 @@ export function SuggestionCards({
         </UserCard>
       ))}
     </div>
-  )
+  );
 }
 
-type LoadingSuggestionCardsProps = Pick<SuggestionCardsProps, 'className'> & {
-  limit: number
-}
+type LoadingSuggestionCardsProps = Pick<SuggestionCardsProps, "className"> & {
+  limit: number;
+};
 
 export function LoadingSuggestionCards({
   limit,
@@ -51,7 +51,7 @@ export function LoadingSuggestionCards({
 }: LoadingSuggestionCardsProps) {
   return (
     <div className={className}>
-      {Array.from({ length: limit }).map((_, index) => (
+      {Array.from({ length: limit }, (_, i) => i).map((index) => (
         <LoadingUserCard key={index}>
           <div className={buttonLayoutClasses}>
             <div className="skeleton shape-btn" />
@@ -59,5 +59,5 @@ export function LoadingSuggestionCards({
         </LoadingUserCard>
       ))}
     </div>
-  )
+  );
 }

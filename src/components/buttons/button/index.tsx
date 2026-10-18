@@ -1,25 +1,25 @@
-import { Spinner } from '@/components/spinner'
+import { Spinner } from "@/components/spinner";
 
 type ButtonProps = Omit<
-  React.ComponentPropsWithoutRef<'button'>,
-  'disabled'
+  React.ComponentPropsWithoutRef<"button">,
+  "disabled"
 > & {
-  status?: 'idle' | 'pending' | 'disabled'
-}
+  status?: "idle" | "pending" | "disabled";
+};
 
 export function Button({
-  status = 'idle',
-  className = '',
+  status = "idle",
+  className = "",
   children,
   ...rest
 }: ButtonProps) {
   return (
     <button
       className={`btn ${className}`}
-      disabled={status !== 'idle'}
+      disabled={status !== "idle"}
       {...rest}
     >
-      {status === 'pending' ? (
+      {status === "pending" ? (
         <span className="flex h-full w-full items-center justify-center gap-1">
           <Spinner className="size-2/3" />
           処理中...
@@ -28,5 +28,5 @@ export function Button({
         children
       )}
     </button>
-  )
+  );
 }

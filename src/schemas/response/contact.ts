@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import { z } from "zod";
 
 export const contactSchema = z.object({
   contact: z.object({
@@ -12,4 +12,4 @@ export const contactSchema = z.object({
       avatar_url: z.string().optional(),
     }),
   }),
-})
+});

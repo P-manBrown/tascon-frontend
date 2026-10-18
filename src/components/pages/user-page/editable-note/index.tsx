@@ -1,19 +1,19 @@
-import { DetailItemHeading } from '@/components/headings/detail-item-heading'
-import { DetailItemContentLayout } from '@/components/layouts/detail-item-content-layout'
-import { Tag } from '@/components/tag'
-import { DetailMultiLineText } from '@/components/texts/detail-multi-line-text'
-import { getCurrentUser } from '@/utils/api/server/get-current-user'
-import { NoteCollapsibleSection } from './note-collapsible-section'
-import { NoteEditor } from './note-editor'
+import { DetailItemHeading } from "@/components/headings/detail-item-heading";
+import { DetailItemContentLayout } from "@/components/layouts/detail-item-content-layout";
+import { Tag } from "@/components/tag";
+import { DetailMultiLineText } from "@/components/texts/detail-multi-line-text";
+import { getCurrentUser } from "@/utils/api/server/get-current-user";
+import { NoteCollapsibleSection } from "./note-collapsible-section";
+import { NoteEditor } from "./note-editor";
 
-type Props = Pick<React.ComponentProps<typeof NoteEditor>, 'contactId'> & {
-  note: string | undefined
-}
+type Props = Pick<React.ComponentProps<typeof NoteEditor>, "contactId"> & {
+  note: string | undefined;
+};
 
-const minHeight = 160
+const minHeight = 160;
 
 export async function EditableNote({ contactId, note }: Props) {
-  const { account: currentUser } = await getCurrentUser()
+  const { account: currentUser } = await getCurrentUser();
 
   return (
     <NoteEditor
@@ -25,7 +25,7 @@ export async function EditableNote({ contactId, note }: Props) {
     >
       <NoteCollapsibleSection minHeight={minHeight}>
         <DetailItemContentLayout>
-          {note === undefined || note === '' ? (
+          {note === undefined || note === "" ? (
             <p className="text-gray-500">メモを登録できます...</p>
           ) : (
             <DetailMultiLineText>{note}</DetailMultiLineText>
@@ -33,5 +33,5 @@ export async function EditableNote({ contactId, note }: Props) {
         </DetailItemContentLayout>
       </NoteCollapsibleSection>
     </NoteEditor>
-  )
+  );
 }

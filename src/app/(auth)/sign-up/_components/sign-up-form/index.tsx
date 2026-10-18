@@ -1,22 +1,22 @@
-'use client'
+"use client";
 
-import { XMarkIcon } from '@heroicons/react/24/solid'
-import { useId } from 'react'
-import { Button } from '@/components/buttons/button'
-import { IconButton } from '@/components/buttons/icon-button'
-import { ModalContent } from '@/components/contents/modal-content'
-import { Label } from '@/components/form-controls/label'
-import { TextField } from '@/components/form-controls/text-field'
-import { Modal } from '@/components/modal'
-import { VisibilityToggleIcon } from '@/components/visibility-toggle-icon'
-import { useVisibilityToggle } from '@/components/visibility-toggle-icon/use-visibility-toggle'
-import { SignUpSuccessMessage } from './sign-up-success-message'
-import { useSignUpForm } from './use-sign-up-form'
-import type { LabeledTextFields } from '@/types/labeled-text-fields'
+import { XMarkIcon } from "@heroicons/react/24/solid";
+import { useId } from "react";
+import { Button } from "@/components/buttons/button";
+import { IconButton } from "@/components/buttons/icon-button";
+import { ModalContent } from "@/components/contents/modal-content";
+import { Label } from "@/components/form-controls/label";
+import { TextField } from "@/components/form-controls/text-field";
+import { Modal } from "@/components/modal";
+import { VisibilityToggleIcon } from "@/components/visibility-toggle-icon";
+import { useVisibilityToggle } from "@/components/visibility-toggle-icon/use-visibility-toggle";
+import type { LabeledTextFields } from "@/types/labeled-text-fields";
+import { SignUpSuccessMessage } from "./sign-up-success-message";
+import { useSignUpForm } from "./use-sign-up-form";
 
 export function SignUpForm() {
-  const id = useId()
-  const { isVisible, toggleVisible } = useVisibilityToggle()
+  const id = useId();
+  const { isVisible, toggleVisible } = useVisibilityToggle();
 
   const {
     shouldMount,
@@ -31,43 +31,43 @@ export function SignUpForm() {
     onSubmit,
     handleSubmit,
     register,
-  } = useSignUpForm()
+  } = useSignUpForm();
 
   const labeledTextFields: LabeledTextFields = [
     {
       id: `${id}-name`,
-      label: 'ユーザー名',
-      type: 'text',
-      autoComplete: 'username',
-      register: register('name'),
+      label: "ユーザー名",
+      type: "text",
+      autoComplete: "username",
+      register: register("name"),
       errors: errors.name,
     },
     {
       id: `${id}-email`,
-      label: 'メールアドレス',
-      type: 'email',
-      autoComplete: 'email',
-      register: register('email'),
+      label: "メールアドレス",
+      type: "email",
+      autoComplete: "email",
+      register: register("email"),
       errors: errors.email,
     },
     {
       id: `${id}-password`,
-      label: 'パスワード',
-      type: isVisible ? 'text' : 'password',
-      autoComplete: 'new-password',
-      register: register('password'),
+      label: "パスワード",
+      type: isVisible ? "text" : "password",
+      autoComplete: "new-password",
+      register: register("password"),
       errors: errors.password,
       suffixIcon: (
         <IconButton
           type="button"
-          aria-label={isVisible ? 'パスワードを隠す' : 'パスワードを表示する'}
+          aria-label={isVisible ? "パスワードを隠す" : "パスワードを表示する"}
           onClick={toggleVisible}
         >
           <VisibilityToggleIcon isVisible={isVisible} className="size-5" />
         </IconButton>
       ),
     },
-  ]
+  ];
 
   return (
     <>
@@ -93,7 +93,7 @@ export function SignUpForm() {
         <Button
           type="submit"
           className="btn-primary mt-6"
-          status={isSubmitting ? 'pending' : 'idle'}
+          status={isSubmitting ? "pending" : "idle"}
         >
           新規登録
         </Button>
@@ -121,5 +121,5 @@ export function SignUpForm() {
         </Modal>
       )}
     </>
-  )
+  );
 }

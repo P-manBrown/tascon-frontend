@@ -1,38 +1,38 @@
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useRouter } from 'next/navigation'
-import { useCallback, useTransition } from 'react'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
-import { useModal } from '@/components/modal/use-modal'
-import { signUpSchema } from '@/schemas/request/auth'
-import { createContact } from '@/utils/api/create-contact'
-import { isValidValue } from '@/utils/type-guard/is-valid-value'
-import type { ErrorObject } from '@/types/error'
-import type { HttpError } from '@/utils/error/custom/http-error'
-import type { SubmitHandler } from 'react-hook-form'
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { useCallback, useTransition } from "react";
+import type { SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { useErrorSnackbar } from "@/app/_components/snackbars/snackbar/use-error-snackbar";
+import { useModal } from "@/components/modal/use-modal";
+import { signUpSchema } from "@/schemas/request/auth";
+import type { ErrorObject } from "@/types/error";
+import { createContact } from "@/utils/api/create-contact";
+import type { HttpError } from "@/utils/error/custom/http-error";
+import { isValidValue } from "@/utils/type-guard/is-valid-value";
 
-const createContactSchema = signUpSchema.pick({ email: true })
-type CreateContactFormValues = z.infer<typeof createContactSchema>
+const createContactSchema = signUpSchema.pick({ email: true });
+type CreateContactFormValues = z.infer<typeof createContactSchema>;
 
 const errorMessageSchema = z.object({
   message: z.string(),
-})
+});
 const snackbarErrorSchema = z.object({
   error: errorMessageSchema,
-})
+});
 const snackbarErrorsSchema = z.object({
   errors: z.array(errorMessageSchema),
-})
+});
 
 type Params = {
-  currentUserId: string
-}
+  currentUserId: string;
+};
 
 export function useCreateContactButton({ currentUserId }: Params) {
-  const [isPending, startTransition] = useTransition()
-  const router = useRouter()
-  const { openErrorSnackbar } = useErrorSnackbar()
+  const [isPending, startTransition] = useTransition();
+  const router = useRouter();
+  const { openErrorSnackbar } = useErrorSnackbar();
 
   const {
     shouldMount,
@@ -42,7 +42,7 @@ export function useCreateContactButton({ currentUserId }: Params) {
     unmountModal,
     handleAnimationEnd,
     handleCancel,
-  } = useModal()
+  } = useModal();
 
   const {
     register,
@@ -50,48 +50,48 @@ export function useCreateContactButton({ currentUserId }: Params) {
     reset,
     formState: { errors },
   } = useForm<CreateContactFormValues>({
-    mode: 'onBlur',
+    mode: "onBlur",
     resolver: zodResolver(createContactSchema),
-  })
+  });
 
   const handleClose = useCallback(
     (ev: React.SyntheticEvent<HTMLDialogElement, Event>) => {
-      ev.stopPropagation()
-      unmountModal()
+      ev.stopPropagation();
+      unmountModal();
     },
     [unmountModal],
-  )
+  );
 
   const handleHttpError = useCallback(
     (err: ErrorObject<HttpError>) => {
-      const { data } = err
+      const { data } = err;
       if (isValidValue(snackbarErrorSchema, data)) {
-        openErrorSnackbar(err, data.error.message)
+        openErrorSnackbar(err, data.error.message);
       } else if (isValidValue(snackbarErrorsSchema, data)) {
-        openErrorSnackbar(err, data.errors[0].message)
+        openErrorSnackbar(err, data.errors[0].message);
       } else {
-        openErrorSnackbar(err)
+        openErrorSnackbar(err);
       }
     },
     [openErrorSnackbar],
-  )
+  );
 
   const onSubmit: SubmitHandler<CreateContactFormValues> = useCallback(
     (data) => {
       startTransition(async () => {
-        const result = await createContact({ currentUserId, ...data })
-        if (result.status === 'error') {
-          if (result.name === 'HttpError') {
-            handleHttpError(result)
+        const result = await createContact({ currentUserId, ...data });
+        if (result.status === "error") {
+          if (result.name === "HttpError") {
+            handleHttpError(result);
           } else {
-            openErrorSnackbar(result)
+            openErrorSnackbar(result);
           }
         } else {
-          reset()
-          closeModal()
-          router.push(`/users/profile/${result.contact.contactUser.id}`)
+          reset();
+          closeModal();
+          router.push(`/users/profile/${result.contact.contactUser.id}`);
         }
-      })
+      });
     },
     [
       currentUserId,
@@ -101,7 +101,7 @@ export function useCreateContactButton({ currentUserId }: Params) {
       openErrorSnackbar,
       closeModal,
     ],
-  )
+  );
 
   return {
     shouldMount,
@@ -116,5 +116,5 @@ export function useCreateContactButton({ currentUserId }: Params) {
     errors,
     onSubmit,
     isPending,
-  }
+  };
 }

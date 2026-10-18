@@ -1,12 +1,12 @@
-import dynamic from 'next/dynamic'
-import Link from 'next/link'
-import { Avatar } from '@/components/avatars/avatar'
+import dynamic from "next/dynamic";
+import Link from "next/link";
+import { Avatar } from "@/components/avatars/avatar";
 
-const iconSize = 20
-const avatarSize = 20
+const iconSize = 20;
+const avatarSize = 20;
 
 const Emoji = dynamic(
-  () => import('emoji-picker-react').then((mod) => mod.Emoji),
+  () => import("emoji-picker-react").then((mod) => mod.Emoji),
   {
     loading: () => (
       <span
@@ -16,20 +16,20 @@ const Emoji = dynamic(
     ),
     ssr: false,
   },
-)
+);
 
 type Props = {
-  shareId: string
-  name: string
-  icon: string
+  shareId: string;
+  name: string;
+  icon: string;
   owner: {
-    name: string
-    avatarUrl?: string
-  }
-  currentPath: string
-  sidebarQuery?: Record<string, string>
-  className: string
-}
+    name: string;
+    avatarUrl?: string;
+  };
+  currentPath: string;
+  sidebarQuery?: Record<string, string>;
+  className: string;
+};
 
 export function SharedTaskGroupLink({
   shareId,
@@ -40,8 +40,8 @@ export function SharedTaskGroupLink({
   sidebarQuery,
   className,
 }: Props) {
-  const groupPath = `/tasks/shared-groups/${shareId}`
-  const isActive = groupPath === currentPath
+  const groupPath = `/tasks/shared-groups/${shareId}`;
+  const isActive = groupPath === currentPath;
 
   return (
     <Link
@@ -49,7 +49,7 @@ export function SharedTaskGroupLink({
       className={`flex items-center gap-x-2 rounded-sm ${
         isActive
           ? 'pointer-events-none relative bg-gray-600/10 text-black before:absolute before:top-0 before:left-0 before:h-full before:w-1 before:rounded-sm before:bg-gray-600 before:content-[""]'
-          : 'duration-200 hover:bg-gray-600/10 hover:text-black'
+          : "duration-200 hover:bg-gray-600/10 hover:text-black"
       } ${className}`}
       prefetch={isActive ? false : null}
       tabIndex={isActive ? -1 : undefined}
@@ -66,5 +66,5 @@ export function SharedTaskGroupLink({
         />
       </span>
     </Link>
-  )
+  );
 }

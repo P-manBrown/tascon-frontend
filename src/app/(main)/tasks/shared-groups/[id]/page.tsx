@@ -1,47 +1,47 @@
-import { Suspense } from 'react'
-import { ErrorBoundary } from 'react-error-boundary'
-import { CalendarError } from '@/components/calendars/calendar-error'
-import { LoadingTaskGroupNameHeading } from '@/components/headings/task-group-name-heading'
-import { DesktopTaskCalendarLayout } from '@/components/layouts/task-calendar-layout'
-import { TaskListLayout } from '@/components/layouts/task-list-layout'
-import TasksLayout from '@/components/layouts/tasks-layout'
-import { SharedTaskCalendar } from './_components/shared-task-calendar'
+import type { Metadata } from "next";
+import { Suspense } from "react";
+import { ErrorBoundary } from "react-error-boundary";
+import { CalendarError } from "@/components/calendars/calendar-error";
+import { LoadingTaskGroupNameHeading } from "@/components/headings/task-group-name-heading";
+import { DesktopTaskCalendarLayout } from "@/components/layouts/task-calendar-layout";
+import { TaskListLayout } from "@/components/layouts/task-list-layout";
+import TasksLayout from "@/components/layouts/tasks-layout";
+import { ShowTaskGroupDetailModalButton } from "../../groups/[id]/_components/show-task-group-detail-modal-button";
+import { SharedTaskCalendar } from "./_components/shared-task-calendar";
 import {
   LoadingSharedTaskGroupDetail,
   SharedTaskGroupDetail,
-} from './_components/shared-task-group-detail'
+} from "./_components/shared-task-group-detail";
 import {
   LoadingSharedTaskGroupHeaderIcon,
   SharedTaskGroupHeaderIcon,
-} from './_components/shared-task-group-header-icon'
-import { SharedTaskGroupHeading } from './_components/shared-task-group-heading'
+} from "./_components/shared-task-group-header-icon";
+import { SharedTaskGroupHeading } from "./_components/shared-task-group-heading";
 import {
   LoadingSharedTaskGroupOwner,
   SharedTaskGroupOwner,
-} from './_components/shared-task-group-owner'
+} from "./_components/shared-task-group-owner";
 import {
   LoadingSharedTaskGroupTaskList,
   SharedTaskGroupTaskList,
-} from './_components/shared-task-group-task-list'
-import { ShowTaskGroupDetailModalButton } from '../../groups/[id]/_components/show-task-group-detail-modal-button'
-import type { Metadata } from 'next'
+} from "./_components/shared-task-group-task-list";
 
 export const metadata: Metadata = {
-  title: '共有タスクグループ詳細',
-}
+  title: "共有タスクグループ詳細",
+};
 
 type Props = {
-  params: Promise<{ id: string }>
+  params: Promise<{ id: string }>;
   searchParams: Promise<{
-    page?: string
-  }>
-}
+    page?: string;
+  }>;
+};
 
 export default async function SharedTaskGroup(props: Props) {
-  const params = await props.params
-  const { id } = params
-  const searchParams = await props.searchParams
-  const { page = '1' } = searchParams
+  const params = await props.params;
+  const { id } = params;
+  const searchParams = await props.searchParams;
+  const { page = "1" } = searchParams;
 
   return (
     <TasksLayout>
@@ -78,5 +78,5 @@ export default async function SharedTaskGroup(props: Props) {
         </DesktopTaskCalendarLayout>
       </TaskListLayout>
     </TasksLayout>
-  )
+  );
 }

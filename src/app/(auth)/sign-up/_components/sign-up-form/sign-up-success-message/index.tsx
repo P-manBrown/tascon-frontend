@@ -1,33 +1,33 @@
-import { useState } from 'react'
-import { useErrorSnackbar } from '@/app/_components/snackbars/snackbar/use-error-snackbar'
-import { useSnackbarsStore } from '@/app/_components/snackbars/use-snackbars-store'
-import { Button } from '@/components/buttons/button'
-import { HorizontalRule } from '@/components/horizontal-rule'
-import { IconMessage } from '@/components/icon-message'
-import { resendConfirmationEmail } from './resend-confirmation-email.api'
+import { useState } from "react";
+import { useErrorSnackbar } from "@/app/_components/snackbars/snackbar/use-error-snackbar";
+import { useSnackbarsStore } from "@/app/_components/snackbars/use-snackbars-store";
+import { Button } from "@/components/buttons/button";
+import { HorizontalRule } from "@/components/horizontal-rule";
+import { IconMessage } from "@/components/icon-message";
+import { resendConfirmationEmail } from "./resend-confirmation-email.api";
 
 type Props = {
-  email: string
-}
+  email: string;
+};
 
 export function SignUpSuccessMessage({ email }: Props) {
-  const [isSending, setIsSending] = useState(false)
-  const openSnackbar = useSnackbarsStore((state) => state.openSnackbar)
-  const { openErrorSnackbar } = useErrorSnackbar()
+  const [isSending, setIsSending] = useState(false);
+  const openSnackbar = useSnackbarsStore((state) => state.openSnackbar);
+  const { openErrorSnackbar } = useErrorSnackbar();
 
   const handleClick = async () => {
-    setIsSending(true)
-    const result = await resendConfirmationEmail({ email })
-    if (result.status === 'error') {
-      openErrorSnackbar(result)
+    setIsSending(true);
+    const result = await resendConfirmationEmail({ email });
+    if (result.status === "error") {
+      openErrorSnackbar(result);
     } else {
       openSnackbar({
-        severity: 'success',
-        message: '確認用メールを再送信しました。',
-      })
+        severity: "success",
+        message: "確認用メールを再送信しました。",
+      });
     }
-    setIsSending(false)
-  }
+    setIsSending(false);
+  };
 
   return (
     <IconMessage severity="success" title="新規登録完了">
@@ -41,12 +41,12 @@ export function SignUpSuccessMessage({ email }: Props) {
         <Button
           type="button"
           className="btn-primary"
-          status={isSending ? 'pending' : 'idle'}
+          status={isSending ? "pending" : "idle"}
           onClick={handleClick}
         >
           確認用メールを再送信
         </Button>
       </div>
     </IconMessage>
-  )
+  );
 }

@@ -1,31 +1,31 @@
-import { DeleteBlockButton } from '@/components/cards/block-cards/delete-block-button'
-import { DetailItemHeading } from '@/components/headings/detail-item-heading'
-import { getCurrentUser } from '@/utils/api/server/get-current-user'
-import { getUser } from '@/utils/api/server/get-user'
-import { CreateBlockButton } from './create-block-button'
+import { DeleteBlockButton } from "@/components/cards/block-cards/delete-block-button";
+import { DetailItemHeading } from "@/components/headings/detail-item-heading";
+import { getCurrentUser } from "@/utils/api/server/get-current-user";
+import { getUser } from "@/utils/api/server/get-user";
+import { CreateBlockButton } from "./create-block-button";
 
 type Props = {
-  userId: number
-}
+  userId: number;
+};
 
 export async function UserBlockSection({ userId }: Props) {
-  const userData = getUser(userId.toString())
-  const accountData = getCurrentUser()
+  const userData = getUser(userId.toString());
+  const accountData = getCurrentUser();
   const [{ user }, { account: currentUser }] = await Promise.all([
     userData,
     accountData,
-  ])
-  const { block } = user
-  const isBlocked = block !== undefined
+  ]);
+  const { block } = user;
+  const isBlocked = block !== undefined;
 
   return (
     <section
-      className={`rounded-sm p-6 ${isBlocked ? 'border border-red-200 bg-red-50' : 'bg-gray-100'}`}
+      className={`rounded-sm p-6 ${isBlocked ? "border border-red-200 bg-red-50" : "bg-gray-100"}`}
     >
       <div className="flex items-center gap-1.5">
         <DetailItemHeading>ブロック</DetailItemHeading>
         {isBlocked && (
-          <span className="ml-auto rounded-full bg-red-100 px-2.5 py-0.5 text-sm text-red-800">
+          <span className="ml-auto rounded-full bg-red-100 px-2.5 py-0.5 text-red-800 text-sm">
             ブロック中
           </span>
         )}
@@ -63,5 +63,5 @@ export async function UserBlockSection({ userId }: Props) {
         )}
       </div>
     </section>
-  )
+  );
 }
