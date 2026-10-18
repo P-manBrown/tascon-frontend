@@ -10,6 +10,13 @@ paths:
 
 - `use client`はServer/Clientコンポーネントの境界にのみ記述する。汎用コンポーネントに安易に記述しない
 
+## 読み込み中表示
+
+- 読み込み中表示（`Loading`で始まるコンポーネント）は本物と同じファイルに置き、見た目のクラス定数はexportせずファイル内で共有する
+- 本物がClient Componentの場合→Client Componentの範囲を狭める。見た目のクラスはServer Componentで組み立ててpropsで渡し、そのServer Componentのファイルに読み込み中表示を置く
+  - 範囲を狭められない場合→本物と同じClient Componentのファイルに置いたままにする。クラス定数をexportして別ファイルと共有しない
+- Client Componentの中で描画する読み込み中表示は対象外
+
 ## データ取得
 
 - サーバーで取得するデータは、値を使うコンポーネントで取得する。値を使うのがClient Componentなら、直近の祖先Server Componentで取得してpropsで渡す
