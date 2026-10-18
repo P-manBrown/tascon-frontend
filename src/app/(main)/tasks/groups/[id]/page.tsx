@@ -6,7 +6,7 @@ import { LoadingTaskGroupNameHeading } from '@/components/headings/task-group-na
 import { DesktopTaskCalendarLayout } from '@/components/layouts/task-calendar-layout'
 import { TaskListLayout } from '@/components/layouts/task-list-layout'
 import TasksLayout from '@/components/layouts/tasks-layout'
-import { LoadingTaskList, TaskList } from '@/components/task-list'
+import { LoadingTaskList, TaskList } from '@/components/tasks/task-list'
 import { ShowTaskGroupDetailModalButton } from './_components/show-task-group-detail-modal-button'
 import { TaskGroupDetail } from './_components/task-group-detail'
 import {

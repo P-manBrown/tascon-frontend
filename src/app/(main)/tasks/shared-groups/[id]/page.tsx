@@ -65,7 +65,7 @@ export default async function SharedTaskGroup(props: Props) {
       </div>
       <TaskListLayout>
         <Suspense fallback={<LoadingSharedTaskGroupTaskList />}>
-          <SharedTaskGroupTaskList id={id} page={page} />
+          <SharedTaskGroupTaskList shareId={id} page={page} />
         </Suspense>
       </TaskListLayout>
     </TasksLayout>

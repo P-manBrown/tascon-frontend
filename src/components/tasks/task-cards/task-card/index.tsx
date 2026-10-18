@@ -1,18 +1,14 @@
-'use client'
-
 import { ClockIcon } from '@heroicons/react/24/outline'
 import { CalendarDateRangeIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
-import { usePathname, useSearchParams } from 'next/navigation'
-import { generateFromUrlParam } from '@/utils/login-path/generate-from-url-param'
 import { checkShouldShowSingleDate } from './date-utils'
 import {
   formatStartDateTime,
   formatEndDateTime,
   formatMinutesToHoursAndMinutes,
 } from './format-utils'
-import { TaskStatusButton } from './task-status-box'
-import { TaskStatusSquare } from './task-status-box/status-square'
+import { TaskStatusButton } from './task-status-button'
+import { TaskStatusSquare } from './task-status-square'
 
 type Props = {
   id: number
@@ -24,6 +20,7 @@ type Props = {
   note?: string
   status: 'not_started' | 'in_progress' | 'completed'
   isReadonly?: boolean
+  href: string
   children?: React.ReactNode
 }
 
@@ -37,11 +34,9 @@ export function TaskCard({
   note,
   status,
   isReadonly = false,
+  href,
   children,
 }: Props) {
-  const pathname = usePathname()
-  const params = useSearchParams()
-  const fromUrl = generateFromUrlParam(pathname, params.toString())
   const isOverdue = endsAt ? new Date(endsAt) < new Date() : false
   const taskId = id.toString()
 
@@ -110,7 +105,7 @@ export function TaskCard({
         </div>
         {children}
         <Link
-          href={`/tasks/detail/${taskId}?${fromUrl}`}
+          href={href}
           className="absolute top-0 left-0 h-full w-full rounded-md"
           aria-label={`${name}の詳細画面を表示`}
         />
