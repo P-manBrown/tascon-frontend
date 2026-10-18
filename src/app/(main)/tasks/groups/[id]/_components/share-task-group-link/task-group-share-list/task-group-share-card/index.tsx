@@ -1,5 +1,6 @@
 import { UserCard } from "@/components/cards/user-card";
 import { CancelHandoverRequestButton } from "./cancel-handover-request-button";
+import { CancelTaskGroupShareButton } from "./cancel-task-group-share-button";
 import { RequestHandoverButton } from "./request-handover-button";
 
 type Props = {
@@ -24,17 +25,26 @@ export function TaskGroupShareCard({ share, taskGroupId, disabled }: Props) {
     >
       <div className="relative z-10 mt-4">
         {isHandoverPending ? (
-          <CancelHandoverRequestButton
-            shareId={share.id}
-            taskGroupId={taskGroupId}
-          />
+          <div>
+            <CancelHandoverRequestButton
+              shareId={share.id}
+              taskGroupId={taskGroupId}
+            />
+          </div>
         ) : (
-          <RequestHandoverButton
-            shareId={share.id}
-            taskGroupId={taskGroupId}
-            userName={share.user.name}
-            disabled={disabled}
-          />
+          <div className="flex flex-wrap gap-2">
+            <RequestHandoverButton
+              shareId={share.id}
+              taskGroupId={taskGroupId}
+              userName={share.user.name}
+              disabled={disabled}
+            />
+            <CancelTaskGroupShareButton
+              shareId={share.id}
+              taskGroupId={taskGroupId}
+              userName={share.user.name}
+            />
+          </div>
         )}
       </div>
     </UserCard>
