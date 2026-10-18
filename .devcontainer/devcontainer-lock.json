@@ -30,10 +30,10 @@
       "resolved": "ghcr.io/p-manbrown/devcontainer-features/claude-mem@sha256:01abeec2277f2d4e58eab5eec42bf72f3b398cf32307f4141705b1f24f411bed",
       "integrity": "sha256:01abeec2277f2d4e58eab5eec42bf72f3b398cf32307f4141705b1f24f411bed"
     },
-    "ghcr.io/P-manBrown/devcontainer-features/codebase-memory-mcp:1": {
-      "version": "1.0.0",
-      "resolved": "ghcr.io/p-manbrown/devcontainer-features/codebase-memory-mcp@sha256:9333228d8e57b46e01714eec843c325aca4e424a5c0d82757e90e59d62e0ffc7",
-      "integrity": "sha256:9333228d8e57b46e01714eec843c325aca4e424a5c0d82757e90e59d62e0ffc7"
+    "ghcr.io/P-manBrown/devcontainer-features/codebase-memory-mcp:2": {
+      "version": "2.0.1",
+      "resolved": "ghcr.io/p-manbrown/devcontainer-features/codebase-memory-mcp@sha256:b73b70d445874e583ef1fe1949ff8eeb1dd0d5f9bd9ca98f400606e97bad1847",
+      "integrity": "sha256:b73b70d445874e583ef1fe1949ff8eeb1dd0d5f9bd9ca98f400606e97bad1847"
     },
     "ghcr.io/P-manBrown/devcontainer-features/codex:2": {
       "version": "2.0.0",
