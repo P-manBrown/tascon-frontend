@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckIcon, XMarkIcon } from "@heroicons/react/24/solid";
+import { XMarkIcon } from "@heroicons/react/24/solid";
 import { useTransition } from "react";
 import { useErrorSnackbar } from "@/app/_components/snackbars/snackbar/use-error-snackbar";
 import { Button } from "@/components/buttons/button";
@@ -24,7 +24,6 @@ type Props = {
   note?: string;
   taskGroupId: string;
   taskGroupName: string;
-  isShared: boolean;
   buttonLayoutClasses: string;
 };
 
@@ -34,7 +33,6 @@ export function ShareTaskGroupContactCard({
   note,
   taskGroupId,
   taskGroupName,
-  isShared,
   buttonLayoutClasses,
 }: Props) {
   const [isPending, startTransition] = useTransition();
@@ -81,21 +79,14 @@ export function ShareTaskGroupContactCard({
     >
       <ContactNote note={note} />
       <div className={buttonLayoutClasses}>
-        {isShared ? (
-          <div className="flex items-center gap-1 font-bold text-green-700">
-            <CheckIcon className="size-5" />
-            <span>共有済み</span>
-          </div>
-        ) : (
-          <Button
-            type="button"
-            className="btn-primary"
-            status={isPending ? "pending" : "idle"}
-            onClick={openModal}
-          >
-            共有
-          </Button>
-        )}
+        <Button
+          type="button"
+          className="btn-primary"
+          status={isPending ? "pending" : "idle"}
+          onClick={openModal}
+        >
+          共有
+        </Button>
         {shouldMount && (
           <Modal
             isOpen={isOpen}
