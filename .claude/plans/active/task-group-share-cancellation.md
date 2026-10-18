@@ -76,8 +76,8 @@ Worktree: /home/node/tascon-frontend/.claude/worktrees/agent-afad560b446293ddb
 
 - [x] 調査（既存画面・解除導線・API・レスポンス・権限制御・解除後の遷移/状態更新）
 - [x] planのユーザー承認（2026-10-18）
-- [x] Step 1: オーナーによる共有解除（`feat/cancel-task-group-share`、63124a12。レビュー指摘の修正: 70866f57、77ea1308）
-- [x] Step 2: 共有相手による共有解除（`feat/leave-shared-task-group`、e1950c0f。レビュー指摘の修正: e1cddf29、73eb42ea）
+- [x] Step 1: オーナーによる共有解除（`feat/cancel-task-group-share`、63124a12。レビュー指摘の修正: 70866f57、77ea1308。ユーザー確認後の修正: ac05cd80、5e7bea34、99cd5459）
+- [x] Step 2: 共有相手による共有解除（`feat/leave-shared-task-group`、81e8b1ee。レビュー指摘の修正: 4d295a6f、d67a0031。ユーザー確認後の修正: 83b6e4d2、271cd47d）
 - [ ] 実機での動作確認（代表ケース。ユーザーの最終確認タスクで実施）
 
 ## Decision Log
@@ -91,6 +91,8 @@ Worktree: /home/node/tascon-frontend/.claude/worktrees/agent-afad560b446293ddb
   - 404（相手側で既に解除済み）はスナックバー表示のみで、画面の再描画はしない。既存の引き継ぎ系ボタンと同じ
   - ボタン文言はオーナー側・共有相手側とも「共有解除」に統一する。ドラフトでは共有相手側を「共有をやめる」としていたが、ユーザー判断で「両方とも『共有解除』でよい」となった。確認モーダルの文言も「解除」に揃える
   - コード上の命名（server action `leave-task-group-share.api.ts`、Step2ブランチ`feat/leave-shared-task-group`）は、共有相手が自分の共有から抜けるというAPI上の操作（バックエンドPR #692の"leave"）を表すため変更しない。画面文言と内部命名は別扱い
+- 2026-10-18: 共有解除ボタン（オーナー側・共有相手側）は、外側を`div`でくくらずフラグメントで返す。レビュー指摘で`div`でくくったところ、共有カードでボタンが横並びにならず文字幅に縮んだ。ボタンと確認モーダル（トップレイヤーの`<dialog>`）は、通常フローに出る要素が1つだけだからである（`docs/decisions/component-root-wrapper-by-in-flow-count.md`）。共有カードのボタン行は、他の類似箇所に合わせて`flex`と`gap`で並べる（ユーザー判断）
+- 2026-10-18: 解除の確認文言を、共有時の確認文言（`{taskGroupName} を {userName} と共有しますか？`）に揃える（ユーザー判断）。オーナー側は「{taskGroupName} の {userName} との共有を解除しますか？」、共有相手側は「{taskGroupName} の共有を解除しますか？」とし、共有相手側の2行目の注意文は残す。オーナー側のタスクグループ名は、一覧から受け渡さず`TaskGroupShareCard`で`getTaskGroup`を呼んで取得する。Props Drillingを避けるためで、`cache()`によりリクエストは増えない（`docs/decisions/fetch-data-in-consuming-server-component.md`）
 
 ## Validation and Acceptance
 
