@@ -1,0 +1,21 @@
+# 既存コンポーネントの外側要素（フラグメント/div）が新基準と食い違っている
+
+- **Status:** Open
+- **Priority:** Low
+- **Category:** Code
+- **Area:** src/app/**/*.tsx, src/components/**/*.tsx
+- **Detected:** 2026-10-18
+- **Todoist Task ID:** 6hp2X2j2VVqg5fMH
+- **Description:** `component-implementation`ルールの外側要素の基準を「通常フローに出るトップレベル要素の数」に変更した。外側が`<>`または素の`<div>`であるコンポーネントを機械的に抽出したところ、新基準と合わない候補が以下のとおり見つかった。抽出はBiome整形済みのインデントを頼りにした簡易スキャンであり、`className`付きの`div`を外側に持つものなどは対象外のため、網羅性は保証しない
+  - 通常フローの要素が1つ以下なのに素の`<div>`でくくっているもの
+    - `src/app/(main)/users/contacts/_components/current-user-create-contact-button/create-contact-button/index.tsx`（Button＋確認モーダル）
+    - `src/app/(main)/users/(page)/page.tsx`（子は`UsersHeaderLayout`のみ）
+    - `src/app/(main)/users/(page)/@blocks/_components/users-block-list/index.tsx`、`@contacts/_components/users-contact-list/index.tsx`、`@suggestions/_components/users-suggestion-list/index.tsx`（三項演算子で1要素。ただし`fallback`は親から渡されるため、何要素として振る舞う設計かの判断が必要）
+  - 通常フローの要素が2つ以上なのにフラグメントで返しているもの（例外の「親のレイアウトへ複数要素を差し込む設計」に当たるかの判断が必要）
+    - `src/components/pages/account-page/current-user-info/index.tsx`（6要素）
+    - `src/components/pages/account-page/current-user-info/private-mode-switch/index.tsx`の`LoadingPrivateModeSwitch`（2要素）
+    - `src/components/social-login-forms/index.tsx`（`form`の`map`）
+    - ページコンポーネント: `src/app/(auth)/login/page.tsx`、`src/app/(auth)/password/forgot/page.tsx`、`src/app/(auth)/password/reset/page.tsx`、`src/app/(auth)/sign-up/page.tsx`、`src/app/page.tsx`
+- **Impact:** 不要な`div`は親のflex/gridのアイテム単位と幅の基準を変える。そのため`w-full`の要素が内容幅に縮むなど、タスクグループ共有カードで起きたのと同じレイアウト崩れの原因になる。逆に複数要素のフラグメントは、親側のレイアウト変更（flex化・gap変更等）で意図せず個別のアイテムとして並ぶ。基準と実装が食い違ったままだと、既存コードを参考にした新規実装が誤った側に倣う
+- **Proposed Resolution:** 各候補について、親での使われ方を確認したうえで基準に沿って`div`の除去またはラップを行う。例外に当たると判断したものは、その判断を記録して現状維持とする。あわせて、候補抽出の網羅性を上げるため、`className`付きのラッパーを含めて再スキャンする
+- **Related:** docs/decisions/component-root-wrapper-by-in-flow-count.md
