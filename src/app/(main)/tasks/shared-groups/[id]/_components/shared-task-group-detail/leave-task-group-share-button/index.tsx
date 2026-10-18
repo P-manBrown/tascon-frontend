@@ -29,10 +29,15 @@ const snackbarErrorSchema = z.union([errorObjectSchema, errorsObjectSchema]);
 
 type Props = {
   shareId: string;
+  taskGroupName: string;
   disabled: boolean;
 };
 
-export function LeaveTaskGroupShareButton({ shareId, disabled }: Props) {
+export function LeaveTaskGroupShareButton({
+  shareId,
+  taskGroupName,
+  disabled,
+}: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirectLoginPath = useRedirectLoginPath({ searchParams });
@@ -112,7 +117,7 @@ export function LeaveTaskGroupShareButton({ shareId, disabled }: Props) {
           >
             <IconMessage severity="warning" title="確認">
               <p className="mb-5 sm:text-center">
-                このタスクグループの共有を解除しますか？
+                {taskGroupName} の共有を解除しますか？
                 <br />
                 解除すると、このタスクグループは表示されなくなります。
               </p>

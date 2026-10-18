@@ -62,6 +62,7 @@ export async function SharedTaskGroupDetail({ id }: Props) {
         <DetailItemContentLayout>
           <LeaveTaskGroupShareButton
             shareId={id}
+            taskGroupName={taskGroup.name}
             disabled={taskGroupShare.status === "handover_pending"}
           />
         </DetailItemContentLayout>
