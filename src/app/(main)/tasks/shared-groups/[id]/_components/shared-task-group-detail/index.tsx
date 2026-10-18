@@ -1,6 +1,7 @@
 import { TaskGroupDetailEmoji } from "@/app/(main)/tasks/groups/[id]/_components/task-group-detail/task-group-detail-icon/task-group-detail-emoji";
 import { TaskGroupNoteCollapsibleSection } from "@/app/(main)/tasks/groups/[id]/_components/task-group-detail/task-group-note/editable-task-group-note/task-group-note-collapsible-section";
 import { DetailItemHeading } from "@/components/headings/detail-item-heading";
+import { HorizontalRule } from "@/components/horizontal-rule";
 import { DetailItemContentLayout } from "@/components/layouts/detail-item-content-layout";
 import { DetailItemHeadingLayout } from "@/components/layouts/detail-item-heading-layout";
 import {
@@ -12,6 +13,7 @@ import {
   LoadingDetailSingleLineText,
 } from "@/components/texts/detail-single-line-text";
 import { getTaskGroupShare } from "../get-task-group-share.api";
+import { LeaveTaskGroupShareButton } from "./leave-task-group-share-button";
 
 type Props = {
   id: string;
@@ -56,6 +58,14 @@ export async function SharedTaskGroupDetail({ id }: Props) {
             </DetailItemContentLayout>
           </TaskGroupNoteCollapsibleSection>
         </div>
+        <HorizontalRule />
+        <DetailItemContentLayout>
+          <LeaveTaskGroupShareButton
+            shareId={id}
+            taskGroupName={taskGroup.name}
+            disabled={taskGroupShare.status === "handover_pending"}
+          />
+        </DetailItemContentLayout>
       </div>
     </div>
   );
