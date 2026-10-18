@@ -3,7 +3,7 @@
 - **Status:** Accepted
 - **Verification Status:** Verified
 - **Date:** 2026-10-18
-- **Related Files:** `.claude/rules/component-implementation.md`, `src/app/(main)/tasks/groups/[id]/_components/share-task-group-link/task-group-share-list/task-group-share-card/index.tsx`, `src/app/(main)/tasks/groups/[id]/_components/share-task-group-link/task-group-share-list/task-group-share-card/cancel-task-group-share-button/index.tsx`, `src/app/(main)/tasks/shared-groups/[id]/_components/shared-task-group-detail/leave-task-group-share-button/index.tsx`
+- **Related Files:** `.claude/rules/component-implementation.md`, `src/app/(main)/tasks/groups/[id]/_components/share-task-group-link/task-group-share-list/task-group-share-cards/task-group-share-card/index.tsx`, `src/app/(main)/tasks/groups/[id]/_components/share-task-group-link/task-group-share-list/task-group-share-cards/task-group-share-card/cancel-task-group-share-button/index.tsx`, `src/app/(main)/tasks/shared-groups/[id]/_components/shared-task-group-detail/leave-task-group-share-button/index.tsx`
 
 ## Context
 
