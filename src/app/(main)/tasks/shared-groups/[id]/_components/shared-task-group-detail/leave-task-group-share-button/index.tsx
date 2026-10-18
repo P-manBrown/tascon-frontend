@@ -82,7 +82,7 @@ export function LeaveTaskGroupShareButton({ shareId, disabled }: Props) {
   };
 
   return (
-    <div>
+    <>
       <Button
         type="button"
         className="btn-danger"
@@ -137,6 +137,6 @@ export function LeaveTaskGroupShareButton({ shareId, disabled }: Props) {
           </ModalContent>
         </Modal>
       )}
-    </div>
+    </>
   );
 }
