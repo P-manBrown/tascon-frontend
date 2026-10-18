@@ -15,7 +15,7 @@ import type { ErrorObject } from "@/types/error";
 import type { HttpError } from "@/utils/error/custom/http-error";
 import { useRedirectLoginPath } from "@/utils/login-path/use-redirect-login-path";
 import { isValidValue } from "@/utils/type-guard/is-valid-value";
-import { cancelTaskGroupShare } from "../cancel-task-group-share.api";
+import { cancelTaskGroupShare } from "./cancel-task-group-share.api";
 
 const errorObjectSchema = z.object({
   error: z.object({

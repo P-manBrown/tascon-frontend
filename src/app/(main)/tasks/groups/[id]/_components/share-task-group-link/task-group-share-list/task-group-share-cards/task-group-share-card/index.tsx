@@ -1,4 +1,4 @@
-import { UserCard } from "@/components/cards/user-card";
+import { LoadingUserCard, UserCard } from "@/components/cards/user-card";
 import { getTaskGroup } from "@/utils/api/get-task-group";
 import { CancelHandoverRequestButton } from "./cancel-handover-request-button";
 import { CancelTaskGroupShareButton } from "./cancel-task-group-share-button";
@@ -13,6 +13,9 @@ type Props = {
     user: Omit<React.ComponentProps<typeof UserCard>, "children">;
   };
 };
+
+const buttonLayoutClasses = "relative z-10 mt-4";
+const buttonRowClasses = "flex items-center justify-center gap-2";
 
 export async function TaskGroupShareCard({
   share,
@@ -29,7 +32,7 @@ export async function TaskGroupShareCard({
       bio={share.user.bio}
       avatarUrl={share.user.avatarUrl}
     >
-      <div className="relative z-10 mt-4">
+      <div className={buttonLayoutClasses}>
         {isHandoverPending ? (
           <div>
             <CancelHandoverRequestButton
@@ -38,7 +41,7 @@ export async function TaskGroupShareCard({
             />
           </div>
         ) : (
-          <div className="flex items-center justify-center gap-2">
+          <div className={buttonRowClasses}>
             <RequestHandoverButton
               shareId={share.id}
               taskGroupId={taskGroupId}
@@ -55,5 +58,16 @@ export async function TaskGroupShareCard({
         )}
       </div>
     </UserCard>
+  );
+}
+
+export function LoadingTaskGroupShareCard() {
+  return (
+    <LoadingUserCard>
+      <div className={`${buttonRowClasses} ${buttonLayoutClasses}`}>
+        <div className="skeleton shape-btn" />
+        <div className="skeleton shape-btn" />
+      </div>
+    </LoadingUserCard>
   );
 }
