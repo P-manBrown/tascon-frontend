@@ -12,7 +12,8 @@
 ### 作業環境の注意
 
 - `.claude/settings.json`の登録内容から、SubagentStopフックはメインcheckoutのスクリプト（`${CLAUDE_PROJECT_DIR}`）で動く。そのため、このブランチがメインcheckoutに反映されるまでは、サブエージェントがworktree内で停止すると旧版のフックによる無関係なplanの指摘が出続ける
-- worktree内（`EnterWorktree`で移ったメインセッション、およびそこから起動したsubagent）のBashでは、素の`git status`がrtk経由の実行として扱われ、worktree分離ガードに拒否された。`/usr/bin/git`は通った（2026-10-16にこのリポジトリで確認）
+- worktree内（`EnterWorktree`で移ったメインセッション、およびそこから起動したsubagent）のBashでは、素の`git status`がrtk経由の実行として扱われ、worktree分離ガードに拒否された。`/usr/bin/git`は通った（2026-10-16にこのリポジトリで確認。rtk featureは1.0.1のlock時点）
+  - rtk feature 1.0.2以降は、worktree内でrtkがgitコマンドを書き換えなくなり、素のgitを使える（2026-10-18にこのリポジトリで確認済み）。devcontainerをrtk feature 1.0.2でリビルドした後、`EnterWorktree`で`.claude/worktrees/`の下のworktreeへ移ったメインセッションと、`isolation: "worktree"`で起動したsubagentのそれぞれで、Bashツールから素の`git status`を実行し、いずれも拒否されずに動いた。インストールされた`/usr/local/share/rtk-claude-hook/rtk`には、worktree内でgitを含む書き換えを出力しない処理（rtk feature 1.0.2の`install.sh`にあり、1.0.1にはない）が入っていた。`rtk --version`は`rtk 1.0.1`を返すが、これはrtk本体のリリース番号で、featureのバージョンとは別である
 
 ## 仕様
 
@@ -77,7 +78,9 @@
 - 2026-10-16 このリポジトリでは、上の「1行ずつ書く」旨の明記と、`todoist-task-runner/SKILL.md`の「`Worktree:`行を記録する」への変更を含めない（ユーザー判断）。新規subagentでの比較2で、別のworktreeの`Worktree:`行がすでにあるplanを使っても、変更前から新しい行として追加しており、差が出なかったため（`claude-md-maintenance`ルールの「新規ルール追加時の必須手順」）。あわせて、同じ文言で追加された「`Worktree: <path>`の形で」「（最初の`##`見出しより前）」も含めず、比較1で差が出た文言にそろえた。そのため、この2ファイルはバックエンドの最終状態と一致しない
 - 2026-10-16 上の判断を取り消し、`plans-maintenance.md`と`todoist-task-runner/SKILL.md`の文言をバックエンドの最終状態に戻す（ユーザー判断）。「`Worktree: <path>`の形で」「（最初の`##`見出しより前）」「1行に複数のパスを並べない」は、フックが検査する書式（最初の`##`見出しより前に、行全体が`Worktree: <cwd>`と一致する行）の仕様である。`claude-md-maintenance`ルールの比較は行動を促すルールがノイズかどうかを判定するもので、フックとの書式の約束は対象外とする。比較2で差が出なかったのは「1行ずつ」の明記だけで、残り2つはそもそも比較していない。末尾に空白を含むコード表記の`##`はmarkdownlintのMD038に当たるため、ルールの該当行に`markdownlint-disable-line MD038`を付けた（ユーザー判断）
 - 2026-10-16 ブランチtypeはchoreにする（既存のフック変更と同じ）
+- 2026-10-16 rtk feature 1.0.2への更新は、別ブランチ`chore/rtk-feature-1.0.2`で行う（バックエンドと同じ構成）。このリポジトリのactive planには、worktree内のgit操作の回避策を書いたものがないため、廃止の対象はない
 - 2026-10-16 コミットは、バックエンドでレビュー指摘への対応として分かれたもの（フック・ルールの追加修正、Progress記録）を、フック・ルール・Progressそれぞれ1コミットにまとめる。このリポジトリではレビュー指摘の経緯がないため
+- 2026-10-18 devcontainerをrtk feature 1.0.2でリビルドした後、worktree内のBashで素の`git status`が拒否されずに動くことをこのリポジトリで確認した。これを受けて、「作業環境の注意」の「フロントでは未確認」を確認済みの記述に改めた
 
 ## Validation and Acceptance
 
