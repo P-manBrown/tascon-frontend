@@ -1,8 +1,9 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { z } from "zod";
-import type { ResultObject } from "@/types/api";
+import type { ErrorObject, Errors } from "@/types/error";
 import { fetchData } from "@/utils/api/fetch-data";
 import { getBearerToken } from "@/utils/cookie/bearer-token";
 import { createErrorObject } from "@/utils/error/create-error-object";
@@ -10,8 +11,6 @@ import { getRequestId } from "@/utils/request-id/get-request-id";
 import { validateData } from "@/utils/validation/validate-data";
 
 const dataSchema = z.null();
-
-type Data = z.infer<typeof dataSchema>;
 
 type Params = {
   shareId: string;
@@ -28,10 +27,10 @@ export async function leaveTaskGroupShare({ shareId }: Params) {
     },
   );
 
-  let resultObject: ResultObject<Data>;
+  let errorObject: ErrorObject<Errors>;
 
   if (fetchDataResult instanceof Error) {
-    resultObject = createErrorObject(fetchDataResult);
+    errorObject = createErrorObject(fetchDataResult);
   } else {
     const { headers, data } = fetchDataResult;
     const requestId = getRequestId(headers);
@@ -39,13 +38,12 @@ export async function leaveTaskGroupShare({ shareId }: Params) {
     const validateDataResult = validateData({ requestId, dataSchema, data });
 
     if (validateDataResult instanceof Error) {
-      resultObject = createErrorObject(validateDataResult);
+      errorObject = createErrorObject(validateDataResult);
     } else {
-      resultObject = { status: "success" };
-
       revalidatePath("/tasks", "layout");
+      redirect("/tasks");
     }
   }
 
-  return resultObject;
+  return errorObject;
 }

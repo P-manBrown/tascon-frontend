@@ -65,14 +65,13 @@ export function LeaveTaskGroupShareButton({ shareId, disabled }: Props) {
     closeModal();
     startTransition(async () => {
       const result = await leaveTaskGroupShare({ shareId });
+
       if (result.status === "error") {
         if (result.name === "HttpError") {
           handleHttpError(result);
         } else {
           openErrorSnackbar(result);
         }
-      } else {
-        router.replace("/tasks");
       }
     });
   };
