@@ -93,6 +93,7 @@ Worktree: /home/node/tascon-frontend/.claude/worktrees/agent-afad560b446293ddb
   - コード上の命名（server action `leave-task-group-share.api.ts`、Step2ブランチ`feat/leave-shared-task-group`）は、共有相手が自分の共有から抜けるというAPI上の操作（バックエンドPR #692の"leave"）を表すため変更しない。画面文言と内部命名は別扱い
 - 2026-10-18: 共有解除ボタン（オーナー側・共有相手側）は、外側を`div`でくくらずフラグメントで返す。レビュー指摘で`div`でくくったところ、共有カードでボタンが横並びにならず文字幅に縮んだ。ボタンと確認モーダル（トップレイヤーの`<dialog>`）は、通常フローに出る要素が1つだけだからである（`docs/decisions/component-root-wrapper-by-in-flow-count.md`）。共有カードのボタン行は、他の類似箇所に合わせて`flex`と`gap`で並べる（ユーザー判断）
 - 2026-10-18: 解除の確認文言を、共有時の確認文言（`{taskGroupName} を {userName} と共有しますか？`）に揃える（ユーザー判断）。オーナー側は「{taskGroupName} の {userName} との共有を解除しますか？」、共有相手側は「{taskGroupName} の共有を解除しますか？」とし、共有相手側の2行目の注意文は残す。オーナー側のタスクグループ名は、一覧から受け渡さず`TaskGroupShareCard`で`getTaskGroup`を呼んで取得する。Props Drillingを避けるためで、`cache()`によりリクエストは増えない（`docs/decisions/fetch-data-in-consuming-server-component.md`）
+- 2026-10-18: このplanで作成・変更したファイルを、import元の`index.tsx`と同じ階層に置く方針（`docs/decisions/component-placement-by-importer.md`）に合わせて移動する（ユーザー判断）。範囲はこのplanに関係する最小限とする。具体的には、`task-group-share-card/`を`task-group-share-cards/`の中へ移し、`cancel-task-group-share.api.ts`・`leave-task-group-share.api.ts`をそれぞれのボタンのディレクトリへ移す。あわせて、読み込み中のカードを`TaskGroupShareCard`と同じファイルに置き、`buttonLayoutClasses`を本物とskeletonで共有する。範囲外の配置のずれは`.claude/tech-debt/active/component-placement-mismatch.md`で追跡する
 
 ## Validation and Acceptance
 
