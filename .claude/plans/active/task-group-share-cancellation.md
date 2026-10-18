@@ -76,8 +76,9 @@ Worktree: /home/node/tascon-frontend/.claude/worktrees/agent-afad560b446293ddb
 
 - [x] 調査（既存画面・解除導線・API・レスポンス・権限制御・解除後の遷移/状態更新）
 - [x] planのユーザー承認（2026-10-18）
-- [ ] Step 1: オーナーによる共有解除
-- [ ] Step 2: 共有相手による共有解除
+- [x] Step 1: オーナーによる共有解除（`feat/cancel-task-group-share`、63124a12）
+- [x] Step 2: 共有相手による共有解除（`feat/leave-shared-task-group`、59442949）
+- [ ] 実機での動作確認（代表ケース。ユーザーの最終確認タスクで実施）
 
 ## Decision Log
 
