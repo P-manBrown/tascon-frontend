@@ -5,6 +5,7 @@ import { LoadingPagination, Pagination } from "@/components/paginations";
 import { getContacts } from "@/utils/api/get-contacts";
 import { getTaskGroup } from "@/utils/api/get-task-group";
 import { getCurrentUser } from "@/utils/api/server/get-current-user";
+import { PaginationClickTracker } from "../../share-task-group-page-content/unshared-scroll-anchor/pagination-click-tracker";
 import { ShareTaskGroupContactCard } from "../share-task-group-contact-card";
 
 type Props = {
@@ -58,7 +59,9 @@ export default async function ShareTaskGroupContactList({
         </div>
       )}
       <div className={paginationLayoutClasses}>
-        <Pagination {...pagination} />
+        <PaginationClickTracker>
+          <Pagination {...pagination} />
+        </PaginationClickTracker>
       </div>
     </div>
   );
