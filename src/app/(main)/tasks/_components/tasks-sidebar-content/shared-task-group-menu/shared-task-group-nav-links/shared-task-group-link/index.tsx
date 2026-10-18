@@ -19,7 +19,7 @@ const Emoji = dynamic(
 )
 
 type Props = {
-  id: number
+  shareId: string
   name: string
   icon: string
   owner: {
@@ -32,7 +32,7 @@ type Props = {
 }
 
 export function SharedTaskGroupLink({
-  id,
+  shareId,
   name,
   icon,
   owner,
@@ -40,7 +40,7 @@ export function SharedTaskGroupLink({
   sidebarQuery,
   className,
 }: Props) {
-  const groupPath = `/tasks/groups/${id}`
+  const groupPath = `/tasks/shared-groups/${shareId}`
   const isActive = groupPath === currentPath
 
   return (
