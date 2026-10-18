@@ -42,7 +42,9 @@ export function LoadingTaskGroupShareList() {
       <div className="grid gap-4 p-4 lg:grid-cols-2 xl:grid-cols-3">
         {Array.from({ length: 6 }, (_, index) => index).map((index) => (
           <LoadingUserCard key={index}>
-            <div className={`grid grid-cols-2 gap-2 ${buttonLayoutClasses}`}>
+            <div
+              className={`flex items-center justify-center gap-2 ${buttonLayoutClasses}`}
+            >
               <div className="skeleton shape-btn" />
               <div className="skeleton shape-btn" />
             </div>

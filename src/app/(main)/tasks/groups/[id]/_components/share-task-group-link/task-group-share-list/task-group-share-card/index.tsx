@@ -32,7 +32,7 @@ export function TaskGroupShareCard({ share, taskGroupId, disabled }: Props) {
             />
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-2">
+          <div className="flex items-center justify-center gap-2">
             <RequestHandoverButton
               shareId={share.id}
               taskGroupId={taskGroupId}

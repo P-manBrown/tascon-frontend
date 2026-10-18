@@ -87,7 +87,7 @@ export function CancelTaskGroupShareButton({
   };
 
   return (
-    <div>
+    <>
       <Button
         type="button"
         className="btn-danger"
@@ -140,6 +140,6 @@ export function CancelTaskGroupShareButton({
           </ModalContent>
         </Modal>
       )}
-    </div>
+    </>
   );
 }
