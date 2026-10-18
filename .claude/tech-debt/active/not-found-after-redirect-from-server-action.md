@@ -14,5 +14,5 @@
   - `fetchData`は`cache`オプションを指定しておらず、Next.js 15以降のデフォルトでData Cacheされない。Router Cache（Partial Rendering、共有レイアウトの再利用）はfetchのキャッシュとは別の層であり、`revalidatePath`や`router.refresh()`が必要なのはこちらのためである
   - 同じ「今いるページのデータを削除してから別ページへ移る」処理は、他の箇所では方法が揃っていない。共有解除（`leave-task-group-share.api.ts`）は引き継ぎ承認と同じ`revalidatePath`→`redirect`である。タスク削除（`delete-task-button`）はserver actionで`revalidatePath("/tasks", "layout")`を呼び、クライアントで`router.replace`する。タスクグループ削除（`delete-task-group-button`）は`revalidatePath`を呼ばずに、クライアントで`router.replace`だけを行う
 - **Impact:** 承認・解除・削除の直後に、ユーザーが「見つかりません」の画面を目にすることがあり、操作が失敗したように見える。原因が未確定のため、同じ処理を新しく作るときにどの方法を選べば防げるのか判断できない
-- **Proposed Resolution:** 再発したら、サーバーログ（`fetchData response data`の`logger.debug`）で、承認直後にどのURLへのGETが何を返したかを確認するところから調査を再開する。原因が分かったら、引き継ぎ承認・共有解除・タスク削除・タスクグループ削除の削除後の遷移を同じ方法に揃える
+- **Proposed Resolution:** 再発したら、サーバーログ（`fetchData response data`の`logger.debug`）で、承認直後にどのURLへのGETが何を返したかを確認するところから調査を再開する。原因が分かったら、引き継ぎ承認・共有解除・タスク削除・タスクグループ削除の削除後の遷移を同じ方法に揃える。揃えた遷移方法は、Server Action（`.api.ts`等）と、それを呼ぶClient Component（`.tsx`）の両方で読み込まれるルールとして追加する
 - **Related:** .claude/plans/active/task-group-share-cancellation.md
