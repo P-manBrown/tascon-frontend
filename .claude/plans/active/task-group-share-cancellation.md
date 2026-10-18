@@ -45,7 +45,7 @@ Worktree: /home/node/tascon-frontend/.claude/worktrees/agent-afad560b446293ddb
 - `SharedTaskGroupDetail`（詳細モーダル）の末尾に、オーナー側`TaskGroupDetail`と同じく`HorizontalRule`＋ボタン「共有解除」（`btn-danger`想定）を追加する
 - `taskGroupShare.status === "handover_pending"`のときはボタンを`disabled`にする（APIが422になるため。先に引き継ぎを承認/拒否する必要がある）
 - 確認モーダルで「このタスクグループの共有を解除しますか？解除すると、このタスクグループは表示されなくなります。」を確認してから実行する
-- server action `leave-task-group-share.api.ts`（`DELETE`、`dataSchema = z.null()`）。成功時`revalidatePath("/tasks", "layout")`でサイドバーの共有タスクグループ一覧を更新し、クライアント側で`router.replace("/tasks")`する（`DeleteTaskGroupButton`と同じ遷移）
+- server action `leave-task-group-share.api.ts`（`DELETE`、`dataSchema = z.null()`）。成功時`revalidatePath("/tasks", "layout")`でサイドバーの共有タスクグループ一覧を更新し、続けてserver action内で`redirect("/tasks")`する（`accept-handover.api.ts`と同じ。レビュー指摘により、クライアント側`router.replace`から変更。revalidateで現在の共有ページが再描画され`notFound()`が一瞬出るのを避けるため）
 - エラー処理はオーナー側と同じ
 
 ## Steps
@@ -76,8 +76,8 @@ Worktree: /home/node/tascon-frontend/.claude/worktrees/agent-afad560b446293ddb
 
 - [x] 調査（既存画面・解除導線・API・レスポンス・権限制御・解除後の遷移/状態更新）
 - [x] planのユーザー承認（2026-10-18）
-- [x] Step 1: オーナーによる共有解除（`feat/cancel-task-group-share`、63124a12）
-- [x] Step 2: 共有相手による共有解除（`feat/leave-shared-task-group`、59442949）
+- [x] Step 1: オーナーによる共有解除（`feat/cancel-task-group-share`、63124a12。レビュー指摘の修正: 70866f57、77ea1308）
+- [x] Step 2: 共有相手による共有解除（`feat/leave-shared-task-group`、e1950c0f。レビュー指摘の修正: e1cddf29、73eb42ea）
 - [ ] 実機での動作確認（代表ケース。ユーザーの最終確認タスクで実施）
 
 ## Decision Log
