@@ -1,14 +1,13 @@
-import { LoadingUserCard } from "@/components/cards/user-card";
 import { EmptyList } from "@/components/empty-list";
 import { CollapsibleTaskGroupShareCards } from "./collapsible-task-group-share-cards";
 import { getOwnerTaskGroupShares } from "./get-task-group-shares.api";
+import { LoadingTaskGroupShareCards } from "./task-group-share-cards";
 
 type Props = {
   taskGroupId: string;
 };
 
 const shareCardsMinHeight = 412;
-const buttonLayoutClasses = "relative z-10 mt-4";
 
 export default async function TaskGroupShareList({ taskGroupId }: Props) {
   const { taskGroupShares } = await getOwnerTaskGroupShares(taskGroupId);
@@ -39,14 +38,8 @@ export function LoadingTaskGroupShareList() {
       className="overflow-clip"
       style={{ height: `${shareCardsMinHeight}px` }}
     >
-      <div className="grid gap-4 p-4 lg:grid-cols-2 xl:grid-cols-3">
-        {Array.from({ length: 6 }, (_, index) => index).map((index) => (
-          <LoadingUserCard key={index}>
-            <div className={buttonLayoutClasses}>
-              <div className="skeleton shape-btn" />
-            </div>
-          </LoadingUserCard>
-        ))}
+      <div className="p-4">
+        <LoadingTaskGroupShareCards limit={6} />
       </div>
     </div>
   );
