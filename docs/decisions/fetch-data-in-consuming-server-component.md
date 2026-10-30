@@ -3,7 +3,7 @@
 - **Status:** Accepted
 - **Verification Status:** Verified
 - **Date:** 2026-10-18
-- **Related Files:** `.claude/rules/component-implementation.md`, `src/utils/api/get-task-group.ts`, `src/app/(main)/tasks/groups/[id]/_components/share-task-group-link/task-group-share-list/task-group-share-card/index.tsx`
+- **Related Files:** `.claude/rules/component-implementation.md`, `src/utils/api/get-task-group.ts`, `src/app/(main)/tasks/groups/[id]/_components/share-task-group-link/task-group-share-list/task-group-share-cards/task-group-share-card/index.tsx`
 
 ## Context
 

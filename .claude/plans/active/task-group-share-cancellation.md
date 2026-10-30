@@ -52,12 +52,12 @@ Worktree: /home/node/tascon-frontend/.claude/worktrees/agent-afad560b446293ddb
 
 ### Step 1: オーナーによる共有解除（`feat/cancel-task-group-share`）
 
-1. `task-group-share-card/cancel-task-group-share.api.ts`と`task-group-share-card/cancel-task-group-share-button/index.tsx`を追加し、`TaskGroupShareCard`に組み込む（Codexへ委譲）
+1. `task-group-share-cards/task-group-share-card/cancel-task-group-share-button/index.tsx`と`task-group-share-cards/task-group-share-card/cancel-task-group-share-button/cancel-task-group-share.api.ts`を追加し、`TaskGroupShareCard`に組み込む（Codexへ委譲）
 2. `LoadingTaskGroupShareList`のスケルトンを調整する（同上）
 
 ### Step 2: 共有相手による共有解除（`feat/leave-shared-task-group`）
 
-1. `shared-task-group-detail/leave-task-group-share.api.ts`と`shared-task-group-detail/leave-task-group-share-button/index.tsx`を追加し、`SharedTaskGroupDetail`に組み込む（Codexへ委譲）
+1. `shared-task-group-detail/leave-task-group-share-button/index.tsx`と`shared-task-group-detail/leave-task-group-share-button/leave-task-group-share.api.ts`を追加し、`SharedTaskGroupDetail`に組み込む（Codexへ委譲）
 
 各Stepの検証: `yarn tsc --noEmit`、`yarn check`、`yarn lint-jsx`が通ること。画面での動作確認は下記代表ケースで行う（実機確認はユーザーの最終確認タスクで実施）
 
