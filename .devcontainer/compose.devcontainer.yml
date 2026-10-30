@@ -2,12 +2,11 @@ services:
   frontend:
     volumes:
       - shell-log:/home/${FRONTEND_USER_NAME}/shell_log
+      - gh-config:/home/${FRONTEND_USER_NAME}/.config/gh
     ports:
       - '127.0.0.1:${CBM_UI_PORT:-9750}:${CBM_UI_PORT:-9750}'
       - '127.0.0.1:${CLAUDE_MEM_UI_PORT:-37701}:37700'
     command: bash -c 'while sleep 1000; do :; done'
-    env_file:
-      - ./.devcontainer/environment/gh-token.env
     environment:
       CLAUDE_MEM_WORKER_HOST: '0.0.0.0'
       CLAUDE_MEM_WORKER_PORT: '37700'
@@ -15,3 +14,4 @@ services:
       CLAUDE_MEM_SKIP_TOOLS: 'ListMcpResourcesTool,SlashCommand,Skill,TodoWrite'
 volumes:
   shell-log:
+  gh-config:
