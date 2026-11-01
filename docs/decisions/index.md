@@ -4,3 +4,4 @@
 - [planのWorktree行のパス形式](plan-worktree-path-format.md)
 - [件数上限のない非同期データはSuspense境界の内側でCollapsibleSectionを生成する](collapsible-section-suspense-boundary.md)
 - [レスポンススキーマでnilになり得る項目は.optional()で定義する](response-schema-optional-for-nil.md)
+- [コンポーネントの外側要素は通常フローに出るトップレベル要素の数で決める](component-root-wrapper-by-in-flow-count.md)
