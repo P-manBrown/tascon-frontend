@@ -1,0 +1,25 @@
+# 既存のファイル配置がimport元と同じ階層に置く方針と食い違っている
+
+- **Status:** Open
+- **Priority:** Low
+- **Category:** Architecture
+- **Area:** src/app/**/_components
+- **Detected:** 2026-10-18
+- **Todoist Task ID:** 6hp3q9Mh9rqV762H
+- **Description:** `component-placement`ルールを追加した。ルート内のファイルは、それをimportする`index.tsx`と同じ階層（複数から使われるものは共通の親の階層）に置き、別のルートから使うものは共有層に置くという方針である。`src/app`配下を対象に、各モジュールの置き場所とimport元を照合するスキャンを行い、方針に合わない配置を抽出した。`src/components`配下はスキャン対象外のため、網羅性は保証しない
+  - 別のルートの`_components`を直接importしているもの（共有層へ移す候補）
+    - `tasks/shared-groups/[id]`が`tasks/groups/[id]/_components`の`TaskGroupDetailEmoji`・`TaskGroupNoteCollapsibleSection`・`TaskGroupHeaderEmoji`・`ShowTaskGroupDetailModalButton`をimportしている
+    - `@modals/(.)tasks/groups/[id]/share/page.tsx`が`tasks/groups/[id]/_components/share-task-group-page-content`をimportしている。他の画面は、モーダルと直接アクセスで共有する中身を`src/components/pages/`に置いている
+    - `@modals/(.)tasks/shared-groups/[id]/task/[taskId]/layout.tsx`が`@modals/(.)tasks/detail/[id]/_components/task-modal`をimportしている
+  - 同じルート内で、import元と同じ階層にないもの（`(main)/`配下はパスの先頭を省略）
+    - `tasks/groups/[id]/_components/share-task-group-link/`配下: `task-group-share-list`・`share-task-group-contact-list`（import元は`share-task-group-page-content`）、`share-task-group-contact-card`（import元は`share-task-group-contact-list`）、`create-task-group-share.api.ts`（import元は`share-task-group-contact-card`）、`task-group-share-cards-collapsible-section`（import元は`collapsible-task-group-share-cards`）
+    - `tasks/groups/[id]/_components/share-task-group-link/task-group-share-list/`配下: `task-group-share-cards`（import元は`collapsible-task-group-share-cards`）。`task-group-share-cards/task-group-share-card/`直下の`request-handover.api.ts`・`cancel-handover-request.api.ts`（import元はそれぞれのボタン）
+    - `tasks/groups/[id]/_components/share-task-group-page-content/unshared-scroll-anchor/pagination-click-tracker`（import元は`share-task-group-contact-list`）
+    - `tasks/groups/[id]/_components/task-group-detail/`配下: `editable-task-group-icon`・`editable-task-group-name`・`editable-task-group-note`が、import元の`task-group-detail`より1階層深い`task-group-detail-icon/`・`task-group-name/`・`task-group-note/`の中にある
+    - `tasks/shared-groups/[id]/_components/`直下の`get-shared-calendar-tasks.api.ts`（import元は`shared-task-calendar`）・`get-shared-tasks.api.ts`（import元は`shared-task-group-task-list`）
+    - `tasks/shared-groups/[id]/_components/task-group-share-handover-notice/`直下の`accept-handover.api.ts`・`decline-handover.api.ts`（import元は`pending-handover-button`）
+    - `_components/main-header/account-avatar-link/account-link`（import元は`main-header`）
+    - `src/app/_components/login-link`（import元は`home-header`）
+- **Impact:** import元と置き場所がずれていると、どのコンポーネントがどこから使われているかを場所から読み取れない。変更の影響範囲を誤り、不要になった部品やserver actionの取り残しも起きる。方針と既存配置が食い違ったままだと、既存コードを参考にした新規実装がずれた配置に倣う
+- **Proposed Resolution:** 各候補をimport元と同じ階層（複数から使われるものは共通の親の階層）へ移動し、importを直す。別のルートから使われているものは、`src/components`（モーダルと共有する画面の中身は`src/components/pages/`）へ移す。`src/app/_components/snackbars`（アプリ全体と`src/components`から使われる）は、共有層へ移すか現状維持かを別途判断する。あわせて、`src/components`配下も同じ方法でスキャンする
+- **Related:** docs/decisions/component-placement-by-importer.md

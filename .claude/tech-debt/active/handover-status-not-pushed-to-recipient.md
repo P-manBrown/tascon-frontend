@@ -3,7 +3,7 @@
 - **Status:** Open
 - **Priority:** Low
 - **Category:** Architecture
-- **Area:** src/app/(main)/tasks/groups/[id]/_components/share-task-group-link/task-group-share-list/task-group-share-card/, src/app/(main)/tasks/shared-groups/[id]/_components/task-group-share-handover-notice/, src/app/(main)/tasks/_components/tasks-sidebar-content/shared-task-group-menu/shared-task-group-nav-links/
+- **Area:** src/app/(main)/tasks/groups/[id]/_components/share-task-group-link/task-group-share-list/task-group-share-cards/task-group-share-card/, src/app/(main)/tasks/shared-groups/[id]/_components/task-group-share-handover-notice/, src/app/(main)/tasks/_components/tasks-sidebar-content/shared-task-group-menu/shared-task-group-nav-links/
 - **Detected:** 2026-08-24
 - **Todoist Task ID:** 6hjqg3qm8R65r64H
 - **Description:** 引き継ぎの依頼・キャンセル・承認・拒否後のキャッシュ更新は`revalidatePath`のみで行っており、操作した本人のブラウザにしか反映されない。相手側のサイドバーバッジや依頼通知は、相手が次にページ遷移・リロードするまで更新されない

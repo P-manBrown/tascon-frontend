@@ -6,3 +6,4 @@
 - [レスポンススキーマでnilになり得る項目は.optional()で定義する](response-schema-optional-for-nil.md)
 - [コンポーネントの外側要素は通常フローに出るトップレベル要素の数で決める](component-root-wrapper-by-in-flow-count.md)
 - [サーバーのデータは値を使うコンポーネントで取得する](fetch-data-in-consuming-server-component.md)
+- [ルート内のファイルはimport元と同じ階層に置く](component-placement-by-importer.md)
