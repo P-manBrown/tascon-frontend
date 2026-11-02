@@ -57,6 +57,7 @@ git-spice使用。スタック型ブランチ管理。
 
 - mainへのマージはsquash mergeのみ。マージ後、headブランチは自動削除され、1つ上のPRのマージ先はGitHubがmainへ付け替える
 - 作業ツリーがクリーンで、スタックの全ブランチのローカルとリモートが一致していること。未コミットの変更がある場合は、push前に`git stash push -u`で退避し、push後に戻す
+- マージ前の確かめ: リポジトリに書かれたlint・typecheck・buildの確かめ（AGENTS.md・package.jsonのscript等にある手順）が、スタックの最上段ブランチですべて通ること
 
 ### 1本ごとの手順
 
