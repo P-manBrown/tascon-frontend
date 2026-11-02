@@ -7,3 +7,4 @@
 - [コンポーネントの外側要素は通常フローに出るトップレベル要素の数で決める](component-root-wrapper-by-in-flow-count.md)
 - [サーバーのデータは値を使うコンポーネントで取得する](fetch-data-in-consuming-server-component.md)
 - [ルート内のファイルはimport元と同じ階層に置く](component-placement-by-importer.md)
+- [読み込み中表示はServer Componentのファイルに本物と並べて置く](loading-component-in-server-file.md)
