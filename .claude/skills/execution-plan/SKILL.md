@@ -34,4 +34,3 @@ description: 実装計画をExecPlan方式で作成・更新・完了処理す�
 ## 変更範囲
 
 - 変更してよい対象: `.claude/plans/active/*.md`の作成・更新、完了時の`.claude/plans/completed/`への移動
-- 変更してはいけない対象: 実装コード。このリポジトリでは実装をCodexへ委譲するため、このskill自体はコード実装を行わない
