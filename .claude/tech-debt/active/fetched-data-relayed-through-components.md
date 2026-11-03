@@ -5,7 +5,6 @@
 - **Category:** Code
 - **Area:** src/app/**/*.tsx, src/components/**/*.tsx
 - **Detected:** 2026-10-18
-- **Todoist Task ID:** 6hp3HXV3gPjfPQWH
 - **Description:** `component-implementation`ルールに、サーバーのデータは値を使うコンポーネント（Client Componentなら直近の祖先Server Component）で取得するという方針を追加した。既存のServer Componentを簡易スキャンし、取得したデータ（またはその派生値）を、値を使わない中間コンポーネント経由で渡している箇所、または値を使うServer Componentへ上位から渡している箇所を抽出した。抽出方法は、Propsをそのまま子へ渡すだけのコンポーネントの検出と、`cache()`付き取得関数の結果をpropsへ渡している箇所の列挙である。網羅性は保証しない
   - `src/app/(main)/tasks/groups/[id]/_components/share-task-group-link/task-group-share-list/`: `TaskGroupShareList`が`getOwnerTaskGroupShares`の結果から算出した`disabled`（いずれかの共有が引き継ぎ依頼中か）を、`CollapsibleTaskGroupShareCards`→`TaskGroupShareCards`→`TaskGroupShareCard`→`RequestHandoverButton`へ中継している。一覧の各要素ではなく一覧全体からの派生値なので、例外に当たらない
   - `src/components/cards/suggestion-cards/index.tsx`: `SuggestionCards`が`currentUserId`を使わずに`CreateContactFromSuggestionButton`へ中継している。渡しているのは`users-suggestion-list`・`suggestions-paginated-list`で、`getCurrentUser`の結果である

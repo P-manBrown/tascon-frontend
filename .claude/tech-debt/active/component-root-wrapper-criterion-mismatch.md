@@ -5,7 +5,6 @@
 - **Category:** Code
 - **Area:** src/app/**/*.tsx, src/components/**/*.tsx
 - **Detected:** 2026-10-18
-- **Todoist Task ID:** 6hp2X2j2VVqg5fMH
 - **Description:** `component-implementation`ルールの外側要素の基準を「通常フローに出るトップレベル要素の数」に変更した。外側が`<>`または素の`<div>`であるコンポーネントを機械的に抽出したところ、新基準と合わない候補が以下のとおり見つかった。抽出はBiome整形済みのインデントを頼りにした簡易スキャンであり、`className`付きの`div`を外側に持つものなどは対象外のため、網羅性は保証しない
   - 通常フローの要素が1つ以下なのに素の`<div>`でくくっているもの
     - `src/app/(main)/users/contacts/_components/current-user-create-contact-button/create-contact-button/index.tsx`（Button＋確認モーダル）
