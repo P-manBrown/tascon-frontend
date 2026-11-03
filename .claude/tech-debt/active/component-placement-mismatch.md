@@ -5,7 +5,6 @@
 - **Category:** Architecture
 - **Area:** src/app/**/_components
 - **Detected:** 2026-10-18
-- **Todoist Task ID:** 6hp3q9Mh9rqV762H
 - **Description:** `component-placement`ルールを追加した。ルート内のファイルは、それをimportする`index.tsx`と同じ階層（複数から使われるものは共通の親の階層）に置き、別のルートから使うものは共有層に置くという方針である。`src/app`配下を対象に、各モジュールの置き場所とimport元を照合するスキャンを行い、方針に合わない配置を抽出した。`src/components`配下はスキャン対象外のため、網羅性は保証しない
   - 別のルートの`_components`を直接importしているもの（共有層へ移す候補）
     - `tasks/shared-groups/[id]`が`tasks/groups/[id]/_components`の`TaskGroupDetailEmoji`・`TaskGroupNoteCollapsibleSection`・`TaskGroupHeaderEmoji`・`ShowTaskGroupDetailModalButton`をimportしている

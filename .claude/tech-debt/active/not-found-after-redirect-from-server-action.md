@@ -5,7 +5,6 @@
 - **Category:** Code
 - **Area:** src/app/(main)/tasks/shared-groups/[id]/_components/task-group-share-handover-notice/accept-handover.api.ts, src/app/(main)/tasks/shared-groups/[id]/_components/shared-task-group-detail/leave-task-group-share-button/leave-task-group-share.api.ts, src/components/pages/task-page/delete-task-button/
 - **Detected:** 2026-08-28
-- **Todoist Task ID:** 6hp4XqwgG7rRFhJH
 - **Description:** 引き継ぎ承認のserver action（`accept-handover.api.ts`）は、`revalidatePath("/tasks", "layout")`の後に`redirect(...)`を呼んでいる。実機では、遷移せずに今いるページ（`/tasks/shared-groups/[id]`）のnotFoundが表示されることがあった。原因を特定する前に再現しなくなり、実装は変えずに保留した。調査で分かったことは次のとおり
   - Next.js公式ドキュメント（Server Actionsのガイド）では、`redirect`は例外を投げて処理を止めるので、遷移先が最新データを必要とするなら`revalidatePath`を`redirect`の前に置くよう推奨している。現在の順序はこの推奨どおり
   - Next.jsのソース（`action-handler.ts`、v16.1.6）では、`redirect()`が投げられた時点で、`revalidatePath`による今いるページの描き直しは中断される。代わりに遷移先URLへのGETを内部で発行し、そのRSC Payloadを返す（`createRedirectRenderResult`）。理論上は、今いるページのnotFoundが表示される理由を説明できない

@@ -4,7 +4,6 @@ Worktree: /home/node/tascon-frontend/.claude/worktrees/agent-afad560b446293ddb
 
 ## Context/Purpose
 
-- Todoist: 親タスク「タスクグループ共有 解除（フロントエンド）」（6hF9FV6qj8HpRHXF）、子タスク「作業する」（6hhR7h8wF8jHXwQm）
 - 目的: 一度共有したタスクグループの共有を、オーナー側・共有相手側のどちらからも「共有解除」できるようにする（共有相手側の解除はAPI上は離脱＝自分の共有レコード削除）。メモリ`project_task_group_unshare_button_todo`（引き継ぎ機能完成後に別プランとして着手予定）に対応するplan
 - 引き継ぎ機能（依頼・キャンセル・承認・拒否）はフロントエンドで実装済み（スタック上の`feat/request-task-group-handover`〜`feat/task-group-handover-sidebar-badge`）
 - 積む先: 未マージスタックの最上段`docs/keep-gitkeep-in-record-dirs`の上にgit-spiceで積む
