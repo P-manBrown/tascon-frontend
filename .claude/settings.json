@@ -13,6 +13,27 @@
         ]
       }
     ],
+    "PreToolUse": [
+      {
+        "matcher": "SubagentHandback",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PROJECT_DIR}/.claude/hooks/record-check.sh\""
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PROJECT_DIR}/.claude/hooks/record-check.sh\""
+          }
+        ]
+      }
+    ],
     "SubagentStart": [
       {
         "hooks": [
@@ -25,6 +46,14 @@
       }
     ],
     "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PROJECT_DIR}/.claude/hooks/record-check.sh\""
+          }
+        ]
+      },
       {
         "hooks": [
           {
