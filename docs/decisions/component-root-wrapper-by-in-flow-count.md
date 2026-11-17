@@ -49,4 +49,4 @@
 
 - ボタン＋確認モーダル構成のコンポーネントはフラグメントで実装する
 - フラグメントの場合でも、閉じた`<dialog>`は兄弟要素として存在する。そのため親が兄弟セレクタに依存するスタイル（`space-x-*`/`space-y-*`、`divide-*`、`first:`/`last:`/`nth-*`）を使うと、マウントの有無で余白が変わり得る。親の間隔は`gap`で取る
-- 既存コンポーネントのうち、この基準に合わないものは`.claude/tech-debt/active/component-root-wrapper-criterion-mismatch.md`で追跡する
+- 既存コンポーネントのうち、この基準に合わないものは`docs/tech-debt/active/component-root-wrapper-criterion-mismatch.md`で追跡する
