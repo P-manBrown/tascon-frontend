@@ -37,4 +37,4 @@
 ## Consequences
 
 - 範囲を狭められずにClient Componentのファイルに残した読み込み中表示は、クライアントへ送られる。その量はわずかなので、定数の範囲を広げないことを優先する
-- 既存の`LoadingMobilePageTurnLink`は`.claude/tech-debt/active/loading-component-in-client-file.md`で追跡する
+- 既存の`LoadingMobilePageTurnLink`は`docs/tech-debt/active/loading-component-in-client-file.md`で追跡する

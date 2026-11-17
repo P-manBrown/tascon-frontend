@@ -39,4 +39,4 @@
 ## Consequences
 
 - 同じファイル内で本物と読み込み中表示を並べる場合（`BlockCards`と`LoadingBlockCards`等）、読み込み中表示もその部品と同じファイルに置く。上位の`Loading`コンポーネントは、直接の子の`Loading`コンポーネントだけをimportする。孫のファイルを直接importすると、import元が増えて配置が上がってしまうためである
-- 既存の配置でこの方針に合わないものは`.claude/tech-debt/active/component-placement-mismatch.md`で追跡する
+- 既存の配置でこの方針に合わないものは`docs/tech-debt/active/component-placement-mismatch.md`で追跡する
