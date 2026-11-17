@@ -9,7 +9,7 @@
 
 `ARCHITECTURE.md`には、ルートに閉じたものはそのルートセグメントの`_components`に置き、ルートを跨いで使うものだけを共有層に置くという大枠しかなかった。`_components`の中でどの階層に置くかは決まっていなかった。
 
-タスクグループ共有解除の実装（`.claude/plans/active/task-group-share-cancellation.md`）では、共有ページの部品が機能ごとのフォルダの中に兄弟として平らに並んでいた。そのため、import元と置き場所がずれていた。
+タスクグループ共有解除の実装（`docs/design/plans/active/task-group-share-cancellation.md`）では、共有ページの部品が機能ごとのフォルダの中に兄弟として平らに並んでいた。そのため、import元と置き場所がずれていた。
 
 - `TaskGroupShareCard`をimportするのは`TaskGroupShareCards`だけなのに、両者が兄弟に置かれていた
 - server actionの`.api.ts`は、それを使うボタンの外に置かれていた

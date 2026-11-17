@@ -18,7 +18,7 @@ case "$cwd" in
   *) exit 0 ;;
 esac
 
-plans_dir="$cwd/.claude/plans/active"
+plans_dir="$cwd/docs/design/plans/active"
 if [ ! -d "$plans_dir" ]; then
   exit 0
 fi
