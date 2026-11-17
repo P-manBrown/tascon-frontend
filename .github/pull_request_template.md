@@ -18,8 +18,8 @@
 
 <!-- Plan and spec this pull request implements -->
 <!-- ✅ = this pull request completes it, 🏃 = in progress, ⬜️ = not applicable (write N/A as the path) -->
-- 🏃 Plan: .claude/plans/active/<name>.md
-- 🏃 Spec: .claude/specs/<name>.md
+- 🏃 Plan: docs/design/plans/active/<name>.md
+- 🏃 Spec: docs/design/specs/<name>.md
 
 ### Notes (Optional)
 

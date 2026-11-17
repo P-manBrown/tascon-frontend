@@ -7,7 +7,7 @@
 
 ## Context
 
-タスクグループ共有解除の実装（`.claude/plans/active/task-group-share-cancellation.md`）では、共有ページの解除確認文にタスクグループ名が必要になった。名前を使うのはClient Componentの`CancelTaskGroupShareButton`である。
+タスクグループ共有解除の実装（`docs/design/plans/active/task-group-share-cancellation.md`）では、共有ページの解除確認文にタスクグループ名が必要になった。名前を使うのはClient Componentの`CancelTaskGroupShareButton`である。
 
 最初の実装では、一覧の`TaskGroupShareList`で`getTaskGroup`を取得していた。そこから`CollapsibleTaskGroupShareCards`→`TaskGroupShareCards`→`TaskGroupShareCard`→ボタンへ名前を受け渡しており、名前を使わない中間コンポーネントを3つ経由するProps Drillingが発生していた。
 

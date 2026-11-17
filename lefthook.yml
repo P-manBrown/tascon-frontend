@@ -29,7 +29,6 @@ pre-commit:
         - "ARCHITECTURE.md"
         - "docs/*.md"
         - "docs/**/*.md"
-        - ".claude/plans/**/*.md"
       fail_text: 'Read the report above.'
 pre-push:
   commands:

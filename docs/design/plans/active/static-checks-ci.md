@@ -12,7 +12,7 @@
 
 ## Context/Purpose
 
-- 依頼: tf-uhcl（HQ 依頼 gc-vjh8 の 2/4）。承認済み requirements: `.claude/specs/static-checks-ci-requirements.md`（REQ-001〜REQ-010）。承認済み design: `.claude/specs/static-checks-ci.md`（案 A）
+- 依頼: tf-uhcl（HQ 依頼 gc-vjh8 の 2/4）。承認済み requirements: `docs/design/requirements/static-checks-ci-requirements.md`（REQ-001〜REQ-010）。承認済み design: `docs/design/specs/static-checks-ci.md`（案 A）
 - 実装タスクは **Task 1 の 1 つだけ**。新規 3 ファイル＋既存 1 ファイル（索引）への 1 行追加。コミットは 2 つ（`ci` と `docs`）で、ブランチ `ci/static-checks` 1 本に積む
 - 作業順序: 作業用 worktree の確認 → ブランチ作成 → 構造の確かめスクリプトを先に書いて「失敗」を確かめる → composite action とワークフローを書く → 構造の確かめが通る → 5 つのコマンドをローカルで実行 → 型エラーで `tsc --noEmit` が落ちることを確かめる（未コミットで、取り除く） → `ci` コミット → 決定記録と索引 → markdownlint・`check-docs.sh` → `docs` コミット → 変更範囲の確かめ → PR 本文の下書きと後続作業をノートに残す
 - この計画の `### Task N` はソースの変更だけを扱う。ビルドのライフサイクル（requirements → plan → plan-review → decompose → implement → review → finalize → publish）は本 formula が実行中で、実装レーンは Task 1 をローカルのコミットまで行う。push は後段の publish（`push=true`）が行い、PR は作らない（`open_pr=false`）。PR の作成と PR 上でしか確かめられない事項は run の外の後続作業（REQ-010）
@@ -29,7 +29,7 @@
 - Knip の github-actions プラグインは `.github/workflows/*.{yml,yaml}` と `.github/**/action.{yml,yaml}` を読み、`run:` のバイナリを確かめる。`corepack` は Knip の無視リストにある（`node_modules/knip/dist/constants.js`）
 - `docs/decisions/` の形式は `.claude/rules/decisions-maintenance.md`。`check-docs.sh` は決定記録の `Status`・`Verification Status`・`Date`・`Related Files` の値と `## Context`・`## Decision`・`## Consequences` の見出し、ファイル名の kebab-case、`index.md` からのリンクを検査する（索引にない決定記録はコミットで落ちる → 決定記録と索引は同じコミットに入れる）
 - `docs/decisions/index.md` は `# Decisions 索引` の下に、題を `[]` で囲んでリンク先の `.md` ファイル名を括弧で続けた形の 1 行を 8 行並べている。最後の行の題は「読み込み中表示はServer Componentのファイルに本物と並べて置く」、リンク先は `loading-component-in-server-file.md`
-- `.github/pull_request_template.md`（main）: 見出しは `### Summary` / `### Changes` / `### Testing` / `### Related Issues (Optional)` / `### Related Documents` / `### Notes (Optional)`。Related Documents は `- 🏃 Plan: .claude/plans/active/<name>.md`・`- 🏃 Spec: .claude/specs/<name>.md` の形式で、`⬜️` は N/A。`.claude/specs/` は存在せず、`.claude/plans/active/` にこの作業の plan はない
+- `.github/pull_request_template.md`（main）: 見出しは `### Summary` / `### Changes` / `### Testing` / `### Related Issues (Optional)` / `### Related Documents` / `### Notes (Optional)`。Related Documents は `- 🏃 Plan: docs/design/plans/active/<name>.md`・`- 🏃 Spec: docs/design/specs/<name>.md` の形式で、`⬜️` は N/A。`docs/design/specs/` にこの作業の plan はない
 - git-spice の状態（計画作成時点）: 未マージのスタック `refactor/move-design-and-tech-debt-to-docs (#942)` → `chore/drop-gh-stack (#943)`、`main` の上に同じ HQ 依頼の別レーン `ci/english-pull-requests`。`main` は `ffa7ffcc`
 - 外部 Action のリリース（2026-11-19 時点）: `actions/checkout` 最新 v7.0.1（2026-07-20）、`actions/setup-node` 最新 v7.1.0（2026-10-08）。どちらも公開から 2 週間以上たっている
 
@@ -38,7 +38,7 @@
 - [x] Task 1: ワークフロー・composite action・決定記録・索引の追加を実装し、ブランチ`ci/add-static-checks-workflow`にpushした（PR #946）。build（superpowers-build）はレビューとgap analysisの承認後にpublishまで完了している
 - [ ] PR #946のレビュー・マージ
 - [ ] 後続作業（run の外。Task 1 Step 16の一覧）: PR上の5ジョブの実際の表示名と結果の確認とPR本文の更新、x64 runnerでの`yarn install --immutable`の確認、決定記録の`Verification Status`を`Verified`に変えること
-- [ ] マージ後、このplanを`.claude/plans/completed/`へ移動する（`execution-plan`スキルの完了処理）
+- [ ] マージ後、このplanを`docs/design/plans/completed/`へ移動する（`execution-plan`スキルの完了処理）
 - 下のStepsはbuildの実行手順を残したもの。チェックボックスはbuildが実行した記録で、再実行する場合は新しく作る
 
 ## Proposed Implementation
@@ -618,7 +618,7 @@
   - Adding these checks to the required status checks in branch protection is a manual GitHub settings change for the repository owner.
   ````
 
-  見出しは PR を作る時点の `.github/pull_request_template.md` に合わせる（`### Related Issues (Optional)` は該当なしのため省く）。Related Documents は、PR を作る時点でリポジトリの plan・spec の置き場（main では `.claude/plans/`・`.claude/specs/`）にこの作業の plan・spec がなければ両方 `⬜️` と `N/A` のまま。
+  見出しは PR を作る時点の `.github/pull_request_template.md` に合わせる（`### Related Issues (Optional)` は該当なしのため省く）。Related Documents は、PR を作る時点でリポジトリの plan・spec の置き場（`docs/design/plans/`・`docs/design/specs/`）にこの作業の plan・spec がなければ両方 `⬜️` と `N/A` のまま。
 
   続けて、同じノートに `後続作業（run の外、PR 作成後）` として次の一覧を追記する:
 
@@ -696,4 +696,4 @@
 - A-4: REQ-005 の試しは `src/` に新しい 1 行のファイルを置く方法で行う。既存ファイルを書き換えないため、取り除いた後に差分が残らない
 - A-5: 構造の確かめは一時ディレクトリの Python スクリプト（PyYAML）で行う。リポジトリに新しい道具やファイルを足さない（REQ-008、`actionlint` を入れない）
 - A-6: 決定記録の文体は既存の `docs/decisions/*.md` に合わせる（日本語と英字・コードの間に空白を入れない）
-- A-7: このplanを`.claude/plans/active/`へ入れる際、決定記録の索引に足す行の書式例（Markdownリンクの形）は、`check-docs.sh`が`.claude/plans`配下のリンクをplanからの相対パスで検査して壊れたリンクと判定するため、リンク記法を使わない文章に書き換えた。足す行の中身（題とリンク先）は変えていない
+- A-7: このplanを`docs/design/plans/active/`へ入れる際、決定記録の索引に足す行の書式例（Markdownリンクの形）は、`check-docs.sh`が`docs/design/plans`配下のリンクをplanからの相対パスで検査して壊れたリンクと判定するため、リンク記法を使わない文章に書き換えた。足す行の中身（題とリンク先）は変えていない
