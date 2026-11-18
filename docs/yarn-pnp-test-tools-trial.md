@@ -7,7 +7,7 @@
 
 ## 結論の要約
 
-- 前提の確かめ（`yarn install`・`next build`・`next start`）: 回避策で通った。`yarn install` と `next start` はそのまま通ったが、`yarn build`（Turbopack）は通らず、Yarn を 4.4.0 から 4.18.1 に上げて `next build --webpack` にすると通った。根拠: `ANALYZE=true yarn next build --webpack`（終了コード 0）
+- 前提の確かめ（`yarn install`・`next build`・`next start`）: 回避策で通った。`yarn install` はそのまま通った。`yarn build`（Turbopack）は通らず、Yarn を 4.4.0 から 4.18.1 に上げて `next build --webpack` にすると通った。`next start` は、この回避策で作ったビルドの後で、追加の回避策なしに通った。根拠: `ANALYZE=true yarn next build --webpack`（終了コード 0）
 - Vitest 5.1.0: 回避策で通った。Yarn 4.4.0 では jsdom を使う描画テストが `ERR_REQUIRE_ESM` で落ち、Yarn 4.18.1 に上げると通った。根拠: `yarn vitest run`（`Test Files  2 passed (2)`、`Tests  4 passed (4)`）
 - Playwright 1.64.1: 回避策で通った。ブラウザの取得・`webServer`・E2E 自体はそのまま動いたが、前提の `next build` に上の回避策が要った。根拠: `yarn playwright test`（`1 passed`）
 - Stryker 10.1.1（vitest-runner）: 回避策で通った。Yarn 4.18.1 に上げたうえで、`stryker.config.json` に `plugins` を明示すると通った。根拠: `yarn stryker run`（変異 4 つ、スコア 75.00、終了コード 0）
@@ -388,7 +388,7 @@ yarn install
 yarn add -D vitest@5.1.0 vite@8.3.5 jsdom@30.1.3 @testing-library/react@16.3.3 @testing-library/dom@10.4.2
 yarn add -D @playwright/test@1.64.1
 yarn add -D @stryker-mutator/core@10.1.1 @stryker-mutator/vitest-runner@10.1.1
-# 上の設定とテストの 5 ファイルを置く（vitest.config.mts・playwright.config.ts・stryker.config.json・2 つのテスト・e2e/login.spec.ts）
+# 上の設定とテストの 6 ファイルを置く（vitest.config.mts・playwright.config.ts・stryker.config.json・2 つのテスト・e2e/login.spec.ts）
 ANALYZE=true yarn next build --webpack   # 回避策。--turbopack は PnP で失敗する
 yarn vitest run
 yarn vitest related src/utils/string-count/count-graphemes.ts --run
