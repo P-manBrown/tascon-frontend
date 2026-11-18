@@ -35,7 +35,78 @@ export NO_PROXY="${NO_PROXY:+$NO_PROXY,}localhost,127.0.0.1"
 export no_proxy="$NO_PROXY"
 ```
 
-- `--with-deps` が `sudo apt-get` で入れたパッケージ: 67 個。フォント（`fonts-freefont-ttf`・`fonts-ipafont-gothic`・`fonts-liberation`・`fonts-noto-color-emoji`・`fonts-unifont`・`fonts-wqy-zenhei` など）と、Chromium の実行に要る共有ライブラリ（`libasound2`・`libatk1.0-0`・`libcups2`・`libdrm2`・`libgbm1`・`libnss3`・`libx11-xcb1` など）。専用の `HOME` では隔離できない、システム全体への変更
+- `--with-deps` が `sudo apt-get` で入れたパッケージ: 67 個。フォントと、Chromium の実行に要る共有ライブラリ。専用の `HOME` では隔離できない、システム全体への変更。全パッケージ名:
+
+```text
+at-spi2-common
+fonts-freefont-ttf
+fonts-ipafont-gothic
+fonts-liberation
+fonts-noto-color-emoji
+fonts-tlwg-loma-otf
+fonts-unifont
+fonts-wqy-zenhei
+libasound2
+libasound2-data
+libatk1.0-0
+libatk-bridge2.0-0
+libatspi2.0-0
+libavahi-client3
+libavahi-common3
+libavahi-common-data
+libcups2
+libdbus-1-3
+libdrm2
+libdrm-amdgpu1
+libdrm-common
+libdrm-nouveau2
+libdrm-radeon1
+libfontenc1
+libgbm1
+libgl1
+libgl1-mesa-dri
+libglapi-mesa
+libglvnd0
+libglx0
+libglx-mesa0
+libllvm15
+libnspr4
+libnss3
+libsensors5
+libsensors-config
+libunwind8
+libwayland-server0
+libx11-xcb1
+libxaw7
+libxcb-dri2-0
+libxcb-dri3-0
+libxcb-glx0
+libxcb-present0
+libxcb-randr0
+libxcb-sync1
+libxcb-xfixes0
+libxcomposite1
+libxdamage1
+libxfixes3
+libxfont2
+libxi6
+libxkbcommon0
+libxkbfile1
+libxmu6
+libxpm4
+libxrandr2
+libxshmfence1
+libxxf86vm1
+libz3-4
+x11-xkb-utils
+xfonts-encodings
+xfonts-scalable
+xfonts-utils
+xkb-data
+xserver-common
+xvfb
+```
+
 - 後片付け: 一時ディレクトリ（比べる試しの取り出しを含む）を消した。Playwright のブラウザは一時ディレクトリの中にだけ入り、利用者の `~/.cache/ms-playwright` はできていない
 
 ## 版
