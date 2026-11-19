@@ -85,7 +85,7 @@ tascon-frontend の CI は PR タイトルの検証（`semantic-pull-request.yml
 
 ### REQ-007 索引
 
-- `docs/decisions/index.md` に、新しい決定記録へのリンク 1 行（既存の行と同じ形式 `- [<題>](static-checks-in-pr-ci.md)`）を末尾に追加する
+- `docs/decisions/index.md` に、新しい決定記録へのリンク 1 行（既存の行と同じ形式 `- [<題>]` に続く丸括弧へ `static-checks-in-pr-ci.md` を入れた形）を末尾に追加する
 
 ### REQ-008 変更範囲
 
