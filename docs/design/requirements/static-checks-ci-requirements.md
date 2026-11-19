@@ -1,8 +1,8 @@
 # Requirements: 静的な確かめを PR ごとの CI に入れる（tascon-frontend）
 
 - workflow root: tf-uvyh（superpowers-build）/ target: tf-uhcl（HQ 依頼 gc-vjh8 の 2/4）
-- 承認済み design: `.claude/specs/static-checks-ci.md`（autonomous で承認済み）
-- この spec の置き場所: `.claude/specs/static-checks-ci-requirements.md`
+- 承認済み design: `docs/design/specs/static-checks-ci.md`（autonomous で承認済み）
+- この spec の置き場所: `docs/design/requirements/static-checks-ci-requirements.md`
 - 基準: `main` の `ffa7ffcc`（2026-11-18 時点。design の実地試行はこのコミットで行った）
 
 ## Problem Statement
@@ -85,7 +85,7 @@ tascon-frontend の CI は PR タイトルの検証（`semantic-pull-request.yml
 
 ### REQ-007 索引
 
-- `docs/decisions/index.md` に、新しい決定記録へのリンク 1 行（既存の行と同じ形式 `- [<題>](static-checks-in-pr-ci.md)`）を末尾に追加する
+- `docs/decisions/index.md` に、新しい決定記録へのリンク 1 行（既存の行と同じ形式 `- [<題>]` に続く丸括弧へ `static-checks-in-pr-ci.md` を入れた形）を末尾に追加する
 
 ### REQ-008 変更範囲
 
@@ -105,7 +105,7 @@ tascon-frontend の CI は PR タイトルの検証（`semantic-pull-request.yml
 - 本文は英語で、`.github/pull_request_template.md` の見出しに沿う
 - この run では PR 本文の下書きを作る。Changes に、新しいジョブの見込みの表示名（TS-4、`Static Checks / <name> (pull_request)`）を一覧で書く
 - Testing に、REQ-005 の確認と、ローカルで 5 つのコマンドが成功したことを書く。PR 上の 5 ジョブの結果は後続作業で書き足す
-- Related Documents は今のテンプレートの記法に従う。リポジトリの `.claude/plans/` と `.claude/specs/` に対応する plan・spec がなければ両方 `⬜️` で path を `N/A` にする
+- Related Documents は今のテンプレートの記法に従う。リポジトリの `docs/design/plans/`・`docs/design/specs/`・`docs/design/requirements/` に対応する plan・spec がなければ両方 `⬜️` で path を `N/A` にする
 - Notes に、既存 `semantic-pull-request.yml` の `amannn/action-semantic-pull-request@v5` が SHA 固定されていないこと、required status checks への登録は人の GitHub 設定作業であることを書く
 - PR を作るレーンはワークフローの設定に従う（この run の変数は `open_pr=false`、`push=true`）。この spec は PR の中身の要件だけを定める。PR を作らずに run が終わる場合、PR 本文の下書きは実装の bead のノートに残す
 - 後続作業（run の外。PR を作った後に行う）を、実装の bead のノートに一覧で残す: PR の作成、`gh pr checks` で 5 ジョブの実際の表示名と結果を確かめて PR 本文の Changes・Testing を直すこと、x64 runner での `yarn install --immutable` の成否の確認、5 ジョブがすべて成功した後に決定記録の `Verification Status` を `Verified` に変える `docs` コミットを積むこと（その再実行の結果も `gh pr checks` で確かめる）

@@ -3,7 +3,7 @@
 ## Context/Purpose
 
 - バックエンド（tascon-backend）の同名planで行った変更を、このリポジトリへ移植する。判断の経緯はバックエンドで決めたものを移植している（Decision Log参照）
-- `.claude/hooks/plan-worktree-check.sh`（`.claude/settings.json`のSubagentStopフック）は、cwdが`/.claude/worktrees/`配下のとき、`.claude/plans/active/*.md`の全ファイルに`Worktree: <cwd>`行があるかを確認し、1件でも欠けていればexit 2で停止をブロックする。そのため、無関係な既存planが毎回指摘される
+- `.claude/hooks/plan-worktree-check.sh`（`.claude/settings.json`のSubagentStopフック）は、cwdが`/.claude/worktrees/`配下のとき、`docs/design/plans/active/*.md`の全ファイルに`Worktree: <cwd>`行があるかを確認し、1件でも欠けていればexit 2で停止をブロックする。そのため、無関係な既存planが毎回指摘される
 - `Worktree:`を記録する目的は、`execution-plan`完了処理の手順2（`Worktree:`のパスから解決されるproject識別子でclaude-memを照会する）にある。記録が必要かどうかは「そのworktreeでplanの作業をしたか」で決まり、planファイルを編集したかどうかは関係ない
 - 目的: フックの判定を「いずれか1件のactive planに、行全体が`Worktree: <cwd>`と一致する行があるか」へ変更し、`plans-maintenance`ルールの記録条件も同じ考え方に揃える
 - ブランチ: `chore/plan-worktree-check-scope`（`chore/update-codebase-memory-mcp-lock`の上にgit-spiceで作成済み）
@@ -19,8 +19,8 @@
 
 - `stop_hook_active`がtrueなら何も出力せずexit 0（現状維持）
 - cwdが空、またはcwdが`/.claude/worktrees/`配下でなければexit 0（現状維持）
-- `$cwd/.claude/plans/active`が存在しなければexit 0（現状維持）
-- `.claude/plans/active/`に`*.md`が1件もなければexit 0
+- `$cwd/docs/design/plans/active`が存在しなければexit 0（現状維持）
+- `docs/design/plans/active/`に`*.md`が1件もなければexit 0
 - 各planの冒頭（最初の`##`見出しより前の行）だけを見て、行末の空白・CRを除いた行全体が`Worktree: <cwd>`と完全一致する行が1つでもあればexit 0。1つもなければexit 2
   - 前方一致は不可（`Worktree: .../agent-x`が`agent-xy`のworktreeにマッチしない）
   - cwdは正規表現ではなく文字列として比較する
@@ -34,7 +34,7 @@
 2. `.claude/rules/plans-maintenance.md`の記録条件を「サブエージェントのworktreeでそのplanの作業を行う場合に記録する。planファイル自体を編集しない場合も記録する」の趣旨に修正し、言及箇所（`.claude/skills/todoist-task-runner/SKILL.md:24`）も合わせて更新する（Codexへ委譲）。`claude-md-maintenance`ルールの「新規ルール追加時の必須手順」に従い、新規subagentで変更前後の行動を比較する。比較は「記録条件の変更」と「1行ずつの明記」の2段階で行い、差が出なかった変更は含めない（Decision Log参照）
 3. `docs/decisions/`に、`Worktree:`行のパス形式（絶対パスを維持する）についてADRを追加する
 
-検証（JSON入力をパイプして実行。一時ディレクトリに`.claude/worktrees/<name>/.claude/plans/active/`を作って試す）:
+検証（JSON入力をパイプして実行。一時ディレクトリに`.claude/worktrees/<name>/docs/design/plans/active/`を作って試す）:
 
 1. どのactive planにもWorktree行がない（無関係なplanのみ） → exit 2
 2. いずれか1件のactive planに完全一致のWorktree行がある → exit 0

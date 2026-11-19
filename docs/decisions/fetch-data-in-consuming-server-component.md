@@ -7,7 +7,7 @@
 
 ## Context
 
-タスクグループ共有解除の実装（`.claude/plans/active/task-group-share-cancellation.md`）では、共有ページの解除確認文にタスクグループ名が必要になった。名前を使うのはClient Componentの`CancelTaskGroupShareButton`である。
+タスクグループ共有解除の実装（`docs/design/plans/active/task-group-share-cancellation.md`）では、共有ページの解除確認文にタスクグループ名が必要になった。名前を使うのはClient Componentの`CancelTaskGroupShareButton`である。
 
 最初の実装では、一覧の`TaskGroupShareList`で`getTaskGroup`を取得していた。そこから`CollapsibleTaskGroupShareCards`→`TaskGroupShareCards`→`TaskGroupShareCard`→ボタンへ名前を受け渡しており、名前を使わない中間コンポーネントを3つ経由するProps Drillingが発生していた。
 
@@ -39,4 +39,4 @@ Next.js App Routerの公式ドキュメントでも、複数のコンポーネ�
 - `cache()`はサーバーでの1回の描画内でのみ有効である。server actionの応答など別の描画では、再度取得される
 - `cache()`は引数が同じ値の呼び出しだけを重複排除する。たとえばURLの`id`文字列と、取得結果の数値`id`を`toString()`した文字列は、表記が異なり得る。そのため、同じデータを取得する箇所どうしでは、同じ出所の値を引数に渡す
 - 深い位置で取得する場合は、上位で既に同じ引数で取得済みか（キャッシュに当たるか）を確認する。当たらない場合は、ウォーターフォールにならないか検討する
-- 既存コンポーネントのうち、この方針に合わないものは`.claude/tech-debt/active/fetched-data-relayed-through-components.md`で追跡する
+- 既存コンポーネントのうち、この方針に合わないものは`docs/tech-debt/active/fetched-data-relayed-through-components.md`で追跡する

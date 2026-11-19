@@ -9,7 +9,7 @@
 
 `ARCHITECTURE.md`には、ルートに閉じたものはそのルートセグメントの`_components`に置き、ルートを跨いで使うものだけを共有層に置くという大枠しかなかった。`_components`の中でどの階層に置くかは決まっていなかった。
 
-タスクグループ共有解除の実装（`.claude/plans/active/task-group-share-cancellation.md`）では、共有ページの部品が機能ごとのフォルダの中に兄弟として平らに並んでいた。そのため、import元と置き場所がずれていた。
+タスクグループ共有解除の実装（`docs/design/plans/active/task-group-share-cancellation.md`）では、共有ページの部品が機能ごとのフォルダの中に兄弟として平らに並んでいた。そのため、import元と置き場所がずれていた。
 
 - `TaskGroupShareCard`をimportするのは`TaskGroupShareCards`だけなのに、両者が兄弟に置かれていた
 - server actionの`.api.ts`は、それを使うボタンの外に置かれていた
@@ -39,4 +39,4 @@
 ## Consequences
 
 - 同じファイル内で本物と読み込み中表示を並べる場合（`BlockCards`と`LoadingBlockCards`等）、読み込み中表示もその部品と同じファイルに置く。上位の`Loading`コンポーネントは、直接の子の`Loading`コンポーネントだけをimportする。孫のファイルを直接importすると、import元が増えて配置が上がってしまうためである
-- 既存の配置でこの方針に合わないものは`.claude/tech-debt/active/component-placement-mismatch.md`で追跡する
+- 既存の配置でこの方針に合わないものは`docs/tech-debt/active/component-placement-mismatch.md`で追跡する

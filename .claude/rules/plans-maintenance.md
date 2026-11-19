@@ -1,6 +1,6 @@
 ---
 paths:
-  - ".claude/plans/**/*.md"
+  - "docs/design/plans/**/*.md"
 ---
 
 # plans運用方針

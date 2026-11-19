@@ -59,10 +59,10 @@ while IFS= read -r -d '' file; do
   [ -n "$td_detected" ] && ! is_valid_date "$td_detected" && fail "$file has invalid Detected date: $td_detected"
 
   case "$file" in
-    .claude/tech-debt/active/*)
+    docs/tech-debt/active/*)
       [ "$td_status" = "Resolved" ] && fail "$file is in active/ but Status is Resolved (should move to completed/)"
       ;;
-    .claude/tech-debt/completed/*)
+    docs/tech-debt/completed/*)
       [ -n "$td_status" ] && [ "$td_status" != "Resolved" ] && fail "$file is in completed/ but Status is $td_status (expected Resolved)"
       ;;
   esac
@@ -71,7 +71,7 @@ while IFS= read -r -d '' file; do
 
   placeholders=$(grep -nE '^(# <[^>]+>|- \*\*[A-Za-z ]+:\*\* <[^>]+>)$' "$file" || true)
   [ -n "$placeholders" ] && fail "$file has unfilled placeholder(s) at line(s): $(echo "$placeholders" | cut -d: -f1 | tr '\n' ' ')"
-done < <(find .claude/tech-debt -name '*.md' -print0 2>/dev/null)
+done < <(find docs/tech-debt -name '*.md' -print0 2>/dev/null)
 
 # --- decisions: fixed-value validation, required fields/headings, orphan detection ---
 valid_decision_status="Proposed|Accepted|Deprecated|Superseded by .+"
@@ -106,7 +106,7 @@ done < <(find docs/decisions -maxdepth 1 -name '*.md' -print0 2>/dev/null)
 while IFS= read -r -d '' file; do
   base=$(basename "$file")
   is_kebab_case_md "$base" || fail "$file does not match naming convention <kebab-case-slug>.md"
-done < <(find .claude/plans -maxdepth 2 -mindepth 2 -name '*.md' -print0 2>/dev/null)
+done < <(find docs/design/plans -maxdepth 2 -mindepth 2 -name '*.md' -print0 2>/dev/null)
 
 # --- ARCHITECTURE.md: no links, no multi-segment paths (name entities, don't point at location) ---
 if [ -f ARCHITECTURE.md ]; then
@@ -132,6 +132,6 @@ while IFS= read -r -d '' file; do
       fail "$file has broken link: $link"
     fi
   done < <(grep -oE '\]\([^)]+\)' "$file" | sed -E 's/^\]\(//; s/\)$//')
-done < <(find ARCHITECTURE.md docs .claude/plans .claude/tech-debt -name '*.md' -print0 2>/dev/null)
+done < <(find ARCHITECTURE.md docs -name '*.md' -print0 2>/dev/null)
 
 exit $status

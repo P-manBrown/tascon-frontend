@@ -9,7 +9,7 @@
 
 旧ルールは「一要素として完結するコンポーネント→フラグメントでなく`div`等でくくる」だった。`div`でくくる目的は、コンポーネントを1つのまとまりにして親コンポーネントでレイアウトしやすくすることにある。
 
-しかし「一要素として完結する」の範囲が曖昧だった。タスクグループ共有解除の実装（`.claude/plans/active/task-group-share-cancellation.md`）では、レビュー指摘を受けてボタン＋確認モーダル構成の`CancelTaskGroupShareButton`を`div`でくくった。その結果、共有カードで「引き継ぎ依頼」と「共有解除」のボタンが横並びにならず、「共有解除」ボタンが文字幅に縮んだ。
+しかし「一要素として完結する」の範囲が曖昧だった。タスクグループ共有解除の実装（`docs/design/plans/active/task-group-share-cancellation.md`）では、レビュー指摘を受けてボタン＋確認モーダル構成の`CancelTaskGroupShareButton`を`div`でくくった。その結果、共有カードで「引き継ぎ依頼」と「共有解除」のボタンが横並びにならず、「共有解除」ボタンが文字幅に縮んだ。
 
 - `.btn`は`w-full`を含む。フラグメントのままなら、Buttonが親のflex/gridアイテムとして親の幅に従う
 - `div`でくくると`div`自体がflexアイテムになり、内容幅に縮む。その中の`w-full`のButtonも同じ幅に縮む
@@ -49,4 +49,4 @@
 
 - ボタン＋確認モーダル構成のコンポーネントはフラグメントで実装する
 - フラグメントの場合でも、閉じた`<dialog>`は兄弟要素として存在する。そのため親が兄弟セレクタに依存するスタイル（`space-x-*`/`space-y-*`、`divide-*`、`first:`/`last:`/`nth-*`）を使うと、マウントの有無で余白が変わり得る。親の間隔は`gap`で取る
-- 既存コンポーネントのうち、この基準に合わないものは`.claude/tech-debt/active/component-root-wrapper-criterion-mismatch.md`で追跡する
+- 既存コンポーネントのうち、この基準に合わないものは`docs/tech-debt/active/component-root-wrapper-criterion-mismatch.md`で追跡する
