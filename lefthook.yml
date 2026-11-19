@@ -9,8 +9,7 @@ pre-commit:
       fail_text: 'Read the report above.'
     markuplint:
       glob: 'src/**/*.{jsx,tsx}'
-      run: yarn markuplint --fix {staged_files}
-      stage_fixed: true
+      run: yarn markuplint {staged_files}
       fail_text: 'Read the report above.'
     markdownlint:
       glob: '*.md'
@@ -38,3 +37,6 @@ pre-push:
     check-git-clean:
       run: test -z "$(git status --porcelain | tee /dev/tty)"
       fail_text: 'ERROR: Commit or stash changes before pushing.'
+    tsc:
+      run: yarn next typegen && yarn tsc --noEmit
+      fail_text: 'Read the report above.'
