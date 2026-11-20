@@ -360,7 +360,7 @@ print("INVARIANTS_OK")
   git log --oneline -1
   ```
 
-  Expected: コミット前の `git status --short` は `M ` の 2 行だけ（未ステージの変更なし）。pre-commit（markdownlint・check-docs.sh）が通る。コミット後も同じブランチ（`same-branch exit=0`）、`git status --short` が空、最新コミットが `ci: add a checks job that gates on every static check`。pre-commit が失敗したら出力を読んで直し、`git add` し直してから同じコマンドでコミットする（`--no-verify` で回避しない）。
+  Expected: コミット前の `git status --short` は `M` と空白で始まる 2 行だけ（未ステージの変更なし）。pre-commit（markdownlint・check-docs.sh）が通る。コミット後も同じブランチ（`same-branch exit=0`）、`git status --short` が空、最新コミットが `ci: add a checks job that gates on every static check`。pre-commit が失敗したら出力を読んで直し、`git add` し直してから同じコマンドでコミットする（`--no-verify` で回避しない）。
 
 - [ ] **Step 7: 1a を展開した木と親との差分で確かめる（REQ-001・REQ-008 の 1a の分）**
 
@@ -830,7 +830,7 @@ print("INVARIANTS_OK")
   git log --oneline -1
   ```
 
-  Expected: コミット前の `git status --short` は `M ` の 3 行だけ。コミット後も同じブランチ（`same-branch exit=0`）、`git status --short` が空、最新コミットが `ci: run markdownlint, the logger.trace check and check-docs.sh in CI`。
+  Expected: コミット前の `git status --short` は `M` と空白で始まる 3 行だけ。コミット後も同じブランチ（`same-branch exit=0`）、`git status --short` が空、最新コミットが `ci: run markdownlint, the logger.trace check and check-docs.sh in CI`。
 
   Step 7 のコマンドブロックをそのまま実行する。
 
