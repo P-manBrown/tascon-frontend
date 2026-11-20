@@ -22,7 +22,7 @@ PRごとのCI（`Static Checks`）は型・Lint・未使用コード・マーク
   - Dependency Review: PRで新しく入る依存の既知の脆弱性（`Static Checks`のjob`dependency-review`、既定の設定。脆弱な依存を足すと落ちる）
   - code-review-graph: 変更の影響の報告（ワークフロー`code-review-graph`のjob`report`）。報告をStep Summaryに書くだけで、リスクの点数では落とさず、解析が走らなかったとき（レンダラの終了コード4）だけ落ちる。`checks`の`needs`に入れない
 - 置き場所: 指摘で落ちる物は`Static Checks`のjobにし、`checks`の`needs`に入れる。CodeQLはマージ先の解析のために`main`への`push`でも走らせる必要があり、`Static Checks`は`pull_request`だけで走るため、別のワークフローに置き、`checks`の`needs`に入れない。CodeQLの関門は「Code scanning results / CodeQL」
-- 固定の仕方: Actionは公開から2週間以上たったリリースの40桁のコミットSHAと行末のタグ、Pythonの道具は`.github/requirements/`の`--hash=sha256:`付きのrequirements（`pip-compile --generate-hashes`で作り、`pip install --require-hashes`で入れる）、取り出す規則は`actions/checkout`の`ref:`のSHA。Pythonの道具はDependabot（`pip`）が更新する
+- 固定の仕方: Actionは公開から2週間以上たったリリースの40桁のコミットSHAと行末のタグ、Pythonの道具は`.github/requirements/`の`--hash=sha256:`付きのrequirements（`pip-compile --generate-hashes`で作り、`pip install --require-hashes`で入れる）、取り出す規則とcode-review-graphのレンダラは`actions/checkout`の`ref:`のSHA。Pythonの道具はDependabot（`pip`）が更新する
 - `.yarn/`は解析から外す（Semgrepは`--exclude .yarn`、CodeQLは`init`の`config:`の`paths-ignore`、code-review-graphはリポジトリ直下の`.code-review-graphignore`の`/.yarn/`。無視のファイルが無いと`.yarn/`の`releases/yarn-4.4.0.cjs`などが解析され、変更の影響の報告に使うグラフが約5倍のノード数になった）
 
 ## Considered Options
@@ -42,4 +42,5 @@ PRごとのCI（`Static Checks`）は型・Lint・未使用コード・マーク
 - Semgrepの規則のSHA（job`semgrep`の`ref:`）とActionのSHAはDependabotの対象外で、手で更新する
 - 導入時のSemgrepの指摘は52か所（53件）で、`react-props-spreading`が43件、`jsx-not-internationalized`が8件、`unsafe-dynamic-method`が2件だった。いずれも挙動を変えずに、行ごとの`nosemgrep: <規則名>`と理由のコメントで外した。`unsafe-dynamic-method`の2件は、キーが`z.enum`と型の文字列リテラルの和集合に限られているため誤検知と判断した。外した行を変えるときは、外す理由がまだ正しいかを見直す
 - 公開から2週間以上たった物に替えた: Semgrepは1.186.0（2026-11-18公開）を避けて1.184.0（2026-11-05公開）にし、規則は`a5ad1714`（2026-11-10）を避けて`16b9e6d4`（2026-10-21）にした。`semgrep.txt`は、同じ`.in`の形でPython 3.13の`pip-compile`が作ったバックエンドの`.txt`のうち`semgrep`の項目だけを1.184.0のハッシュに差し替えたもので、他の依存の版は変えていない。`pip install --require-hashes`で入り、`pip check`が通ることを確かめた
+- code-review-graphは2.4.0（2026-11-11公開）を避けて2.3.9（2026-09-18公開）にし、レンダラの`ref:`も`v2.3.9`のコミット`343ab7ce`にした。`code-review-graph.txt`は、`code-review-graph==2.3.9`をPython 3.13向けに解決し（`pip install --dry-run --report`）、全パッケージのハッシュをPyPIの配布物から集めて`pip-compile`の形に整えたもので、Python 3.13では不要な`importlib-metadata`などは含めていない。`pip install --require-hashes --no-deps --python-version 3.13 --only-binary=:all:`でハッシュが通ることを確かめた。2.3.9は2.4.0と同じく、レンダラが解析の失敗を終了コード4で返す
 - code-review-graphのレンダラ（`code-review-graph.yml`の`tirth8205/code-review-graph`の`ref:`）はDependabotの対象外で、Dependabotが`.github/requirements/code-review-graph.txt`の本体の版を上げたときに、同じ版のタグのSHAへ手で合わせる。ずれるとレンダラが本体の出力を読めない可能性がある

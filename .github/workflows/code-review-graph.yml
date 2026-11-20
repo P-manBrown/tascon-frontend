@@ -26,7 +26,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: tirth8205/code-review-graph
-          ref: b3f1285965a1337b3821e4423da03b65d70ee423 # v2.4.0
+          ref: 343ab7cea29d47a3e805381e09f8243a43d43d88 # v2.3.9
           path: .crg-renderer
           sparse-checkout: scripts/render_pr_comment.py
           sparse-checkout-cone-mode: false
