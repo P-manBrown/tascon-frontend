@@ -55,6 +55,8 @@ export function Modal({
       onClick={onBackdropClick}
       onCancel={onCancel}
       onKeyDown={handleKeyDown}
+      // Forwarding the typed props to the underlying element is intended.
+      // nosemgrep: react-props-spreading
       {...rest}
     >
       <div

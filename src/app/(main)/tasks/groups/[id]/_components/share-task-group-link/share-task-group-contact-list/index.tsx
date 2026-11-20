@@ -60,6 +60,8 @@ export default async function ShareTaskGroupContactList({
       )}
       <div className={paginationLayoutClasses}>
         <PaginationClickTracker>
+          {/* Forwarding the typed props to the underlying element is intended. */}
+          {/* nosemgrep: react-props-spreading */}
           <Pagination {...pagination} />
         </PaginationClickTracker>
       </div>

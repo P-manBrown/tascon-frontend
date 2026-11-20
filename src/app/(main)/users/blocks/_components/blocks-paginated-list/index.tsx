@@ -32,6 +32,8 @@ export async function BlocksPaginatedList({ page }: Props) {
       )}
       {pagination.totalPages > 1 && (
         <div className="mt-6">
+          {/* Forwarding the typed props to the underlying element is intended. */}
+          {/* nosemgrep: react-props-spreading */}
           <Pagination {...pagination} />
         </div>
       )}

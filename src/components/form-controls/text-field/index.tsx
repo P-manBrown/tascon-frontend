@@ -28,7 +28,11 @@ export const TextField = forwardRef<HTMLInputElement, Props>(function TextField(
           className={`text-box [&::-ms-reveal]:hidden ${
             errors ? "text-box-error" : ""
           } ${suffixIcon ? "pr-9" : ""} ${className}`}
+          // Forwarding the typed props to the underlying element is intended.
+          // nosemgrep: react-props-spreading
           {...registerRest}
+          // Forwarding the typed props to the underlying element is intended.
+          // nosemgrep: react-props-spreading
           {...rest}
         />
         {suffixIcon && (

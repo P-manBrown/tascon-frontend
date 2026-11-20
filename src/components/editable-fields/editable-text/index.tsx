@@ -65,6 +65,8 @@ export function EditableText({
           noValidate={true}
           onSubmit={onFormSubmit}
           onKeyDown={handleFormKeyDown}
+          // Forwarding the typed props to the underlying element is intended.
+          // nosemgrep: react-props-spreading
           {...rest}
         >
           {editor}

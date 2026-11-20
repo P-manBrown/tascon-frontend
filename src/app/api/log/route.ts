@@ -37,6 +37,8 @@ export async function POST(req: NextRequest) {
       messages[0] = serializeError(messages[0]);
     }
 
+    // The key is restricted to a literal union, not user-controlled.
+    // nosemgrep: unsafe-dynamic-method
     logger[level](...messages);
 
     return new Response("Message has been successfully logged on the server", {

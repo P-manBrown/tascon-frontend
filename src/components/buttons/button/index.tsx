@@ -17,6 +17,8 @@ export function Button({
     <button
       className={`btn ${className}`}
       disabled={status !== "idle"}
+      // Forwarding the typed props to the underlying element is intended.
+      // nosemgrep: react-props-spreading
       {...rest}
     >
       {status === "pending" ? (

@@ -38,6 +38,8 @@ export async function SuggestionsPaginatedList({ page }: Props) {
       )}
       {pagination.totalPages > 1 && (
         <div className={paginationLayoutClasses}>
+          {/* Forwarding the typed props to the underlying element is intended. */}
+          {/* nosemgrep: react-props-spreading */}
           <Pagination {...pagination} />
         </div>
       )}

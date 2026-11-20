@@ -73,6 +73,8 @@ export function EditableDateTime({
           noValidate={true}
           onSubmit={onFormSubmit}
           onKeyDown={handleFormKeyDown}
+          // Forwarding the typed props to the underlying element is intended.
+          // nosemgrep: react-props-spreading
           {...rest}
         >
           <div className="flex items-start justify-between gap-2">

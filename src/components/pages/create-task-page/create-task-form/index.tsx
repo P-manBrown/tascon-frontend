@@ -49,6 +49,8 @@ export function CreateTaskForm({
           id={`${id}-taskGroupId`}
           disabled={isPending}
           className={`text-box ${errors.taskGroupId === undefined ? "" : "text-box-error"}`}
+          // Forwarding the typed props to the underlying element is intended.
+          // nosemgrep: react-props-spreading
           {...register("taskGroupId")}
         >
           <option value="">選択してください</option>
@@ -119,6 +121,8 @@ export function CreateTaskForm({
                 min={0}
                 readOnly={isPending}
                 aria-label="見積もりの時間"
+                // Forwarding the typed props to the underlying element is intended.
+                // nosemgrep: react-props-spreading
                 {...register("estimatedTime.estimatedHours")}
               />
               <span>時間</span>
@@ -133,6 +137,8 @@ export function CreateTaskForm({
                 step={15}
                 readOnly={isPending}
                 aria-label="見積もりの分"
+                // Forwarding the typed props to the underlying element is intended.
+                // nosemgrep: react-props-spreading
                 {...register("estimatedTime.estimatedMinutes")}
               />
               <span>分</span>

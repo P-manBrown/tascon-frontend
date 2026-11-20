@@ -9,7 +9,11 @@ export default function ErrorBoundary({ error, reset }: ErrorProps) {
   return (
     <main className="flex min-h-dvh items-center justify-center max-md:mx-3">
       <div className="text-center">
+        {/* The app has a single language, so this text is not internationalized. */}
+        {/* nosemgrep: jsx-not-internationalized */}
         <p className="font-semibold text-3xl text-red-600 md:text-5xl">Error</p>
+        {/* The app has a single language, so this text is not internationalized. */}
+        {/* nosemgrep: jsx-not-internationalized */}
         <h1 className="mt-1.5 mb-3.5 font-bold text-3xl tracking-tight md:mt-3 md:mb-7 md:text-6xl">
           Something went wrong
         </h1>

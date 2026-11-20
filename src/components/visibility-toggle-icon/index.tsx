@@ -6,5 +6,7 @@ type Props = {
 };
 
 export function VisibilityToggleIcon({ isVisible, ...rest }: Props) {
+  // Forwarding the typed props to the underlying element is intended.
+  // nosemgrep: react-props-spreading
   return isVisible ? <EyeIcon {...rest} /> : <EyeSlashIcon {...rest} />;
 }

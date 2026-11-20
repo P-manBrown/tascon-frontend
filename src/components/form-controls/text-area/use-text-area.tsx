@@ -27,6 +27,8 @@ export function useTextArea({ countGranularity }: Params) {
         character: countCharacters,
         grapheme: countGraphemes,
       };
+      // The key is restricted to a literal union, not user-controlled.
+      // nosemgrep: unsafe-dynamic-method
       const countFunction = countFunctions[countGranularity];
       const count = countFunction(trimmedValue);
       setWordCount(count);

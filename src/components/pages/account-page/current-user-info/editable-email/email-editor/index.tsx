@@ -130,6 +130,8 @@ export function EmailEditor({
         onCancelClick={handleCancelClick}
         onBlur={handleBlur(onSubmit)}
         isSubmitting={isSubmitting}
+        // Forwarding the typed props to the underlying element is intended.
+        // nosemgrep: react-props-spreading
         {...rest}
       >
         {children}

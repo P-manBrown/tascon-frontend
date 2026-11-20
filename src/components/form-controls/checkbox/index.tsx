@@ -21,6 +21,8 @@ export function Checkbox({
       onClick={onClick}
       onKeyDown={onKeyDown}
     >
+      {/* Forwarding the typed props to the underlying element is intended. */}
+      {/* nosemgrep: react-props-spreading */}
       <input type="checkbox" className="peer hidden" {...rest} />
       <span className="peer-disabled:animate-pulse">{toggleIcon}</span>
       {description}

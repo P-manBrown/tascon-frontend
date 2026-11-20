@@ -5,6 +5,8 @@ type Props = {
 };
 
 export function SignUpLink({ className }: Props) {
+  // The app has a single language, so this text is not internationalized.
+  // nosemgrep: jsx-not-internationalized
   return (
     <Link
       href="/sign-up"

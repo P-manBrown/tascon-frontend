@@ -48,6 +48,8 @@ export function DateTimeInput({
               ref.current = node;
             }
           }}
+          // Forwarding the typed props to the underlying element is intended.
+          // nosemgrep: react-props-spreading
           {...dateRegisterRest}
         />
         <input
@@ -57,6 +59,8 @@ export function DateTimeInput({
           className={`w-fit text-box ${hasError ? "text-box-error" : ""}`}
           aria-label={timeLabel}
           ref={timeRegisterRef}
+          // Forwarding the typed props to the underlying element is intended.
+          // nosemgrep: react-props-spreading
           {...timeRegisterRest}
         />
       </div>

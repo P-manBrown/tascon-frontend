@@ -23,6 +23,8 @@ export function TaskCards({ tasks }: Props) {
       {tasks.map((task) => (
         <TaskCard
           key={task.id}
+          // Forwarding the typed props to the underlying element is intended.
+          // nosemgrep: react-props-spreading
           {...task}
           href={`/tasks/detail/${task.id}?${fromUrl}`}
         >

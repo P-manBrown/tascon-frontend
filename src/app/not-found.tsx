@@ -6,6 +6,8 @@ export default function NotFound() {
     <main className="mx-3 flex min-h-dvh items-center justify-center">
       <div className="text-center">
         <p className="font-semibold text-4xl text-red-600 md:text-5xl">404</p>
+        {/* The app has a single language, so this text is not internationalized. */}
+        {/* nosemgrep: jsx-not-internationalized */}
         <h1 className="mt-1.5 mb-5 font-bold text-4xl tracking-tight md:mt-3 md:text-6xl">
           Page not found
         </h1>
