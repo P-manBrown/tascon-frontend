@@ -19,6 +19,7 @@ PRごとのCI（`Static Checks`）は型・Lint・未使用コード・マーク
 - PRごとのCIで次の道具を使う
   - Semgrep: `semgrep/semgrep-rules`の`typescript/react`・`typescript/lang`・`javascript/react`・`javascript/browser`・`javascript/lang`の規則（`Static Checks`のjob`semgrep`、`--error`で指摘があれば落ちる）
   - CodeQL（`javascript-typescript`、`build-mode: none`）: コードの脆弱性の解析。結果はcode scanningに上がる（ワークフロー`CodeQL`、`pull_request`と`main`への`push`）
+  - Dependency Review: PRで新しく入る依存の既知の脆弱性（`Static Checks`のjob`dependency-review`、既定の設定。脆弱な依存を足すと落ちる）
 - 置き場所: 指摘で落ちる物は`Static Checks`のjobにし、`checks`の`needs`に入れる。CodeQLはマージ先の解析のために`main`への`push`でも走らせる必要があり、`Static Checks`は`pull_request`だけで走るため、別のワークフローに置き、`checks`の`needs`に入れない。CodeQLの関門は「Code scanning results / CodeQL」
 - 固定の仕方: Actionは公開から2週間以上たったリリースの40桁のコミットSHAと行末のタグ、Pythonの道具は`.github/requirements/`の`--hash=sha256:`付きのrequirements（`pip-compile --generate-hashes`で作り、`pip install --require-hashes`で入れる）、取り出す規則は`actions/checkout`の`ref:`のSHA。Pythonの道具はDependabot（`pip`）が更新する
 - `.yarn/`は解析から外す（Semgrepは`--exclude .yarn`、CodeQLは`init`の`config:`の`paths-ignore`）
