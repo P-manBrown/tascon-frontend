@@ -1,20 +1,7 @@
-import dynamic from "next/dynamic";
 import Link from "next/link";
+import { Emoji } from "@/components/emojis/emoji";
 
 const iconSize = 20;
-
-const Emoji = dynamic(
-  () => import("emoji-picker-react").then((mod) => mod.Emoji),
-  {
-    loading: () => (
-      <span
-        className={`skeleton block rounded-sm`}
-        style={{ height: `${iconSize}px`, width: `${iconSize}px` }}
-      />
-    ),
-    ssr: false,
-  },
-);
 
 type Props = {
   id: number;

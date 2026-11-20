@@ -1,16 +1,10 @@
-import dynamic from "next/dynamic";
 import { Button } from "@/components/buttons/button";
+import { Emoji } from "@/components/emojis/emoji";
+import { EmojiPicker } from "@/components/emojis/emoji-picker";
 import { Label } from "@/components/form-controls/label";
 import { TextArea } from "@/components/form-controls/text-area";
 import { TextField } from "@/components/form-controls/text-field";
 import { useCreateTaskGroupForm } from "./use-create-task-group-form";
-
-const Picker = dynamic(() => import("emoji-picker-react"), { ssr: false });
-
-const Emoji = dynamic(
-  () => import("emoji-picker-react").then((mod) => mod.Emoji),
-  { ssr: false },
-);
 
 type Props = {
   handleSubmitSuccess?: () => void;
@@ -52,15 +46,7 @@ export function CreateTaskGroupForm({ handleSubmitSuccess }: Props) {
         id={popoverId}
         className="top-[anchor(top)] left-[anchor(right)] ml-1 rounded-lg drop-shadow-md"
       >
-        {shouldPickerMount && (
-          <Picker
-            onEmojiClick={handleEmojiClick}
-            searchDisabled={true}
-            skinTonesDisabled={true}
-            previewConfig={{ showPreview: false }}
-            width="100%"
-          />
-        )}
+        {shouldPickerMount && <EmojiPicker onEmojiClick={handleEmojiClick} />}
       </div>
       <TextField
         type="text"

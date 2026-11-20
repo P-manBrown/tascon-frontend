@@ -1,21 +1,6 @@
-"use client";
-
-import dynamic from "next/dynamic";
+import { Emoji } from "@/components/emojis/emoji";
 
 const iconSize = 32;
-
-const Emoji = dynamic(
-  () => import("emoji-picker-react").then((mod) => mod.Emoji),
-  {
-    loading: () => (
-      <span
-        className={`skeleton block rounded-sm`}
-        style={{ height: `${iconSize}px`, width: `${iconSize}px` }}
-      />
-    ),
-    ssr: false,
-  },
-);
 
 type Props = {
   unified: string;

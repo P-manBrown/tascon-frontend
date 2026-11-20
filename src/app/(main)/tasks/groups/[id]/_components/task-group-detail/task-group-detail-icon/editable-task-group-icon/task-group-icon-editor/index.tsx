@@ -1,18 +1,16 @@
 "use client";
 
 import type { EmojiClickData } from "emoji-picker-react";
-import dynamic from "next/dynamic";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useId, useRef, useState, useTransition } from "react";
 import { useErrorSnackbar } from "@/app/_components/snackbars/snackbar/use-error-snackbar";
+import { EmojiPicker } from "@/components/emojis/emoji-picker";
 import { DetailItemContentLayout } from "@/components/layouts/detail-item-content-layout";
 import { DetailItemHeadingLayout } from "@/components/layouts/detail-item-heading-layout";
 import type { ErrorObject } from "@/types/error";
 import type { HttpError } from "@/utils/error/custom/http-error";
 import { useRedirectLoginPath } from "@/utils/login-path/use-redirect-login-path";
 import { changeTaskGroupIcon } from "./change-task-group-icon.api";
-
-const Picker = dynamic(() => import("emoji-picker-react"), { ssr: false });
 
 type Props = {
   taskGroupId: string;
@@ -81,15 +79,7 @@ export function TaskGroupIconEditor({ taskGroupId, label, children }: Props) {
         id={popoverId}
         className="top-[anchor(top)] left-[anchor(right)] ml-1 rounded-lg drop-shadow-md"
       >
-        {shouldPickerMount && (
-          <Picker
-            onEmojiClick={handleEmojiClick}
-            searchDisabled={true}
-            skinTonesDisabled={true}
-            previewConfig={{ showPreview: false }}
-            width="100%"
-          />
-        )}
+        {shouldPickerMount && <EmojiPicker onEmojiClick={handleEmojiClick} />}
       </div>
     </div>
   );
