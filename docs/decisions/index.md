@@ -8,5 +8,5 @@
 - [サーバーのデータは値を使うコンポーネントで取得する](fetch-data-in-consuming-server-component.md)
 - [ルート内のファイルはimport元と同じ階層に置く](component-placement-by-importer.md)
 - [読み込み中表示はServer Componentのファイルに本物と並べて置く](loading-component-in-server-file.md)
-- [型・Lint・未使用コード・マークアップ・ビルドの確かめはPRごとのCIでジョブを分けて並列に実行する](static-checks-in-pr-ci.md)
+- [型・Lint・未使用コード・マークアップ・Markdown・ドキュメント・ビルドの確かめはPRごとのCIでジョブを分けて並列に実行する](static-checks-in-pr-ci.md)
 - [手元のgitフックは意味を変えない自動修正と速い検査に限り、CIは検査だけを行う](local-hooks-vs-ci-checks.md)

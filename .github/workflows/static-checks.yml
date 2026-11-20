@@ -48,9 +48,40 @@ jobs:
       - uses: ./.github/actions/setup
       - run: yarn next build --turbopack
 
+  markdownlint:
+    name: markdownlint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: ./.github/actions/setup
+      - run: yarn markdownlint-cli2 '**/*.md'
+
+  check-logger-trace:
+    name: check-logger-trace
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - run: |
+          status=0
+          grep -rnF --include='*.js' --include='*.jsx' --include='*.ts' --include='*.tsx' 'logger.trace' src || status=$?
+          if [ "$status" -eq 0 ]; then
+            echo "ERROR: Remove 'logger.trace' from the files above."
+            exit 1
+          fi
+          if [ "$status" -ne 1 ]; then
+            exit "$status"
+          fi
+
+  check-docs:
+    name: check-docs.sh
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - run: bash .lefthook/pre-commit/check-docs.sh
+
   checks:
     runs-on: ubuntu-latest
-    needs: [typecheck, biome, knip, markuplint, build]
+    needs: [typecheck, biome, knip, markuplint, build, markdownlint, check-logger-trace, check-docs]
     if: always()
     steps:
       - env:
