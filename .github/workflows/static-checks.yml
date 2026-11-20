@@ -46,7 +46,7 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: ./.github/actions/setup
-      - run: yarn build
+      - run: yarn next build --turbopack
 
   checks:
     runs-on: ubuntu-latest
