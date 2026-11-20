@@ -10,6 +10,7 @@
 - [設計書](#設計書)
 - [機能一覧](#機能一覧)
 - [開発環境](#開発環境)
+- [テスト](#テスト)
 
 ## 概要
 
@@ -85,3 +86,13 @@
 
 - **フロントエンド**  
   [P-manBrown/docker-nextjs-template](https://github.com/P-manBrown/docker-nextjs-template)
+
+## テスト
+
+E2E テストは本番用のビルドを `next start` で起動して確かめます。手元では次の手順で実行します。`--with-deps` はブラウザの実行に必要なシステムのパッケージもインストールします。  
+
+```bash
+yarn playwright install --with-deps chromium
+yarn build
+yarn playwright test
+```
