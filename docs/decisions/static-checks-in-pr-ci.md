@@ -1,4 +1,4 @@
-# 型・Lint・未使用コード・マークアップ・Markdown・ドキュメント・ビルドの確かめはPRごとのCIでジョブを分けて並列に実行する
+# 型・Lint・未使用コード・マークアップ・Markdown・ドキュメント・テスト・ビルドの確かめはPRごとのCIでジョブを分けて並列に実行する
 
 - **Status:** Accepted
 - **Verification Status:** Unverified
@@ -25,10 +25,11 @@ lefthookのpre-commitで中身を確かめているmarkdownlint・check-logger-t
 - `yarn markdownlint-cli2 '**/*.md'`は`.markdownlint-cli2.jsonc`の`gitignore`・`ignores`で`node_modules`と`.github`配下を除いて動き、リポジトリ全体でエラー0件で成功する
 - `src`配下の`*.js`・`*.jsx`・`*.ts`・`*.tsx`に`logger.trace`は0件
 - `bash .lefthook/pre-commit/check-docs.sh`はリポジトリ全体（`ARCHITECTURE.md`と`docs`配下）を見て成功し、依存のinstallが要らない（`ubuntu-latest`にあるGNUの`grep -P`と`date -d`を使う）
+- まとめ役の`checks`が`needs`で待てるのは同じワークフローのジョブだけのため、テストのジョブも静的な確かめと同じワークフロー（`Static Checks`）に置く
 
 ## Decision
 
-- PRごと（`pull_request`）に走るワークフロー`Static Checks`で、次の8つの確かめを別々のジョブとして並列に実行する。マージ先のブランチで絞らない（スタックPRのマージ先は`main`以外のブランチにもなる）
+- PRごと（`pull_request`）に走るワークフロー`Static Checks`で、次の9つの確かめを別々のジョブとして並列に実行する。マージ先のブランチで絞らない（スタックPRのマージ先は`main`以外のブランチにもなる）
   - `tsc --noEmit`: `yarn next typegen`の後に`yarn tsc --noEmit`
   - `biome`: `yarn biome ci --error-on-warnings .`（pre-commitと同じく警告も失敗にする）
   - `knip`: `yarn knip`（pre-pushと同じ）
@@ -37,6 +38,7 @@ lefthookのpre-commitで中身を確かめているmarkdownlint・check-logger-t
   - `markdownlint`: `yarn markdownlint-cli2 '**/*.md'`（リポジトリ全体。対象の除外は`.markdownlint-cli2.jsonc`の`gitignore`・`ignores`に従う）
   - `check-logger-trace`: `src`配下の`*.js`・`*.jsx`・`*.ts`・`*.tsx`を`grep -rnF 'logger.trace'`で探し、見つかれば該当の`ファイル:行`を出して失敗する。`grep`自体のエラーも失敗にする
   - `check-docs.sh`: `bash .lefthook/pre-commit/check-docs.sh`
+  - `vitest`: `yarn vitest run`（Vitestのテスト全体）
 - 確かめのジョブの後に、まとめ役のジョブ`checks`を置く。`checks`は`needs`で同じワークフローの確かめのジョブをすべて待ち、`if: always()`で前のジョブが落ちても必ず走る。`toJSON(needs)`を`jq`で読んで各ジョブの`<ジョブのid>=<結果>`を表示し、結果が`success`でないジョブ（`failure`・`cancelled`・`skipped`）が1つでもあれば失敗する。判定の式にジョブ名を並べず、`needs`全体を見る
 - ブランチ保護のrequired status checksに登録するのは`checks`（と`Validate PR title`）だけにする。確かめを足すたびに必須のチェックを登録し直さなくて済み、登録を忘れても関門から漏れないため
 - 必須にする確かめはこのワークフロー（`static-checks.yml`）1つに置く。`needs`が待てるのは同じワークフローのジョブだけのため
@@ -48,7 +50,7 @@ lefthookのpre-commitで中身を確かめているmarkdownlint・check-logger-t
 ## Considered Options
 
 - ジョブを分けて並列に実行し、準備手順をcomposite actionにまとめる（採用）: PRのchecks欄に確かめごとの成否が出て、1つが落ちても他は最後まで走る。Node.jsの版とsetup-nodeのSHAの置き場が1か所になる。ファイルが1つ増え、installを6回行う
-- ジョブを分けて並列に実行し、準備手順を各ジョブに直接書く: 1ファイルで全部読めるが、Node.jsの版とsetup-nodeのSHAが6か所に重複し、更新時にずれやすい
+- ジョブを分けて並列に実行し、準備手順を各ジョブに直接書く: 1ファイルで全部読めるが、Node.jsの版とsetup-nodeのSHAが7か所に重複し、更新時にずれやすい
 - 1つのジョブで5つのステップとして直列に実行する: installが1回で済みActionsの使用時間が最小になるが、checks欄には1つしか出ず、どの確かめが落ちたかは開かないと分からない。直列のため待ち時間が長い
 - `tsc --noEmit`を独立したジョブにせず`next build`の型検査に任せる: ジョブが1つ減るが、`next build`は最初のエラーで止まり、すべての型エラーを報告しない
 - `tsc --noEmit`を`next build`の後に同じジョブで実行する: buildが`next-env.d.ts`を生成するので`next typegen`は要らないが、直列になり遅い。`next typegen`で型ファイルだけ生成すれば並列のまま実行できる
@@ -69,7 +71,7 @@ lefthookのpre-commitで中身を確かめているmarkdownlint・check-logger-t
 - ブランチ保護のrequired status checksに`checks`を登録するまでは、確かめのジョブが失敗してもマージは止まらない
 - 確かめのジョブを足すときは、`checks`の`needs`にも足す必要がある。足さないとそのジョブは関門に入らない
 - ワークフローが途中で取り消されると`checks`は成功しないため、必須のチェックは通らない
-- installを6回行う分、Actionsの使用時間が増える（1回約15秒。`check-logger-trace`と`check-docs.sh`のジョブはinstallしない）
+- installを7回行う分、Actionsの使用時間が増える（1回約15秒。`check-logger-trace`と`check-docs.sh`のジョブはinstallしない）
 - `Dockerfile`のNode.jsの版を上げるときは、`.github/actions/setup/action.yml`の`node-version`も合わせる必要がある
 - `next typegen`はNext 15.5以降のコマンドで、Nextの更新で挙動が変わると`tsc --noEmit`のジョブが壊れる
 - GitHubのrunnerはx64で、`.yarn/cache`にないx64用のオプション依存はinstall時にnpmから取得される

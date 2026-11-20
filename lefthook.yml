@@ -40,3 +40,7 @@ pre-push:
     tsc:
       run: yarn next typegen && yarn tsc --noEmit
       fail_text: 'Read the report above.'
+    vitest-related:
+      glob: '*.{ts,tsx}'
+      run: yarn vitest related --run --passWithNoTests {push_files}
+      fail_text: 'Read the report above.'
