@@ -18,6 +18,8 @@ CIはPRタイトルの検証（`semantic-pull-request.yml`）だけで、型・L
 
 ブランチ保護のrequired status checksはジョブ（check run）ごとに登録する。確かめのジョブを1つずつ登録すると、確かめを足すたびに登録し直す必要があり、登録を忘れたジョブは失敗してもマージを止めない。GitHub Actionsの`needs`が待てるのは同じワークフローのジョブだけである。
 
+`package.json`の`build`スクリプトは`ANALYZE=true next build --turbopack`である。Turbopackのビルドでは`ANALYZE=true`でも`@next/bundle-analyzer`は解析のレポートを作らず、「The Next Bundle Analyzer is not compatible with Turbopack builds, no report will be generated.」という警告だけを出す。`ANALYZE`は`build`スクリプトの中で付くため、ワークフローの`env`では上書きできない。
+
 ## Decision
 
 - PRごと（`pull_request`）に走るワークフロー`Static Checks`で、次の5つの確かめを別々のジョブとして並列に実行する。マージ先のブランチで絞らない（スタックPRのマージ先は`main`以外のブランチにもなる）
@@ -25,7 +27,7 @@ CIはPRタイトルの検証（`semantic-pull-request.yml`）だけで、型・L
   - `biome`: `yarn biome ci --error-on-warnings .`（pre-commitと同じく警告も失敗にする）
   - `knip`: `yarn knip`（pre-pushと同じ）
   - `markuplint`: `yarn lint-jsx`
-  - `next build`: `yarn build`（本番と同じビルド手順）
+  - `next build`: `yarn next build --turbopack`（`build`スクリプトから`ANALYZE=true`を除いたビルド手順。バンドルの解析をしない）
 - 確かめのジョブの後に、まとめ役のジョブ`checks`を置く。`checks`は`needs`で同じワークフローの確かめのジョブをすべて待ち、`if: always()`で前のジョブが落ちても必ず走る。`toJSON(needs)`を`jq`で読んで各ジョブの`<ジョブのid>=<結果>`を表示し、結果が`success`でないジョブ（`failure`・`cancelled`・`skipped`）が1つでもあれば失敗する。判定の式にジョブ名を並べず、`needs`全体を見る
 - ブランチ保護のrequired status checksに登録するのは`checks`（と`Validate PR title`）だけにする。確かめを足すたびに必須のチェックを登録し直さなくて済み、登録を忘れても関門から漏れないため
 - 必須にする確かめはこのワークフロー（`static-checks.yml`）1つに置く。`needs`が待てるのは同じワークフローのジョブだけのため
@@ -45,6 +47,9 @@ CIはPRタイトルの検証（`semantic-pull-request.yml`）だけで、型・L
 - `checks`の判定で`toJSON(needs)`全体を`jq`で見る（採用）: `needs`に足したジョブが自動で判定の対象になり、各ジョブの結果を1行ずつ表示できる。`jq`の式を読む必要がある
 - `checks`の判定でジョブごとに`needs.<id>.result`を`env`で受けてシェルで比べる: 式は単純だが、ジョブを足すたびに`needs`・`env`・比較の3か所を変える必要があり、比較を書き忘れたジョブの失敗は関門を素通りする
 - `checks`の判定でステップの`if`に`contains(needs.*.result, 'failure')`等を並べる: シェルなしで書けるが、失敗とみなす値を列挙するため「`success`以外は失敗」にならず、どのジョブが何の結果だったかがログに出ない
+- `next build`のジョブでワークフローから`yarn next build --turbopack`を直接実行する（採用）: CIのジョブだけを変え、手元の`yarn build`の挙動は変わらない。ビルドの指定が`package.json`とワークフローの2か所になる
+- `package.json`の`build`から`ANALYZE=true`を外し、解析用のスクリプトを分ける: CIは`yarn build`のままで手順が1か所になるが、手元の`yarn build`の挙動が変わる。Turbopackでは解析のレポートが作られないため、解析用のスクリプトの中身という別の判断も要る
+- ワークフローの`env`で`ANALYZE=false`を渡す: `build`スクリプトの中の`ANALYZE=true`が優先されるため効かない
 
 ## Consequences
 
@@ -57,3 +62,4 @@ CIはPRタイトルの検証（`semantic-pull-request.yml`）だけで、型・L
 - `next typegen`はNext 15.5以降のコマンドで、Nextの更新で挙動が変わると`tsc --noEmit`のジョブが壊れる
 - GitHubのrunnerはx64で、`.yarn/cache`にないx64用のオプション依存はinstall時にnpmから取得される
 - 固定したSHAは自動では更新されないため、Actionの更新は手で行う
+- `build`スクリプトのビルドの指定（`--turbopack`等）を変えるときは、`static-checks.yml`の`next build`のジョブも合わせる必要がある
