@@ -85,3 +85,5 @@
 
 - **フロントエンド**  
   [P-manBrown/docker-nextjs-template](https://github.com/P-manBrown/docker-nextjs-template)
+
+UIのデザインにはOpenPencilを使用しています。使い方は[OpenPencilの使い方](docs/openpencil.md)をご参照ください。  
