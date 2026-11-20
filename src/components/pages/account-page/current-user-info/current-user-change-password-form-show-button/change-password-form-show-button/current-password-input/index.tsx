@@ -30,6 +30,8 @@ export function CurrentPasswordInput(props: Props) {
             <VisibilityToggleIcon isVisible={isVisible} className="size-5" />
           </IconButton>
         }
+        // Forwarding the typed props to the underlying element is intended.
+        // nosemgrep: react-props-spreading
         {...props}
       />
     </div>

@@ -11,6 +11,8 @@ type Props = {
 export function SearchParamsLoader(props: Props) {
   return (
     <Suspense>
+      {/* Forwarding the typed props to the underlying element is intended. */}
+      {/* nosemgrep: react-props-spreading */}
       <SearchParamsLoaderInner {...props} />
     </Suspense>
   );

@@ -65,6 +65,8 @@ export function AvatarEditor({ avatarUrl, children }: Props) {
             ref(node);
             inputRef.current = node;
           }}
+          // Forwarding the typed props to the underlying element is intended.
+          // nosemgrep: react-props-spreading
           {...registerRest}
         />
         {errors.avatar && (

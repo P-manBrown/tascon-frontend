@@ -29,6 +29,8 @@ export function SharedTaskGroupsError({ error }: Props) {
     <div className="flex flex-col gap-3 rounded-sm border border-red-300 bg-red-50 p-3 max-md:items-center">
       <div className="flex items-center gap-1.5">
         <XCircleIcon className="size-5 stroke-2 stroke-red-600" />
+        {/* The app has a single language, so this text is not internationalized. */}
+        {/* nosemgrep: jsx-not-internationalized */}
         <p className="font-bold text-lg">Error</p>
       </div>
       <p className="text-sm">

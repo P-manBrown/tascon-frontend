@@ -49,6 +49,8 @@ export function HoursMinutesInput({
                 ref.current = node;
               }
             }}
+            // Forwarding the typed props to the underlying element is intended.
+            // nosemgrep: react-props-spreading
             {...hoursRegisterRest}
           />
           <span>時間</span>
@@ -64,6 +66,8 @@ export function HoursMinutesInput({
             step={15}
             aria-label={minutesLabel}
             ref={minutesRegisterRef}
+            // Forwarding the typed props to the underlying element is intended.
+            // nosemgrep: react-props-spreading
             {...minutesRegisterRest}
           />
           <span>分</span>

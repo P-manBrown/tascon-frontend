@@ -8,5 +8,7 @@ type Props = Pick<
 >;
 
 export function MobilePageSelector(props: Props) {
+  // Forwarding the typed props to the underlying element is intended.
+  // nosemgrep: react-props-spreading
   return <PageSelector {...props} />;
 }

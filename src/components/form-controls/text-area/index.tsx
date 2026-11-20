@@ -35,7 +35,11 @@ export const TextArea = forwardRef<HTMLTextAreaElement, Props>(
           rows={rows}
           cols={cols}
           className={textAreaClasses}
+          // Forwarding the typed props to the underlying element is intended.
+          // nosemgrep: react-props-spreading
           {...registerRest}
+          // Forwarding the typed props to the underlying element is intended.
+          // nosemgrep: react-props-spreading
           {...rest}
         />
         {shadowRef && (
