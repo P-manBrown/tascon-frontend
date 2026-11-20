@@ -20,6 +20,19 @@
       "recommended": true,
       "nursery": {
         "useSortedClasses": "on"
+      },
+      "style": {
+        "noRestrictedImports": {
+          "level": "error",
+          "options": {
+            "paths": {
+              "emoji-picker-react": {
+                "importNames": ["default", "Emoji", "*"],
+                "message": "emoji-picker-reactの部品は直接読み込まず、@/components/emojis/emojiのEmojiと@/components/emojis/emoji-pickerのEmojiPickerを使う。EmojiClickData等の型はimport typeで読み込める。"
+              }
+            }
+          }
+        }
       }
     },
     "domains": {
@@ -37,5 +50,20 @@
     "parser": {
       "tailwindDirectives": true
     }
-  }
+  },
+  "overrides": [
+    {
+      "includes": [
+        "src/components/emojis/emoji/index.tsx",
+        "src/components/emojis/emoji-picker/index.tsx"
+      ],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": "off"
+          }
+        }
+      }
+    }
+  ]
 }

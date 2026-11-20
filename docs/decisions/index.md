@@ -9,3 +9,4 @@
 - [ルート内のファイルはimport元と同じ階層に置く](component-placement-by-importer.md)
 - [読み込み中表示はServer Componentのファイルに本物と並べて置く](loading-component-in-server-file.md)
 - [型・Lint・未使用コード・マークアップ・ビルドの確かめはPRごとのCIでジョブを分けて並列に実行する](static-checks-in-pr-ci.md)
+- [絵文字はラッパー部品で端末の文字に固定し、ライブラリの部品の直接読み込みをlintで禁じる](native-emoji-via-wrapper-components.md)
