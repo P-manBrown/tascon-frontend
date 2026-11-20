@@ -38,7 +38,7 @@ lefthookのpre-commitで中身を確かめているmarkdownlint・check-logger-t
   - `markdownlint`: `yarn markdownlint-cli2 '**/*.md'`（リポジトリ全体。対象の除外は`.markdownlint-cli2.jsonc`の`gitignore`・`ignores`に従う）
   - `check-logger-trace`: `src`配下の`*.js`・`*.jsx`・`*.ts`・`*.tsx`を`grep -rnF 'logger.trace'`で探し、見つかれば該当の`ファイル:行`を出して失敗する。`grep`自体のエラーも失敗にする
   - `check-docs.sh`: `bash .lefthook/pre-commit/check-docs.sh`
-  - `vitest`: `yarn vitest run`（Vitestのテスト全体）
+  - `vitest`: `yarn vitest run --coverage`（Vitestのテスト全体とV8のカバレッジ。カバレッジは出力の表で見るだけで、しきい値は付けない）
 - 確かめのジョブの後に、まとめ役のジョブ`checks`を置く。`checks`は`needs`で同じワークフローの確かめのジョブをすべて待ち、`if: always()`で前のジョブが落ちても必ず走る。`toJSON(needs)`を`jq`で読んで各ジョブの`<ジョブのid>=<結果>`を表示し、結果が`success`でないジョブ（`failure`・`cancelled`・`skipped`）が1つでもあれば失敗する。判定の式にジョブ名を並べず、`needs`全体を見る
 - ブランチ保護のrequired status checksに登録するのは`checks`（と`Validate PR title`）だけにする。確かめを足すたびに必須のチェックを登録し直さなくて済み、登録を忘れても関門から漏れないため
 - 必須にする確かめはこのワークフロー（`static-checks.yml`）1つに置く。`needs`が待てるのは同じワークフローのジョブだけのため
@@ -80,3 +80,4 @@ lefthookのpre-commitで中身を確かめているmarkdownlint・check-logger-t
 - lefthookの`check-logger-trace`の対象・パターンを変えるときは、`static-checks.yml`の同名のジョブも合わせる必要がある（markdownlintと`check-docs.sh`は実体を共有するが、この確かめだけは2か所に書かれている）
 - lefthookで中身を確かめる物（biome・markuplint・markdownlint・check-logger-trace・`check-docs.sh`・knip・tsc）はすべてCIでも走る。手元だけに残るのは、手元の状態を見るprotect-branch・check-git-cleanになる
 - 手元のフックとCIの役割分担は[手元のgitフックは意味を変えない自動修正と速い検査に限り、CIは検査だけを行う](local-hooks-vs-ci-checks.md)に従う。この記録は、CIで走らせる確かめの構成を決める
+- カバレッジ・変異スコアにはしきい値を付けないため、数値が下がってもジョブは落ちない。落ちるのはテストの失敗・道具の故障のときだけ
