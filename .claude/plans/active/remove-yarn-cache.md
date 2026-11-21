@@ -535,6 +535,6 @@ Worktree: /home/node/tascon-frontend/.claude/worktrees/gc-tf-wjb5y
 ## Progress
 
 - plan-review 承認済み。
-- 2026-11-21: Task 1 のローカルコミット 3 つ（`build:`・`ci:`・`docs:`）を作成済み。push・PR は未実施（`open_pr=false`）。
+- 2026-11-21: Task 1 のローカルコミットを作成済み（`build:`・`ci:`・plan の例の修正の `docs:`・ADR の `docs:`・進捗記録の `docs:`）。plan の例の修正は spec レビュー R1 に従い ADR のコミットから分けた。push・PR は未実施（`open_pr=false`）。
 - 検証結果: 受け入れ基準 1〜7・9 を確認。クリーンな `git archive HEAD` での `yarn install --immutable` は exit 0 で `yarn.lock` 不変、`yarn knip` exit 0、作業ツリー clean。worktree 内の `yarn config get enableGlobalCache` は本体 checkout の親 `.yarnrc.yml` を継ぎ `false` になる（環境要因）。
 - 未確認: 受け入れ基準 8（PR の CI でキャッシュが効くこと）は PR を開いた後に確認する。
