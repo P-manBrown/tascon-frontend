@@ -1,7 +1,7 @@
 # `.yarn/cache` をリポジトリから外し、CI で setup-node の yarn キャッシュを使う Implementation Plan
 
 Spec: .claude/specs/remove-yarn-cache.md
-Worktree: 実装 item の準備時に個別の worktree を記録する。
+Worktree: /home/node/tascon-frontend/.claude/worktrees/gc-tf-wjb5y
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
@@ -277,7 +277,7 @@ Worktree: 実装 item の準備時に個別の worktree を記録する。
 
 - [ ] **Step 7: setup-node に `cache: yarn` を足す（REQ-004）**
 
-  `.github/actions/setup/action.yml` の 9 行目 `          node-version: 22.22.2` の次に `          cache: yarn` を足す（行頭は空白 8 個、`node-version` と同じ深さ）。変更後のファイル全体:
+  `.github/actions/setup/action.yml` の 9 行目 `node-version: 22.22.2` の次に `cache: yarn` を足す（行頭は空白 8 個、`node-version` と同じ深さ）。変更後のファイル全体:
 
   ```yaml
   name: Setup
@@ -394,7 +394,7 @@ Worktree: 実装 item の準備時に個別の worktree を記録する。
   ```
 
   ```bash
-  printf '%s\n' '- [依存のzipはリポジトリに入れず、CIではsetup-nodeのyarnキャッシュを使う](yarn-cache-out-of-repo.md)' >> docs/decisions/index.md
+  printf '%s\n' '- [依存のzipはリポジトリに入れず、CIではsetup-nodeのyarnキャッシュを使う]'"(yarn-cache-out-of-repo.md)" >> docs/decisions/index.md
   git diff -- docs/decisions/index.md
   tail -c 1 docs/decisions/index.md | od -An -c
   ```
@@ -530,7 +530,11 @@ Worktree: 実装 item の準備時に個別の worktree を記録する。
 ## Decision Log
 
 - 2026-11-21: plan-review で計画を承認。正式な plan/spec を保存する方針を採用。保存しない旨の旧記述はこの決定で変更。出典: /home/node/tascon-frontend/.gc-artifacts/remove-yarn-cache/requirements.md, /home/node/tascon-frontend/.gc-artifacts/remove-yarn-cache/brainstorming/design-candidate.md, /home/node/tascon-frontend/.gc-artifacts/remove-yarn-cache/implementation-plan.md。 保存時の documents base に存在しないリンクは、リンクテキストと元の参照先をプレーンテキストで保持: `static-checks-in-pr-ci.md`, `ファイル名`。
+- 2026-11-21: Task 1 の実装中、保存済み plan の例示コマンド（markdown リンク形式）と MD038 の空白が `check-docs.sh`・markdownlint に止められたため、plan の該当 2 箇所だけ書き換えた（計画の「変えないファイル」の例外）。ADR の Date は実装日の 2026-11-21 にした。
 
 ## Progress
 
-- plan-review 承認済み。実装前。
+- plan-review 承認済み。
+- 2026-11-21: Task 1 のローカルコミットを作成済み（`build:`・`ci:`・plan の例の修正の `docs:`・ADR の `docs:`・進捗記録の `docs:`）。plan の例の修正は spec レビュー R1 に従い ADR のコミットから分けた。push・PR は未実施（`open_pr=false`）。
+- 検証結果: 受け入れ基準 1〜7・9 を確認。クリーンな `git archive HEAD` での `yarn install --immutable` は exit 0 で `yarn.lock` 不変、`yarn knip` exit 0、作業ツリー clean。worktree 内の `yarn config get enableGlobalCache` は本体 checkout の親 `.yarnrc.yml` を継ぎ `false` になる（環境要因）。
+- 未確認: 受け入れ基準 8（PR の CI でキャッシュが効くこと）は PR を開いた後に確認する。
