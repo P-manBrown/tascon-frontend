@@ -44,3 +44,8 @@ yarn lefthook install
 
 echo 'Setting up TypeScript Language Server...'
 (cd "${HOME}" && sudo npm install -g typescript-language-server)
+
+echo 'Setting up Semgrep...'
+sudo apt-get update
+sudo apt-get install -y --no-install-recommends python3-venv
+bash .lefthook/pre-commit/semgrep-setup.sh
