@@ -19,6 +19,12 @@ pre-commit:
       glob: 'src/**/*.{js,jsx,ts,tsx}'
       run: grep -nFH 'logger.trace' {staged_files} && exit 1 || exit 0
       fail_text: "ERROR: Remove 'logger.trace' before committing."
+    semgrep:
+      glob: '*.{js,jsx,ts,tsx,mjs,cjs,mts,cts}'
+      exclude:
+        - '.yarn/**'
+      run: bash .lefthook/pre-commit/semgrep.sh {staged_files}
+      fail_text: 'Read the report above.'
     protect-branch:
       run: git branch --show-current | tee /dev/tty | grep -Eqvx 'main'
       fail_text: "ERROR: Do NOT commit directly to 'main' branch."
