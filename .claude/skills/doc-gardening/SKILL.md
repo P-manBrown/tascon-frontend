@@ -5,7 +5,7 @@ description: `ARCHITECTURE.md`・`docs/decisions/`・`docs/design/plans/`・`doc
 
 # doc-gardening
 
-既存のドキュメントの陳腐化（実装・実際の状態との乖離）を検知する。書式・必須項目等の形式的な規約準拠は`check-docs.sh`（lefthook pre-commit）が機械的に検証するため、このスキルでは対象としない。
+既存のドキュメントの陳腐化（実装・実際の状態との乖離）を検知する。書式・必須項目等の形式的な規約準拠は`check-docs.sh`が機械的に検証するため、このスキルでは対象としない。
 
 ## 対象と参照先
 
