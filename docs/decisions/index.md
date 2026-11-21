@@ -12,3 +12,4 @@
 - [手元のgitフックは意味を変えない自動修正と速い検査に限り、CIは検査だけを行う](local-hooks-vs-ci-checks.md)
 - [セキュリティと変更の影響を見る道具をPRごとのCIに入れ、指摘で落ちる物だけをchecksのneedsに入れる](security-and-review-checks-in-pr-ci.md)
 - [Yarnのリンカーはnode-modulesのままにし、PnPに切り替えない](keep-node-modules-linker.md)
+- [lefthookの段は確かめに要る物で決め、SemgrepはステージしたファイルにCIと同じ版と規則で走らせる](lefthook-stage-by-check-needs.md)
