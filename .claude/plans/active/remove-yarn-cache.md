@@ -277,7 +277,7 @@ Worktree: 実装 item の準備時に個別の worktree を記録する。
 
 - [ ] **Step 7: setup-node に `cache: yarn` を足す（REQ-004）**
 
-  `.github/actions/setup/action.yml` の 9 行目 `          node-version: 22.22.2` の次に `          cache: yarn` を足す（行頭は空白 8 個、`node-version` と同じ深さ）。変更後のファイル全体:
+  `.github/actions/setup/action.yml` の 9 行目 `node-version: 22.22.2` の次に `cache: yarn` を足す（行頭は空白 8 個、`node-version` と同じ深さ）。変更後のファイル全体:
 
   ```yaml
   name: Setup
@@ -394,7 +394,7 @@ Worktree: 実装 item の準備時に個別の worktree を記録する。
   ```
 
   ```bash
-  printf '%s\n' '- [依存のzipはリポジトリに入れず、CIではsetup-nodeのyarnキャッシュを使う](yarn-cache-out-of-repo.md)' >> docs/decisions/index.md
+  printf '%s\n' '- [依存のzipはリポジトリに入れず、CIではsetup-nodeのyarnキャッシュを使う]'"(yarn-cache-out-of-repo.md)" >> docs/decisions/index.md
   git diff -- docs/decisions/index.md
   tail -c 1 docs/decisions/index.md | od -An -c
   ```
