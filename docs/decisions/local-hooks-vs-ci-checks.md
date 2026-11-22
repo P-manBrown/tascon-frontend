@@ -17,13 +17,15 @@ lefthookのpre-commitでは、Biomeとmarkuplintが自動修正を行い、`stag
 - 現在の`.markuplintrc`（`markuplint:recommended-react`を継承）では上の3ルールはいずれも有効でない。設定を変えると、`--fix`による修正が黙って有効になる
 - `tsc --noEmit`は、`next-env.d.ts`（gitignoreの対象）がない新しい取り出しでは、画像のimportの型がなく失敗する。`next typegen`で型のファイルを生成してから実行すると成功し、生成物はすべてgitignoreの対象のため`git status --porcelain`は空のままになる
 - 作業はふだん`.claude/worktrees/`配下の新しいworktreeからpushされる
+- テストの道具（Vitest）を導入した。Vitestのテスト全体はCIだけで走らせ、pre-pushでは関係するテストだけを走らせると決めた（人の決定）
+- `vitest related`は、渡したファイルが import するテストだけを選んで走らせる。関係するテストがなくても`--passWithNoTests`で成功する
 
 ## Decision
 
 - pre-commitで自動修正し`stage_fixed`でステージし直すのは、意味を変えないことが保証されたツールの修正だけとする。現時点ではBiomeのみとし、保証のないツール（markdownlint・markuplint）は検査だけを行う
 - pre-pushはプロジェクト全体の検査（`knip`、`next typegen`→`tsc --noEmit`）を行い、自動修正はしない
 - CIは検査だけを行い、自動修正をしない。手元のフックは、CIと同じ検査を早めに走らせる場所とする
-- `vitest related`をpre-pushに加えるかは、テストの道具を導入した後に決める
+- pre-pushでは、pushする`.ts`・`.tsx`に関係するテストだけを`vitest related`で走らせる。Vitestのテスト全体・カバレッジ・E2E・変異テストはCIだけで走らせる
 
 ## Considered Options
 
@@ -33,6 +35,9 @@ lefthookのpre-commitでは、Biomeとmarkuplintが自動修正を行い、`stag
 - 型検査を`next typegen`と合わせて実行する（採用）: 新しいworktreeからでも、型エラーがなければ成功する。`next typegen`の時間（約1.3秒）が加わる
 - `tsc --noEmit`だけを実行する: 手順が単純な一方、`next-env.d.ts`のない新しいworktreeでは型エラーがなくても失敗し、ふだんの運用で毎回pushが止まる
 - `package.json`に`typecheck`スクリプトを加え、lefthookから呼ぶ: 手元とCIで同じスクリプトを呼べる一方、並行して進むCIの作業と同じファイルを変更して衝突する。lefthookにコマンドを直接書いても手順は同じになる
+- pre-pushで関係するテストだけを`vitest related`で走らせる（採用）: 壊したテストにpushの前に気づける。テストが増えてもpushの待ち時間は変更の範囲に比例する
+- pre-pushでテスト全体を走らせる: 取りこぼしはないが、テストが増えるほどpushが遅くなる。全体はCIで走る
+- pre-pushではテストを走らせない: pushは速いが、テストの失敗にCIで初めて気づく
 
 ## Consequences
 
@@ -40,3 +45,4 @@ lefthookのpre-commitでは、Biomeとmarkuplintが自動修正を行い、`stag
 - pushが約7秒遅くなる（`next typegen`が約1.3秒、`tsc --noEmit`が約5.7秒）
 - 型エラーがあると、pushの前に止まる
 - pre-pushの型検査は、CIで行う型検査と同じ手順（`next typegen`→`tsc --noEmit`）になる
+- `.ts`・`.tsx`を含むpushでは、関係するテストが落ちるとpushの前に止まる。`.ts`・`.tsx`を含まないpushでは走らない
