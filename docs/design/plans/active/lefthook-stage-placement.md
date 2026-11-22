@@ -116,13 +116,13 @@ Worktree: 実装 item の準備時に個別の worktree を記録する。
   git-spice ls
   ```
 
-  Expected: `BASE` が空でない（保存の段の後なら文書の枝、まだなら `build/add-stryker`）。ブランチが `chore/lefthook-stage-placement`（準備の段が別の名前で作っていれば、名前を変えずに実際の名前を bead ノートと実装の要約に書いて続ける）。`HEAD contains origin/$BASE` が出る。`git log` と `git status --porcelain` が空。`grep` の出力が `  jobs:`、`    - run: bash .lefthook/pre-commit/check-docs.sh`、`pre-push:` の 3 行で、行番号がこの順に増え（`jobs` と `check-docs.sh` が pre-commit 側にある）、`semgrep` を含まない。
+  Expected: `BASE` が空でない（保存の段の後なら文書の枝、まだなら `build/add-stryker`）。ブランチが `chore/lefthook-stage-placement`（準備の段が別の名前で作っていれば、名前を変えずに実際の名前を bead ノートと実装の要約に書いて続ける）。`HEAD contains origin/$BASE` が出る。`git log` と `git status --porcelain` が空。`grep` の出力が `jobs:`、`- run: bash .lefthook/pre-commit/check-docs.sh`、`pre-push:` の 3 行で、行番号がこの順に増え（`jobs` と `check-docs.sh` が pre-commit 側にある）、`semgrep` を含まない。
 
   満たさない場合（`lefthook.yml` に既に `semgrep` がある、`check-docs.sh` が pre-push にある等）は、コミットせずに確かめた値を bead ノートに書き、bead を blocked にして理由を書き、人への通知スクリプトで報告し、assignee を外して drain する。満たす場合は「土台: $BASE ($(git rev-parse --short "origin/$BASE"))」を bead ノートに書く。
 
 - [ ] **Step 2: `check-docs.sh` の `jobs` を pre-push へ移す**
 
-  `lefthook.yml` の pre-commit から次の 7 行（`  jobs:` から `fail_text` まで）を消す。
+  `lefthook.yml` の pre-commit から次の 7 行（`jobs:` から `fail_text` まで）を消す。
 
   ```yaml
     jobs:
